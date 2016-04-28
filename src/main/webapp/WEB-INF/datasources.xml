@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="parentDataSource" abstract="true">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="maxActive" value="3"/>
+        <property name="minIdle" value="1"/>
+    </bean>
+
+    <!-- DataSources & SessionFactories -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          parent="parentDataSource" destroy-method="close">
+        <property name="url" value="jdbc:mysql://${marketplace.db.svr}/marketplace?connectTimeout=20000"/>
+
+    </bean>
+
+    <!-- for sequences - needs read-write password -->
+    <bean id="pdeDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          parent="parentDataSource" destroy-method="close">
+        <property name="url" value="jdbc:mysql://${marketplace.db.svr}/pde?connectTimeout=20000"/>
+    </bean>
+
+</beans>

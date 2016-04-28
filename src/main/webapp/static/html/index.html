@@ -1,0 +1,141 @@
+<html ng-app="myApp" ng-app lang="en">
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        ul > li, a {
+            cursor: pointer;
+        }
+    </style>
+    <title>UI to do DB patch</title>
+    <base href="/pdeui/">
+</head>
+<body>
+<a id="fbtop"></a>
+<div class="navbar navbar-default" id="navbar">
+    <div class="container" id="navbar-container">
+        <div class="navbar-header">
+            <a href="adobe" class="navbar-brand">
+                <small>
+                    <b>Adobe</b>
+                </small>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a href="liveramp" class="navbar-brand">
+                <small>
+                    <b>Liveramp</b>
+                </small>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a href="facebook" class="navbar-brand">
+                <small>
+                    <b>Facebook</b>
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a href="derive-conversion" class="navbar-brand">
+                <small>
+                    <b>Derive-Conversion</b>
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a href="krux-dpkey" class="navbar-brand">
+                <small>
+                    <b>Krux</b>
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a href="dbm" class="navbar-brand">
+                <small>
+                    <b>Dbm</b>
+                </small>
+            </a>
+        </div>
+
+
+        <div class="navbar-header">
+            <a href="pixel-data-engine-rule" class="navbar-brand">
+                <small>
+                    <b>Pixel-Data-Engine-Rules</b>
+                </small>
+            </a>
+        </div>
+
+
+        <div class="navbar-header" ng-show="isroot">
+            <a href="manageusers" class="navbar-brand">
+                <small>
+                    <b>Manage-Users</b>
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a href="login" class="navbar-brand">
+                <small>
+                    <b>Logout</b>
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header pull-right" role="navigation">
+            Adara Internal Use Only
+        </div>
+
+
+        <!--<div class="form-actions">-->
+        <!--<a href="register" class="btn btn-link">Register</a>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<div>
+    <div class="container">
+        <br/>
+        <br/>
+        <div ng-view="" id="ng-view"></div>
+
+    </div>
+</div>
+
+<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.css">
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> <!-- add this one for "var restrictedPage = $.inArray" in index.html page -->
+<script src="webjars/angularjs/1.5.2/angular.js"></script>
+<script src="webjars/angularjs/1.5.2/angular-resource.js"></script>
+<script src="webjars/angularjs/1.5.2/angular-route.js"></script>
+<script src="webjars/angularjs/1.5.2/angular-cookies.js"></script>
+<script src="webjars/angular-md5/0.1.8/angular-md5.js"></script>
+
+<!--main-->
+<script src="static/js/app.js"></script>
+
+<!--Config-->
+<script src="static/js/config/appConfig.js"></script>
+
+<!--services-->
+<script src="static/js/service/pixelmapping/pixelmapping.service.js"></script>
+<script src="static/js/service/usermanagement/authentication.service.js"></script>
+<script src="static/js/service/usermanagement/flash.service.js"></script>
+<script src="static/js/service/usermanagement/user.service.js"></script>
+
+<!--Controllers-->
+<script src="static/js/controller/pixelmapping/adobe.controller.js"></script>
+<script src="static/js/controller/pixelmapping/liveramp.controller.js"></script>
+<script src="static/js/controller/pixelmapping/facebook.controller.js"></script>
+<script src="static/js/controller/pixelmapping/drive-conversion.controller.js"></script>
+<script src="static/js/controller/pixelmapping/krux.controller.js"></script>
+<script src="static/js/controller/pixelmapping/dbm.controller.js"></script>
+<script src="static/js/controller/pixelmapping/pde-rule.controller.js"></script>
+<script src="static/js/controller/usermanagement/manageusers.controller.js"></script>
+<script src="static/js/controller/usermanagement/login.controller.js"></script>
+<script src="static/js/controller/usermanagement/register.controller.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<!--
+<h1>Hi {{vm.user.username}}!</h1>
+<p>You're logged in!!</p>
+-->
+
+<p>&nbsp;</p>
+<p><a href="register" class="btn btn-primary">Add new user</a></p>
+
+
+<h3>All registered users:</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+    <th>username&nbsp;</th>
+    <th>password&nbsp;</th>
+    <th>delete the user&nbsp;</th>
+    <th>update the user&nbsp;</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in vm.allUsers">
+        <td><input type="text" ng-model="user.username"></td>
+        <td><input type="password" ng-model="user.password"></td>
+        <td><a href="manageusers" ng-click="vm.deleteUser(user.username)">Delete</a></td>
+        <td><a href="manageusers" ng-click="vm.updateUser(user)">Update</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!--<ul>-->
+<!--<li ng-repeat="user in vm.allUsers">-->
+
+<!--{{user.username}}{{user.password}}-->
+<!--&lt;!&ndash;{{user.username}} ({{user.firstName}} {{user.lastName}})&ndash;&gt;-->
+<!-- - <a href="manageusers" ng-click="vm.deleteUser(user.username)">Delete</a>-->
+<!--&lt;!&ndash; - <a href="" ng-click="vm.deleteUser(user.username)">Delete</a>&ndash;&gt;-->
+<!--</li>-->
+<!--</ul>-->
+
+
+<!--
+<p>&nbsp;</p>
+<p><a href="login" class="btn btn-primary">Logout</a></p>
+-->
+
+<!--<div class="navbar-header">-->
+<!--<a href="register" class="navbar-brand">-->
+<!--<small>-->
+<!--<b>Register</b>-->
+<!--</small>-->
+<!--</a>-->
+<!--</div>-->

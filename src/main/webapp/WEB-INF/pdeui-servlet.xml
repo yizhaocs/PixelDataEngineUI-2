@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- The <context:component-scan...> tag will be use to activate Spring MVC annotation scanning capability which allows to make use of annotations like @Controller and @RequestMapping etc. -->
+    <context:component-scan base-package="com.adara.pixeldataengineui"/>
+
+    <!-- Process annotations on registered beans like @Autowired... -->
+    <context:annotation-config/>
+
+    <!-- This tag registers the DefaultAnnotationHandlerMapping and
+         AnnotationMethodHandlerAdapter beans that are required for Spring MVC  -->
+    <mvc:annotation-driven/>
+
+    <!-- Exception Resolver that resolves exceptions through @ExceptionHandler methods -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"/>
+
+    <!-- View Resolver for JSPs/htmls -->
+    <!-- The InternalResourceViewResolver will have rules defined to resolve the view names. As per the above defined rule, a logical view named hello is delegated to a view implementation located at /WEB-INF/views/hello.jsp . -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/static/html/"/>
+        <property name="suffix" value=".html"/>
+    </bean>
+
+    <!-- This tag allows for mapping the DispatcherServlet to "/" -->
+    <mvc:default-servlet-handler/>
+
+    <!-- resources exclusions from servlet mapping -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+
+
+</beans>
