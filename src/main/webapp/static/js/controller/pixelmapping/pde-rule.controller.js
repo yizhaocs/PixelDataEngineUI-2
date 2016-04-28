@@ -146,11 +146,13 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
     if (responseBackupRuleData != '') {
         $scope.ngModelRule._id = keyIdParam;
     }
+/*
 
     if (responseBackupRuleData == '') {
         $scope.ngModelRule = {};
         responseBackupRuleData = {};
     }
+*/
 
     // true if user click on the "add button"
     if (keyIdParam == 0) {
