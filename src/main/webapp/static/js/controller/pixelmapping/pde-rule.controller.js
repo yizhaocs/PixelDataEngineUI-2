@@ -154,27 +154,27 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
 
     // true if user click on the "add button"
     if (keyIdParam == 0) {
-        if (responseBackupRuleData.inElementArray == null) {
-            responseBackupRuleData.inElementArray = [{
-                column1: '0',
-                column2: ''
-            }];
+        //if (responseBackupRuleData.inElementArray == null) {
+        //    responseBackupRuleData.inElementArray = [{
+        //        column1: '0',
+        //        column2: ''
+        //    }];
             $scope.ngModelRule.inElementArray = [{
                 column1: '0',
                 column2: ''
             }];
-        }
+       // }
 
-        if (responseBackupRuleData.setRuleArray == null) {
-            responseBackupRuleData.setRuleArray = [{
-                column1: '0',
-                column2: ''
-            }];
+        //if (responseBackupRuleData.setRuleArray == null) {
+        //    responseBackupRuleData.setRuleArray = [{
+        //        column1: '0',
+        //        column2: ''
+        //    }];
             $scope.ngModelRule.setRuleArray = [{
                 column1: '0',
                 column2: ''
             }];
-        }
+      //  }
     }
 
 
