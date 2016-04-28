@@ -163,8 +163,13 @@ app.config(['$routeProvider', '$locationProvider',
                     }
                 }
             })
+            .when(base + 'pixel-data-engine-group', {
+                title: 'Pixel Data Engine Groups',
+                templateUrl: 'static/html/pixel-data-engine-config/list-group.html',
+                controller: 'listPixelGroups'
+            })
             .when(base + 'pixel-data-engine-rule', {
-                title: 'Pixel Data Engine Rule',
+                title: 'Pixel Data Engine Rules',
                 templateUrl: 'static/html/pixel-data-engine-config/list-rule.html',
                 controller: 'listPixelRules'
             })

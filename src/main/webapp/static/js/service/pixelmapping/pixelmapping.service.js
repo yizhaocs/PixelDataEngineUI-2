@@ -48,6 +48,13 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
+        /*
+         * group service begin
+         * */
+        obj.getGroups = function () {
+            return $http.get($rootScope.base + 'getGroups');
+        }
+
 
         /*
          * rule service begin

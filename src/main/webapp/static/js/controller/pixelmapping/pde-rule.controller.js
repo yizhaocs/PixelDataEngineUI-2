@@ -10,6 +10,7 @@ app.controller('listPixelRules', function ($scope, pixelmappingService) {
     });
 });
 
+
 app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, responseRule) {
     /*
      *
@@ -236,7 +237,7 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
             pixelmappingService.insertRule($rootScope.base + 'pixel-data-engine-rule', ngModelRule.parseRule, ngModelRule.conditionRule, ngModelRule.actionRule, ngModelRule.keyId, ngModelRule.type, ngModelRule.split1, ngModelRule.split2, ngModelRule.len, ngModelRule.range, ngModelRule.substr, ngModelRule.dec, ngModelRule.inElementArray, ngModelRule.setRuleArray);
         }
         else {
-            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', $scope.ngModelRule.parseRule, $scope.ngModelRule.conditionRule, $scope.ngModelRule.actionRule, $scope.ngModelRule.keyId, $scope.ngModelRule.type, $scope.ngModelRule.split1, $scope.ngModelRule.split2, $scope.ngModelRule.len, $scope.ngModelRule.range, $scope.ngModelRule.substr, $scope.ngModelRule.dec, $scope.ngModelRule.inElementArray, $scope.ngModelRule.setRuleArray);
+            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', ngModelRule.parseRule, ngModelRule.conditionRule, ngModelRule.actionRule, ngModelRule.keyId, ngModelRule.type, ngModelRule.split1, ngModelRule.split2, ngModelRule.len, ngModelRule.range, ngModelRule.substr, ngModelRule.dec, ngModelRule.inElementArray, ngModelRule.setRuleArray);
         }
     };
 });

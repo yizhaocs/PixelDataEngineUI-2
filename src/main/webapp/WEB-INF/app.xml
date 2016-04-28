@@ -48,4 +48,8 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="PixelDataEngineGroupDAO" class="com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineGroupDAOImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

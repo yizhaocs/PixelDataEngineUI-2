@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class PixelDataEngineRuleDAOImpl implements com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineRuleDAO {
+public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;

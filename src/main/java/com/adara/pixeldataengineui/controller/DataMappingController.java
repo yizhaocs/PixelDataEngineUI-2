@@ -1,11 +1,7 @@
 package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
-import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
-import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
-import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixelmapping.*;
-import com.adara.pixeldataengineui.service.usermanagement.UserManagementService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 @RestController
-public class PixelDataEngineUIController {
-    private static final Log LOG = LogFactory.getLog(PixelDataEngineUIController.class);
+public class DataMappingController {
+    private static final Log LOG = LogFactory.getLog(DataMappingController.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
 
     @Autowired
@@ -30,15 +26,12 @@ public class PixelDataEngineUIController {
     @Autowired
     LiverampService mLiverampService;
     @Autowired
-    UserManagementService mUserManagementService;
-    @Autowired
     DeriveComboPixelService mDeriveComboPixelService;
     @Autowired
     KruxDpkeyService mKruxDpkeyService;
     @Autowired
     DbmConversionPixelMappingsService mDbmConversionPixelMappingsService;
-    @Autowired
-    PixelDataEngineRuleService mPixelDataEngineRuleService;
+
 
     @RequestMapping(value = "/mappings", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> mappings(@RequestParam("type") String type) {
@@ -249,246 +242,6 @@ public class PixelDataEngineUIController {
 
         if (LOG.isDebugEnabled())
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/insertRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> insertRule(@RequestBody RuleRequest request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
-        result = mPixelDataEngineRuleService.insertRule(request);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/getRules", method = RequestMethod.GET)
-    public ResponseEntity<String> getRules() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRules");
-
-        String result = "";
-        result = mPixelDataEngineRuleService.getRules();
-
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        } else {
-            response = new ResponseEntity<String>(result, HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRules" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/getRule", method = RequestMethod.GET)
-    public ResponseEntity<String> getRule(@RequestParam(value = "keyid", required = false) String keyid) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "request data ->" + keyid);
-
-        if (keyid.equals("0")) {
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        String result = "";
-        result = mPixelDataEngineRuleService.getRule(keyid);
-
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        } else {
-            response = new ResponseEntity<String>(result, HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/updateRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateRule(@RequestBody RuleRequest request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
-        result = mPixelDataEngineRuleService.updateRule(request);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/deleteRule", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteRule(@RequestParam(value = "keyid", required = false) String keyid) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "request data ->" + keyid);
-
-        Integer result = 0;
-        result = mPixelDataEngineRuleService.deleteRule(keyid);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "ResponseEntity:" + response.toString());
-        return response;
-    }
-
-
-    @RequestMapping(value = "/usermanagement/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> login(@RequestBody UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "login");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "login" + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
-        result = mUserManagementService.login(request);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-            // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "login" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-
-    @RequestMapping(value = "/usermanagement/users", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createUser(@RequestBody UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "createUser");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "createUser" + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
-        result = mUserManagementService.createUser(request);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-            // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "createUser" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-
-    @RequestMapping(value = "/usermanagement/users", method = RequestMethod.GET)
-    public ResponseEntity<String> getAllUser() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getAllUser");
-
-        String result = "";
-        result = mUserManagementService.getAllUser();
-
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        } else {
-            response = new ResponseEntity<String>(result, HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getAllUser" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/usermanagement/users/{username}", method = RequestMethod.GET)
-    public ResponseEntity<String> getByUsername(@PathVariable("username") String username) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getByUsername");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getByUsername" + ", " + "request data ->" + username);
-
-        String result = "";
-        result = mUserManagementService.getByUsername(username);
-
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        } else {
-            response = new ResponseEntity<String>(result, HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getByUsername" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-
-    @RequestMapping(value = "/usermanagement/users/{username}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteUser(@PathVariable("username") String username) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteUser");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteUser" + ", " + "request data ->" + username);
-
-        Integer result = 0;
-        result = mUserManagementService.deleteUser(username);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteUser" + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-
-    @RequestMapping(value = "/usermanagement/users", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateUser(@RequestBody UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateUser");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateUser" + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
-        result = mUserManagementService.updateUser(request);
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
-            // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateUser" + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

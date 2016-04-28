@@ -104,7 +104,7 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
 
     public Integer insertMapping(Integer adobeSegmentId, Integer adobeDpKeyId) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping");
-        String query = "insert into adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
+        String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
         Object[] args = new Object[]{adobeSegmentId, adobeDpKeyId};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
