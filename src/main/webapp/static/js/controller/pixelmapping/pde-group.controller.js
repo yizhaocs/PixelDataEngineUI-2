@@ -11,11 +11,11 @@ app.controller('listPixelGroups', function ($scope, pixelmappingService) {
 });
 
 
-app.controller('editPixelGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, mapping) {
+app.controller('editPixelGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var keyId = ($routeParams.keyId) ? parseInt($routeParams.keyId) : 0;
     $rootScope.title = (keyId > 0) ? 'Edit Group' : 'Add Group';
     $scope.buttonText = (keyId > 0) ? 'Update Group' : 'Add New Group';
-    var original = mapping.data;
+    var original = backendData.data;
     if (original != '') {
         original._id = keyId;
     }
@@ -28,17 +28,17 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
         return angular.equals(original, $scope.frontendData);
     }
 
-    $scope.deleteGroup = function (mapping) {
+    $scope.deleteGroup = function (frontendData) {
         if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteGroup($rootScope.base + 'Pixel-Data-Engine-Groups', mapping.key_id);
+            pixelmappingService.deleteGroup($rootScope.base + 'Pixel-Data-Engine-Groups', frontendData.key_id);
     };
 
-    $scope.saveGroup = function (mapping) {
+    $scope.saveGroup = function (frontendData) {
         if (keyId <= 0) {
-            pixelmappingService.insertGroup($rootScope.base + 'Pixel-Data-Engine-Groups', mapping);
+            pixelmappingService.insertGroup($rootScope.base + 'Pixel-Data-Engine-Groups', frontendData);
         }
         else {
-            pixelmappingService.updateGroup($rootScope.base + 'Pixel-Data-Engine-Groups', keyId, mapping);
+            pixelmappingService.updateGroup($rootScope.base + 'Pixel-Data-Engine-Groups', keyId, frontendData);
         }
     };
 });

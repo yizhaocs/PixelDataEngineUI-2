@@ -41,12 +41,12 @@
                         <div class="form-group">
                             <label class="col-md-2"></label>
                             <div class="col-md-4">
-                                <a href="adobe" class="btn">Cancel</a>
-                                <button ng-click="saveMapping(mapping);"
+                                <a href="pixel-data-engine-group" class="btn">Cancel</a>
+                                <button ng-click="saveGroup(frontendData);"
                                         ng-disabled="isClean() || myForm.$invalid"
                                         class="btn btn-primary">{{buttonText}}
                                 </button>
-                                <button ng-click="deleteMapping(mapping)"
+                                <button ng-click="deleteGroup(frontendData)"
                                         ng-show="frontendData._id" class="btn btn-warning">Delete
                                 </button>
                             </div>

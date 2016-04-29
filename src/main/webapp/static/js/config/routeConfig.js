@@ -173,7 +173,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-group.html',
                 controller: 'editPixelGroup',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var keyId = $route.current.params.keyId;
                         return pixelmappingService.getGroup(keyId);
                     }
