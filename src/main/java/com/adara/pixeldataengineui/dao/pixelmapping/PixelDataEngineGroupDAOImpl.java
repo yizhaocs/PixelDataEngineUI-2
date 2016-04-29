@@ -143,9 +143,9 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         sb.append("[");
         for (Map<String, Object> m : listMap) {
             PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
-            mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("gid")));
+            mPixelDataEngineConfigsDTO.setGid(String.valueOf(m.get("gid")));
             mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("key_id")));
-            mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("priority")));
+            mPixelDataEngineConfigsDTO.setPriority(String.valueOf(m.get("priority")));
             mPixelDataEngineConfigsDTO.setType(String.valueOf(m.get("type")));
             mPixelDataEngineConfigsDTO.setParse_rule(String.valueOf(m.get("parse_rule")));
             mPixelDataEngineConfigsDTO.setCondition_rule(String.valueOf(m.get("condition_rule")));

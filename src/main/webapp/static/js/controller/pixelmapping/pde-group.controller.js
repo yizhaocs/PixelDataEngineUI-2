@@ -39,9 +39,7 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 
 app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var gid = ($routeParams.gid) ? parseInt($routeParams.gid) : 0;
-    $rootScope.title = (gid > 0) ? 'Edit Group' : 'Add Group';
-    $scope.buttonText = (gid > 0) ? 'Update Group' : 'Add New Group';
-    $scope.isUpdate = (gid > 0) ? true : false;
+    $scope.title = 'Group id:' + gid;
     $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
