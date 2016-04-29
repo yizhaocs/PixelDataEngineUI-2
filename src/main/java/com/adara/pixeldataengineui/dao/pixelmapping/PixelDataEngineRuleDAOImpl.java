@@ -33,19 +33,10 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
     public Integer insertRule(RuleRequest request) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule");
 
-        // key_id
         String keyId = request.getKeyId();
-
-        // type
         String type = request.getType();
-
-        // parse_rule
         String parseRuleValue = parseRuleBuilder(request);
-
-        // condition_rule
         String conditionRuleValue = conditionRuleBuilder(request);
-
-        // action_rule
         String actionRuleValue = actionRuleBuilder(request);
 
         if (keyId == null || keyId.length() == 0 || type == null || type.length() == 0 || parseRuleValue == null || parseRuleValue.length() == 0 || conditionRuleValue == null || conditionRuleValue.length() == 0 || actionRuleValue == null || actionRuleValue.length() == 0) {
@@ -73,7 +64,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
     public String getRules() {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRules");
-        String query = "SELECT p.key_id, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p order by p.key_id";
+        String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p order by p.key_id";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRules" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
