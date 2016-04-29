@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PdeGroupsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -124,6 +125,51 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
 
         return result;
     }
+
+    public String getSameGroup(String gid){
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getSameGroup");
+        String query = "SELECT a.gid, a.key_id, a.priority, a.type, a.parse_rule, a.condition_rule, a.action_rule FROM marketplace.pixel_data_engine_configs a where a.gid=" + gid;
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getSameGroup" + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Map<String, Object>> listMap = null;
+        try {
+            listMap = jdbcTemplate.queryForList(query);
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (Map<String, Object> m : listMap) {
+            PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
+            mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("gid")));
+            mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("key_id")));
+            mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("priority")));
+            mPixelDataEngineConfigsDTO.setType(String.valueOf(m.get("type")));
+            mPixelDataEngineConfigsDTO.setParse_rule(String.valueOf(m.get("parse_rule")));
+            mPixelDataEngineConfigsDTO.setCondition_rule(String.valueOf(m.get("condition_rule")));
+            mPixelDataEngineConfigsDTO.setAction_rule(String.valueOf(m.get("action_rule")));
+            // convert Java object to JSON (Jackson)
+            ObjectMapper mapper = new ObjectMapper();
+            String tmp = "";
+            try {
+                tmp = mapper.writeValueAsString(mPixelDataEngineConfigsDTO);
+            } catch (Exception e) {
+                LOG.error("Failed to execute sql query", e);
+            }
+            sb.append(tmp + ",");
+        }
+
+        sb.deleteCharAt(sb.toString().length() - 1);
+        sb.append("]");
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + "  ,method return -> " + sb.toString());
+
+        return sb.toString();
+    }
+
 
     public Integer updateGroup(Integer key_id, Integer gid, String type){
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");

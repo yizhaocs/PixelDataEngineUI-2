@@ -69,6 +69,31 @@ public class PixelDataEngineGroupController {
         return response;
     }
 
+    @RequestMapping(value = "/samegroup", method = RequestMethod.GET)
+    public ResponseEntity<String> samegroup(@RequestParam(value = "id", required = false) String id) {
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "samegroup");
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "samegroup" + ", " + "request data ->" + "id:" + id);
+
+        String result = "";
+        if (id.equals("0")) {
+            return new ResponseEntity<String>(result, HttpStatus.NO_CONTENT);
+        }
+
+        result = mPixelDataEngineGroupService.getSameGroup(id);
+
+        ResponseEntity<String> response = null;
+        if (result.length() < 4) {
+            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        } else {
+            response = new ResponseEntity<String>(result, HttpStatus.OK);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "samegroup" + ", " + "ResponseEntity:" + response.toString());
+
+        return response;
+    }
+
     @RequestMapping(value = "/getGroups", method = RequestMethod.GET)
     public ResponseEntity<String> getGroups() {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups");

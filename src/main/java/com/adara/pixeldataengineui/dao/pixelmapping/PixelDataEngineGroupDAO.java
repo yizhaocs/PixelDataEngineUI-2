@@ -10,6 +10,8 @@ public interface PixelDataEngineGroupDAO {
 
     String getGroup(String keyId);
 
+    String getSameGroup(String gid);
+
     Integer updateGroup(Integer key_id, Integer gid, String type);
 
     Integer deleteGroup(String keyId);

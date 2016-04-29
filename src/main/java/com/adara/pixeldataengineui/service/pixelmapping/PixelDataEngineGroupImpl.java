@@ -26,6 +26,10 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService{
         return mPixelDataEngineGroupDAO.getGroup(keyId);
     }
 
+    public String getSameGroup(String gid) {
+        return mPixelDataEngineGroupDAO.getSameGroup(gid);
+    }
+
     public Integer updateGroup(Integer key_id, Integer gid, String type) {
         return mPixelDataEngineGroupDAO.updateGroup(key_id, gid, type);
     }

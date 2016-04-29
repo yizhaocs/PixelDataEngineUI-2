@@ -4,11 +4,21 @@ package com.adara.pixeldataengineui.model.backend.dto.pixelmapping;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public class PixelDataEngineConfigsDTO {
+    private String gid;
     private String key_id;
+    private String priority;
     private String type;
     private String parse_rule;
     private String condition_rule;
     private String action_rule;
+
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
 
     public String getKey_id() {
         return key_id;
@@ -16,6 +26,14 @@ public class PixelDataEngineConfigsDTO {
 
     public void setKey_id(String key_id) {
         this.key_id = key_id;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     public String getType() {
