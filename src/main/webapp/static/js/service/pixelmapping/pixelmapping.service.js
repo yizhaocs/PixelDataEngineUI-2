@@ -80,6 +80,12 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
+        obj.getSameGroup = function (gid) {
+            return $http.get($rootScope.base + 'samegroup?id=' + gid);
+        }
+
+
+
 
 
         /*

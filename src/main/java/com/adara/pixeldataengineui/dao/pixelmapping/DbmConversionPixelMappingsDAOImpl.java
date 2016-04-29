@@ -105,7 +105,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
     public Integer insertMapping(Integer conversionPixelId, String dbmUrl) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping");
         String query = "insert into dbm_conversion_pixel_mappings(conversion_pixel_id, dbm_url) values(?, ?)";
-        Object[] args = new Object[]{conversionPixelId, dbmUrl};
+        Object[] args = new Object[]{conversionPixelId, httpsChecker(dbmUrl)};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping" + ", " + "Executing query -> " + query.toString());
@@ -114,7 +114,6 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         try {
             result = jdbcTemplate.update(query, args);
         } catch (Exception e) {
-
             LOG.error("Failed to execute sql query", e);
         }
 
@@ -161,5 +160,17 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping" + "  ,method return -> " + result);
 
         return result;
+    }
+
+    private String httpsChecker(String url){
+        if(url == null || url.length() == 0 || (url.length() > 7 && url.substring(0,8).equals("https://")) || (url.length() > 6 && url.substring(0,7).equals("http://")) ){
+            return url;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://");
+        sb.append(url);
+
+        return sb.toString();
     }
 }
