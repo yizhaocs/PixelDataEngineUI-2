@@ -15,21 +15,15 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     var keyId = ($routeParams.keyId) ? parseInt($routeParams.keyId) : 0;
     $rootScope.title = (keyId > 0) ? 'Edit Group' : 'Add Group';
     $scope.buttonText = (keyId > 0) ? 'Update Group' : 'Add New Group';
-    var original = backendData.data;
-    if (original != '') {
-        original._id = keyId;
-    }
-    $scope.frontendData = angular.copy(original);
-    if (original != '') {
-        $scope.frontendData._id = keyId;
-    }
+    $scope.isUpdate = (keyId > 0) ? true : false;
+    $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.frontendData);
+        return angular.equals(backendData.data, $scope.frontendData);
     }
 
     $scope.deleteGroup = function (frontendData) {
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.key_id) == true)
             pixelmappingService.deleteGroup($rootScope.base + 'pixel-data-engine-group', frontendData.key_id);
     };
 

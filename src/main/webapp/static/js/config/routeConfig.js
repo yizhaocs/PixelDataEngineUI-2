@@ -157,7 +157,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/facebook-pages/edit-key-mapping.html',
                 controller: 'editCtrlFacebookKey',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'facebook-key');
                     }

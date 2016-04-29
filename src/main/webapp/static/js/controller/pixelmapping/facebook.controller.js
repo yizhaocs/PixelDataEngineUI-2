@@ -25,20 +25,15 @@ app.controller('listCtrlFacebook', function ($scope, $location, $anchorScroll, p
 });
 
 app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
-    var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
-    $rootScope.title = (mappingID != '0') ? 'Edit Liveramp DP Mapping' : 'Add Facebook Pixel Mapping';
-    $scope.buttonText = (mappingID != '0') ? 'Update Liveramp DP Mapping' : 'Add New Facebook Pixel Mapping';
-    var original = backendData.data;
-    if (original != '') {
-        original._id = mappingID;
-    }
-    $scope.frontendData = angular.copy(original);
-    if (original != '') {
-        $scope.frontendData._id = mappingID;
-    }
+    var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : 0;
+    $rootScope.title = (mappingID > 0) ? 'Edit Data Provider Facebook Pixel' : 'Add Data Provider Facebook Pixel';
+    $scope.buttonText = (mappingID > 0) ? 'Update Data Provider Facebook Pixel' : 'Add New Data Provider Facebook Pixel';
+    $scope.isUpdate = (mappingID > 0) ? true : false;
+
+    $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.frontendData);
+        return angular.equals(backendData.data, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (mapping) {
@@ -62,17 +57,12 @@ app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $r
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
     $rootScope.title = 'Edit Facebook DP Mapping';
     $scope.buttonText = 'Update Facebook DP Mapping';
-    var original = backendData.data;
-    if (original != '') {
-        original._id = mappingID;
-    }
-    $scope.frontendData = angular.copy(original);
-    if (original != '') {
-        $scope.frontendData._id = mappingID;
-    }
+    $scope.isUpdate = (mappingID != '0') ? true : false;
+
+    $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.frontendData);
+        return angular.equals(backendData.data, $scope.frontendData);
     }
 
     $scope.saveMapping = function (mapping) {
@@ -82,20 +72,16 @@ app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $r
 });
 
 app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
-    var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
-    $rootScope.title = (mappingID != '0') ? 'Edit Facebook Key Mapping' : 'Add Facebook Key Mapping';
-    $scope.buttonText = (mappingID != '0') ? 'Update Facebook Key Mapping' : 'Add New Facebook Key Mapping';
-    var original = backendData.data;
-    if (original != '') {
-        original._id = mappingID;
-    }
-    $scope.frontendData = angular.copy(original);
-    if (original != '') {
-        $scope.frontendData._id = mappingID;
-    }
+    var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : 0;
+    $rootScope.title = (mappingID > 0) ? 'Edit Facebook Key Mapping' : 'Add Facebook Key Mapping';
+    $scope.buttonText = (mappingID > 0) ? 'Update Facebook Key Mapping' : 'Add New Facebook Key Mapping';
+    $scope.isUpdate = (mappingID > 0) ? true : false;
+
+    $scope.frontendData = angular.copy(backendData.data);
+
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.frontendData);
+        return angular.equals(backendData.data, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {

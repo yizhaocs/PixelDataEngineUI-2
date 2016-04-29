@@ -14,17 +14,11 @@ app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routePar
     var mappingID = ($routeParams.mappingID) ? parseInt($routeParams.mappingID) : 0;
     $rootScope.title = (mappingID > 0) ? 'Edit Mapping' : 'Add Mapping';
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
-    var original = backendData.data;
-    if (original != '') {
-        original._id = mappingID;
-    }
-    $scope.frontendData = angular.copy(original);
-    if (original != '') {
-        $scope.frontendData._id = mappingID;
-    }
+    $scope.isUpdate = (mappingID > 0) ? true : false;
+    $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.frontendData);
+        return angular.equals(backendData.data, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {
