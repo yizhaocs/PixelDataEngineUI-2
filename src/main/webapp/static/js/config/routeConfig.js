@@ -157,7 +157,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/facebook-pages/edit-key-mapping.html',
                 controller: 'editCtrlFacebookKey',
                 resolve: {
-                    backendData: function (pixelmappingService, $route) {
+                    mapping: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'facebook-key');
                     }
@@ -189,7 +189,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
                 controller: 'editPixelRule',
                 resolve: {
-                    backendData: function (pixelmappingService, $route) {
+                    responseRule: function (pixelmappingService, $route) {
                         var keyId = $route.current.params.keyId;
                         return pixelmappingService.getRule(keyId);
                     }
