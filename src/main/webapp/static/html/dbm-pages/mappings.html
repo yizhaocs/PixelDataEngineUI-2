@@ -14,7 +14,7 @@
             <th>Action&nbsp;</th>
             </thead>
             <tbody>
-            <tr ng-repeat="data in mappings">
+            <tr ng-repeat="data in frontendData">
                 <td>{{data.conversion_pixel_id}}</td>
                 <td>{{data.dbm_url}}</td>
                 <td><a href="dbm/edit-mapping/{{data.conversion_pixel_id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Mapping</a></td>
@@ -22,7 +22,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-12" ng-show="mappings.length == 0">
+    <div class="col-md-12" ng-show="frontendData.length == 0">
         <div class="col-md-12">
             <h4>No mapping found</h4>
         </div>

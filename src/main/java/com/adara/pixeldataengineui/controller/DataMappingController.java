@@ -34,7 +34,7 @@ public class DataMappingController {
 
 
     @RequestMapping(value = "/mappings", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> mappings(@RequestParam("type") String type) {
+    public ResponseEntity<String> getMappings(@RequestParam("type") String type) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mappings");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mappings" + ", " + "request data ->" + "type:" + type);
         if (type == null || type.equals("")) {
@@ -76,7 +76,7 @@ public class DataMappingController {
     }
 
     @RequestMapping(value = "/mapping", method = RequestMethod.GET)
-    public ResponseEntity<String> mapping(@RequestParam(value = "id", required = false) String id, @RequestParam(value = "type", required = false) String type) {
+    public ResponseEntity<String> getMapping(@RequestParam(value = "id", required = false) String id, @RequestParam(value = "type", required = false) String type) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mapping");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mapping" + ", " + "request data ->" + "id:" + id + " ,type:" + type);
         if (type == null || type.equals("") || id == null || id.equals("")) {

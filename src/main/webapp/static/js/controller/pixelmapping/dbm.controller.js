@@ -6,7 +6,7 @@
 
 app.controller('listCtrlDbm', function ($scope, pixelmappingService) {
     pixelmappingService.getMappings('dbm').then(function (data) {
-        $scope.mappings = data.data;
+        $scope.frontendData = data.data;
     });
 });
 
@@ -18,17 +18,17 @@ app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routePar
     if (original != '') {
         original._id = mappingID;
     }
-    $scope.mapping = angular.copy(original);
+    $scope.frontendData = angular.copy(original);
     if (original != '') {
-        $scope.mapping._id = mappingID;
+        $scope.frontendData._id = mappingID;
     }
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.mapping);
+        return angular.equals(original, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (mapping) {
-        if (confirm("Are you sure to delete mapping number: " + $scope.mapping._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'dbm', mapping.conversion_pixel_id, 'dbm');
     };
 

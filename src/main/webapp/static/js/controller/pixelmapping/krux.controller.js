@@ -6,7 +6,7 @@
 
 app.controller('listCtrlKruxDpkey', function ($scope, pixelmappingService) {
     pixelmappingService.getMappings('krux-dpkey').then(function (data) {
-        $scope.mappings = data.data;
+        $scope.frontendData = data.data;
     });
 });
 
@@ -19,18 +19,18 @@ app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $ro
     if (original != '') {
         original._id = mappingID;
     }
-    $scope.mapping = angular.copy(original);
+    $scope.frontendData = angular.copy(original);
     if (original != '') {
-        $scope.mapping._id = mappingID;
+        $scope.frontendData._id = mappingID;
     }
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.mapping);
+        return angular.equals(original, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (mapping) {
         // $location.path('/adobe');
-        if (confirm("Are you sure to delete mapping number: " + $scope.mapping._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'krux-dpkey', mapping.krux_segment_id, 'krux-dpkey');
     };
 

@@ -20,21 +20,21 @@
                         <div class="form-group" ng-class="{error: myForm.id.$invalid}">
                             <label class="col-md-2"> DP Id </label>
                             <div class="col-md-4">
-                                <input name="id" ng-disabled="true" ng-model="mapping.id" type="text" class="form-control" placeholder="id" required/>
+                                <input name="id" ng-disabled="true" ng-model="frontendData.id" type="text" class="form-control" placeholder="id" required/>
                                 <span ng-show="myForm.id.$dirty && myForm.id.$invalid" class="help-inline">DP Id Required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> Name </label>
                             <div class="col-md-4">
-                                <input name="name" ng-disabled="true" ng-model="mapping.name" type="text" class="form-control" placeholder="name" required/>
+                                <input name="name" ng-disabled="true" ng-model="frontendData.name" type="text" class="form-control" placeholder="name" required/>
                                 <span ng-show="myForm.name.$dirty && myForm.name.$invalid" class="help-inline">DP Name Required</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2"> Sync Facebook </label>
                             <div class="col-md-4">
-                                <input name="sync_facebook" ng-model="mapping.sync_facebook" type="text" class="form-control" placeholder="sync_facebook" required/>
+                                <input name="sync_facebook" ng-model="frontendData.sync_facebook" type="text" class="form-control" placeholder="sync_facebook" required/>
                                 <span ng-show="myForm.sync_facebook.$dirty && myForm.sync_facebook.$invalid " class="help-inline">Sync Facebook Required</span>
                             </div>
                         </div>

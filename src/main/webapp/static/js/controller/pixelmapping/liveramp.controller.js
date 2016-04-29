@@ -22,18 +22,18 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
     if (original != '') {
         original._id = mappingID;
     }
-    $scope.mapping = angular.copy(original);
+    $scope.frontendData = angular.copy(original);
     if (original != '') {
-        $scope.mapping._id = mappingID;
+        $scope.frontendData._id = mappingID;
     }
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.mapping);
+        return angular.equals(original, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (mapping) {
         // $location.path('/liveramp');
-        if (confirm("Are you sure to delete mapping number: " + $scope.mapping._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'liveramp', mapping.dp_name, 'liveramp-dp');
     };
 
@@ -61,18 +61,18 @@ app.controller('editCtrlLiverampKey', function ($scope, $rootScope, $location, $
     if (original != '') {
         original._id = mappingID;
     }
-    $scope.mapping = angular.copy(original);
+    $scope.frontendData = angular.copy(original);
     if (original != '') {
-        $scope.mapping._id = mappingID;
+        $scope.frontendData._id = mappingID;
     }
 
     $scope.isClean = function () {
-        return angular.equals(original, $scope.mapping);
+        return angular.equals(original, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (mapping) {
         // $location.path('/liveramp');
-        if (confirm("Are you sure to delete mapping number: " + $scope.mapping._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'liveramp', mapping.liveramp_segment_id, 'liveramp-key');
     };
 

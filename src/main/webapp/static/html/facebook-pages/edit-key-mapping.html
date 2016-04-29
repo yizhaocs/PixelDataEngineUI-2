@@ -20,21 +20,21 @@
                         <div class="form-group" ng-class="{error: myForm.key_id.$invalid}">
                             <label class="col-md-2"> Key Id </label>
                             <div class="col-md-4">
-                                <input name="key_id" ng-model="mapping.key_id" type="text" class="form-control" placeholder="key_id" required/>
+                                <input name="key_id" ng-model="frontendData.key_id" type="text" class="form-control" placeholder="key_id" required/>
                                 <span ng-show="myForm.key_id.$dirty && myForm.key_id.$invalid" class="help-inline">Key Id Required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> Enabled </label>
                             <div class="col-md-4">
-                                <input name="enabled" ng-model="mapping.enabled" type="text" class="form-control" placeholder="enabled" required/>
+                                <input name="enabled" ng-model="frontendData.enabled" type="text" class="form-control" placeholder="enabled" required/>
                                 <span ng-show="myForm.enabled.$dirty && myForm.enabled.$invalid" class="help-inline">Enabled Required</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2"> Update Interval </label>
                             <div class="col-md-4">
-                                <input name="update_interval" ng-model="mapping.update_interval" type="text" class="form-control" placeholder="update_interval"/>
+                                <input name="update_interval" ng-model="frontendData.update_interval" type="text" class="form-control" placeholder="update_interval"/>
                                 <!--
                                     <span ng-show="myForm.update_interval.$dirty && myForm.update_interval.$invalid" class="help-inline">Updata Interval Required</span>
                                 -->
@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label class="col-md-2"> Use Image </label>
                             <div class="col-md-4">
-                                <input name="use_image_pixel" ng-model="mapping.use_image_pixel" type="text" class="form-control" placeholder="use_image_pixel" required/>
+                                <input name="use_image_pixel" ng-model="frontendData.use_image_pixel" type="text" class="form-control" placeholder="use_image_pixel" required/>
                                 <span ng-show="myForm.use_image_pixel.$dirty && myForm.use_image_pixel.$invalid" class="help-inline">Use Image Pixel Required</span>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                         class="btn btn-primary">{{buttonText}}
                                 </button>
                                 <button ng-click="deleteMapping(mapping)"
-                                        ng-show="mapping._id" class="btn btn-warning">Delete
+                                        ng-show="frontendData._id" class="btn btn-warning">Delete
                                 </button>
                             </div>
                         </div>

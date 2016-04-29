@@ -10,7 +10,7 @@ public interface PixelDataEngineGroupService {
 
     String getGroups();
 
-    String getGroup(String gid);
+    String getGroup(String keyId);
 
     Integer updateGroup(GroupRequest request);
 

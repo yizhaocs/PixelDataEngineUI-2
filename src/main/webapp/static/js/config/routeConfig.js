@@ -168,6 +168,17 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/list-group.html',
                 controller: 'listPixelGroups'
             })
+            .when(base + 'group/edit-group/:keyId', {
+                title: 'Edit Pixel Data Engine Group',
+                templateUrl: 'static/html/pixel-data-engine-config/edit-group.html',
+                controller: 'editPixelGroup',
+                resolve: {
+                    mapping: function (pixelmappingService, $route) {
+                        var keyId = $route.current.params.keyId;
+                        return pixelmappingService.getGroup(keyId);
+                    }
+                }
+            })
             .when(base + 'pixel-data-engine-rule', {
                 title: 'Pixel Data Engine Rules',
                 templateUrl: 'static/html/pixel-data-engine-config/list-rule.html',

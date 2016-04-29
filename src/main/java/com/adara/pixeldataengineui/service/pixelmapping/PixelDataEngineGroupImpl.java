@@ -23,8 +23,8 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService{
         return mPixelDataEngineGroupDAO.getGroups();
     }
 
-    public String getGroup(String gid) {
-        return mPixelDataEngineGroupDAO.getGroup(gid);
+    public String getGroup(String keyId) {
+        return mPixelDataEngineGroupDAO.getGroup(keyId);
     }
 
     public Integer updateGroup(GroupRequest request) {

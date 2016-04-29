@@ -6,8 +6,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -86,8 +89,42 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return sb.toString();
     }
 
-    public String getGroup(String gid){
-        return null;
+    public String getGroup(String keyId){
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup");
+        String query = "SELECT a.key_id, a.gid, a.type FROM marketplace.pde_groups a where a.key_id= ?";
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String result = null;
+        try {
+            result = jdbcTemplate.queryForObject(query, new Object[]{keyId}, new RowMapper<String>() {
+
+                @Override
+                public String mapRow(ResultSet rs, int rowNum)
+                        throws SQLException {
+                    PdeGroupsDTO mPdeGroupsDTO = new PdeGroupsDTO();
+                    mPdeGroupsDTO.setKey_id(rs.getInt("key_id"));
+                    mPdeGroupsDTO.setGid(rs.getInt("gid"));
+                    mPdeGroupsDTO.setType(String.valueOf(rs.getObject("type")));
+                    // convert Java object to JSON (Jackson)
+                    ObjectMapper mapper = new ObjectMapper();
+                    String result = "";
+                    try {
+                        result = mapper.writeValueAsString(mPdeGroupsDTO);
+                    } catch (Exception e) {
+                        LOG.error("Failed to convert Java object to JSON", e);
+                    }
+                    return result;
+                }
+            });
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + "  ,method return -> " + result);
+
+        return result;
     }
 
     public Integer updateGroup(GroupRequest request){
@@ -95,6 +132,21 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
     }
 
     public Integer deleteGroup(String keyId){
-        return null;
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
+        String query = "DELETE FROM marketplace.pde_groups WHERE key_id =?";
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        int result = 0;
+        try {
+            result = jdbcTemplate.update(query, keyId);
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + "  ,method return -> " + result);
+
+        return result;
     }
 }
