@@ -29,7 +29,7 @@ public class PixelDataEngineGroupController {
 
         Integer result = 0;
 
-            result = mPixelDataEngineGroupService.insertGroup(request.getMapping().getKey_id(), request.getMapping().getGid(), request.getMapping().getType());
+        result = mPixelDataEngineGroupService.insertGroup(request.getMapping().getKey_id(), request.getMapping().getGid(), request.getMapping().getType());
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -85,6 +85,53 @@ public class PixelDataEngineGroupController {
 
         if (LOG.isDebugEnabled())
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups" + ", " + "ResponseEntity:" + response.toString());
+
+        return response;
+    }
+
+    @RequestMapping(value = "/updateGroup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateGroup(@RequestBody InsertUpdateRequest request) {
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "request data ->" + request.toString());
+
+        Integer result = 0;
+
+        result = mPixelDataEngineGroupService.updateGroup(request.getMapping().getKey_id(), request.getMapping().getGid(), request.getMapping().getType());
+
+        ResponseEntity<String> response = null;
+        if (result > 0) {
+            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "ResponseEntity:" + response.toString());
+
+        return response;
+    }
+
+    @RequestMapping(value = "/deleteGroup", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteGroup(@RequestParam(value = "id", required = false) String id) {
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "request data ->" + "id:" + id);
+
+        Integer result = 0;
+        if (id.equals("0")) {
+            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        }
+
+        result = mPixelDataEngineGroupService.deleteGroup(id);
+
+        ResponseEntity<String> response = null;
+        if (result > 0) {
+            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

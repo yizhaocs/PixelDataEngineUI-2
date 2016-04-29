@@ -30,15 +30,15 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 
     $scope.deleteGroup = function (frontendData) {
         if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteGroup($rootScope.base + 'Pixel-Data-Engine-Groups', frontendData.key_id);
+            pixelmappingService.deleteGroup($rootScope.base + 'pixel-data-engine-group', frontendData.key_id);
     };
 
     $scope.saveGroup = function (frontendData) {
         if (keyId <= 0) {
-            pixelmappingService.insertGroup($rootScope.base + 'Pixel-Data-Engine-Groups', frontendData);
+            pixelmappingService.insertGroup($rootScope.base + 'pixel-data-engine-group', frontendData);
         }
         else {
-            pixelmappingService.updateGroup($rootScope.base + 'Pixel-Data-Engine-Groups', keyId, frontendData);
+            pixelmappingService.updateGroup($rootScope.base + 'pixel-data-engine-group', keyId, frontendData);
         }
     };
 });

@@ -126,7 +126,23 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
     }
 
     public Integer updateGroup(Integer key_id, Integer gid, String type){
-        return null;
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");
+        String query = "UPDATE marketplace.pde_groups SET " + "key_id" + "=?" + "," + "gid" + "=?" + "," + "type" + "=?" + " WHERE key_id=?";
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        Object[] args = new Object[]{key_id, gid, type};
+        Integer result = 0;
+        try {
+            result = jdbcTemplate.update(query, args);
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + "  ,method return -> " + result);
+
+        return result;
     }
 
     public Integer deleteGroup(String keyId){

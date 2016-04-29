@@ -189,7 +189,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
                 controller: 'editPixelRule',
                 resolve: {
-                    responseRule: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var keyId = $route.current.params.keyId;
                         return pixelmappingService.getRule(keyId);
                     }

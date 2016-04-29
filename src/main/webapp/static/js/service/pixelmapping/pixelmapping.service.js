@@ -27,15 +27,15 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'mapping?id=' + mappingID + '&type=' + type);
         }
 
-        obj.insertMapping = function (redirectPath, mapping, type) {
-            return $http.post($rootScope.base + 'insertMapping', {mapping: mapping, type: type}).then(function (results) {
+        obj.insertMapping = function (redirectPath, frontendData, type) {
+            return $http.post($rootScope.base + 'insertMapping', {mapping: frontendData, type: type}).then(function (results) {
                 $location.path(redirectPath);
                 return results;
             });
         };
 
-        obj.updateMapping = function (redirectPath, id, mapping, type) {
-            return $http.post($rootScope.base + 'updateMapping', {id: id, mapping: mapping, type: type}).then(function (status) {
+        obj.updateMapping = function (redirectPath, id, frontendData, type) {
+            return $http.post($rootScope.base + 'updateMapping', {id: id, mapping: frontendData, type: type}).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
@@ -59,10 +59,24 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'group?id=' + keyId);
         }
 
-        obj.insertGroup = function (redirectPath, mapping) {
-            return $http.post($rootScope.base + 'insertGroup', {mapping: mapping}).then(function (results) {
+        obj.insertGroup = function (redirectPath, frontendData) {
+            return $http.post($rootScope.base + 'insertGroup', {mapping: frontendData}).then(function (results) {
                 $location.path(redirectPath);
                 return results;
+            });
+        };
+
+        obj.updateGroup = function (redirectPath, id, frontendData) {
+            return $http.post($rootScope.base + 'updateGroup', {key_id: id, mapping: frontendData}).then(function (status) {
+                $location.path(redirectPath);
+                return status.data;
+            });
+        };
+
+        obj.deleteGroup = function (redirectPath, id) {
+            return $http.delete($rootScope.base + 'deleteGroup?id=' + id).then(function (status) {
+                $location.path(redirectPath);
+                return status.data;
             });
         };
 
