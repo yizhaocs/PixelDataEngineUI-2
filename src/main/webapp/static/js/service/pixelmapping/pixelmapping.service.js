@@ -59,6 +59,14 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'group?id=' + keyId);
         }
 
+        obj.insertGroup = function (redirectPath, mapping) {
+            return $http.post($rootScope.base + 'insertGroup', {mapping: mapping}).then(function (results) {
+                $location.path(redirectPath);
+                return results;
+            });
+        };
+
+
 
         /*
          * rule service begin

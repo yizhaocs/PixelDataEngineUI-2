@@ -1,18 +1,16 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
-import com.adara.pixeldataengineui.model.frontend.requestbody.GroupRequest;
-
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineGroupDAO {
-    Integer insertGroup(GroupRequest request);
+    Integer insertGroup(Integer key_id, Integer gid, String type);
 
     String getGroups();
 
     String getGroup(String keyId);
 
-    Integer updateGroup(GroupRequest request);
+    Integer updateGroup(Integer key_id, Integer gid, String type);
 
     Integer deleteGroup(String keyId);
 }

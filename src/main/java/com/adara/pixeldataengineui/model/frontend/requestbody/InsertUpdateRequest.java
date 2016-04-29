@@ -66,6 +66,9 @@ public class InsertUpdateRequest {
         // dbm_conversion_pixel_mappings
         private Integer conversion_pixel_id;
         private String dbm_url;
+        // pde groups
+        private Integer gid;
+        private String type;
 
         public Boolean getUse_image_pixel() {
             return use_image_pixel;
@@ -233,6 +236,22 @@ public class InsertUpdateRequest {
 
         public void setDbm_url(String dbm_url) {
             this.dbm_url = dbm_url;
+        }
+
+        public Integer getGid() {
+            return gid;
+        }
+
+        public void setGid(Integer gid) {
+            this.gid = gid;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
     }
 }

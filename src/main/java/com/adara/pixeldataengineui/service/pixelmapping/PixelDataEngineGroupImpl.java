@@ -1,7 +1,6 @@
 package com.adara.pixeldataengineui.service.pixelmapping;
 
 import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineGroupDAO;
-import com.adara.pixeldataengineui.model.frontend.requestbody.GroupRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +14,8 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService{
     @Autowired
     private PixelDataEngineGroupDAO mPixelDataEngineGroupDAO;
 
-    public Integer insertGroup(GroupRequest request) {
-        return mPixelDataEngineGroupDAO.insertGroup(request);
+    public Integer insertGroup(Integer key_id, Integer gid, String type) {
+        return mPixelDataEngineGroupDAO.insertGroup(key_id, gid, type);
     }
 
     public String getGroups() {
@@ -27,8 +26,8 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService{
         return mPixelDataEngineGroupDAO.getGroup(keyId);
     }
 
-    public Integer updateGroup(GroupRequest request) {
-        return mPixelDataEngineGroupDAO.updateGroup(request);
+    public Integer updateGroup(Integer key_id, Integer gid, String type) {
+        return mPixelDataEngineGroupDAO.updateGroup(key_id, gid, type);
     }
 
     public Integer deleteGroup(String keyId) {

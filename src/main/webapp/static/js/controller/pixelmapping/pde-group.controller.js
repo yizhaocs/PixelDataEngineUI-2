@@ -28,17 +28,17 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
         return angular.equals(original, $scope.frontendData);
     }
 
-    $scope.deleteMapping = function (mapping) {
+    $scope.deleteGroup = function (mapping) {
         if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteMapping($rootScope.base + 'adobe', mapping.adobe_segment_id, 'adobe');
+            pixelmappingService.deleteGroup($rootScope.base + 'Pixel-Data-Engine-Groups', mapping.key_id);
     };
 
-    $scope.saveMapping = function (mapping) {
-        if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'adobe', mapping, 'adobe');
+    $scope.saveGroup = function (mapping) {
+        if (keyId <= 0) {
+            pixelmappingService.insertGroup($rootScope.base + 'Pixel-Data-Engine-Groups', mapping);
         }
         else {
-            pixelmappingService.updateMapping($rootScope.base + 'adobe', mappingID, mapping, 'adobe');
+            pixelmappingService.updateGroup($rootScope.base + 'Pixel-Data-Engine-Groups', keyId, mapping);
         }
     };
 });

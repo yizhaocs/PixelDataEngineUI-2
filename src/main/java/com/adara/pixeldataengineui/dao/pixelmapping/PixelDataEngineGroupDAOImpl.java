@@ -1,7 +1,6 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PdeGroupsDTO;
-import com.adara.pixeldataengineui.model.frontend.requestbody.GroupRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,26 +25,25 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(GroupRequest request){
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping");
+    public Integer insertGroup(Integer key_id, Integer gid, String type){
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
         String query = "insert into marketplace.pde_groups(key_id, gid, type) values(?, ?, ?)";
-        // Object[] args = new Object[]{key_id, gid, type};
+         Object[] args = new Object[]{key_id, gid, type};
 
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping" + ", " + "Executing query -> " + query.toString());
-//
-//        int result = 0;
-//        try {
-//            result = jdbcTemplate.update(query, args);
-//        } catch (Exception e) {
-//
-//            LOG.error("Failed to execute sql query", e);
-//        }
-//
-//        if (LOG.isDebugEnabled())
-//            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping" + "  ,method return -> " + result);
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + ", " + "Executing query -> " + query.toString());
 
-        return null;
+        int result = 0;
+        try {
+            result = jdbcTemplate.update(query, args);
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + "  ,method return -> " + result);
+
+        return result;
     }
 
     public String getGroups(){
@@ -127,7 +125,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return result;
     }
 
-    public Integer updateGroup(GroupRequest request){
+    public Integer updateGroup(Integer key_id, Integer gid, String type){
         return null;
     }
 

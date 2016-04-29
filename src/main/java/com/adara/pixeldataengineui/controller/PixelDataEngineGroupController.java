@@ -1,15 +1,14 @@
 package com.adara.pixeldataengineui.controller;
 
+import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
@@ -23,8 +22,30 @@ public class PixelDataEngineGroupController {
     PixelDataEngineGroupService mPixelDataEngineGroupService;
 
 
+    @RequestMapping(value = "/insertGroup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> insertGroup(@RequestBody InsertUpdateRequest request) {
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + ", " + "request data ->" + request.toString());
+
+        Integer result = 0;
+
+            result = mPixelDataEngineGroupService.insertGroup(request.getMapping().getKey_id(), request.getMapping().getGid(), request.getMapping().getType());
+
+        ResponseEntity<String> response = null;
+        if (result > 0) {
+            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + ", " + "ResponseEntity:" + response.toString());
+
+        return response;
+    }
+
     @RequestMapping(value = "/group", method = RequestMethod.GET)
-    public ResponseEntity<String> mapping(@RequestParam(value = "id", required = false) String id) {
+    public ResponseEntity<String> group(@RequestParam(value = "id", required = false) String id) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mapping");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mapping" + ", " + "request data ->" + "id:" + id);
 
