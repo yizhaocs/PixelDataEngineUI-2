@@ -10,11 +10,11 @@ app.controller('listCtrlDbm', function ($scope, pixelmappingService) {
     });
 });
 
-app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, mapping) {
+app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? parseInt($routeParams.mappingID) : 0;
     $rootScope.title = (mappingID > 0) ? 'Edit Mapping' : 'Add Mapping';
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
-    var original = mapping.data;
+    var original = backendData.data;
     if (original != '') {
         original._id = mappingID;
     }
@@ -27,17 +27,17 @@ app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routePar
         return angular.equals(original, $scope.frontendData);
     }
 
-    $scope.deleteMapping = function (mapping) {
+    $scope.deleteMapping = function (frontendData) {
         if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteMapping($rootScope.base + 'dbm', mapping.conversion_pixel_id, 'dbm');
+            pixelmappingService.deleteMapping($rootScope.base + 'dbm', frontendData.conversion_pixel_id, 'dbm');
     };
 
-    $scope.saveMapping = function (mapping) {
+    $scope.saveMapping = function (frontendData) {
         if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'dbm', mapping, 'dbm');
+            pixelmappingService.insertMapping($rootScope.base + 'dbm', frontendData, 'dbm');
         }
         else {
-            pixelmappingService.updateMapping($rootScope.base + 'dbm', mappingID, mapping, 'dbm');
+            pixelmappingService.updateMapping($rootScope.base + 'dbm', mappingID, frontendData, 'dbm');
         }
     };
 });

@@ -35,11 +35,11 @@
                             <label class="col-md-2"></label>
                             <div class="col-md-4">
                                 <a href="krux-dpkey" class="btn">Cancel</a>
-                                <button ng-click="saveMapping(mapping);"
+                                <button ng-click="saveMapping(frontendData);"
                                         ng-disabled="isClean() || myForm.$invalid"
                                         class="btn btn-primary">{{buttonText}}
                                 </button>
-                                <button ng-click="deleteMapping(mapping)"
+                                <button ng-click="deleteMapping(frontendData)"
                                         ng-show="frontendData._id" class="btn btn-warning">Delete
                                 </button>
                             </div>

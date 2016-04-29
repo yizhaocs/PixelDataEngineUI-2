@@ -41,7 +41,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/adobe-pages/edit-mapping.html',
                 controller: 'editCtrlAdobe',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'adobe');
                     }
@@ -57,7 +57,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/derive-conversion-pages/edit-mapping.html',
                 controller: 'editCtrlDeriveConversion',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'derive-conversion');
                     }
@@ -73,7 +73,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/krux-dpkey-pages/edit-mapping.html',
                 controller: 'editCtrlKruxDpkey',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'krux-dpkey');
                     }
@@ -90,7 +90,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/liveramp-pages/edit-dp-mapping.html',
                 controller: 'editCtrlLiverampDp',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'liveramp-dp');
                     }
@@ -101,7 +101,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/liveramp-pages/edit-key-mapping.html',
                 controller: 'editCtrlLiverampKey',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'liveramp-key');
                     }
@@ -118,7 +118,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/dbm-pages/edit-mapping.html',
                 controller: 'editCtrlDbm',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'dbm');
                     }
@@ -135,7 +135,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/facebook-pages/edit-pixel-mapping.html',
                 controller: 'editCtrlFacebookPixel',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'facebook-pixel');
                     }
@@ -146,7 +146,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/facebook-pages/edit-dp-mapping.html',
                 controller: 'editCtrlFacebookDp',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'facebook-dp');
                     }
@@ -157,7 +157,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/facebook-pages/edit-key-mapping.html',
                 controller: 'editCtrlFacebookKey',
                 resolve: {
-                    mapping: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var mappingID = $route.current.params.mappingID;
                         return pixelmappingService.getMapping(mappingID, 'facebook-key');
                     }
@@ -189,7 +189,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
                 controller: 'editPixelRule',
                 resolve: {
-                    responseRule: function (pixelmappingService, $route) {
+                    backendData: function (pixelmappingService, $route) {
                         var keyId = $route.current.params.keyId;
                         return pixelmappingService.getRule(keyId);
                     }

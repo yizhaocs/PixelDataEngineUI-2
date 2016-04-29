@@ -10,12 +10,12 @@ app.controller('listCtrlKruxDpkey', function ($scope, pixelmappingService) {
     });
 });
 
-app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, mapping) {
+app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : 0;
 
     $rootScope.title = (mappingID > 0) ? 'Edit Mapping' : 'Add Mapping';
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
-    var original = mapping.data;
+    var original = backendData.data;
     if (original != '') {
         original._id = mappingID;
     }
@@ -28,19 +28,19 @@ app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $ro
         return angular.equals(original, $scope.frontendData);
     }
 
-    $scope.deleteMapping = function (mapping) {
+    $scope.deleteMapping = function (frontendData) {
         // $location.path('/adobe');
         if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteMapping($rootScope.base + 'krux-dpkey', mapping.krux_segment_id, 'krux-dpkey');
+            pixelmappingService.deleteMapping($rootScope.base + 'krux-dpkey', frontendData.krux_segment_id, 'krux-dpkey');
     };
 
-    $scope.saveMapping = function (mapping) {
+    $scope.saveMapping = function (frontendData) {
         // $location.path('/adobe');
         if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'krux-dpkey', mapping, 'krux-dpkey');
+            pixelmappingService.insertMapping($rootScope.base + 'krux-dpkey', frontendData, 'krux-dpkey');
         }
         else {
-            pixelmappingService.updateMapping($rootScope.base + 'krux-dpkey', mappingID, mapping, 'krux-dpkey');
+            pixelmappingService.updateMapping($rootScope.base + 'krux-dpkey', mappingID, frontendData, 'krux-dpkey');
         }
     };
 });

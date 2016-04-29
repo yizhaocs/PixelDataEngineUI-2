@@ -24,11 +24,11 @@ app.controller('listCtrlFacebook', function ($scope, $location, $anchorScroll, p
     };
 });
 
-app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, mapping) {
+app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
     $rootScope.title = (mappingID != '0') ? 'Edit Liveramp DP Mapping' : 'Add Facebook Pixel Mapping';
     $scope.buttonText = (mappingID != '0') ? 'Update Liveramp DP Mapping' : 'Add New Facebook Pixel Mapping';
-    var original = mapping.data;
+    var original = backendData.data;
     if (original != '') {
         original._id = mappingID;
     }
@@ -58,11 +58,11 @@ app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location,
     };
 });
 
-app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, mapping) {
+app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
     $rootScope.title = 'Edit Facebook DP Mapping';
     $scope.buttonText = 'Update Facebook DP Mapping';
-    var original = mapping.data;
+    var original = backendData.data;
     if (original != '') {
         original._id = mappingID;
     }
@@ -81,11 +81,11 @@ app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $r
     };
 });
 
-app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, mapping) {
+app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
     $rootScope.title = (mappingID != '0') ? 'Edit Facebook Key Mapping' : 'Add Facebook Key Mapping';
     $scope.buttonText = (mappingID != '0') ? 'Update Facebook Key Mapping' : 'Add New Facebook Key Mapping';
-    var original = mapping.data;
+    var original = backendData.data;
     if (original != '') {
         original._id = mappingID;
     }
@@ -98,19 +98,19 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
         return angular.equals(original, $scope.frontendData);
     }
 
-    $scope.deleteMapping = function (mapping) {
+    $scope.deleteMapping = function (frontendData) {
         // $location.path('/facebook');
         if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteMapping($rootScope.base + 'facebook', mapping.key_id, 'facebook-key');
+            pixelmappingService.deleteMapping($rootScope.base + 'facebook', frontendData.key_id, 'facebook-key');
     };
 
-    $scope.saveMapping = function (mapping) {
+    $scope.saveMapping = function (frontendData) {
         // $location.path('/facebook');
         if (mappingID == '0') {
-            pixelmappingService.insertMapping($rootScope.base + 'facebook', mapping, 'facebook-key');
+            pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-key');
         }
         else {
-            pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, mapping, 'facebook-key');
+            pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, frontendData, 'facebook-key');
         }
     };
 });

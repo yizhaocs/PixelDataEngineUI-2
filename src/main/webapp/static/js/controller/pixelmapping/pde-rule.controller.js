@@ -11,7 +11,7 @@ app.controller('listPixelRules', function ($scope, pixelmappingService) {
 });
 
 
-app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, responseRule) {
+app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     /*
      *
      * Add rule
@@ -28,7 +28,7 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
     var keyIdParam = ($routeParams.keyId) ? $routeParams.keyId : '0';
     $rootScope.title = (keyIdParam != '0') ? 'Edit Rule' : 'Add Rule';
     $scope.buttonText = (keyIdParam != '0') ? 'Update Rule' : 'Add Rule';
-    var responseBackupRuleData = responseRule.data;
+    var responseBackupRuleData = backendData.data;
 
     if (responseBackupRuleData != '') {
         responseBackupRuleData._id = keyIdParam;
