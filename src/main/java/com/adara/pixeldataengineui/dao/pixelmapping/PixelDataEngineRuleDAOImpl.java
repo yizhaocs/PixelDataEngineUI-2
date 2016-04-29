@@ -88,7 +88,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         sb.append("[");
         for (Map<String, Object> m : listMap) {
             PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
+            mPixelDataEngineConfigsDTO.setGid(String.valueOf(m.get("gid")));
             mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(m.get("key_id")));
+            mPixelDataEngineConfigsDTO.setPriority(String.valueOf(m.get("priority")));
             mPixelDataEngineConfigsDTO.setType(String.valueOf(m.get("type")));
             mPixelDataEngineConfigsDTO.setParse_rule(String.valueOf(m.get("parse_rule")));
             mPixelDataEngineConfigsDTO.setCondition_rule(String.valueOf(m.get("condition_rule")));
@@ -114,7 +116,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
     public String getRule(String keyId) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
-        String query = "SELECT p.key_id, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p where p.key_id=?";
+        String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p where p.key_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -126,7 +128,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
+                    mPixelDataEngineConfigsDTO.setGid(String.valueOf(rs.getObject("gid")));
                     mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(rs.getObject("key_id")));
+                    mPixelDataEngineConfigsDTO.setPriority(String.valueOf(rs.getObject("priority")));
                     mPixelDataEngineConfigsDTO.setType(String.valueOf(rs.getObject("type")));
                     mPixelDataEngineConfigsDTO.setParse_rule(String.valueOf(rs.getObject("parse_rule")));
                     mPixelDataEngineConfigsDTO.setCondition_rule(String.valueOf(rs.getObject("condition_rule")));
@@ -154,32 +158,30 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
     public Integer updateRule(RuleRequest request) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule");
 
-        // key_id
+        String gid = request.getGid();
+
         String keyId = request.getKeyId();
 
-        // type
+        String priority = request.getPriority();
+
         String type = request.getType();
 
-        // parse_rule
         String parseRuleValue = parseRuleBuilder(request);
 
-        // condition_rule
         String conditionRuleValue = conditionRuleBuilder(request);
 
-        // action_rule
         String actionRuleValue = actionRuleBuilder(request);
 
         if (keyId == null || keyId.length() == 0 || type == null || type.length() == 0 || parseRuleValue == null || parseRuleValue.length() == 0 || conditionRuleValue == null || conditionRuleValue.length() == 0 || actionRuleValue == null || actionRuleValue.length() == 0) {
-
             LOG.error("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + "  ,Error: keyId or type or parseRuleValue or conditionRuleValue or actionRuleValue is null");
             return -1;
         }
 
-        String query = "UPDATE marketplace.pixel_data_engine_configs SET " + "key_id" + "=?" + "," + "type" + "=?" + "," + "parse_rule" + "=?" + "," + "condition_rule" + "=?" + "," + "action_rule" + "=?" + " WHERE key_id=?";
+        String query = "UPDATE marketplace.pixel_data_engine_configs SET " + "gid" + "=?" + "," + "key_id" + "=?" + "," + "priority" + "=?" + "," + "type" + "=?" + "," + "parse_rule" + "=?" + "," + "condition_rule" + "=?" + "," + "action_rule" + "=?" + " WHERE key_id=?";
 
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "Executing query -> " + query.toString());
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{keyId, type, parseRuleValue, conditionRuleValue, actionRuleValue, keyId};
+        Object[] args = new Object[]{gid, keyId, priority, type, parseRuleValue, conditionRuleValue, actionRuleValue, keyId};
 
         Integer result = 0;
         try {

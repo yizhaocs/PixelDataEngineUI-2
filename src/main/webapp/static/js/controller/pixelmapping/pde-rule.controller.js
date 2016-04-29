@@ -41,7 +41,9 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
         "parseRule": null,
         "conditionRule": null,
         "actionRule": null,
+        "gid": null,
         "keyId": null,
+        "priority": null,
         "type": null,
         "split1": {
             "column1": null
@@ -71,8 +73,10 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
 
     // true if user click on the "edit button"
     if (keyIdParam != 0) {
+        processedResponseBackupRuleData.gid = responseBackupRuleData.gid;
         processedResponseBackupRuleData.keyId = responseBackupRuleData.key_id;
         processedResponseBackupRuleData.type = responseBackupRuleData.type;
+        processedResponseBackupRuleData.priority = responseBackupRuleData.priority;
 
         var parseRuleSplit = responseBackupRuleData.parse_rule.split("|");
         processedResponseBackupRuleData.parseRule = parseRuleSplit[0];
@@ -236,10 +240,10 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
 
     $scope.saveRule = function (frontendData) {
         if ($routeParams.keyId == '0') {
-            pixelmappingService.insertRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.keyId, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
+            pixelmappingService.insertRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.gid, frontendData.keyId, frontendData.priority, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
         }
         else {
-            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.keyId, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
+            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.gid, frontendData.keyId, frontendData.priority, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
         }
     };
 });

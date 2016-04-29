@@ -11,7 +11,9 @@ public class RuleRequest {
     private String parseRule;
     private String conditionRule;
     private String actionRule;
+    private String gid;
     private String keyId;
+    private String priority;
     private String type;
     private Split1 split1;
     private Split2 split2;
@@ -46,12 +48,28 @@ public class RuleRequest {
         this.conditionRule = conditionRule;
     }
 
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
     public String getKeyId() {
         return keyId;
     }
 
     public void setKeyId(String keyId) {
         this.keyId = keyId;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     public String getType() {
