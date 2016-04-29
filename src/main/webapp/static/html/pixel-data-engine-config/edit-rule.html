@@ -20,7 +20,7 @@
                     <tr>
                         <td>key_id:</td>
                         <td>
-                            <input type="text" ng-model="ngModelRule.keyId">
+                            <input type="text" ng-model="frontendData.keyId">
                         </td>
                     </tr>
                 </table>
@@ -30,7 +30,7 @@
                 <tr>
                     <td>type:</td>
                     <td>
-                        <select ng-model="ngModelRule.type">
+                        <select ng-model="frontendData.type">
                             <option value="transform">transform</option>
                         </select>
                     </td>
@@ -40,7 +40,7 @@
                 <!--<tr>-->
                 <!--<td>type:</td>-->
                 <!--<td>-->
-                <!--<input type="text" ng-model="ngModelRule.type">-->
+                <!--<input type="text" ng-model="frontendData.type">-->
                 <!--</td>-->
                 <!--</tr>-->
                 <!--</table>-->
@@ -51,7 +51,7 @@
                     <tr>
                         <td>parse_rule:</td>
                         <td>
-                            <select ng-model="ngModelRule.parseRule">
+                            <select ng-model="frontendData.parseRule">
                                 <option value="orig">orig</option>
                                 <option value="split1">split1</option>
                                 <option value="split2">split2</option>
@@ -61,23 +61,23 @@
                     <tr>
                     </tr>
                     <tr>
-                        <table ng-show="ngModelRule.parseRule=='split1'">
+                        <table ng-show="frontendData.parseRule=='split1'">
                             <td>split string:</td>
                             <td>
-                                <input type="text" ng-model="ngModelRule.split1.column1">
+                                <input type="text" ng-model="frontendData.split1.column1">
                             </td>
                         </table>
-                        <table ng-show="ngModelRule.parseRule=='split2'">
+                        <table ng-show="frontendData.parseRule=='split2'">
                             <tr>
                                 <td>level 1 split string:</td>
                                 <td>
-                                    <input type="text" ng-model="ngModelRule.split2.column1">
+                                    <input type="text" ng-model="frontendData.split2.column1">
                                 </td>
                             </tr>
                             <tr>
                                 <td>level 2 split string:</td>
                                 <td>
-                                    <input type="text" ng-model="ngModelRule.split2.column2">
+                                    <input type="text" ng-model="frontendData.split2.column2">
                                 </td>
                             </tr>
                         </table>
@@ -88,7 +88,7 @@
                     <tr>
                         <td>condition_rule:</td>
                         <td>
-                            <select ng-model="ngModelRule.conditionRule">
+                            <select ng-model="frontendData.conditionRule">
                                 <option value="len">len</option>
                                 <option value="always">always</option>
                                 <option value="range">range</option>
@@ -97,28 +97,28 @@
                         </td>
                     </tr>
                     <tr>
-                        <table ng-show="ngModelRule.conditionRule=='len'">
+                        <table ng-show="frontendData.conditionRule=='len'">
                             <td>string length:</td>
                             <td>
-                                <input type="text" ng-model="ngModelRule.len.column1">
+                                <input type="text" ng-model="frontendData.len.column1">
                             </td>
                         </table>
-                        <table ng-show="ngModelRule.conditionRule=='range'">
+                        <table ng-show="frontendData.conditionRule=='range'">
                             <tr>
                                 <td>range from:</td>
                                 <td>
-                                    <input type="text" ng-model="ngModelRule.range.column1">
+                                    <input type="text" ng-model="frontendData.range.column1">
                                 </td>
                             </tr>
                             <tr>
                                 <td>range to:</td>
                                 <td>
-                                    <input type="text" ng-model="ngModelRule.range.column2">
+                                    <input type="text" ng-model="frontendData.range.column2">
                                 </td>
                             </tr>
                         </table>
-                        <table ng-show="ngModelRule.conditionRule=='in'">
-                            <tr ng:repeat="element in ngModelRule.inElementArray">
+                        <table ng-show="frontendData.conditionRule=='in'">
+                            <tr ng:repeat="element in frontendData.inElementArray">
                                 <td>element_{{element.column1}}:</td>
                                 <td><input type="text" ng-model="element.column2"></td>
                             </tr>
@@ -138,7 +138,7 @@
                     <tr>
                         <td>action_rule:</td>
                         <td>
-                            <select ng-model="ngModelRule.actionRule">
+                            <select ng-model="frontendData.actionRule">
                                 <option value="substr">substr</option>
                                 <option value="set">set</option>
                                 <option value="dec">dec</option>
@@ -148,28 +148,28 @@
                     </tr>
                     <tr>
                         <div>
-                            <table ng-show="ngModelRule.actionRule=='substr'">
+                            <table ng-show="frontendData.actionRule=='substr'">
                                 <tr>
                                     <td>direction:</td>
                                     <td>
-                                        <input type="text" ng-model="ngModelRule.substr.column1">
+                                        <input type="text" ng-model="frontendData.substr.column1">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>start index:</td>
                                     <td>
-                                        <input type="text" ng-model="ngModelRule.substr.column2">
+                                        <input type="text" ng-model="frontendData.substr.column2">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>length:</td>
                                     <td>
-                                        <input type="text" ng-model="ngModelRule.substr.column3">
+                                        <input type="text" ng-model="frontendData.substr.column3">
                                     </td>
                                 </tr>
                             </table>
-                            <table ng-show="ngModelRule.actionRule=='set'">
-                                <tr ng:repeat="set in ngModelRule.setRuleArray">
+                            <table ng-show="frontendData.actionRule=='set'">
+                                <tr ng:repeat="set in frontendData.setRuleArray">
                                     <td>set_{{set.column1}}:</td>
                                     <td><input type="text" ng-model="set.column2"></td>
                                 </tr>
@@ -182,10 +182,10 @@
                                 </td>
                                 </td>
                             </table>
-                            <table ng-show="ngModelRule.actionRule=='dec'">
+                            <table ng-show="frontendData.actionRule=='dec'">
                                 <td>number of decimals:</td>
                                 <td>
-                                    <input type="text" ng-model="ngModelRule.dec.column1">
+                                    <input type="text" ng-model="frontendData.dec.column1">
                                 </td>
                             </table>
                         </div>
@@ -197,12 +197,12 @@
                     <label class="col-md-2"></label>
                     <div class="col-md-4">
                         <a href="pixel-data-engine-rule" class="btn">Cancel</a>
-                        <button ng-click="saveRule(ngModelRule);"
+                        <button ng-click="saveRule(frontendData);"
                                 ng-disabled="isClean() || myForm.$invalid"
                                 class="btn btn-primary">{{buttonText}}
                         </button>
-                        <button ng-click="deleteRule(ngModelRule)"
-                                ng-show="ngModelRule._id" class="btn btn-warning">Delete
+                        <button ng-click="deleteRule(frontendData)"
+                                ng-show="frontendData._id" class="btn btn-warning">Delete
                         </button>
                     </div>
                 </div>
