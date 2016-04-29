@@ -162,6 +162,17 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         return result;
     }
 
+
+    /*
+    * This method will check the incoming url and do the following modification[if the url without "https://" or "http://" then added "https://" to
+    * the front of url to the incoming url:
+    * google.com -> https://google.com
+    * www.google.com -> https://www.google.com
+    * */
+    //
+    //
+    // https://google.com -> https://google.com
+    // http://google.com -> http://google.com
     private String httpsChecker(String url){
         if(url == null || url.length() == 0 || (url.length() > 7 && url.substring(0,8).equals("https://")) || (url.length() > 6 && url.substring(0,7).equals("http://")) ){
             return url;
