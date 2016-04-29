@@ -33,19 +33,21 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
     public Integer insertRule(RuleRequest request) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule");
 
+        String gid = request.getGid();
         String keyId = request.getKeyId();
+        String priority = request.getPriority();
         String type = request.getType();
         String parseRuleValue = parseRuleBuilder(request);
         String conditionRuleValue = conditionRuleBuilder(request);
         String actionRuleValue = actionRuleBuilder(request);
 
-        if (keyId == null || keyId.length() == 0 || type == null || type.length() == 0 || parseRuleValue == null || parseRuleValue.length() == 0 || conditionRuleValue == null || conditionRuleValue.length() == 0 || actionRuleValue == null || actionRuleValue.length() == 0) {
+        if (gid == null || keyId == null || priority == null || keyId.length() == 0 || type == null || type.length() == 0 || parseRuleValue == null || parseRuleValue.length() == 0 || conditionRuleValue == null || conditionRuleValue.length() == 0 || actionRuleValue == null || actionRuleValue.length() == 0) {
             LOG.error("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + "  ,Error: keyId or type or parseRuleValue or conditionRuleValue or actionRuleValue is null");
             return -1;
         }
 
-        String query = "INSERT INTO pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?)";
-        Object[] args = new Object[]{keyId, type, parseRuleValue, conditionRuleValue, actionRuleValue, "NULL", getCurrentDateTime()};
+        String query = "INSERT INTO pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = new Object[]{gid, keyId, priority, type, parseRuleValue, conditionRuleValue, actionRuleValue, "NULL", getCurrentDateTime()};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + ", " + "Executing query -> " + query.toString());
