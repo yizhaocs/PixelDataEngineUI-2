@@ -7,13 +7,13 @@
 
 app.controller('listCtrlFacebook', function ($scope, $location, $anchorScroll, pixelmappingService) {
     pixelmappingService.getMappings('facebook-dp').then(function (data) {
-        $scope.mappingsDp = data.data;
+        $scope.frontendDataMappingsDp = data.data;
     });
     pixelmappingService.getMappings('facebook-key').then(function (data) {
-        $scope.mappingsKey = data.data;
+        $scope.frontendDataMappingsKey = data.data;
     });
     pixelmappingService.getMappings('facebook-pixel').then(function (data) {
-        $scope.mappingsPixel = data.data;
+        $scope.frontendDataMappingsPixel = data.data;
     });
 
     $scope.scrollTo = function (position) {

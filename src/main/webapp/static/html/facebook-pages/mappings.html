@@ -23,7 +23,7 @@
             <th>Action&nbsp;</th>
             </thead>
             <tbody>
-            <tr ng-repeat="data in mappingsPixel">
+            <tr ng-repeat="data in frontendDataMappingsPixel">
                 <td>{{data.dp_id}}</td>
                 <td>{{data.facebook_pixel_id}}</td>
                 <td><a href="facebook/edit-pixel-mapping/{{data.dp_id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Mapping</a></td>
@@ -31,7 +31,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-12" ng-show="mappingsPixel.length == 0">
+    <div class="col-md-12" ng-show="frontendDataMappingsPixel.length == 0">
         <div class="col-md-12">
             <h4>No pixel mapping found</h4>
         </div>
@@ -58,7 +58,7 @@
             <th>Action&nbsp;</th>
             </thead>
             <tbody>
-            <tr ng-repeat="data in mappingsDp">
+            <tr ng-repeat="data in frontendDataMappingsDp">
                 <td>{{data.id}}</td>
                 <td>{{data.name}}</td>
                 <td>{{data.sync_facebook}}</td>
@@ -67,7 +67,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-12" ng-show="mappingsDp.length == 0">
+    <div class="col-md-12" ng-show="frontendDataMappingsDp.length == 0">
         <div class="col-md-12">
             <h4>No dp mapping found</h4>
         </div>
@@ -96,7 +96,7 @@
             <th>Action&nbsp;</th>
             </thead>
             <tbody>
-            <tr ng-repeat="data in mappingsKey">
+            <tr ng-repeat="data in frontendDataMappingsKey">
                 <td>{{data.key_id}}</td>
                 <td>{{data.enabled}}</td>
                 <td>{{data.update_interval}}</td>
@@ -106,7 +106,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-12" ng-show="mappingsKey.length == 0">
+    <div class="col-md-12" ng-show="frontendDataMappingsKey.length == 0">
         <div class="col-md-12">
             <h4>No key mapping found</h4>
         </div>
