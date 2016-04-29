@@ -67,7 +67,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
         obj.updateGroup = function (redirectPath, id, frontendData) {
-            return $http.post($rootScope.base + 'updateGroup', {key_id: id, mapping: frontendData}).then(function (status) {
+            return $http.post($rootScope.base + 'updateGroup', {mapping: frontendData}).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });

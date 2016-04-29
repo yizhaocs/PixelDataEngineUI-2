@@ -131,7 +131,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{key_id, gid, type};
+        Object[] args = new Object[]{key_id, gid, type, key_id};
         Integer result = 0;
         try {
             result = jdbcTemplate.update(query, args);
