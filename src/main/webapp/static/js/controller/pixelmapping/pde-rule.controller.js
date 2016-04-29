@@ -229,7 +229,7 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
     }
 
     $scope.deleteRule = function (frontendData) {
-        if (confirm("Are you sure to delete rule number: " + $scope.frontendData._id) == true) {
+        if (confirm("Are you sure to delete rule number: " + frontendData.keyId) == true) {
             pixelmappingService.deleteRule($rootScope.base + 'pixel-data-engine-rule', frontendData.keyId);
         }
     };

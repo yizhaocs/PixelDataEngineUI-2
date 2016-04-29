@@ -23,7 +23,7 @@ app.controller('editCtrlAdobe', function ($scope, $rootScope, $location, $routeP
     }
 
     $scope.deleteMapping = function (frontendData) {
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.adobe_segment_id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'adobe', frontendData.adobe_segment_id, 'adobe');
     };
 

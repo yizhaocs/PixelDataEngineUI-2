@@ -26,23 +26,23 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
         return angular.equals(backendData.data, $scope.frontendData);
     }
 
-    $scope.deleteMapping = function (mapping) {
+    $scope.deleteMapping = function (frontendData) {
         // $location.path('/liveramp');
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
-            pixelmappingService.deleteMapping($rootScope.base + 'liveramp', mapping.dp_name, 'liveramp-dp');
+        if (confirm("Are you sure to delete mapping number: " + frontendData.dp_name) == true)
+            pixelmappingService.deleteMapping($rootScope.base + 'liveramp', frontendData.dp_name, 'liveramp-dp');
     };
 
-    $scope.saveMapping = function (mapping) {
+    $scope.saveMapping = function (frontendData) {
         if (mapping.threshold_mb > 100) {
             alert("Threshold can't be greater than 100MB");
         }
         else {
             // $location.path('/liveramp');
             if (mappingID == '0') {
-                pixelmappingService.insertMapping($rootScope.base + 'liveramp', mapping, 'liveramp-dp');
+                pixelmappingService.insertMapping($rootScope.base + 'liveramp', frontendData, 'liveramp-dp');
             }
             else {
-                pixelmappingService.updateMapping($rootScope.base + 'liveramp', mappingID, mapping, 'liveramp-dp');
+                pixelmappingService.updateMapping($rootScope.base + 'liveramp', mappingID, frontendData, 'liveramp-dp');
             }
         }
     };
@@ -63,7 +63,7 @@ app.controller('editCtrlLiverampKey', function ($scope, $rootScope, $location, $
 
     $scope.deleteMapping = function (frontendData) {
         // $location.path('/liveramp');
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.liveramp_segment_id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'liveramp', frontendData.liveramp_segment_id, 'liveramp-key');
     };
 

@@ -36,19 +36,19 @@ app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location,
         return angular.equals(backendData.data, $scope.frontendData);
     }
 
-    $scope.deleteMapping = function (mapping) {
+    $scope.deleteMapping = function (frontendData) {
         // $location.path('/facebook');
-        if (confirm("Are you sure to delete mapping number: " + $scope.mapping._id) == true)
-            pixelmappingService.deleteMapping($rootScope.base + 'facebook', mapping.dp_id, 'facebook-pixel');
+        if (confirm("Are you sure to delete mapping number: " + frontendData.dp_id) == true)
+            pixelmappingService.deleteMapping($rootScope.base + 'facebook', frontendData.dp_id, 'facebook-pixel');
     };
 
-    $scope.saveMapping = function (mapping) {
+    $scope.saveMapping = function (frontendData) {
         // $location.path('/facebook');
         if (mappingID == '0') {
-            pixelmappingService.insertMapping($rootScope.base + 'facebook', mapping, 'facebook-pixel');
+            pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-pixel');
         }
         else {
-            pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, mapping, 'facebook-pixel');
+            pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, frontendData, 'facebook-pixel');
         }
     };
 });
@@ -65,9 +65,9 @@ app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $r
         return angular.equals(backendData.data, $scope.frontendData);
     }
 
-    $scope.saveMapping = function (mapping) {
+    $scope.saveMapping = function (frontendData) {
         // $location.path('/facebook');
-        pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, mapping, 'facebook-dp');
+        pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, frontendData, 'facebook-dp');
     };
 });
 
@@ -86,7 +86,7 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
 
     $scope.deleteMapping = function (frontendData) {
         // $location.path('/facebook');
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.key_id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'facebook', frontendData.key_id, 'facebook-key');
     };
 

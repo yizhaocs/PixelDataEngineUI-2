@@ -41,11 +41,24 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <!--<label class="col-md-2"> Use Image </label>-->
+                            <!--<div class="col-md-4">-->
+                                <!--<input name="use_image_pixel" ng-model="frontendData.use_image_pixel" type="text" class="form-control" placeholder="use_image_pixel" required/>-->
+                                <!--<span ng-show="myForm.use_image_pixel.$dirty && myForm.use_image_pixel.$invalid" class="help-inline">Use Image Pixel Required</span>-->
+                            <!--</div>-->
+
                             <label class="col-md-2"> Use Image </label>
+                            <!--<tr>-->
+                            <!--<td>Type:</td>-->
                             <div class="col-md-4">
-                                <input name="use_image_pixel" ng-model="frontendData.use_image_pixel" type="text" class="form-control" placeholder="use_image_pixel" required/>
-                                <span ng-show="myForm.use_image_pixel.$dirty && myForm.use_image_pixel.$invalid" class="help-inline">Use Image Pixel Required</span>
+                                <td>
+                                    <select ng-model="frontendData.use_image_pixel">
+                                        <option value="true">true</option>
+                                        <option value="false">false</option>
+                                    </select>
+                                </td>
                             </div>
+                            <!--</tr>-->
                         </div>
                         <div class="form-group">
                             <label class="col-md-2"></label>

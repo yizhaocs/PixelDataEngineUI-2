@@ -24,7 +24,7 @@ app.controller('editCtrlDeriveConversion', function ($scope, $rootScope, $locati
 
     $scope.deleteMapping = function (frontendData) {
         // $location.path('/adobe');
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.dp_key_id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'derive-conversion', frontendData.dp_key_id, 'derive-conversion');
     };
 

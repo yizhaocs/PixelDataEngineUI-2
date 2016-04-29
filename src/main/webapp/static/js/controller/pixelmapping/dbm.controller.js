@@ -22,7 +22,7 @@ app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routePar
     }
 
     $scope.deleteMapping = function (frontendData) {
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.conversion_pixel_id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'dbm', frontendData.conversion_pixel_id, 'dbm');
     };
 

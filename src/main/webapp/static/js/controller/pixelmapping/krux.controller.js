@@ -26,7 +26,7 @@ app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $ro
 
     $scope.deleteMapping = function (frontendData) {
         // $location.path('/adobe');
-        if (confirm("Are you sure to delete mapping number: " + $scope.frontendData._id) == true)
+        if (confirm("Are you sure to delete mapping number: " + frontendData.krux_segment_id) == true)
             pixelmappingService.deleteMapping($rootScope.base + 'krux-dpkey', frontendData.krux_segment_id, 'krux-dpkey');
     };
 
