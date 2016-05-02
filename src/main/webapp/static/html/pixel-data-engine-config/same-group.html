@@ -198,7 +198,7 @@
     <!-- First, we have our left-hand list of data names -->
     <div id="leftHandPanelView">
         <span>Key Id&nbsp;</span>
-        <div class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat='data in frontendLeftHandPanelData' ng-click="selectKeyId(data);">
+        <div class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">
 
             <div class="cssCompanyName">{{data.key_id}}</div>
         </div>
