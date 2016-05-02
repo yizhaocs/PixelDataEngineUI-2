@@ -66,9 +66,9 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         }
     };
 
-    $scope.selectCustomer = function (val) {
+    $scope.selectKeyId = function (frontendData) {
         //  If the user clicks on a <div>, we can get the ng-click to call this function, to set a new selected Customer.
-        $scope.selectedCustomer = val.CustomerID;
+        $scope.key_id = frontendData.key_id;
         $scope.loadOrders();
     }
 

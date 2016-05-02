@@ -193,9 +193,13 @@
 
     <!-- First, we have our left-hand list of data names -->
     <div id="divMasterView">
-        <div id="{{customer.customerid}}" class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.CustomerID == selectedCustomer}" ng-repeat='data in frontendData' ng-click="selectCustomer(data);">
+        <span>Key Id&nbsp;</span>
+        <div id="{{customer.customerid}}" class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat='data in frontendData' ng-click="selectKeyId(data);">
+
             <div class="cssCompanyName">{{data.key_id}}</div>
         </div>
+
+
     </div>
 
     <!-- Then, we have our right-hand panel, showing one data's orders -->
