@@ -40,7 +40,9 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var gid = ($routeParams.gid) ? parseInt($routeParams.gid) : 0;
     $scope.title = 'Group id:' + gid;
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
+
+    var responseBackupRuleData = '';
 
     /*
      *
@@ -117,7 +119,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             $scope.buttonText = 'Update Group';
             $scope.isUpdate = (backendData.key_id > 0) ? true : false;
-
+            responseBackupRuleData = backendData;
 
             var processedResponseBackupRuleData = {
                 "parseRule": null,

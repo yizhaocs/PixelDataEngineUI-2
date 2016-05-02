@@ -2,7 +2,7 @@
     /*  This CSS is exclusively for our Master-Detail view examples */
     #wholePanelView
     {
-        width: 95%;
+        width: 100%;
         height: 600px;
         border: 1px solid Green;
         padding: 3px;
@@ -198,7 +198,7 @@
     <!-- First, we have our left-hand list of data names -->
     <div id="leftHandPanelView">
         <span>Key Id&nbsp;</span>
-        <div id="{{customer.customerid}}" class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat='data in frontendData' ng-click="selectKeyId(data);">
+        <div class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat='data in frontendLeftHandPanelData' ng-click="selectKeyId(data);">
 
             <div class="cssCompanyName">{{data.key_id}}</div>
         </div>
@@ -211,9 +211,6 @@
         <div class="view">
             <div class="container">
                 <div class="row">
-
-
-
                     <div>
                         <table>
                             <tr>
@@ -292,7 +289,7 @@
                                     <tr>
                                         <td>level 1 split string:</td>
                                         <td>
-                                            <input type="text" ng-model="frontendData.split2.column1">
+                                            <input type="text" ng-model="frontendRightHandPanelData.split2.column1">
                                         </td>
                                     </tr>
                                     <tr>
