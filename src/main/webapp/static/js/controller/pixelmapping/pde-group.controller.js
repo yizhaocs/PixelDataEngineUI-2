@@ -256,39 +256,21 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             $scope.frontendRightHandPanelData = angular.copy(processedResponseBackupRuleData);
 
-
-            // true if user click on the "add button"
-            if (gid == 0) {
-                //if (responseBackupRuleData.inElementArray == null) {
-                //    responseBackupRuleData.inElementArray = [{
-                //        column1: '0',
-                //        column2: ''
-                //    }];
+            // if no inElementArray || setRuleArray data from backend, then init them
+            if ($scope.frontendRightHandPanelData.inElementArray.length == 0) {
                 $scope.frontendRightHandPanelData.inElementArray = [{
                     column1: '0',
                     column2: ''
                 }];
-                // }
+            }
 
-                //if (responseBackupRuleData.setRuleArray == null) {
-                //    responseBackupRuleData.setRuleArray = [{
-                //        column1: '0',
-                //        column2: ''
-                //    }];
+            if ($scope.frontendRightHandPanelData.setRuleArray.length == 0) {
                 $scope.frontendRightHandPanelData.setRuleArray = [{
                     column1: '0',
                     column2: ''
                 }];
-                //  }
             }
         });
-        //$http.get('http://inorthwind.azurewebsites.net/Service1.svc/getBasketsForCustomer/' + $scope.selectedCustomer)
-        //    .success(function (data) {
-        //        $scope.listOfOrders = data.GetBasketsForCustomerResult;
-        //    })
-        //    .error(function (data, status, headers, config) {
-        //        $scope.errorMessage = "Couldn't load the list of Orders, error # " + status;
-        //    });
     }
 });
 
