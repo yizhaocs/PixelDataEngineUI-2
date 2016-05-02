@@ -42,9 +42,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.title = 'Group id:' + gid;
 
     // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
-    for(var i = 0; i < backendData.data.length; i++){
-        backendData.data[i].priority = parseInt(backendData.data[i].priority);
-    }
+    $scope.sortPriority = function (data) {
+        for(var i = 0; i < data.length; i++){
+            data[i].priority = parseInt(data[i].priority);
+        }
+    };
+
+    $scope.sortPriority(backendData.data);
     $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
     var responseBackupRuleData = '';
 
@@ -52,6 +56,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
      *
      * functions
      * */
+
+
     // button fuctions
     $scope.addSetRule = function () {
         if ($scope.debug) {
@@ -111,6 +117,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.refreshLeftPanel = function () {
         pixelmappingService.getSameGroup(gid).success(function (backendData) {
+            $scope.sortPriority(backendData);
             $scope.frontendLeftHandPanelData = angular.copy(backendData);
         });
     };
