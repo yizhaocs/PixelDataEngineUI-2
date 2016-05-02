@@ -42,27 +42,63 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.title = 'Group id:' + gid;
     $scope.frontendData = angular.copy(backendData.data);
 
-    //  We'll load our list of Customers from our JSON Web Service into this variable
-    $scope.listOfCustomers = null;
+    /*
+     *
+     * functions
+     * */
+    // button fuctions
+    $scope.addSetRule = function () {
+        if ($scope.debug) {
+            console.log('addSetRule');
+        }
+        $scope.frontendData.setRuleArray.push({
+            column1: $scope.frontendData.setRuleArray.length,
+            column2: ''
+        });
 
-    //  When the user selects a "Customer" from our MasterView list, we'll set the following variable.
-    $scope.selectedCustomer = null;
+    };
+
+    $scope.removeSetRule = function () {
+        if ($scope.debug) {
+            console.log('removeSetRule');
+        }
+        $scope.frontendData.setRuleArray.pop();
+    };
+
+    $scope.addInElement = function () {
+        if ($scope.debug) {
+            console.log('addInElement');
+        }
+        $scope.frontendData.inElementArray.push({
+            column1: $scope.frontendData.inElementArray.length,
+            column2: ''
+        });
+    };
+
+    $scope.removeInElement = function () {
+        if ($scope.debug) {
+            console.log('removeInElement');
+        }
+        $scope.frontendData.inElementArray.pop();
+    };
+
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(responseBackupRuleData, $scope.frontendData);
+    }
+
+    $scope.deleteRule = function (frontendData) {
+        if (confirm("Are you sure to delete rule number: " + frontendData.keyId) == true) {
+            pixelmappingService.deleteRule($rootScope.base + 'pixel-data-engine-rule', frontendData.keyId);
+        }
     };
 
-    $scope.deleteGroup = function (frontendData) {
-        if (confirm("Are you sure to delete mapping number: " + frontendData.key_id) == true)
-            pixelmappingService.deleteGroup($rootScope.base + 'pixel-data-engine-group', frontendData.key_id);
-    };
-
-    $scope.saveGroup = function (frontendData) {
-        if (keyId <= 0) {
-            pixelmappingService.insertGroup($rootScope.base + 'pixel-data-engine-group', frontendData);
+    $scope.saveRule = function (frontendData) {
+        if ($routeParams.keyId == '0') {
+            pixelmappingService.insertRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.gid, frontendData.keyId, frontendData.priority, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
         }
         else {
-            pixelmappingService.updateGroup($rootScope.base + 'pixel-data-engine-group', keyId, frontendData);
+            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.gid, frontendData.keyId, frontendData.priority, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
         }
     };
 
@@ -196,6 +232,32 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             }
 
             $scope.frontendRightHandPanelData = angular.copy(processedResponseBackupRuleData);
+
+
+            // true if user click on the "add button"
+            if (gid == 0) {
+                //if (responseBackupRuleData.inElementArray == null) {
+                //    responseBackupRuleData.inElementArray = [{
+                //        column1: '0',
+                //        column2: ''
+                //    }];
+                $scope.frontendRightHandPanelData.inElementArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+                // }
+
+                //if (responseBackupRuleData.setRuleArray == null) {
+                //    responseBackupRuleData.setRuleArray = [{
+                //        column1: '0',
+                //        column2: ''
+                //    }];
+                $scope.frontendRightHandPanelData.setRuleArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+                //  }
+            }
         });
         //$http.get('http://inorthwind.azurewebsites.net/Service1.svc/getBasketsForCustomer/' + $scope.selectedCustomer)
         //    .success(function (data) {
