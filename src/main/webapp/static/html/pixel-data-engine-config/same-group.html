@@ -204,32 +204,258 @@
 
     <!-- Then, we have our right-hand panel, showing one data's orders -->
     <div id="divDetailView">
-        <!-- Get AngularJS to create one DIV for each Order that this data has made. -->
-        <div id="Order_{{Order.OrderID}}" ng-repeat="Order in listOfOrders" class="cssOneOrderRecord">
-            <!-- Each Order will have a header bar, with Order ID and date. -->
-            <div class="cssOneOrderHeader">
-                <div class="cssOrderID">Order # {{Order.OrderID}}</div>
-                <div class="cssOrderDate">Order Date: {{Order.OrderDate}}</div>
-            </div>
+        <div class="view">
+            <div class="container">
+                <div class="row">
+                    <header>
+                        <h3>{{title}}</h3>
+                    </header>
 
-            <!-- AngularJS will create one DIV for each Product in this particular Order -->
-            <div class="cssOneProductRecord" ng-repeat='Product in Order.ProductsInBasket' ng-class="{ cssProductEven: (($index%2) == 0), cssProductOdd: ($index%2)}">
-                <div class="cssOneProductQty">{{Product.Quantity}}</div>
-                <div class="cssOneProductName">{{Product.ProductName}}</div>
-                <div class="cssOneProductPrice">@ {{Product.UnitPrice | currency}}</div>
-                <div class="cssOneProductSubtotal">{{Product.UnitPrice * Product.Quantity | currency}}</div>
-            </div>
 
-            <!-- The fiddly bit - calculating totals for this Order -->
-            <div class="cssOneOrderTotal">
-                <div class="cssOneProductQty">
-                    {{Order.ProductsInBasket|countItemsInOrder}} item(s), {{Order.ProductsInBasket.length}} product(s)
-                </div>
-                <div class="cssOneProductSubtotal">
-                    {{Order.ProductsInBasket|orderTotal | currency}}
+                    <div>
+                        <table>
+                            <tr>
+                                <td>gid:</td>
+                                <td>
+                                    <input type="text" ng-model="rightHandPanelData.gid">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <table>
+                            <tr>
+                                <td>key_id:</td>
+                                <td>
+                                    <input type="text" ng-model="rightHandPanelData.keyId">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <table>
+                            <tr>
+                                <td>priority:</td>
+                                <td>
+                                    <input type="text" ng-model="rightHandPanelData.priority">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <tr>
+                            <td>type:</td>
+                            <td>
+                                <select ng-model="rightHandPanelData.type">
+                                    <option value="transform">transform</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!--<table>-->
+                        <!--<tr>-->
+                        <!--<td>type:</td>-->
+                        <!--<td>-->
+                        <!--<input type="text" ng-model="frontendData.type">-->
+                        <!--</td>-->
+                        <!--</tr>-->
+                        <!--</table>-->
+
+                        <hr>
+
+                        <table>
+                            <tr>
+                                <td>parse_rule:</td>
+                                <td>
+                                    <select ng-model="rightHandPanelData.parseRule">
+                                        <option value="orig">orig</option>
+                                        <option value="split1">split1</option>
+                                        <option value="split2">split2</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <table ng-show="rightHandPanelData.parseRule=='split1'">
+                                    <td>split string:</td>
+                                    <td>
+                                        <input type="text" ng-model="rightHandPanelData.split1.column1">
+                                    </td>
+                                </table>
+                                <table ng-show="rightHandPanelData.parseRule=='split2'">
+                                    <tr>
+                                        <td>level 1 split string:</td>
+                                        <td>
+                                            <input type="text" ng-model="frontendData.split2.column1">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>level 2 split string:</td>
+                                        <td>
+                                            <input type="text" ng-model="rightHandPanelData.split2.column2">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                        <hr>
+                        <table>
+                            <tr>
+                                <td>condition_rule:</td>
+                                <td>
+                                    <select ng-model="rightHandPanelData.conditionRule">
+                                        <option value="len">len</option>
+                                        <option value="always">always</option>
+                                        <option value="range">range</option>
+                                        <option value="in">in</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <table ng-show="rightHandPanelData.conditionRule=='len'">
+                                    <td>string length:</td>
+                                    <td>
+                                        <input type="text" ng-model="rightHandPanelData.len.column1">
+                                    </td>
+                                </table>
+                                <table ng-show="rightHandPanelData.conditionRule=='range'">
+                                    <tr>
+                                        <td>range from:</td>
+                                        <td>
+                                            <input type="text" ng-model="rightHandPanelData.range.column1">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>range to:</td>
+                                        <td>
+                                            <input type="text" ng-model="rightHandPanelData.range.column2">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table ng-show="rightHandPanelData.conditionRule=='in'">
+                                    <tr ng:repeat="element in rightHandPanelData.inElementArray">
+                                        <td>element_{{element.column1}}:</td>
+                                        <td><input type="text" ng-model="element.column2"></td>
+                                    </tr>
+                                    <td>
+                                    <td>
+                                        <button type="button" ng-click="addInElement()">+</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" ng-click="removeInElement()">-</button>
+                                    </td>
+                                    </td>
+                                </table>
+                            </tr>
+                        </table>
+                        <hr>
+                        <table>
+                            <tr>
+                                <td>action_rule:</td>
+                                <td>
+                                    <select ng-model="rightHandPanelData.actionRule">
+                                        <option value="substr">substr</option>
+                                        <option value="set">set</option>
+                                        <option value="dec">dec</option>
+                                        <option value="ignore">ignore</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <div>
+                                    <table ng-show="rightHandPanelData.actionRule=='substr'">
+                                        <tr>
+                                            <td>direction:</td>
+                                            <td>
+                                                <input type="text" ng-model="rightHandPanelData.substr.column1">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>start index:</td>
+                                            <td>
+                                                <input type="text" ng-model="rightHandPanelData.substr.column2">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>length:</td>
+                                            <td>
+                                                <input type="text" ng-model="rightHandPanelData.substr.column3">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table ng-show="rightHandPanelData.actionRule=='set'">
+                                        <tr ng:repeat="set in rightHandPanelData.setRuleArray">
+                                            <td>set_{{set.column1}}:</td>
+                                            <td><input type="text" ng-model="set.column2"></td>
+                                        </tr>
+                                        <td>
+                                        <td>
+                                            <button type="button" ng-click="addSetRule()">+</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" ng-click="removeSetRule()">-</button>
+                                        </td>
+                                        </td>
+                                    </table>
+                                    <table ng-show="rightHandPanelData.actionRule=='dec'">
+                                        <td>number of decimals:</td>
+                                        <td>
+                                            <input type="text" ng-model="rightHandPanelData.dec.column1">
+                                        </td>
+                                    </table>
+                                </div>
+                            </tr>
+                        </table>
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="col-md-2"></label>
+                            <div class="col-md-4">
+                                <a href="pixel-data-engine-rule" class="btn">Cancel</a>
+                                <button ng-click="saveRule(rightHandPanelData);"
+                                        ng-disabled="isClean() || myForm.$invalid"
+                                        class="btn btn-primary">{{buttonText}}
+                                </button>
+                                <button ng-click="deleteRule(rightHandPanelData)"
+                                        ng-show="isUpdate" class="btn btn-warning">Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!--&lt;!&ndash; Get AngularJS to create one DIV for each Order that this data has made. &ndash;&gt;-->
+        <!--<div id="Order_{{Order.OrderID}}" ng-repeat="Order in listOfOrders" class="cssOneOrderRecord">-->
+            <!--&lt;!&ndash; Each Order will have a header bar, with Order ID and date. &ndash;&gt;-->
+            <!--<div class="cssOneOrderHeader">-->
+                <!--<div class="cssOrderID">Order # {{Order.OrderID}}</div>-->
+                <!--<div class="cssOrderDate">Order Date: {{Order.OrderDate}}</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; AngularJS will create one DIV for each Product in this particular Order &ndash;&gt;-->
+            <!--<div class="cssOneProductRecord" ng-repeat='Product in Order.ProductsInBasket' ng-class="{ cssProductEven: (($index%2) == 0), cssProductOdd: ($index%2)}">-->
+                <!--<div class="cssOneProductQty">{{Product.Quantity}}</div>-->
+                <!--<div class="cssOneProductName">{{Product.ProductName}}</div>-->
+                <!--<div class="cssOneProductPrice">@ {{Product.UnitPrice | currency}}</div>-->
+                <!--<div class="cssOneProductSubtotal">{{Product.UnitPrice * Product.Quantity | currency}}</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; The fiddly bit - calculating totals for this Order &ndash;&gt;-->
+            <!--<div class="cssOneOrderTotal">-->
+                <!--<div class="cssOneProductQty">-->
+                    <!--{{Order.ProductsInBasket|countItemsInOrder}} item(s), {{Order.ProductsInBasket.length}} product(s)-->
+                <!--</div>-->
+                <!--<div class="cssOneProductSubtotal">-->
+                    <!--{{Order.ProductsInBasket|orderTotal | currency}}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
 
