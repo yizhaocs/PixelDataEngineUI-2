@@ -5,7 +5,7 @@
         height: 600px;
         border: 1px solid Green;
         padding: 3px;
-        margin: 15px 5px 15px 30px;
+        /*margin: 15px 5px 15px 30px;*/
     }
 
     #leftHandPanelView {
@@ -33,175 +33,33 @@
         padding: 0;
         overflow-y: auto;
     }
-
-    /*
-     *   This is the CSS for one data record, in our Master view
-     *
-     *   Each data record will have one overall <div> element, with one sub-<div> for each data field
-     *   that we want to display.
-     *
-     *   For example, the data City values will all be added to the DOM with a CSS class of "cssCompanyCity",
-     *   which sets their position in the "data" <div> to (23px, 40px)
-     */
-    .cssOneCompanyRecord {
+    
+    .cssKeyId {
         height: 47px;
         width: 98%;
         position: relative; /* Very important, for appending child <div>s with absolute positioning later */
         border-bottom: 1px solid white;
     }
 
-    .cssOneCompanyRecord:hover {
+    .cssKeyId:hover {
         background-color: yellow;
         cursor: pointer;
     }
-
-    .cssCompanySelectedRecord {
-        /*  If this Company record has been selected, we'll display a Red vertical bar next to it */
-        border-left: 2px solid Red;
-        background-color: white;
-    }
-
-    .cssKeyId {
-        position: absolute;
-        top: 5px;
-        left: 40px;
-    }
-
-    .cssCompanyCity {
-        position: absolute;
-        top: 23px;
-        left: 40px;
-        color: #505050;
-        font-size: 0.9em;
-    }
-
-    .cssCustomerID {
-        position: absolute;
-        top: 31px;
-        right: 5px;
-        font-size: 0.7em;
-        color: blue;
-    }
-
-    .cssCustomerIcon {
-        position: absolute;
-        top: 12px;
-        left: 7px;
-        width: 24px;
-        height: 24px;
-    }
-
-    /*
-     *   This is the CSS for one "Order" record, in our Detail view
-     *
-     *   This one's a little more complicated, as, for each "Order", we'll have an Order Header, followed by a
-     *   collection of "Product" <div>s in that order.
-     *
-     *   But, the theory is just the same.  Each "Product" values gets added to the DOM with a particular CSS class
-     *   to allow us to set their position in the "Product" <div>.
-     */
-
-    .cssOneOrderRecord {
-        width: 90%;
-        position: relative; /* Very important, for appending child <div>s with absolute positioning later */
-        padding: 5px;
-        border-bottom: 1px solid white;
-        background-color: white;
-        border: 1px solid #404040;
-        margin: 15px 20px 15px 20px;
-        overflow: no-display;
-    }
-
-    .cssOneOrderHeader {
-        height: 40px;
-        background-color: #E0E0E0;
-        width: 100%;
-        position: relative;
-        margin: 0px 0px 4px 0px;
-
-        background-image: url(/images/icnOrder.png);
-        background-position: 10px 5px;
-        background-repeat: no-repeat;
-    }
-
-    .cssOrderID {
-        position: absolute;
-        left: 75px;
-        top: 10px;
-        font-weight: bold;
-    }
-
-    .cssOrderDate {
-        position: absolute;
-        left: 300px;
-        top: 10px;
-    }
-
-    .cssOneProductRecord {
-        width: 100%;
-        height: 25px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .cssOneProductQty {
-        position: absolute;
-        left: 30px;
-        top: 5px;
-    }
-
-    .cssOneProductName {
-        position: absolute;
-        left: 100px;
-        top: 5px;
-    }
-
-    .cssOneProductPrice {
-        position: absolute;
-        left: 300px;
-        top: 7px;
-    }
-
-    .cssOneProductSubtotal {
-        position: absolute;
-        left: 420px;
-        top: 7px;
-        overflow: hidden;
-        height: 20px;
-    }
-
-    .cssOneOrderTotal {
-        width: 100%;
-        height: 32px;
-        position: relative;
-        background-color: #e0e0e0;
-        margin: 10px 0px 4px 0px;
-        font-weight: bold;
-        border-top: dashed 1px black;
-        overflow: hidden;
-    }
-
-    .cssProductEven {
-        background-color: white;
-    }
-
-    .cssProductOdd {
-        background-color: #F0F8F8;
-    }
-
-
 </style>
 
-
-<header>
-    <h3>{{title}}</h3>
-</header>
+<hr>
+<span><b>{{title}}</b></span><br><br>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="btn btn-lg btn-success" href="rule/edit-rule/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new rule</a>
+    </div>
+</nav>
 <div id="wholePanelView" style="position:relative;">
 
     <!-- First, we have our left-hand list of data names -->
     <div id="leftHandPanelView">
         <!--<span>Key Id&nbsp;</span>-->
-        <!--<div class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">-->
+        <!--<div class="cssKeyId" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">-->
 
             <!--<div class="cssKeyId">{{data.key_id}}</div>-->
 
@@ -215,7 +73,7 @@
             <th>Priority&nbsp;</th>
             </thead>
             <tbody>
-            <tr class="cssOneCompanyRecord" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">
+            <tr class="cssKeyId" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">
                 <td>{{data.key_id}}</td>
                 <td>{{data.priority}}</td>
             </tr>
