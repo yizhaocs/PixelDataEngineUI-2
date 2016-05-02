@@ -40,8 +40,12 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var gid = ($routeParams.gid) ? parseInt($routeParams.gid) : 0;
     $scope.title = 'Group id:' + gid;
-    $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
 
+    // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
+    for(var i = 0; i < backendData.data.length; i++){
+        backendData.data[i].priority = parseInt(backendData.data[i].priority);
+    }
+    $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
     var responseBackupRuleData = '';
 
     /*
@@ -93,6 +97,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
             pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.keyId);
         }
+        $scope.refreshLeftPanel();
     };
 
     $scope.saveRule = function (frontendRightHandPanelData) {
@@ -101,11 +106,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         } else {
             pixelmappingService.updateRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray);
         }
+        $scope.refreshLeftPanel();
+    };
 
+    $scope.refreshLeftPanel = function () {
         pixelmappingService.getSameGroup(gid).success(function (backendData) {
             $scope.frontendLeftHandPanelData = angular.copy(backendData);
         });
-
     };
 
     $scope.selectKeyId = function (frontendData) {
@@ -164,7 +171,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 processedResponseBackupRuleData.gid = backendData.gid;
                 processedResponseBackupRuleData.keyId = backendData.key_id;
                 processedResponseBackupRuleData.type = backendData.type;
-                processedResponseBackupRuleData.priority = backendData.priority;
+                processedResponseBackupRuleData.priority = parseInt(backendData.priority);
 
                 var parseRuleSplit = backendData.parse_rule.split("|");
                 processedResponseBackupRuleData.parseRule = parseRuleSplit[0];

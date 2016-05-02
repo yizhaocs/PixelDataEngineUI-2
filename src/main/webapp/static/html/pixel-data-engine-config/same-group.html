@@ -1,15 +1,14 @@
 <style type="text/css">
     /*  This CSS is exclusively for our Master-Detail view examples */
-    #wholePanelView
-    {
+    #wholePanelView {
         width: 100%;
         height: 600px;
         border: 1px solid Green;
         padding: 3px;
         margin: 15px 5px 15px 30px;
     }
-    #leftHandPanelView
-    {
+
+    #leftHandPanelView {
         width: 300px;
         height: 600px;
         background-color: #E0E0E0;
@@ -17,19 +16,19 @@
         overflow-y: auto;
         float: left;
     }
-    #rightHandPanelView
-    {
+
+    #rightHandPanelView {
         height: 600px;
 
         /* Fadey background CSS, created with: http://www.colorzilla.com/gradient-editor/ */
         background: #c6ffc6; /* Old browsers */
-        background: -moz-linear-gradient(top,  #c6ffc6 0%, #f2fff2 51%, #c6ffc6 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c6ffc6), color-stop(51%,#f2fff2), color-stop(100%,#c6ffc6)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  #c6ffc6 0%,#f2fff2 51%,#c6ffc6 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  #c6ffc6 0%,#f2fff2 51%,#c6ffc6 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  #c6ffc6 0%,#f2fff2 51%,#c6ffc6 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  #c6ffc6 0%,#f2fff2 51%,#c6ffc6 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6ffc6', endColorstr='#c6ffc6',GradientType=0 ); /* IE6-9 */
+        background: -moz-linear-gradient(top, #c6ffc6 0%, #f2fff2 51%, #c6ffc6 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c6ffc6), color-stop(51%, #f2fff2), color-stop(100%, #c6ffc6)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #c6ffc6 0%, #f2fff2 51%, #c6ffc6 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #c6ffc6 0%, #f2fff2 51%, #c6ffc6 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #c6ffc6 0%, #f2fff2 51%, #c6ffc6 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #c6ffc6 0%, #f2fff2 51%, #c6ffc6 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6ffc6', endColorstr='#c6ffc6', GradientType=0); /* IE6-9 */
 
         padding: 0;
         overflow-y: auto;
@@ -47,44 +46,45 @@
     .cssOneCompanyRecord {
         height: 47px;
         width: 98%;
-        position: relative;         /* Very important, for appending child <div>s with absolute positioning later */
+        position: relative; /* Very important, for appending child <div>s with absolute positioning later */
         border-bottom: 1px solid white;
     }
-    .cssOneCompanyRecord:hover
-    {
+
+    .cssOneCompanyRecord:hover {
         background-color: yellow;
         cursor: pointer;
     }
+
     .cssCompanySelectedRecord {
         /*  If this Company record has been selected, we'll display a Red vertical bar next to it */
         border-left: 2px solid Red;
         background-color: white;
     }
-    .cssCompanyName
-    {
-        position:absolute;
+
+    .cssKeyId {
+        position: absolute;
         top: 5px;
         left: 40px;
     }
-    .cssCompanyCity
-    {
-        position:absolute;
+
+    .cssCompanyCity {
+        position: absolute;
         top: 23px;
         left: 40px;
         color: #505050;
         font-size: 0.9em;
     }
-    .cssCustomerID
-    {
-        position:absolute;
+
+    .cssCustomerID {
+        position: absolute;
         top: 31px;
         right: 5px;
         font-size: 0.7em;
         color: blue;
     }
-    .cssCustomerIcon
-    {
-        position:absolute;
+
+    .cssCustomerIcon {
+        position: absolute;
         top: 12px;
         left: 7px;
         width: 24px;
@@ -101,10 +101,9 @@
      *   to allow us to set their position in the "Product" <div>.
      */
 
-    .cssOneOrderRecord
-    {
+    .cssOneOrderRecord {
         width: 90%;
-        position: relative;         /* Very important, for appending child <div>s with absolute positioning later */
+        position: relative; /* Very important, for appending child <div>s with absolute positioning later */
         padding: 5px;
         border-bottom: 1px solid white;
         background-color: white;
@@ -112,6 +111,7 @@
         margin: 15px 20px 15px 20px;
         overflow: no-display;
     }
+
     .cssOneOrderHeader {
         height: 40px;
         background-color: #E0E0E0;
@@ -123,51 +123,53 @@
         background-position: 10px 5px;
         background-repeat: no-repeat;
     }
-    .cssOrderID
-    {
-        position:absolute;
+
+    .cssOrderID {
+        position: absolute;
         left: 75px;
         top: 10px;
         font-weight: bold;
     }
-    .cssOrderDate
-    {
-        position:absolute;
+
+    .cssOrderDate {
+        position: absolute;
         left: 300px;
         top: 10px;
     }
-    .cssOneProductRecord
-    {
+
+    .cssOneProductRecord {
         width: 100%;
         height: 25px;
         position: relative;
         overflow: hidden;
     }
-    .cssOneProductQty
-    {
-        position:absolute;
+
+    .cssOneProductQty {
+        position: absolute;
         left: 30px;
         top: 5px;
     }
-    .cssOneProductName
-    {
-        position:absolute;
+
+    .cssOneProductName {
+        position: absolute;
         left: 100px;
         top: 5px;
     }
-    .cssOneProductPrice
-    {
-        position:absolute;
+
+    .cssOneProductPrice {
+        position: absolute;
         left: 300px;
         top: 7px;
     }
+
     .cssOneProductSubtotal {
-        position:absolute;
+        position: absolute;
         left: 420px;
         top: 7px;
         overflow: hidden;
         height: 20px;
     }
+
     .cssOneOrderTotal {
         width: 100%;
         height: 32px;
@@ -182,6 +184,7 @@
     .cssProductEven {
         background-color: white;
     }
+
     .cssProductOdd {
         background-color: #F0F8F8;
     }
@@ -197,12 +200,27 @@
 
     <!-- First, we have our left-hand list of data names -->
     <div id="leftHandPanelView">
-        <span>Key Id&nbsp;</span>
-        <div class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">
+        <!--<span>Key Id&nbsp;</span>-->
+        <!--<div class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">-->
 
-            <div class="cssCompanyName">{{data.key_id}}</div>
-        </div>
+            <!--<div class="cssKeyId">{{data.key_id}}</div>-->
 
+
+        <!--</div>-->
+
+
+        <table class="table table-striped table-bordered">
+            <thead>
+            <th>Key Id&nbsp;</th>
+            <th>Priority&nbsp;</th>
+            </thead>
+            <tbody>
+            <tr class="cssOneCompanyRecord" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">
+                <td>{{data.key_id}}</td>
+                <td>{{data.priority}}</td>
+            </tr>
+            </tbody>
+        </table>
 
     </div>
 
@@ -431,82 +449,80 @@
 
         <!--&lt;!&ndash; Get AngularJS to create one DIV for each Order that this data has made. &ndash;&gt;-->
         <!--<div id="Order_{{Order.OrderID}}" ng-repeat="Order in listOfOrders" class="cssOneOrderRecord">-->
-            <!--&lt;!&ndash; Each Order will have a header bar, with Order ID and date. &ndash;&gt;-->
-            <!--<div class="cssOneOrderHeader">-->
-                <!--<div class="cssOrderID">Order # {{Order.OrderID}}</div>-->
-                <!--<div class="cssOrderDate">Order Date: {{Order.OrderDate}}</div>-->
-            <!--</div>-->
+        <!--&lt;!&ndash; Each Order will have a header bar, with Order ID and date. &ndash;&gt;-->
+        <!--<div class="cssOneOrderHeader">-->
+        <!--<div class="cssOrderID">Order # {{Order.OrderID}}</div>-->
+        <!--<div class="cssOrderDate">Order Date: {{Order.OrderDate}}</div>-->
+        <!--</div>-->
 
-            <!--&lt;!&ndash; AngularJS will create one DIV for each Product in this particular Order &ndash;&gt;-->
-            <!--<div class="cssOneProductRecord" ng-repeat='Product in Order.ProductsInBasket' ng-class="{ cssProductEven: (($index%2) == 0), cssProductOdd: ($index%2)}">-->
-                <!--<div class="cssOneProductQty">{{Product.Quantity}}</div>-->
-                <!--<div class="cssOneProductName">{{Product.ProductName}}</div>-->
-                <!--<div class="cssOneProductPrice">@ {{Product.UnitPrice | currency}}</div>-->
-                <!--<div class="cssOneProductSubtotal">{{Product.UnitPrice * Product.Quantity | currency}}</div>-->
-            <!--</div>-->
+        <!--&lt;!&ndash; AngularJS will create one DIV for each Product in this particular Order &ndash;&gt;-->
+        <!--<div class="cssOneProductRecord" ng-repeat='Product in Order.ProductsInBasket' ng-class="{ cssProductEven: (($index%2) == 0), cssProductOdd: ($index%2)}">-->
+        <!--<div class="cssOneProductQty">{{Product.Quantity}}</div>-->
+        <!--<div class="cssOneProductName">{{Product.ProductName}}</div>-->
+        <!--<div class="cssOneProductPrice">@ {{Product.UnitPrice | currency}}</div>-->
+        <!--<div class="cssOneProductSubtotal">{{Product.UnitPrice * Product.Quantity | currency}}</div>-->
+        <!--</div>-->
 
-            <!--&lt;!&ndash; The fiddly bit - calculating totals for this Order &ndash;&gt;-->
-            <!--<div class="cssOneOrderTotal">-->
-                <!--<div class="cssOneProductQty">-->
-                    <!--{{Order.ProductsInBasket|countItemsInOrder}} item(s), {{Order.ProductsInBasket.length}} product(s)-->
-                <!--</div>-->
-                <!--<div class="cssOneProductSubtotal">-->
-                    <!--{{Order.ProductsInBasket|orderTotal | currency}}-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--&lt;!&ndash; The fiddly bit - calculating totals for this Order &ndash;&gt;-->
+        <!--<div class="cssOneOrderTotal">-->
+        <!--<div class="cssOneProductQty">-->
+        <!--{{Order.ProductsInBasket|countItemsInOrder}} item(s), {{Order.ProductsInBasket.length}} product(s)-->
+        <!--</div>-->
+        <!--<div class="cssOneProductSubtotal">-->
+        <!--{{Order.ProductsInBasket|orderTotal | currency}}-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
     </div>
 </div>
 
 <!--<div class="row">-->
-    <!--<div style="width: 100%;">-->
-        <!--<div class="col-md-12" style="float:left; width: 50%">-->
-            <!--<hr>-->
-            <!--<span><b>{{title}}</b></span><br><br>-->
-            <!--<nav class="navbar navbar-default" role="navigation">-->
-                <!--<div class="navbar-header">-->
-                    <!--<a class="btn btn-lg btn-success" href="group/edit-group/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new group</a>-->
-                <!--</div>-->
-            <!--</nav>-->
-            <!--<table class="table table-striped table-bordered">-->
-                <!--<thead>-->
-                <!--<th>Key Id&nbsp;</th>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr ng-repeat="data in frontendData">-->
-                    <!--<td>{{data.key_id}}</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-        <!--<div class="col-md-12" ng-show="rules.length == 0">-->
-            <!--<div class="col-md-12">-->
-                <!--<h4>No group found</h4>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-12" style="float:right; width: 50%">-->
-            <!--<hr>-->
-            <!--<span><b>{{title}}</b></span><br><br>-->
-            <!--<nav class="navbar navbar-default" role="navigation">-->
-                <!--<div class="navbar-header">-->
-                    <!--<a class="btn btn-lg btn-success" href="group/edit-group/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new group</a>-->
-                <!--</div>-->
-            <!--</nav>-->
-            <!--<table class="table table-striped table-bordered">-->
-                <!--<thead>-->
-                <!--<th>Key Id&nbsp;</th>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr ng-repeat="data in frontendData">-->
-                    <!--<td>{{data.key_id}}</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div style="clear:both"></div>-->
-
-
+<!--<div style="width: 100%;">-->
+<!--<div class="col-md-12" style="float:left; width: 50%">-->
+<!--<hr>-->
+<!--<span><b>{{title}}</b></span><br><br>-->
+<!--<nav class="navbar navbar-default" role="navigation">-->
+<!--<div class="navbar-header">-->
+<!--<a class="btn btn-lg btn-success" href="group/edit-group/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new group</a>-->
+<!--</div>-->
+<!--</nav>-->
+<!--<table class="table table-striped table-bordered">-->
+<!--<thead>-->
+<!--<th>Key Id&nbsp;</th>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr ng-repeat="data in frontendData">-->
+<!--<td>{{data.key_id}}</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--<div class="col-md-12" ng-show="rules.length == 0">-->
+<!--<div class="col-md-12">-->
+<!--<h4>No group found</h4>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-12" style="float:right; width: 50%">-->
+<!--<hr>-->
+<!--<span><b>{{title}}</b></span><br><br>-->
+<!--<nav class="navbar navbar-default" role="navigation">-->
+<!--<div class="navbar-header">-->
+<!--<a class="btn btn-lg btn-success" href="group/edit-group/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new group</a>-->
+<!--</div>-->
+<!--</nav>-->
+<!--<table class="table table-striped table-bordered">-->
+<!--<thead>-->
+<!--<th>Key Id&nbsp;</th>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr ng-repeat="data in frontendData">-->
+<!--<td>{{data.key_id}}</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div style="clear:both"></div>-->
 
 
 <!--</div>-->
