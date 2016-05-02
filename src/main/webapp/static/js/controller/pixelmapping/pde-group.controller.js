@@ -20,7 +20,7 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 
     $scope.isClean = function () {
         return angular.equals(backendData.data, $scope.frontendData);
-    }
+    };
 
     $scope.deleteGroup = function (frontendData) {
         if (confirm("Are you sure to delete mapping number: " + frontendData.key_id) == true)
@@ -42,9 +42,15 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.title = 'Group id:' + gid;
     $scope.frontendData = angular.copy(backendData.data);
 
+    //  We'll load our list of Customers from our JSON Web Service into this variable
+    $scope.listOfCustomers = null;
+
+    //  When the user selects a "Customer" from our MasterView list, we'll set the following variable.
+    $scope.selectedCustomer = null;
+
     $scope.isClean = function () {
         return angular.equals(backendData.data, $scope.frontendData);
-    }
+    };
 
     $scope.deleteGroup = function (frontendData) {
         if (confirm("Are you sure to delete mapping number: " + frontendData.key_id) == true)
@@ -59,4 +65,27 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             pixelmappingService.updateGroup($rootScope.base + 'pixel-data-engine-group', keyId, frontendData);
         }
     };
+
+    $scope.selectCustomer = function (val) {
+        //  If the user clicks on a <div>, we can get the ng-click to call this function, to set a new selected Customer.
+        $scope.selectedCustomer = val.CustomerID;
+        $scope.loadOrders();
+    }
+
+    $scope.loadOrders = function () {
+        //  Reset our list of orders  (when binded, this'll ensure the previous list of orders disappears from the screen while we're loading our JSON data)
+        $scope.listOfOrders = null;
+
+        //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
+        pixelmappingService.getGroup($scope.selectedCustomer);
+        //$http.get('http://inorthwind.azurewebsites.net/Service1.svc/getBasketsForCustomer/' + $scope.selectedCustomer)
+        //    .success(function (data) {
+        //        $scope.listOfOrders = data.GetBasketsForCustomerResult;
+        //    })
+        //    .error(function (data, status, headers, config) {
+        //        $scope.errorMessage = "Couldn't load the list of Orders, error # " + status;
+        //    });
+    }
 });
+
+
