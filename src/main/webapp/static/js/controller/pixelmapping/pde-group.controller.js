@@ -43,7 +43,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
     $scope.sortPriority = function (data) {
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
             data[i].priority = parseInt(data[i].priority);
         }
     };
@@ -56,8 +56,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
      *
      * functions
      * */
-
-
     // button fuctions
     $scope.addSetRule = function () {
         if ($scope.debug) {
@@ -101,18 +99,22 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
-            pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.keyId);
+            pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.keyId).then(function (backendData) {
+                $scope.refreshLeftPanel();
+            });
         }
-        $scope.refreshLeftPanel();
     };
 
     $scope.saveRule = function (frontendRightHandPanelData) {
         if ($routeParams.keyId == '0') {
-            pixelmappingService.insertRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray);
+            pixelmappingService.insertRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
+                $scope.refreshLeftPanel();
+            });
         } else {
-            pixelmappingService.updateRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray);
+            pixelmappingService.updateRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
+                $scope.refreshLeftPanel();
+            });
         }
-        $scope.refreshLeftPanel();
     };
 
     $scope.refreshLeftPanel = function () {
