@@ -1,25 +1,25 @@
 <style type="text/css">
     /*  This CSS is exclusively for our Master-Detail view examples */
-    #divMasterDetailWrapper
+    #wholePanelView
     {
         width: 95%;
-        height: 300px;
+        height: 600px;
         border: 1px solid Green;
         padding: 3px;
         margin: 15px 5px 15px 30px;
     }
-    #divMasterView
+    #leftHandPanelView
     {
         width: 300px;
-        height: 300px;
+        height: 600px;
         background-color: #E0E0E0;
         margin-right: 5px;
         overflow-y: auto;
         float: left;
     }
-    #divDetailView
+    #rightHandPanelView
     {
-        height: 300px;
+        height: 600px;
 
         /* Fadey background CSS, created with: http://www.colorzilla.com/gradient-editor/ */
         background: #c6ffc6; /* Old browsers */
@@ -189,10 +189,14 @@
 
 </style>
 
-<div id="divMasterDetailWrapper" style="position:relative;">
+
+<header>
+    <h3>{{title}}</h3>
+</header>
+<div id="wholePanelView" style="position:relative;">
 
     <!-- First, we have our left-hand list of data names -->
-    <div id="divMasterView">
+    <div id="leftHandPanelView">
         <span>Key Id&nbsp;</span>
         <div id="{{customer.customerid}}" class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat='data in frontendData' ng-click="selectKeyId(data);">
 
@@ -203,13 +207,11 @@
     </div>
 
     <!-- Then, we have our right-hand panel, showing one data's orders -->
-    <div id="divDetailView">
+    <div id="rightHandPanelView">
         <div class="view">
             <div class="container">
                 <div class="row">
-                    <header>
-                        <h3>{{title}}</h3>
-                    </header>
+
 
 
                     <div>

@@ -51,8 +51,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         if ($scope.debug) {
             console.log('addSetRule');
         }
-        $scope.frontendData.setRuleArray.push({
-            column1: $scope.frontendData.setRuleArray.length,
+        $scope.frontendRightHandPanelData.setRuleArray.push({
+            column1: $scope.frontendRightHandPanelData.setRuleArray.length,
             column2: ''
         });
 
@@ -62,15 +62,15 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         if ($scope.debug) {
             console.log('removeSetRule');
         }
-        $scope.frontendData.setRuleArray.pop();
+        $scope.frontendRightHandPanelData.setRuleArray.pop();
     };
 
     $scope.addInElement = function () {
         if ($scope.debug) {
             console.log('addInElement');
         }
-        $scope.frontendData.inElementArray.push({
-            column1: $scope.frontendData.inElementArray.length,
+        $scope.frontendRightHandPanelData.inElementArray.push({
+            column1: $scope.frontendRightHandPanelData.inElementArray.length,
             column2: ''
         });
     };
@@ -79,26 +79,26 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         if ($scope.debug) {
             console.log('removeInElement');
         }
-        $scope.frontendData.inElementArray.pop();
+        $scope.frontendRightHandPanelData.inElementArray.pop();
     };
 
 
     $scope.isClean = function () {
-        return angular.equals(responseBackupRuleData, $scope.frontendData);
+        return angular.equals(responseBackupRuleData, $scope.frontendRightHandPanelData);
     }
 
-    $scope.deleteRule = function (frontendData) {
-        if (confirm("Are you sure to delete rule number: " + frontendData.keyId) == true) {
-            pixelmappingService.deleteRule($rootScope.base + 'pixel-data-engine-rule', frontendData.keyId);
+    $scope.deleteRule = function (frontendRightHandPanelData) {
+        if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
+            pixelmappingService.deleteRule($rootScope.base + 'pixel-data-engine-rule', frontendRightHandPanelData.keyId);
         }
     };
 
-    $scope.saveRule = function (frontendData) {
+    $scope.saveRule = function (frontendRightHandPanelData) {
         if ($routeParams.keyId == '0') {
-            pixelmappingService.insertRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.gid, frontendData.keyId, frontendData.priority, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
+            pixelmappingService.insertRule($rootScope.base + 'pixel-data-engine-rule', frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray);
         }
         else {
-            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', frontendData.parseRule, frontendData.conditionRule, frontendData.actionRule, frontendData.gid, frontendData.keyId, frontendData.priority, frontendData.type, frontendData.split1, frontendData.split2, frontendData.len, frontendData.range, frontendData.substr, frontendData.dec, frontendData.inElementArray, frontendData.setRuleArray);
+            pixelmappingService.updateRule($rootScope.base + 'pixel-data-engine-rule', frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray);
         }
     };
 
