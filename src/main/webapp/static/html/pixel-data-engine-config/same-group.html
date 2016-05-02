@@ -217,7 +217,7 @@
                             <tr>
                                 <td>gid:</td>
                                 <td>
-                                    <input type="text" ng-model="rightHandPanelData.gid">
+                                    <input type="text" ng-model="frontendRightHandPanelData.gid">
                                 </td>
                             </tr>
                         </table>
@@ -228,7 +228,7 @@
                             <tr>
                                 <td>key_id:</td>
                                 <td>
-                                    <input type="text" ng-model="rightHandPanelData.keyId">
+                                    <input type="text" ng-model="frontendRightHandPanelData.keyId">
                                 </td>
                             </tr>
                         </table>
@@ -239,7 +239,7 @@
                             <tr>
                                 <td>priority:</td>
                                 <td>
-                                    <input type="text" ng-model="rightHandPanelData.priority">
+                                    <input type="text" ng-model="frontendRightHandPanelData.priority">
                                 </td>
                             </tr>
                         </table>
@@ -249,7 +249,7 @@
                         <tr>
                             <td>type:</td>
                             <td>
-                                <select ng-model="rightHandPanelData.type">
+                                <select ng-model="frontendRightHandPanelData.type">
                                     <option value="transform">transform</option>
                                 </select>
                             </td>
@@ -270,7 +270,7 @@
                             <tr>
                                 <td>parse_rule:</td>
                                 <td>
-                                    <select ng-model="rightHandPanelData.parseRule">
+                                    <select ng-model="frontendRightHandPanelData.parseRule">
                                         <option value="orig">orig</option>
                                         <option value="split1">split1</option>
                                         <option value="split2">split2</option>
@@ -280,13 +280,13 @@
                             <tr>
                             </tr>
                             <tr>
-                                <table ng-show="rightHandPanelData.parseRule=='split1'">
+                                <table ng-show="frontendRightHandPanelData.parseRule=='split1'">
                                     <td>split string:</td>
                                     <td>
-                                        <input type="text" ng-model="rightHandPanelData.split1.column1">
+                                        <input type="text" ng-model="frontendRightHandPanelData.split1.column1">
                                     </td>
                                 </table>
-                                <table ng-show="rightHandPanelData.parseRule=='split2'">
+                                <table ng-show="frontendRightHandPanelData.parseRule=='split2'">
                                     <tr>
                                         <td>level 1 split string:</td>
                                         <td>
@@ -296,7 +296,7 @@
                                     <tr>
                                         <td>level 2 split string:</td>
                                         <td>
-                                            <input type="text" ng-model="rightHandPanelData.split2.column2">
+                                            <input type="text" ng-model="frontendRightHandPanelData.split2.column2">
                                         </td>
                                     </tr>
                                 </table>
@@ -307,7 +307,7 @@
                             <tr>
                                 <td>condition_rule:</td>
                                 <td>
-                                    <select ng-model="rightHandPanelData.conditionRule">
+                                    <select ng-model="frontendRightHandPanelData.conditionRule">
                                         <option value="len">len</option>
                                         <option value="always">always</option>
                                         <option value="range">range</option>
@@ -316,28 +316,28 @@
                                 </td>
                             </tr>
                             <tr>
-                                <table ng-show="rightHandPanelData.conditionRule=='len'">
+                                <table ng-show="frontendRightHandPanelData.conditionRule=='len'">
                                     <td>string length:</td>
                                     <td>
-                                        <input type="text" ng-model="rightHandPanelData.len.column1">
+                                        <input type="text" ng-model="frontendRightHandPanelData.len.column1">
                                     </td>
                                 </table>
-                                <table ng-show="rightHandPanelData.conditionRule=='range'">
+                                <table ng-show="frontendRightHandPanelData.conditionRule=='range'">
                                     <tr>
                                         <td>range from:</td>
                                         <td>
-                                            <input type="text" ng-model="rightHandPanelData.range.column1">
+                                            <input type="text" ng-model="frontendRightHandPanelData.range.column1">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>range to:</td>
                                         <td>
-                                            <input type="text" ng-model="rightHandPanelData.range.column2">
+                                            <input type="text" ng-model="frontendRightHandPanelData.range.column2">
                                         </td>
                                     </tr>
                                 </table>
-                                <table ng-show="rightHandPanelData.conditionRule=='in'">
-                                    <tr ng:repeat="element in rightHandPanelData.inElementArray">
+                                <table ng-show="frontendRightHandPanelData.conditionRule=='in'">
+                                    <tr ng:repeat="element in frontendRightHandPanelData.inElementArray">
                                         <td>element_{{element.column1}}:</td>
                                         <td><input type="text" ng-model="element.column2"></td>
                                     </tr>
@@ -357,7 +357,7 @@
                             <tr>
                                 <td>action_rule:</td>
                                 <td>
-                                    <select ng-model="rightHandPanelData.actionRule">
+                                    <select ng-model="frontendRightHandPanelData.actionRule">
                                         <option value="substr">substr</option>
                                         <option value="set">set</option>
                                         <option value="dec">dec</option>
@@ -367,28 +367,28 @@
                             </tr>
                             <tr>
                                 <div>
-                                    <table ng-show="rightHandPanelData.actionRule=='substr'">
+                                    <table ng-show="frontendRightHandPanelData.actionRule=='substr'">
                                         <tr>
                                             <td>direction:</td>
                                             <td>
-                                                <input type="text" ng-model="rightHandPanelData.substr.column1">
+                                                <input type="text" ng-model="frontendRightHandPanelData.substr.column1">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>start index:</td>
                                             <td>
-                                                <input type="text" ng-model="rightHandPanelData.substr.column2">
+                                                <input type="text" ng-model="frontendRightHandPanelData.substr.column2">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>length:</td>
                                             <td>
-                                                <input type="text" ng-model="rightHandPanelData.substr.column3">
+                                                <input type="text" ng-model="frontendRightHandPanelData.substr.column3">
                                             </td>
                                         </tr>
                                     </table>
-                                    <table ng-show="rightHandPanelData.actionRule=='set'">
-                                        <tr ng:repeat="set in rightHandPanelData.setRuleArray">
+                                    <table ng-show="frontendRightHandPanelData.actionRule=='set'">
+                                        <tr ng:repeat="set in frontendRightHandPanelData.setRuleArray">
                                             <td>set_{{set.column1}}:</td>
                                             <td><input type="text" ng-model="set.column2"></td>
                                         </tr>
@@ -401,10 +401,10 @@
                                         </td>
                                         </td>
                                     </table>
-                                    <table ng-show="rightHandPanelData.actionRule=='dec'">
+                                    <table ng-show="frontendRightHandPanelData.actionRule=='dec'">
                                         <td>number of decimals:</td>
                                         <td>
-                                            <input type="text" ng-model="rightHandPanelData.dec.column1">
+                                            <input type="text" ng-model="frontendRightHandPanelData.dec.column1">
                                         </td>
                                     </table>
                                 </div>
@@ -416,11 +416,11 @@
                             <label class="col-md-2"></label>
                             <div class="col-md-4">
                                 <a href="pixel-data-engine-rule" class="btn">Cancel</a>
-                                <button ng-click="saveRule(rightHandPanelData);"
+                                <button ng-click="saveRule(frontendRightHandPanelData);"
                                         ng-disabled="isClean() || myForm.$invalid"
                                         class="btn btn-primary">{{buttonText}}
                                 </button>
-                                <button ng-click="deleteRule(rightHandPanelData)"
+                                <button ng-click="deleteRule(frontendRightHandPanelData)"
                                         ng-show="isUpdate" class="btn btn-warning">Delete
                                 </button>
                             </div>
