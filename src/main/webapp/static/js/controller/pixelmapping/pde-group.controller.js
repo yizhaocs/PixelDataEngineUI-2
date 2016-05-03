@@ -118,9 +118,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
      * */
     // button fuctions
     $scope.addSetRule = function () {
-        if ($scope.debug) {
-            console.log('addSetRule');
-        }
         $scope.frontendRightHandPanelData.setRuleArray.push({
             column1: $scope.frontendRightHandPanelData.setRuleArray.length,
             column2: ''
@@ -153,6 +150,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.buttonText = 'Add New Rule';
         $scope.isUpdate = false; // false to get rid of "Delete" button
         $scope.groupIdInputDisable = true;
+        $scope.keyIdDisable = false;
         $scope.initRuleData();
     };
 
@@ -190,7 +188,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.key_id = frontendData.key_id;
         $scope.getRule();
     };
-
 
 
     $scope.getRule = function () {
