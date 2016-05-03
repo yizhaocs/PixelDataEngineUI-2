@@ -40,6 +40,8 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var gid = ($routeParams.gid) ? parseInt($routeParams.gid) : 0;
     $scope.title = 'Group id:' + gid;
+    $scope.buttonText = 'Add New Rule';
+    $scope.isUpdate = false; // false to get rid of "Delete" button
 
     // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
     $scope.sortPriority = function (data) {
@@ -97,6 +99,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         return angular.equals(responseBackupRuleData, $scope.frontendRightHandPanelData);
     }
 
+    // when use click on "Add new rule" button
+    $scope.addRule = function () {
+        $scope.frontendRightHandPanelData = '';
+        $scope.buttonText = 'Add New Rule';
+        $scope.isUpdate = false; // false to get rid of "Delete" button
+    };
+
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
             pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.keyId).then(function (backendData) {
@@ -107,7 +116,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.saveRule = function (frontendRightHandPanelData) {
-        if ($routeParams.keyId == '0') {
+        // true if "Add new rule"
+        if ($scope.isUpdate == false) {
             pixelmappingService.insertRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
                 $scope.refreshLeftPanel();
             });

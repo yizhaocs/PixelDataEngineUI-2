@@ -18,7 +18,7 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
     $rootScope.title = (mappingID != '0') ? 'Edit Liveramp DP Mapping' : 'Add Liveramp DP Mapping';
     $scope.buttonText = (mappingID != '0') ? 'Update Liveramp DP Mapping' : 'Add New Liveramp DP Mapping';
-    $scope.isUpdate = (mappingID > 0) ? true : false;
+    $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
 
     $scope.frontendData = angular.copy(backendData.data);
 

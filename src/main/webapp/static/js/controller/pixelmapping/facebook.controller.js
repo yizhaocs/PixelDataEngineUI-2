@@ -28,7 +28,7 @@ app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location,
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : 0;
     $rootScope.title = (mappingID > 0) ? 'Edit Data Provider Facebook Pixel' : 'Add Data Provider Facebook Pixel';
     $scope.buttonText = (mappingID > 0) ? 'Update Data Provider Facebook Pixel' : 'Add New Data Provider Facebook Pixel';
-    $scope.isUpdate = (mappingID > 0) ? true : false;
+    $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
 
     $scope.frontendData = angular.copy(backendData.data);
 
