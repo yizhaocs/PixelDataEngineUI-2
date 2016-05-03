@@ -162,29 +162,20 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
     }
 */
 
-    // true if user click on the "add button"
-    if (keyIdParam == 0) {
-        //if (responseBackupRuleData.inElementArray == null) {
-        //    responseBackupRuleData.inElementArray = [{
-        //        column1: '0',
-        //        column2: ''
-        //    }];
-            $scope.frontendData.inElementArray = [{
-                column1: '0',
-                column2: ''
-            }];
-       // }
 
-        //if (responseBackupRuleData.setRuleArray == null) {
-        //    responseBackupRuleData.setRuleArray = [{
-        //        column1: '0',
-        //        column2: ''
-        //    }];
-            $scope.frontendData.setRuleArray = [{
-                column1: '0',
-                column2: ''
-            }];
-      //  }
+    // if no inElementArray || setRuleArray data from backend, then init them
+    if ($scope.frontendData.inElementArray.length == 0) {
+        $scope.frontendData.inElementArray = [{
+            column1: '0',
+            column2: ''
+        }];
+    }
+
+    if ($scope.frontendData.setRuleArray.length == 0) {
+        $scope.frontendData.setRuleArray = [{
+            column1: '0',
+            column2: ''
+        }];
     }
 
 
