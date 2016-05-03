@@ -43,6 +43,61 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.buttonText = 'Add New Rule';
     $scope.isUpdate = false; // false to get rid of "Delete" button
 
+    $scope.initRuleData = function () {
+        $scope.processedResponseBackupRuleData = {
+            "parseRule": null,
+            "conditionRule": null,
+            "actionRule": null,
+            "gid": null,
+            "keyId": null,
+            "priority": null,
+            "type": null,
+            "split1": {
+                "column1": null
+            },
+            "split2": {
+                "column1": null,
+                "column2": null
+            },
+            "len": {
+                "column1": null
+            },
+            "range": {
+                "column1": null,
+                "column2": null
+            },
+            "substr": {
+                "column1": null,
+                "column2": null,
+                "column3": null
+            },
+            "dec": {
+                "column1": null
+            },
+            "inElementArray": [],
+            "setRuleArray": []
+        };
+
+        $scope.frontendRightHandPanelData = angular.copy($scope.processedResponseBackupRuleData);
+
+        // if no inElementArray || setRuleArray data from backend, then init them
+        if ($scope.frontendRightHandPanelData.inElementArray.length == 0) {
+            $scope.frontendRightHandPanelData.inElementArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+
+        if ($scope.frontendRightHandPanelData.setRuleArray.length == 0) {
+            $scope.frontendRightHandPanelData.setRuleArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+    };
+
+    $scope.initRuleData();
+
     // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
     $scope.sortPriority = function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -71,16 +126,10 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.removeSetRule = function () {
-        if ($scope.debug) {
-            console.log('removeSetRule');
-        }
         $scope.frontendRightHandPanelData.setRuleArray.pop();
     };
 
     $scope.addInElement = function () {
-        if ($scope.debug) {
-            console.log('addInElement');
-        }
         $scope.frontendRightHandPanelData.inElementArray.push({
             column1: $scope.frontendRightHandPanelData.inElementArray.length,
             column2: ''
@@ -88,9 +137,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.removeInElement = function () {
-        if ($scope.debug) {
-            console.log('removeInElement');
-        }
         $scope.frontendRightHandPanelData.inElementArray.pop();
     };
 
@@ -101,9 +147,9 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     // when use click on "Add new rule" button
     $scope.addRule = function () {
-        $scope.frontendRightHandPanelData = '';
         $scope.buttonText = 'Add New Rule';
         $scope.isUpdate = false; // false to get rid of "Delete" button
+        $scope.initRuleData();
     };
 
     $scope.deleteRule = function (frontendRightHandPanelData) {
@@ -139,68 +185,34 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         //  If the user clicks on a <div>, we can get the ng-click to call this function, to set a new selected Customer.
         $scope.key_id = frontendData.key_id;
         $scope.getRule();
-    }
+    };
+
+
 
     $scope.getRule = function () {
-        //  Reset our list of orders  (when binded, this'll ensure the previous list of orders disappears from the screen while we're loading our JSON data)
-        //$scope.listOfOrders = null;
+        $scope.buttonText = 'Update Group';
+        $scope.isUpdate = true; // true to display "Delete" button
 
-        //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
         pixelmappingService.getRule($scope.key_id).success(function (backendData) {
-
-            $scope.buttonText = 'Update Group';
-            $scope.isUpdate = (backendData.key_id > 0) ? true : false;
             responseBackupRuleData = backendData;
 
-            var processedResponseBackupRuleData = {
-                "parseRule": null,
-                "conditionRule": null,
-                "actionRule": null,
-                "gid": null,
-                "keyId": null,
-                "priority": null,
-                "type": null,
-                "split1": {
-                    "column1": null
-                },
-                "split2": {
-                    "column1": null,
-                    "column2": null
-                },
-                "len": {
-                    "column1": null
-                },
-                "range": {
-                    "column1": null,
-                    "column2": null
-                },
-                "substr": {
-                    "column1": null,
-                    "column2": null,
-                    "column3": null
-                },
-                "dec": {
-                    "column1": null
-                },
-                "inElementArray": [],
-                "setRuleArray": []
-            };
+            $scope.initRuleData();
 
             // true if user click on the "edit button"
             if (gid != 0) {
-                processedResponseBackupRuleData.gid = backendData.gid;
-                processedResponseBackupRuleData.keyId = backendData.key_id;
-                processedResponseBackupRuleData.type = backendData.type;
-                processedResponseBackupRuleData.priority = parseInt(backendData.priority);
+                $scope.processedResponseBackupRuleData.gid = backendData.gid;
+                $scope.processedResponseBackupRuleData.keyId = backendData.key_id;
+                $scope.processedResponseBackupRuleData.type = backendData.type;
+                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.priority);
 
                 var parseRuleSplit = backendData.parse_rule.split("|");
-                processedResponseBackupRuleData.parseRule = parseRuleSplit[0];
+                $scope.processedResponseBackupRuleData.parseRule = parseRuleSplit[0];
                 if (parseRuleSplit[0] == 'split1') {
                     // true if -> -> split1|"|"
                     if (parseRuleSplit.length == 3) {
-                        processedResponseBackupRuleData.split1.column1 = "\"|\"";
+                        $scope.processedResponseBackupRuleData.split1.column1 = "\"|\"";
                     } else {
-                        processedResponseBackupRuleData.split1.column1 = parseRuleSplit[1];
+                        $scope.processedResponseBackupRuleData.split1.column1 = parseRuleSplit[1];
                     }
                 } else if (parseRuleSplit[0] == 'split2') {
                     /*
@@ -209,62 +221,62 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                      * handle case of -> split2|,|"|"
                      * */
                     if (parseRuleSplit.length == 5) { // true if -> split2|"|"|"|"
-                        processedResponseBackupRuleData.split2.column1 = "\"|\"";
-                        processedResponseBackupRuleData.split2.column2 = "\"|\"";
+                        $scope.processedResponseBackupRuleData.split2.column1 = "\"|\"";
+                        $scope.processedResponseBackupRuleData.split2.column2 = "\"|\"";
                     } else if (parseRuleSplit.length == 4) {
                         // true if -> split2|"|"|,
                         // false if -> split2|,|"|"
                         if (parseRuleSplit[1] == "\"") {
-                            processedResponseBackupRuleData.split2.column1 = "\"|\"";
-                            processedResponseBackupRuleData.split2.column2 = parseRuleSplit[3];
+                            $scope.processedResponseBackupRuleData.split2.column1 = "\"|\"";
+                            $scope.processedResponseBackupRuleData.split2.column2 = parseRuleSplit[3];
                         } else {
-                            processedResponseBackupRuleData.split2.column1 = parseRuleSplit[1];
-                            processedResponseBackupRuleData.split2.column2 = "\"|\"";
+                            $scope.processedResponseBackupRuleData.split2.column1 = parseRuleSplit[1];
+                            $scope.processedResponseBackupRuleData.split2.column2 = "\"|\"";
                         }
                     } else {
-                        processedResponseBackupRuleData.split2.column1 = parseRuleSplit[1];
-                        processedResponseBackupRuleData.split2.column2 = parseRuleSplit[2];
+                        $scope.processedResponseBackupRuleData.split2.column1 = parseRuleSplit[1];
+                        $scope.processedResponseBackupRuleData.split2.column2 = parseRuleSplit[2];
                     }
                 }
 
 
                 var conditionRuleSplit = backendData.condition_rule.split("|");
-                processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
+                $scope.processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
                 if (conditionRuleSplit[0] == 'len') {
-                    processedResponseBackupRuleData.len.column1 = conditionRuleSplit[1];
+                    $scope.processedResponseBackupRuleData.len.column1 = conditionRuleSplit[1];
                 } else if (conditionRuleSplit[0] == 'range') {
-                    processedResponseBackupRuleData.range.column1 = conditionRuleSplit[1];
-                    processedResponseBackupRuleData.range.column2 = conditionRuleSplit[2];
+                    $scope.processedResponseBackupRuleData.range.column1 = conditionRuleSplit[1];
+                    $scope.processedResponseBackupRuleData.range.column2 = conditionRuleSplit[2];
                 } else if (conditionRuleSplit[0] == 'in') {
                     for (var i = 1; i < conditionRuleSplit.length; i++) {
                         var inObject = {
                             column1: i - 1,
                             column2: conditionRuleSplit[i]
                         }
-                        processedResponseBackupRuleData.inElementArray.push(inObject);
+                        $scope.processedResponseBackupRuleData.inElementArray.push(inObject);
                     }
                 }
 
                 var actionRuleSplit = backendData.action_rule.split("|");
-                processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
+                $scope.processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
                 if (actionRuleSplit[0] == 'substr') {
-                    processedResponseBackupRuleData.substr.column1 = actionRuleSplit[1];
-                    processedResponseBackupRuleData.substr.column2 = actionRuleSplit[2];
-                    processedResponseBackupRuleData.substr.column3 = actionRuleSplit[3];
+                    $scope.processedResponseBackupRuleData.substr.column1 = actionRuleSplit[1];
+                    $scope.processedResponseBackupRuleData.substr.column2 = actionRuleSplit[2];
+                    $scope.processedResponseBackupRuleData.substr.column3 = actionRuleSplit[3];
                 } else if (actionRuleSplit[0] == 'set') {
                     for (var i = 1; i < actionRuleSplit.length; i++) {
                         var setObject = {
                             column1: i - 1,
                             column2: actionRuleSplit[i]
                         }
-                        processedResponseBackupRuleData.setRuleArray.push(setObject);
+                        $scope.processedResponseBackupRuleData.setRuleArray.push(setObject);
                     }
                 } else if (actionRuleSplit[0] == 'dec') {
-                    processedResponseBackupRuleData.dec.column1 = actionRuleSplit[1];
+                    $scope.processedResponseBackupRuleData.dec.column1 = actionRuleSplit[1];
                 }
             }
 
-            $scope.frontendRightHandPanelData = angular.copy(processedResponseBackupRuleData);
+            $scope.frontendRightHandPanelData = angular.copy($scope.processedResponseBackupRuleData);
 
             // if no inElementArray || setRuleArray data from backend, then init them
             if ($scope.frontendRightHandPanelData.inElementArray.length == 0) {
