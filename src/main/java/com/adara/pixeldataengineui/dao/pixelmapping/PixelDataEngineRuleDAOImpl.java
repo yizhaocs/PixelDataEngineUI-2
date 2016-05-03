@@ -107,16 +107,15 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return sb.toString();
     }
 
-    public String getRule(String keyId) {
+    public String getRule(String gid, String keyId, String priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
-        String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p where p.key_id=?";
+        String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p WHERE p.gid=? AND p.key_id=? AND p.priority=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
         try {
-            result = jdbcTemplate.queryForObject(query, new Object[]{keyId}, new RowMapper<String>() {
-
+            result = jdbcTemplate.queryForObject(query, new Object[]{gid, keyId, priority}, new RowMapper<String>() {
                 @Override
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {

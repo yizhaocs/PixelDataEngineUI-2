@@ -201,8 +201,10 @@ app.config(['$routeProvider', '$locationProvider',
                 controller: 'editPixelRule',
                 resolve: {
                     backendData: function (pixelmappingService, $route) {
+                        var gid = $route.current.params.gid;
                         var keyId = $route.current.params.keyId;
-                        return pixelmappingService.getRule(keyId);
+                        var priority = $route.current.params.priority;
+                        return pixelmappingService.getRule(gid, keyId, priority);
                     }
                 }
             })

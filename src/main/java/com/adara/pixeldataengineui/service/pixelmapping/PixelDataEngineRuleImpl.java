@@ -23,8 +23,8 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.getRules();
     }
 
-    public String getRule(String keyId) {
-        return mPixelDataEngineRuleDAO.getRule(keyId);
+    public String getRule(String gid, String keyId, String priority) {
+        return mPixelDataEngineRuleDAO.getRule(gid, keyId, priority);
     }
 
     public Integer updateRule(RuleRequest request) {

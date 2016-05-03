@@ -63,16 +63,16 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/getRule", method = RequestMethod.GET)
-    public ResponseEntity<String> getRule(@RequestParam(value = "keyid", required = false) String keyid) {
+    public ResponseEntity<String> getRule(@RequestParam(value = "gid", required = false) String gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) String priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "request data ->" + keyid);
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
         if (keyid.equals("0")) {
             return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
         }
 
         String result = "";
-        result = mPixelDataEngineRuleService.getRule(keyid);
+        result = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {

@@ -95,8 +95,8 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'getRules');
         }
 
-        obj.getRule = function (keyID) {
-            return $http.get($rootScope.base + 'getRule?keyid=' + keyID);
+        obj.getRule = function (gid, keyID, priority) {
+            return $http.get($rootScope.base + 'getRule?gid=' + gid +'&keyid=' + keyID + '&priority=' + priority);
         }
 
         obj.updateRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray) {

@@ -205,6 +205,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.selectKeyId = function (frontendData) {
         //  If the user clicks on a <div>, we can get the ng-click to call this function, to set a new selected Customer.
         $scope.key_id = frontendData.key_id;
+        $scope.priority = frontendData.priority;
+        $scope.gid = frontendData.gid;
         $scope.getRule();
     };
 
@@ -214,7 +216,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.isUpdate = true; // true to display "Delete" button
         $scope.groupIdInputDisable = true;
         $scope.keyIdDisable = true;
-        pixelmappingService.getRule($scope.key_id).success(function (backendData) {
+        pixelmappingService.getRule($scope.gid, $scope.key_id, $scope.priority).success(function (backendData) {
             responseBackupRuleData = backendData;
 
             $scope.initRuleData();
