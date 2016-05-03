@@ -20,7 +20,7 @@
                         <div class="form-group" ng-class="{error: myForm.dp_name.$invalid}">
                             <label class="col-md-2"> DP Name </label>
                             <div class="col-md-4">
-                                <input name="dp_name" ng-model="frontendData.dp_name" type="text" class="form-control" placeholder="dp_name" required/>
+                                <input name="dp_name" ng-model="frontendData.dp_name" type="text" ng-disabled="keyIdDisable" class="form-control" placeholder="dp_name" required/>
                                 <span ng-show="myForm.dp_name.$dirty && myForm.dp_name.$invalid" class="help-inline">DP Name Required</span>
                             </div>
                         </div>

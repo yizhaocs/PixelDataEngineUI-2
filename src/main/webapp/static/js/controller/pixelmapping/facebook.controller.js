@@ -26,10 +26,10 @@ app.controller('listCtrlFacebook', function ($scope, $location, $anchorScroll, p
 
 app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : 0;
-    $rootScope.title = (mappingID > 0) ? 'Edit Data Provider Facebook Pixel' : 'Add Data Provider Facebook Pixel';
-    $scope.buttonText = (mappingID > 0) ? 'Update Data Provider Facebook Pixel' : 'Add New Data Provider Facebook Pixel';
+    $rootScope.title = (mappingID > 0) ? 'Edit Data Provider Pixel' : 'Add Data Provider Pixel';
+    $scope.buttonText = (mappingID > 0) ? 'Update Data Provider Pixel' : 'Add New Data Provider Pixel';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
-
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
@@ -76,7 +76,7 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
     $rootScope.title = (mappingID > 0) ? 'Edit Facebook Key Mapping' : 'Add Facebook Key Mapping';
     $scope.buttonText = (mappingID > 0) ? 'Update Facebook Key Mapping' : 'Add New Facebook Key Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false;
-
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
 

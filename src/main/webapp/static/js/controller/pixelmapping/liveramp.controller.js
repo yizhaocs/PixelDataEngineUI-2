@@ -19,7 +19,7 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
     $rootScope.title = (mappingID != '0') ? 'Edit Liveramp DP Mapping' : 'Add Liveramp DP Mapping';
     $scope.buttonText = (mappingID != '0') ? 'Update Liveramp DP Mapping' : 'Add New Liveramp DP Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
-
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
@@ -53,7 +53,7 @@ app.controller('editCtrlLiverampKey', function ($scope, $rootScope, $location, $
     $rootScope.title = (mappingID != '0') ? 'Edit Liveramp Key Mapping' : 'Add Liveramp Key Mapping';
     $scope.buttonText = (mappingID != '0') ? 'Update Liveramp Key Mapping' : 'Add New Liveramp Key Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false;
-
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
 

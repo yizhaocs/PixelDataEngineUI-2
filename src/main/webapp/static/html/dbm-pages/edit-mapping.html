@@ -20,7 +20,7 @@
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> Conversion Pixel Id </label>
                             <div class="col-md-4">
-                                <input name="conversion_pixel_id" ng-model="frontendData.conversion_pixel_id" type="text" class="form-control" placeholder="conversion_pixel_id" required/>
+                                <input name="conversion_pixel_id" ng-model="frontendData.conversion_pixel_id" type="text" ng-disabled="keyIdDisable" class="form-control" placeholder="conversion_pixel_id" required/>
                                 <span ng-show="myForm.conversion_pixel_id.$dirty && myForm.conversion_pixel_id.$invalid" class="help-inline">Conversion Pixel Id Required</span>
                             </div>
                         </div>

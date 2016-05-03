@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="user in vm.allUsers">
-        <td><input type="text" ng-model="user.username"></td>
+        <td><input type="text" ng-model="user.username" ng-disabled=true class="form-control"></td>
         <td><input type="password" ng-model="user.password"></td>
         <td><a href="manageusers" ng-click="vm.deleteUser(user.username)">Delete</a></td>
         <td><a href="manageusers" ng-click="vm.updateUser(user)">Update</a></td>

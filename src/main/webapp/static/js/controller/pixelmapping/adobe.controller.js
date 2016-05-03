@@ -17,6 +17,8 @@ app.controller('editCtrlAdobe', function ($scope, $rootScope, $location, $routeP
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
     $scope.frontendData = angular.copy(backendData.data);
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
+
 
     $scope.isClean = function () {
         return angular.equals(backendData.data, $scope.frontendData);
@@ -30,8 +32,7 @@ app.controller('editCtrlAdobe', function ($scope, $rootScope, $location, $routeP
     $scope.saveMapping = function (frontendData) {
         if (mappingID <= 0) {
             pixelmappingService.insertMapping($rootScope.base + 'adobe', frontendData, 'adobe');
-        }
-        else {
+        } else {
             pixelmappingService.updateMapping($rootScope.base + 'adobe', mappingID, frontendData, 'adobe');
         }
     };

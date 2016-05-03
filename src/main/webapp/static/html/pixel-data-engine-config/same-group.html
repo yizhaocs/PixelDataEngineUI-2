@@ -34,6 +34,13 @@
         background-color: yellow;
         cursor: pointer;
     }
+    .form-horizontal input.ng-invalid.ng-dirty {
+        border-color: #FA787E;
+    }
+
+    .form-horizontal input.ng-valid.ng-dirty {
+        border-color: #78FA89;
+    }
 </style>
 
 <hr>
@@ -82,7 +89,7 @@
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Group ID </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-disabled="groupidEnable" ng-model="frontendRightHandPanelData.gid">
+                                    <input type="text" ng-disabled="groupIdInputDisable" class="form-control" ng-model="frontendRightHandPanelData.gid">
                                 </div>
                             </div>
 
@@ -91,7 +98,7 @@
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Key ID </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.keyId">
+                                    <input type="text" ng-disabled="keyIdDisable" class="form-control" ng-model="frontendRightHandPanelData.keyId">
                                 </div>
                             </div>
 

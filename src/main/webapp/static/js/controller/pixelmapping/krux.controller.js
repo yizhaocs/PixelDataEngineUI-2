@@ -16,7 +16,7 @@ app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $ro
     $rootScope.title = (mappingID > 0) ? 'Edit Mapping' : 'Add Mapping';
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
-
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
 
