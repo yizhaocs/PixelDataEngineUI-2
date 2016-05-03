@@ -7,228 +7,209 @@
         border-color: #78FA89;
     }
 </style>
-<div class="view">
-    <div class="container">
-        <div class="row">
-            <header>
-                <h3>{{title}}</h3>
-            </header>
+<form role="form" name="myForm" class="form-horizontal">
+    <div class="view">
+        <div class="container">
+            <div class="row">
+                <header>
+                    <h3>{{title}}</h3>
+                </header>
 
+                <div>
 
-            <div>
-                <table>
-                    <tr>
-                        <td>gid:</td>
-                        <td>
-                            <input type="text" ng-model="frontendData.gid">
-                        </td>
-                    </tr>
-                </table>
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Group ID </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-disabled="groupIdInputDisable" class="form-control" ng-model="frontendData.gid">
+                        </div>
+                    </div>
 
-                <hr>
+                    <hr>
 
-                <table>
-                    <tr>
-                        <td>key_id:</td>
-                        <td>
-                            <input type="text" ng-model="frontendData.keyId">
-                        </td>
-                    </tr>
-                </table>
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Key ID </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-disabled="keyIdDisable" class="form-control" ng-model="frontendData.keyId">
+                        </div>
+                    </div>
 
-                <hr>
+                    <hr>
 
-                <table>
-                    <tr>
-                        <td>priority:</td>
-                        <td>
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Priority </label>
+                        <div class="col-md-4">
                             <input type="text" ng-model="frontendData.priority">
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
 
-                <hr>
+                    <hr>
 
-                <tr>
-                    <td>type:</td>
-                    <td>
-                        <select ng-model="frontendData.type">
-                            <option value="transform">transform</option>
-                        </select>
-                    </td>
-                </tr>
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Type </label>
+                        <div class="col-md-4">
+                            <select ng-model="frontendData.type">
+                                <option value="transform">transform</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <!--<table>-->
-                <!--<tr>-->
-                <!--<td>type:</td>-->
-                <!--<td>-->
-                <!--<input type="text" ng-model="frontendData.type">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--</table>-->
+                    <hr>
 
-                <hr>
-
-                <table>
-                    <tr>
-                        <td>parse_rule:</td>
-                        <td>
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Parse Rule </label>
+                        <div class="col-md-4">
                             <select ng-model="frontendData.parseRule">
                                 <option value="orig">orig</option>
                                 <option value="split1">split1</option>
                                 <option value="split2">split2</option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                        <table ng-show="frontendData.parseRule=='split1'">
-                            <td>split string:</td>
-                            <td>
-                                <input type="text" ng-model="frontendData.split1.column1">
-                            </td>
-                        </table>
-                        <table ng-show="frontendData.parseRule=='split2'">
-                            <tr>
-                                <td>level 1 split string:</td>
-                                <td>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.parseRule=='split1'">
+                                <label class="col-md-5"> Split String </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="frontendData.split1.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.parseRule=='split2'">
+                                <label class="col-md-5"> Level 1 </label>
+                                <div class="col-md-4">
                                     <input type="text" ng-model="frontendData.split2.column1">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>level 2 split string:</td>
-                                <td>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.parseRule=='split2'">
+                                <label class="col-md-5"> Level 2 </label>
+                                <div class="col-md-4">
                                     <input type="text" ng-model="frontendData.split2.column2">
-                                </td>
-                            </tr>
-                        </table>
-                    </tr>
-                </table>
-                <hr>
-                <table>
-                    <tr>
-                        <td>condition_rule:</td>
-                        <td>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Condition Rule </label>
+                        <div class="col-md-4">
                             <select ng-model="frontendData.conditionRule">
                                 <option value="len">len</option>
                                 <option value="always">always</option>
                                 <option value="range">range</option>
                                 <option value="in">in</option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <table ng-show="frontendData.conditionRule=='len'">
-                            <td>string length:</td>
-                            <td>
-                                <input type="text" ng-model="frontendData.len.column1">
-                            </td>
-                        </table>
-                        <table ng-show="frontendData.conditionRule=='range'">
-                            <tr>
-                                <td>range from:</td>
-                                <td>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.conditionRule=='len'">
+                                <label class="col-md-5"> String Length </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="frontendData.len.column1">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.conditionRule=='range'">
+                                <label class="col-md-5"> Range From </label>
+                                <div class="col-md-4">
                                     <input type="text" ng-model="frontendData.range.column1">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>range to:</td>
-                                <td>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.conditionRule=='range'">
+                                <label class="col-md-5"> Range To </label>
+                                <div class="col-md-4">
                                     <input type="text" ng-model="frontendData.range.column2">
-                                </td>
-                            </tr>
-                        </table>
-                        <table ng-show="frontendData.conditionRule=='in'">
-                            <tr ng:repeat="element in frontendData.inElementArray">
-                                <td>element_{{element.column1}}:</td>
-                                <td><input type="text" ng-model="element.column2"></td>
-                            </tr>
-                            <td>
-                            <td>
-                                <button type="button" ng-click="addInElement()">+</button>
-                            </td>
-                            <td>
-                                <button type="button" ng-click="removeInElement()">-</button>
-                            </td>
-                            </td>
-                        </table>
-                    </tr>
-                </table>
-                <hr>
-                <table>
-                    <tr>
-                        <td>action_rule:</td>
-                        <td>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.conditionRule=='in'" ng:repeat="element in frontendData.inElementArray">
+                                <label class="col-md-5"> element_{{element.column1}}: </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="element.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-show="frontendData.conditionRule=='in'">
+                                <div class="col-md-4">
+                                    <button type="button" ng-click="addInElement()">+</button>
+                                    <button type="button" ng-click="removeInElement()">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <label class="col-md-2"> Action Rule </label>
+                        <div class="col-md-4">
                             <select ng-model="frontendData.actionRule">
                                 <option value="substr">substr</option>
                                 <option value="set">set</option>
                                 <option value="dec">dec</option>
                                 <option value="ignore">ignore</option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <table ng-show="frontendData.actionRule=='substr'">
-                                <tr>
-                                    <td>direction:</td>
-                                    <td>
-                                        <input type="text" ng-model="frontendData.substr.column1">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>start index:</td>
-                                    <td>
-                                        <input type="text" ng-model="frontendData.substr.column2">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>length:</td>
-                                    <td>
-                                        <input type="text" ng-model="frontendData.substr.column3">
-                                    </td>
-                                </tr>
-                            </table>
-                            <table ng-show="frontendData.actionRule=='set'">
-                                <tr ng:repeat="set in frontendData.setRuleArray">
-                                    <td>set_{{set.column1}}:</td>
-                                    <td><input type="text" ng-model="set.column2"></td>
-                                </tr>
-                                <td>
-                                <td>
-                                    <button type="button" ng-click="addSetRule()">+</button>
-                                </td>
-                                <td>
-                                    <button type="button" ng-click="removeSetRule()">-</button>
-                                </td>
-                                </td>
-                            </table>
-                            <table ng-show="frontendData.actionRule=='dec'">
-                                <td>number of decimals:</td>
-                                <td>
-                                    <input type="text" ng-model="frontendData.dec.column1">
-                                </td>
-                            </table>
-                        </div>
-                    </tr>
-                </table>
-                <hr>
 
-                <div class="form-group">
-                    <label class="col-md-2"></label>
-                    <div class="col-md-4">
-                        <a href="pixel-data-engine-rule" class="btn">Cancel</a>
-                        <button ng-click="saveRule(frontendData);"
-                                ng-disabled="isClean() || myForm.$invalid"
-                                class="btn btn-primary">{{buttonText}}
-                        </button>
-                        <button ng-click="deleteRule(frontendData)"
-                                ng-show="isUpdate" class="btn btn-warning">Delete
-                        </button>
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.actionRule=='substr'">
+                                <label class="col-md-5"> Direction </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="frontendData.substr.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.actionRule=='substr'">
+                                <label class="col-md-5"> Start Index </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="frontendData.substr.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.actionRule=='substr'">
+                                <label class="col-md-5"> Length </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="frontendData.substr.column3">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.actionRule=='set'" ng:repeat="set in frontendData.setRuleArray">
+                                <label class="col-md-5"> set_{{set.column1}}: </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="set.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-show="frontendData.actionRule=='set'">
+                                <div class="col-md-4">
+                                    <button type="button" ng-click="addSetRule()">+</button>
+                                    <button type="button" ng-click="removeSetRule()">-</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendData.actionRule=='dec'">
+                                <label class="col-md-5"> Number of Decimals </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="frontendData.dec.column1">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2"></label>
+                <div class="col-md-4">
+                    <a href="pixel-data-engine-rule" class="btn">Cancel</a>
+                    <button ng-click="saveRule(frontendData);"
+                            ng-disabled="isClean() || myForm.$invalid"
+                            class="btn btn-primary">{{buttonText}}
+                    </button>
+                    <button ng-click="deleteRule(frontendData)"
+                            ng-show="isUpdate" class="btn btn-warning">Delete
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
