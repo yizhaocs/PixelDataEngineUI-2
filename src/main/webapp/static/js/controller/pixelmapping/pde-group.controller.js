@@ -169,10 +169,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 alert("Disallow Duplicate Priorities");
                 return;
             }
-            if($scope.frontendLeftHandPanelData[i].key_id == $scope.frontendRightHandPanelData.keyId){
-                alert("Disallow Duplicate Keys");
-                return;
-            }
         }
 
 
@@ -203,7 +199,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
 
     $scope.getRule = function () {
-        $scope.buttonText = 'Update Group';
+        $scope.buttonText = 'Update Rule';
         $scope.isUpdate = true; // true to display "Delete" button
         $scope.groupIdInputDisable = true;
         $scope.keyIdDisable = true;
