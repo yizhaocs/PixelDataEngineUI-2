@@ -16,6 +16,7 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     $rootScope.title = (keyId > 0) ? 'Edit Group' : 'Add Group';
     $scope.buttonText = (keyId > 0) ? 'Update Group' : 'Add New Group';
     $scope.isUpdate = (keyId > 0) ? true : false;
+    $scope.keyIdDisable = (keyId > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {

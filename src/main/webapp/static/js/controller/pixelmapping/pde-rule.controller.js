@@ -29,7 +29,7 @@ app.controller('editPixelRule', function ($scope, $rootScope, $location, $routeP
     $rootScope.title = (keyIdParam > 0) ? 'Edit Rule' : 'Add Rule';
     $scope.buttonText = (keyIdParam > 0) ? 'Update Rule' : 'Add Rule';
     $scope.isUpdate = (keyIdParam > 0) ? true : false; // false to get rid of "Delete" button
-
+    // $scope.keyIdDisable = (keyIdParam > 0) ? true : false;
     var responseBackupRuleData = backendData.data;
 
     if (responseBackupRuleData != '') {
