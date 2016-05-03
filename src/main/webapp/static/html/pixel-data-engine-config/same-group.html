@@ -22,8 +22,7 @@
         padding: 0;
         /*vertical scroll bar*/
         overflow-y: auto;
-        hori
-        overflow-x: hidden;
+        hori overflow-x: hidden;
     }
 
     .cssKeyId {
@@ -89,10 +88,9 @@
                 <div class="container">
                     <div class="row">
                         <div>
-
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Group ID </label>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <input type="text" ng-disabled="groupIdInputDisable" class="form-control" ng-model="frontendRightHandPanelData.gid">
                                 </div>
                             </div>
@@ -101,7 +99,7 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Key ID </label>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <input type="text" ng-disabled="keyIdDisable" class="form-control" ng-model="frontendRightHandPanelData.keyId">
                                 </div>
                             </div>
@@ -110,8 +108,8 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Priority </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.priority">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.priority">
                                 </div>
                             </div>
 
@@ -119,7 +117,7 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Type </label>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <select ng-model="frontendRightHandPanelData.type">
                                         <option value="transform">transform</option>
                                     </select>
@@ -143,22 +141,22 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.parseRule=='split1'">
                                 <label class="col-md-2"> Split String </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.split1.column1">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.split1.column1">
                                 </div>
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.parseRule=='split2'">
                                 <label class="col-md-2"> Level 1 </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.split2.column1">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.split2.column1">
                                 </div>
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.parseRule=='split2'">
                                 <label class="col-md-2"> Level 2 </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.split2.column2">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.split2.column2">
                                 </div>
                             </div>
                             <hr>
@@ -177,30 +175,30 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='len'">
                                 <label class="col-md-2"> String Length </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.len.column1">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column1">
                                 </div>
 
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
                                 <label class="col-md-2"> Range From </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.range.column1">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column1">
                                 </div>
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
                                 <label class="col-md-2"> Range To </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.range.column2">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column2">
                                 </div>
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inElementArray">
                                 <label class="col-md-2"> element_{{element.column1}}: </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="element.column2">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="element.column2">
                                 </div>
                             </div>
 
@@ -228,30 +226,30 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='substr'">
                                 <label class="col-md-2"> Direction </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.substr.column1">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column1">
                                 </div>
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='substr'">
                                 <label class="col-md-2"> Start Index </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.substr.column2">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column2">
                                 </div>
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='substr'">
                                 <label class="col-md-2"> Length </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.substr.column3">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column3">
                                 </div>
                             </div>
 
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='set'" ng:repeat="set in frontendRightHandPanelData.setRuleArray">
                                 <label class="col-md-2"> set_{{set.column1}}: </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="set.column2">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="set.column2">
                                 </div>
                             </div>
 
@@ -265,8 +263,8 @@
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='dec'">
                                 <label class="col-md-2"> Number of Decimals </label>
-                                <div class="col-md-4">
-                                    <input type="text" ng-model="frontendRightHandPanelData.dec.column1">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.dec.column1">
                                 </div>
                             </div>
                         </div>
