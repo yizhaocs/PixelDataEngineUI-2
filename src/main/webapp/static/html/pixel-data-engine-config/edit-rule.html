@@ -56,8 +56,8 @@
 
                     <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                         <label class="col-md-2"> Parse Rule </label>
-                        <div class="col-md-4">
-                            <select ng-model="frontendData.parseRule">
+                        <div class="col-md-2">
+                            <select class="form-control" ng-model="frontendData.parseRule">
                                 <option value="orig">orig</option>
                                 <option value="split1">split1</option>
                                 <option value="split2">split2</option>
@@ -91,8 +91,8 @@
 
                     <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                         <label class="col-md-2"> Condition Rule </label>
-                        <div class="col-md-4">
-                            <select ng-model="frontendData.conditionRule">
+                        <div class="col-md-2">
+                            <select class="form-control" ng-model="frontendData.conditionRule">
                                 <option value="len">len</option>
                                 <option value="always">always</option>
                                 <option value="range">range</option>
@@ -142,8 +142,8 @@
 
                     <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                         <label class="col-md-2"> Action Rule </label>
-                        <div class="col-md-4">
-                            <select ng-model="frontendData.actionRule">
+                        <div class="col-md-2">
+                            <select class="form-control" ng-model="frontendData.actionRule">
                                 <option value="substr">substr</option>
                                 <option value="set">set</option>
                                 <option value="dec">dec</option>
