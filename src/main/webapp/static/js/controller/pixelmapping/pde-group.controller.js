@@ -42,13 +42,14 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.title = 'Group id:' + gid;
     $scope.buttonText = 'Add New Rule';
     $scope.isUpdate = false; // false to get rid of "Delete" button
+    $scope.groupidEnable = true;
 
     $scope.initRuleData = function () {
         $scope.processedResponseBackupRuleData = {
             "parseRule": null,
             "conditionRule": null,
             "actionRule": null,
-            "gid": null,
+            "gid": gid,
             "keyId": null,
             "priority": null,
             "type": null,
@@ -149,6 +150,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.addRule = function () {
         $scope.buttonText = 'Add New Rule';
         $scope.isUpdate = false; // false to get rid of "Delete" button
+        $scope.groupidEnable = true;
         $scope.initRuleData();
     };
 
@@ -192,7 +194,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.getRule = function () {
         $scope.buttonText = 'Update Group';
         $scope.isUpdate = true; // true to display "Delete" button
-
+        $scope.groupidEnable = false;
         pixelmappingService.getRule($scope.key_id).success(function (backendData) {
             responseBackupRuleData = backendData;
 
