@@ -40,7 +40,7 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 
 app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var gid = ($routeParams.gid) ? parseInt($routeParams.gid) : 0;
-    $scope.title = 'Group id:' + gid;
+    $scope.title = 'Group ID:' + gid;
     $scope.buttonText = 'Add New Rule';
     $scope.isUpdate = false; // false to get rid of "Delete" button
     $scope.groupIdInputDisable = true;

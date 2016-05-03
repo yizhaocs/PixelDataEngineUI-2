@@ -13,16 +13,18 @@
         height: 600px;
         /*background-color: #E0E0E0;*/
         margin-right: 40px;
+        /*vertical scroll bar*/
         overflow-y: auto;
         float: left;
     }
 
     #rightHandPanelView {
         height: 600px;
-        padding: 0;
+        padding: 35px;
         /*vertical scroll bar*/
         overflow-y: auto;
-        hori overflow-x: hidden;
+        /*horizontal scroll bar*/
+        overflow-x: hidden;
     }
 
     .cssKeyId {
@@ -95,8 +97,6 @@
                                 </div>
                             </div>
 
-                            <hr>
-
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Key ID </label>
                                 <div class="col-md-2">
@@ -104,16 +104,12 @@
                                 </div>
                             </div>
 
-                            <hr>
-
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Priority </label>
                                 <div class="col-md-2">
                                     <input type="text" class="form-control" ng-model="frontendRightHandPanelData.priority">
                                 </div>
                             </div>
-
-                            <hr>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Type </label>
