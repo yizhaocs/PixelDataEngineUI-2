@@ -164,20 +164,31 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.saveRule = function (frontendRightHandPanelData) {
-        for(var i = 0; i < $scope.frontendLeftHandPanelData.length; i++){
-            if($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority){
-                alert("Disallow Duplicate Priorities");
-                return;
-            }
-        }
+
 
 
         // true if "Add new rule"
         if ($scope.isUpdate == false) {
+            for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
+                if ($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority) {
+                    alert("Disallow Duplicate Priorities");
+                    return;
+                }
+            }
             pixelmappingService.insertRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
                 $scope.refreshLeftPanel();
             });
         } else {
+            for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
+                if ($scope.frontendLeftHandPanelData[i].key_id === $scope.frontendRightHandPanelData.keyId && $scope.frontendLeftHandPanelData[i].priority === $scope.frontendRightHandPanelData.priority) {
+                    break;
+                }
+                if ($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority) {
+                    alert("Disallow Duplicate Priorities");
+                    return;
+                }
+
+            }
             pixelmappingService.updateRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
                 $scope.refreshLeftPanel();
             });
