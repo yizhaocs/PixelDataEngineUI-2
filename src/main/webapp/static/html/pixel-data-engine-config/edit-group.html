@@ -19,14 +19,14 @@
                     <div class="row">
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> Key Id </label>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <input name="key_id" ng-model="frontendData.key_id" type="text" ng-disabled="keyIdDisable" class="form-control" placeholder="key_id" required/>
                                 <span ng-show="myForm.key_id.$dirty && myForm.key_id.$invalid" class="help-inline">Key Id Required</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2"> Gid </label>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <input name="Gid" ng-model="frontendData.gid" type="text" class="form-control" placeholder="Gid" required/>
                                 <span ng-show="myForm.Gid.$dirty && myForm.Gid.$invalid" class="help-inline">Gid Required</span>
                             </div>
@@ -35,9 +35,9 @@
                             <label class="col-md-2"> Type </label>
                             <!--<tr>-->
                                 <!--<td>Type:</td>-->
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <td>
-                                    <select ng-model="frontendData.type">
+                                    <select class="form-control" ng-model="frontendData.type">
                                         <option value="independent">independent</option>
                                         <option value="sequence">sequence</option>
                                     </select>
