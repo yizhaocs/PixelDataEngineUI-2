@@ -6,14 +6,14 @@
 'use strict';
 
 app.controller('listCtrlFacebook', function ($scope, $location, $anchorScroll, pixelmappingService) {
-    pixelmappingService.getMappings('facebook-dp').then(function (data) {
-        $scope.frontendDataMappingsDp = data.data;
+    pixelmappingService.getMappings('facebook-dp').then(function (backendData) {
+        $scope.frontendDataMappingsDp = backendData.data;
     });
-    pixelmappingService.getMappings('facebook-key').then(function (data) {
-        $scope.frontendDataMappingsKey = data.data;
+    pixelmappingService.getMappings('facebook-key').then(function (backendData) {
+        $scope.frontendDataMappingsKey = backendData.data;
     });
-    pixelmappingService.getMappings('facebook-pixel').then(function (data) {
-        $scope.frontendDataMappingsPixel = data.data;
+    pixelmappingService.getMappings('facebook-pixel').then(function (backendData) {
+        $scope.frontendDataMappingsPixel = backendData.data;
     });
 
     $scope.scrollTo = function (position) {

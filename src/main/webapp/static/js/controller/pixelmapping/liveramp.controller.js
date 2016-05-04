@@ -6,11 +6,11 @@
 'use strict';
 
 app.controller('listCtrlLiveramp', function ($scope, pixelmappingService) {
-    pixelmappingService.getMappings('liveramp-dp').then(function (data) {
-        $scope.mappingsDp = data.data;
+    pixelmappingService.getMappings('liveramp-dp').then(function (backendData) {
+        $scope.mappingsDp = backendData.data;
     });
-    pixelmappingService.getMappings('liveramp-key').then(function (data) {
-        $scope.mappingsKey = data.data;
+    pixelmappingService.getMappings('liveramp-key').then(function (backendData) {
+        $scope.mappingsKey = backendData.data;
     });
 });
 

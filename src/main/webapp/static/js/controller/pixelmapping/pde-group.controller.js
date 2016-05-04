@@ -5,8 +5,8 @@
 'use strict';
 
 app.controller('listPixelGroups', function ($scope, pixelmappingService) {
-    pixelmappingService.getGroups().then(function (data) {
-        $scope.frontendData = data.data;
+    pixelmappingService.getGroups().then(function (backendData) {
+        $scope.frontendData = backendData.data;
     });
 });
 

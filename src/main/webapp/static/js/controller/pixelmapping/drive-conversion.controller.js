@@ -5,8 +5,8 @@
 'use strict';
 
 app.controller('listCtrlDeriveConversion', function ($scope, pixelmappingService) {
-    pixelmappingService.getMappings('derive-conversion').then(function (data) {
-        $scope.frontendData = data.data;
+    pixelmappingService.getMappings('derive-conversion').then(function (backendData) {
+        $scope.frontendData = backendData.data;
     });
 });
 

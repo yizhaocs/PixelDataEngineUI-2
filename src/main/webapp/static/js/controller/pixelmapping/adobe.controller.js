@@ -6,8 +6,8 @@
 'use strict';
 
 app.controller('listCtrlAdobe', function ($scope, pixelmappingService) {
-    pixelmappingService.getMappings('adobe').then(function (data) {
-        $scope.frontendData = data.data;
+    pixelmappingService.getMappings('adobe').then(function (backendData) {
+        $scope.frontendData = backendData.data;
     });
 });
 
