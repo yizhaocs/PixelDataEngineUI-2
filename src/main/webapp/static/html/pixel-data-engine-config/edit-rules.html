@@ -1,0 +1,287 @@
+<style type="text/css">
+    /*  This CSS is exclusively for our Master-Detail view examples */
+    #wholePanelView {
+        width: 100%;
+        height: 600px;
+        border: 1px solid Green;
+        padding: 3px;
+        /*margin: 15px 5px 15px 30px;*/
+    }
+
+    #leftHandPanelView {
+        width: 300px;
+        height: 600px;
+        /*background-color: #E0E0E0;*/
+        margin-right: 40px;
+        /*vertical scroll bar*/
+        overflow-y: auto;
+        float: left;
+    }
+
+    #rightHandPanelView {
+        height: 600px;
+        padding: 35px;
+        /*vertical scroll bar*/
+        overflow-y: auto;
+        /*horizontal scroll bar*/
+        overflow-x: hidden;
+    }
+
+    .cssKeyId {
+        height: 47px;
+        width: 98%;
+        position: relative; /* Very important, for appending child <div>s with absolute positioning later */
+        border-bottom: 1px solid white;
+    }
+
+    .cssKeyId:hover {
+        background-color: yellow;
+        cursor: pointer;
+    }
+
+    .form-horizontal input.ng-invalid.ng-dirty {
+        border-color: #FA787E;
+    }
+
+    .form-horizontal input.ng-valid.ng-dirty {
+        border-color: #78FA89;
+    }
+</style>
+
+<hr>
+<span><b>{{title}}</b></span><br><br>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="btn btn-lg btn-success" ng-click="addRule();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new rule</a>
+    </div>
+</nav>
+<div id="wholePanelView" style="position:relative;">
+
+    <!-- First, we have our left-hand list of data names -->
+    <div id="leftHandPanelView">
+        <!--<span>Key Id&nbsp;</span>-->
+        <!--<div class="cssKeyId" ng-class="{cssCompanySelectedRecord: data.key_id == selectedCustomer}" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">-->
+
+        <!--<div class="cssKeyId">{{data.key_id}}</div>-->
+
+
+        <!--</div>-->
+
+
+        <table class="table table-striped table-bordered">
+            <thead>
+            <th>Key Id&nbsp;</th>
+            <th>Priority&nbsp;</th>
+            </thead>
+            <tbody>
+            <tr class="cssKeyId" ng-repeat="data in frontendLeftHandPanelData | orderBy:'priority'" ng-click="selectKeyId(data);">
+                <td>{{data.key_id}}</td>
+                <td>{{data.priority}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Then, we have our right-hand panel, showing one data's orders -->
+    <div id="rightHandPanelView">
+        <form role="form" name="myForm" class="form-horizontal">
+            <div class="view">
+                <div class="container">
+                    <div class="row">
+                        <div>
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Group ID </label>
+                                <div class="col-md-2">
+                                    <input type="text" ng-disabled="groupIdInputDisable" class="form-control" ng-model="frontendRightHandPanelData.gid">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Key ID </label>
+                                <div class="col-md-2">
+                                    <input type="text" ng-disabled="keyIdDisable" class="form-control" ng-model="frontendRightHandPanelData.keyId">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Priority </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.priority">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Type </label>
+                                <div class="col-md-2">
+                                    <select class="form-control" ng-model="frontendRightHandPanelData.type">
+                                        <option value="transform">transform</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Parse Rule </label>
+                                <div class="col-md-2">
+                                    <select class="form-control" ng-model="frontendRightHandPanelData.parseRule">
+                                        <option value="orig">orig</option>
+                                        <option value="split1">split1</option>
+                                        <option value="split2">split2</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.parseRule=='split1'">
+                                <label class="col-md-2"> Split String </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.split1.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.parseRule=='split2'">
+                                <label class="col-md-2"> Level 1 </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.split2.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.parseRule=='split2'">
+                                <label class="col-md-2"> Level 2 </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.split2.column2">
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Condition Rule </label>
+                                <div class="col-md-2">
+                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionRule">
+                                        <option value="len">len</option>
+                                        <option value="always">always</option>
+                                        <option value="range">range</option>
+                                        <option value="in">in</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='len'">
+                                <label class="col-md-2"> String Length </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column1">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
+                                <label class="col-md-2"> Range From </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
+                                <label class="col-md-2"> Range To </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inElementArray">
+                                <label class="col-md-2"> element_{{element.column1}}: </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="element.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-show="frontendRightHandPanelData.conditionRule=='in'">
+                                <label class="col-md-2"></label>
+                                <div class="col-md-2">
+                                    <button type="button" ng-click="addInElement()">+</button>
+                                    <button type="button" ng-click="removeInElement()">-</button>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Action Rule </label>
+                                <div class="col-md-2">
+                                    <select class="form-control" ng-model="frontendRightHandPanelData.actionRule">
+                                        <option value="substr">substr</option>
+                                        <option value="set">set</option>
+                                        <option value="dec">dec</option>
+                                        <option value="ignore">ignore</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='substr'">
+                                <label class="col-md-2"> Direction </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='substr'">
+                                <label class="col-md-2"> Start Index </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='substr'">
+                                <label class="col-md-2"> Length </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column3">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='set'" ng:repeat="set in frontendRightHandPanelData.setRuleArray">
+                                <label class="col-md-2"> set_{{set.column1}}: </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="set.column2">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-show="frontendRightHandPanelData.actionRule=='set'">
+                                <label class="col-md-2"></label>
+                                <div class="col-md-2">
+                                    <button type="button" ng-click="addSetRule()">+</button>
+                                    <button type="button" ng-click="removeSetRule()">-</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.actionRule=='dec'">
+                                <label class="col-md-2"> Number of Decimals </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.dec.column1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-2"></label>
+                        <div class="col-md-4">
+                            <a href="pixel-data-engine-group" class="btn">Cancel</a>
+                            <button ng-click="saveRule(frontendRightHandPanelData);"
+                                    ng-disabled="isClean() || myForm.$invalid"
+                                    class="btn btn-primary">{{buttonText}}
+                            </button>
+                            <button ng-click="deleteRule(frontendRightHandPanelData)"
+                                    ng-show="isUpdate" class="btn btn-warning">Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
