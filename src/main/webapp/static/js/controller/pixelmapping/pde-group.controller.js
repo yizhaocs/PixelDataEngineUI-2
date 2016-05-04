@@ -45,6 +45,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.isUpdate = false; // false to get rid of "Delete" button
     $scope.groupIdInputDisable = true;
     $scope.keyIdDisable = false;
+    var frontendRightHandPanelDataForClean = '';
 
     $scope.initRuleData = function () {
         $scope.processedResponseBackupRuleData = {
@@ -110,7 +111,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.sortPriority(backendData.data);
     $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
-    var responseBackupRuleData = '';
+
 
     /*
      *
@@ -142,7 +143,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
 
     $scope.isClean = function () {
-        return angular.equals(responseBackupRuleData, $scope.frontendRightHandPanelData);
+        return angular.equals(frontendRightHandPanelDataForClean, $scope.frontendRightHandPanelData);
     }
 
     // when use click on "Add new rule" button
@@ -216,7 +217,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.groupIdInputDisable = true;
         $scope.keyIdDisable = true;
         pixelmappingService.getRule($scope.leftPanelSelectedGid, $scope.leftPanelSelectedkeyid, $scope.leftPanelSelectedPriority).success(function (backendData) {
-            responseBackupRuleData = backendData;
+            // frontendRightHandPanelDataForClean = backendData;
 
             $scope.initRuleData();
 
@@ -314,6 +315,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                     column2: ''
                 }];
             }
+
+            frontendRightHandPanelDataForClean = angular.copy($scope.frontendRightHandPanelData);
         });
     }
 });
