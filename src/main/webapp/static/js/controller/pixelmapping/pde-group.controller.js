@@ -166,6 +166,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.saveRule = function (frontendRightHandPanelData) {
         // true if "Add new rule"
         if ($scope.isUpdate == false) {
+            // validation for Duplicate Priorities in "insertion" scenario
             for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
                 if ($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority) {
                     alert("Disallow Duplicate Priorities");
@@ -176,6 +177,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 $scope.refreshLeftPanel();
             });
         } else {
+            // validation for Duplicate Priorities in "updation" scenario
             for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
                 if ($scope.frontendLeftHandPanelData[i].key_id === $scope.frontendRightHandPanelData.keyId && $scope.frontendLeftHandPanelData[i].priority === $scope.frontendRightHandPanelData.priority) {
                     break;
