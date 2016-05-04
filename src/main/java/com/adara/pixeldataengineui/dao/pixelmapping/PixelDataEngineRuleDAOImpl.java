@@ -156,6 +156,8 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
         String priority = request.getPriority();
 
+        String newPriority = request.getNewPriority();
+
         String type = request.getType();
 
         String parseRuleValue = parseRuleBuilder(request);
@@ -169,11 +171,11 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
             return -1;
         }
 
-        String query = "UPDATE marketplace.pixel_data_engine_configs SET " + "gid" + "=?" + "," + "key_id" + "=?" + "," + "priority" + "=?" + "," + "type" + "=?" + "," + "parse_rule" + "=?" + "," + "condition_rule" + "=?" + "," + "action_rule" + "=?" + " WHERE key_id=?";
+        String query = "UPDATE marketplace.pixel_data_engine_configs SET " + "gid" + "=?" + "," + "key_id" + "=?" + "," + "priority" + "=?" + "," + "type" + "=?" + "," + "parse_rule" + "=?" + "," + "condition_rule" + "=?" + "," + "action_rule" + "=?" + " WHERE gid=? AND key_id=? AND priority=?";
 
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "Executing query -> " + query.toString());
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{gid, keyId, priority, type, parseRuleValue, conditionRuleValue, actionRuleValue, keyId};
+        Object[] args = new Object[]{gid, keyId, newPriority, type, parseRuleValue, conditionRuleValue, actionRuleValue, gid, keyId, priority};
 
         Integer result = 0;
         try {

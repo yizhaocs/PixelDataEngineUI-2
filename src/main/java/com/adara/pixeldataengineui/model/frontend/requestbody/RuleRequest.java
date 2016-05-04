@@ -14,6 +14,7 @@ public class RuleRequest {
     private String gid;
     private String keyId;
     private String priority;
+    private String newPriority; // for update rule only
     private String type;
     private Split1 split1;
     private Split2 split2;
@@ -70,6 +71,14 @@ public class RuleRequest {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public String getNewPriority() {
+        return newPriority;
+    }
+
+    public void setNewPriority(String newPriority) {
+        this.newPriority = newPriority;
     }
 
     public String getType() {
