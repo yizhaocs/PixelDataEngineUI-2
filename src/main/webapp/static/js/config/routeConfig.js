@@ -179,9 +179,9 @@ app.config(['$routeProvider', '$locationProvider',
                     }
                 }
             })
-            .when(base + 'group/same-group/:gid', {
+            .when(base + 'group/edit-rules/:gid', {
                 title: 'Group Id :gid',
-                templateUrl: 'static/html/pixel-data-engine-config/same-group.html',
+                templateUrl: 'static/html/pixel-data-engine-config/edit-rules.html',
                 controller: 'editSameGroup',
                 resolve: {
                     backendData: function (pixelmappingService, $route) {
