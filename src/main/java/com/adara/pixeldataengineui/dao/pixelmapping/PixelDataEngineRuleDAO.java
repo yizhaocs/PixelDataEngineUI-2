@@ -14,5 +14,5 @@ public interface PixelDataEngineRuleDAO {
 
     Integer updateRule(RuleRequest request);
 
-    Integer deleteRule(String keyId);
+    Integer deleteRule(String gid, String keyId, String priority);
 }

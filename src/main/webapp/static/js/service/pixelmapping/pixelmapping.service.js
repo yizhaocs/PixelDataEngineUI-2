@@ -123,8 +123,8 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        obj.deleteRule = function (redirectPath, keyid) {
-            return $http.delete($rootScope.base + 'deleteRule?keyid=' + keyid).then(function (status) {
+        obj.deleteRule = function (redirectPath, gid, keyID, priority) {
+            return $http.delete($rootScope.base + 'deleteRule?gid=' + gid +'&keyid=' + keyID + '&priority=' + priority).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });

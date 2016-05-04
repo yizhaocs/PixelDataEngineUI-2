@@ -156,7 +156,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
-            pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.keyId).then(function (backendData) {
+            pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.priority).then(function (backendData) {
                 $scope.refreshLeftPanel();
                 $scope.frontendRightHandPanelData = '';
             });

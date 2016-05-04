@@ -191,15 +191,15 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer deleteRule(String keyId) {
+    public Integer deleteRule(String gid, String keyId, String priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
-        String query = "DELETE FROM marketplace.pixel_data_engine_configs WHERE key_id =?";
+        String query = "DELETE FROM marketplace.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
         try {
-            result = jdbcTemplate.update(query, keyId);
+            result = jdbcTemplate.update(query, gid, keyId, priority);
         } catch (Exception e) {
             LOG.error("Failed to execute sql query", e);
         }

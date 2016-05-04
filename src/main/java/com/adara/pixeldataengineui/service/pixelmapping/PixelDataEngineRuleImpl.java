@@ -31,7 +31,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.updateRule(request);
     }
 
-    public Integer deleteRule(String keyId) {
-        return mPixelDataEngineRuleDAO.deleteRule(keyId);
+    public Integer deleteRule(String gid, String keyId, String priority) {
+        return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority);
     }
 }

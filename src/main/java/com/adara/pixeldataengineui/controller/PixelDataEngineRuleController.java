@@ -109,12 +109,12 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/deleteRule", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteRule(@RequestParam(value = "keyid", required = false) String keyid) {
+    public ResponseEntity<String> deleteRule(@RequestParam(value = "gid", required = false) String gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) String priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "request data ->" + keyid);
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
         Integer result = 0;
-        result = mPixelDataEngineRuleService.deleteRule(keyid);
+        result = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority);
 
         ResponseEntity<String> response = null;
         if (result > 0) {
