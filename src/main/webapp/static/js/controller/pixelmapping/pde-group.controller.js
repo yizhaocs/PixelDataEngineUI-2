@@ -156,7 +156,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
-            pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.priority).then(function (backendData) {
+            pixelmappingService.deleteRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority).then(function (backendData) {
                 $scope.refreshLeftPanel();
                 $scope.frontendRightHandPanelData = '';
             });
@@ -186,7 +186,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 }
 
             }
-            pixelmappingService.updateRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.priority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
+            pixelmappingService.updateRule($rootScope.base + 'group/same-group/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
                 $scope.refreshLeftPanel();
             });
         }
@@ -201,9 +201,9 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.selectKeyId = function (frontendData) {
         //  If the user clicks on a <div>, we can get the ng-click to call this function, to set a new selected Customer.
-        $scope.key_id = frontendData.key_id;
-        $scope.priority = frontendData.priority;
-        $scope.gid = frontendData.gid;
+        $scope.leftPanelSelectedkeyid = frontendData.key_id;
+        $scope.leftPanelSelectedPriority = frontendData.priority;
+        $scope.leftPanelSelectedGid = frontendData.gid;
         $scope.getRule();
     };
 
@@ -213,7 +213,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.isUpdate = true; // true to display "Delete" button
         $scope.groupIdInputDisable = true;
         $scope.keyIdDisable = true;
-        pixelmappingService.getRule($scope.gid, $scope.key_id, $scope.priority).success(function (backendData) {
+        pixelmappingService.getRule($scope.leftPanelSelectedGid, $scope.leftPanelSelectedkeyid, $scope.leftPanelSelectedPriority).success(function (backendData) {
             responseBackupRuleData = backendData;
 
             $scope.initRuleData();
