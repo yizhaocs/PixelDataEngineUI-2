@@ -83,7 +83,14 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
                     FacebookDpKeysDTO mFacebookDpKeysDTO = new FacebookDpKeysDTO();
                     mFacebookDpKeysDTO.setKey_id(Integer.valueOf(String.valueOf(rs.getObject("key_id"))));
                     mFacebookDpKeysDTO.setEnabled(Byte.valueOf(String.valueOf(rs.getObject("enabled"))));
-                    mFacebookDpKeysDTO.setUpdate_interval(Byte.valueOf(String.valueOf(rs.getObject("update_interval"))));
+                    String updateInterval = String.valueOf(rs.getObject("update_interval"));
+                    // Update Interval is allow null
+                    if(updateInterval.equals("null") == false){
+                        mFacebookDpKeysDTO.setUpdate_interval(Byte.valueOf(String.valueOf(rs.getObject("update_interval"))));
+                    }else{
+                        mFacebookDpKeysDTO.setUpdate_interval(null);
+                    }
+
                     mFacebookDpKeysDTO.setUse_image_pixel(Boolean.valueOf(String.valueOf(rs.getObject("use_image_pixel"))));
 
                     // convert Java object to JSON (Jackson)
