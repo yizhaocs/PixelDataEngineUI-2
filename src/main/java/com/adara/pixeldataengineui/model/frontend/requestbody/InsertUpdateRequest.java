@@ -67,8 +67,9 @@ public class InsertUpdateRequest {
         private Integer conversion_pixel_id;
         private String dbm_url;
         // pde groups
+        private Integer triggering_key_id;
         private Integer gid;
-        private String type;
+        private String group_type;
 
         public Boolean getUse_image_pixel() {
             return use_image_pixel;
@@ -238,6 +239,15 @@ public class InsertUpdateRequest {
             this.dbm_url = dbm_url;
         }
 
+
+        public Integer getTriggering_key_id() {
+            return triggering_key_id;
+        }
+
+        public void setTriggering_key_id(Integer triggering_key_id) {
+            this.triggering_key_id = triggering_key_id;
+        }
+
         public Integer getGid() {
             return gid;
         }
@@ -246,12 +256,12 @@ public class InsertUpdateRequest {
             this.gid = gid;
         }
 
-        public String getType() {
-            return type;
+        public String getGroup_type() {
+            return group_type;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setGroup_type(String group_type) {
+            this.group_type = group_type;
         }
     }
 }

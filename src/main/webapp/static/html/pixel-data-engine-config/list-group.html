@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <hr>
-        <span><b>pde_groups</b></span><br><br>
+        <span><b>pixel_data_engine_groups</b></span><br><br>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
                 <a class="btn btn-lg btn-success" href="group/edit-group/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new group</a>
@@ -11,16 +11,16 @@
             <thead>
             <th>Trigging Key ID&nbsp;</th>
             <th>Group ID&nbsp;</th>
-            <th>Type&nbsp;</th>
+            <th>Group Type&nbsp;</th>
             <th>Action&nbsp;</th>
             <th>Edit Rules In The Same Group&nbsp;</th>
             </thead>
             <tbody>
             <tr ng-repeat="data in frontendData">
-                <td>{{data.key_id}}</td>
+                <td>{{data.triggering_key_id}}</td>
                 <td>{{data.gid}}</td>
-                <td>{{data.type}}</td>
-                <td><a href="group/edit-group/{{data.key_id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Group</a></td>
+                <td>{{data.group_type}}</td>
+                <td><a href="group/edit-group/{{data.triggering_key_id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Group</a></td>
                 <td><a href="group/edit-rules/{{data.gid}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Rules</a></td>
             </tr>
             </tbody>
