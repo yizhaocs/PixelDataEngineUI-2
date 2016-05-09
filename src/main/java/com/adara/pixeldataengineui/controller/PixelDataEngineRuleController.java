@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
@@ -133,15 +135,15 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
 
-        Integer result = 0;
-        result = mPixelDataEngineRuleService.updateRule(request);
+
+        Map<String, String> result = mPixelDataEngineRuleService.testRule(request);
 
         ResponseEntity<java.lang.String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<java.lang.String>("{\"status\":\"Success\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<java.lang.String>(HttpStatus.NO_CONTENT);
-        }
+//        if (result.length() < 4) {
+//            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+//        } else {
+//            response = new ResponseEntity<String>(result, HttpStatus.OK);
+//        }
 
         if (LOG.isDebugEnabled())
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "ResponseEntity:" + response.toString());

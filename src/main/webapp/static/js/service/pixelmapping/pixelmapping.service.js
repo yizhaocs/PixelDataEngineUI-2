@@ -154,8 +154,8 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
 
-        obj.runTest = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray, testValue) {
-            return $http.post($rootScope.base + 'updateRule', {
+        obj.testRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray, testValue) {
+            return $http.post($rootScope.base + 'testRule', {
                 gid: gid,
                 keyId: keyId,
                 priority: priority,
