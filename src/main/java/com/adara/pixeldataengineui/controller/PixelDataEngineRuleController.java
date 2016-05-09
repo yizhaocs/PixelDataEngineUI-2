@@ -63,7 +63,7 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/getRule", method = RequestMethod.GET)
-    public ResponseEntity<String> getRule(@RequestParam(value = "gid", required = false) String gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) String priority) {
+    public ResponseEntity<String> getRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
@@ -109,7 +109,7 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/deleteRule", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteRule(@RequestParam(value = "gid", required = false) String gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) String priority) {
+    public ResponseEntity<String> deleteRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
@@ -125,6 +125,27 @@ public class PixelDataEngineRuleController {
 
         if (LOG.isDebugEnabled())
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "ResponseEntity:" + response.toString());
+        return response;
+    }
+
+    @RequestMapping(value = "/testRule", method = RequestMethod.POST)
+    public ResponseEntity<String> testRule(@RequestBody RuleRequest request) {
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
+
+        Integer result = 0;
+        result = mPixelDataEngineRuleService.updateRule(request);
+
+        ResponseEntity<java.lang.String> response = null;
+        if (result > 0) {
+            response = new ResponseEntity<java.lang.String>("{\"status\":\"Success\"}", HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<java.lang.String>(HttpStatus.NO_CONTENT);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "ResponseEntity:" + response.toString());
+
         return response;
     }
 }

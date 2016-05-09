@@ -23,7 +23,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.getRules();
     }
 
-    public String getRule(String gid, String keyId, String priority) {
+    public String getRule(Integer gid, String keyId, Integer priority) {
         return mPixelDataEngineRuleDAO.getRule(gid, keyId, priority);
     }
 
@@ -31,7 +31,11 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.updateRule(request);
     }
 
-    public Integer deleteRule(String gid, String keyId, String priority) {
+    public Integer deleteRule(Integer gid, String keyId, Integer priority) {
         return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority);
+    }
+
+    public String testRule(RuleRequest request){
+        return null;
     }
 }

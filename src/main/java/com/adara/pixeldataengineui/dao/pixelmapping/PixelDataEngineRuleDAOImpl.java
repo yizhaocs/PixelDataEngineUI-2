@@ -107,7 +107,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return sb.toString();
     }
 
-    public String getRule(String gid, String keyId, String priority) {
+    public String getRule(Integer gid, String keyId, Integer priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
         String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p WHERE p.gid=? AND p.key_id=? AND p.priority=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "Executing query -> " + query.toString());
@@ -191,7 +191,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer deleteRule(String gid, String keyId, String priority) {
+    public Integer deleteRule(Integer gid, String keyId, Integer priority) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
         String query = "DELETE FROM marketplace.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "Executing query -> " + query.toString());

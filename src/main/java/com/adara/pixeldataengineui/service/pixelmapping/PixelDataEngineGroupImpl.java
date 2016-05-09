@@ -14,28 +14,28 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService{
     @Autowired
     private PixelDataEngineGroupDAO mPixelDataEngineGroupDAO;
 
-    public Integer insertGroup(Integer triggeringKeyId, Integer gid, String groupType) {
-        return mPixelDataEngineGroupDAO.insertGroup(triggeringKeyId, gid, groupType);
+    public Integer insertGroup(String triggerKeyId, Integer gid, Integer groupType) {
+        return mPixelDataEngineGroupDAO.insertGroup(triggerKeyId, gid, groupType);
     }
 
     public String getGroups() {
         return mPixelDataEngineGroupDAO.getGroups();
     }
 
-    public String getGroup(String triggeringKeyId) {
-        return mPixelDataEngineGroupDAO.getGroup(triggeringKeyId);
+    public String getGroup(String triggerKeyId) {
+        return mPixelDataEngineGroupDAO.getGroup(triggerKeyId);
     }
 
-    public String getSameGroup(String gid) {
+    public String getSameGroup(Integer gid) {
         return mPixelDataEngineGroupDAO.getSameGroup(gid);
     }
 
-    public Integer updateGroup(Integer triggeringKeyId, Integer gid, String groupType) {
-        return mPixelDataEngineGroupDAO.updateGroup(triggeringKeyId, gid, groupType);
+    public Integer updateGroup(String triggerKeyId, Integer gid, Integer groupType) {
+        return mPixelDataEngineGroupDAO.updateGroup(triggerKeyId, gid, groupType);
     }
 
-    public Integer deleteGroup(String triggeringKeyId) {
-        return mPixelDataEngineGroupDAO.deleteGroup(triggeringKeyId);
+    public Integer deleteGroup(String triggerKeyId) {
+        return mPixelDataEngineGroupDAO.deleteGroup(triggerKeyId);
     }
 
 }

@@ -153,6 +153,32 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
+
+        obj.runTest = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray, testValue) {
+            return $http.post($rootScope.base + 'updateRule', {
+                gid: gid,
+                keyId: keyId,
+                priority: priority,
+                newPriority: newPriority,
+                type: type,
+                parseRule: parseRule,
+                split1: split1,
+                split2: split2,
+                conditionRule: conditionRule,
+                len: len,
+                range: range,
+                actionRule: actionRule,
+                substr: substr,
+                dec: dec,
+                inElementArray: inElementArray,
+                setRuleArray: setRuleArray,
+                testValue: testValue
+            }).then(function (status) {
+                $location.path(redirectPath);
+                return status.data;
+            });
+        };
+
         return obj;
     }
 ]);

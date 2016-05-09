@@ -70,7 +70,7 @@ public class PixelDataEngineGroupController {
     }
 
     @RequestMapping(value = "/samegroup", method = RequestMethod.GET)
-    public ResponseEntity<String> samegroup(@RequestParam(value = "id", required = false) String id) {
+    public ResponseEntity<String> samegroup(@RequestParam(value = "id", required = false) Integer id) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "samegroup");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "samegroup" + ", " + "request data ->" + "id:" + id);
 

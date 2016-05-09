@@ -10,9 +10,9 @@ public interface PixelDataEngineRuleDAO {
 
     String getRules();
 
-    String getRule(String gid, String keyId, String priority);
+    String getRule(Integer gid, String keyId, Integer priority);
 
     Integer updateRule(RuleRequest request);
 
-    Integer deleteRule(String gid, String keyId, String priority);
+    Integer deleteRule(Integer gid, String keyId, Integer priority);
 }
