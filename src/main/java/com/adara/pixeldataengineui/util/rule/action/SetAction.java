@@ -1,13 +1,12 @@
 package com.adara.pixeldataengineui.util.rule.action;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.adara.pixeldataengineui.util.rule.parse.ParseResult;
 import org.apache.commons.lang.text.StrTokenizer;
 import org.apache.log4j.Logger;
 
-import com.opinmind.pixeldataengine.rule.parser.ParseResult;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This is the 'set' action

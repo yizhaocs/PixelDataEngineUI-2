@@ -3,13 +3,13 @@
  */
 package com.adara.pixeldataengineui.util.rule.action;
 
+import com.adara.pixeldataengineui.util.rule.RuleFactory;
+import com.adara.pixeldataengineui.util.rule.parse.ParseResult;
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
-import com.opinmind.pixeldataengine.RuleFactory;
-import com.opinmind.pixeldataengine.rule.parser.ParseResult;
 
 /**
  * This class handles this use case: 

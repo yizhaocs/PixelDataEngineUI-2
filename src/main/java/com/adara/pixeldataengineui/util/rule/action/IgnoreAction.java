@@ -3,10 +3,11 @@
  */
 package com.adara.pixeldataengineui.util.rule.action;
 
+import com.adara.pixeldataengineui.util.rule.parse.ParseResult;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.opinmind.pixeldataengine.rule.parser.ParseResult;
 
 /**
  * @author jgao

@@ -1,11 +1,10 @@
 package com.adara.pixeldataengineui.util.rule.condition;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import com.adara.pixeldataengineui.util.rule.parse.ParseResult;
 import org.apache.log4j.Logger;
 
-import com.opinmind.pixeldataengine.rule.parser.ParseResult;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class checks this case : 

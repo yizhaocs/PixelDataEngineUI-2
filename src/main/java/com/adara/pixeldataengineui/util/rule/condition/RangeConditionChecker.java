@@ -1,8 +1,8 @@
 package com.adara.pixeldataengineui.util.rule.condition;
 
+import com.adara.pixeldataengineui.util.rule.parse.ParseResult;
 import org.apache.log4j.Logger;
 
-import com.opinmind.pixeldataengine.rule.parser.ParseResult;
 
 /**
  * This class checks this case :  
