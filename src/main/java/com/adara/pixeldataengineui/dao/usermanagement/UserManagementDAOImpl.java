@@ -87,10 +87,10 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                         public String mapRow(ResultSet rs, int rowNum)
                                 throws SQLException {
                             UserDTO mUserDTO = new UserDTO();
-                            mUserDTO.setUsername(String.valueOf(rs
-                                    .getObject("username")));
-                            mUserDTO.setPassword(String.valueOf(rs
-                                    .getObject("password")));
+                            mUserDTO.setUsername(rs
+                                    .getString("username"));
+                            mUserDTO.setPassword(rs
+                                    .getString("password"));
                             // convert Java object to JSON (Jackson)
                             ObjectMapper mapper = new ObjectMapper();
                             String tmp = "";
@@ -140,10 +140,10 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                                 public String mapRow(ResultSet rs, int rowNum)
                                         throws SQLException {
                                     UserDTO mUserDTO = new UserDTO();
-                                    mUserDTO.setUsername(String.valueOf(rs
-                                            .getObject("username")));
-                                    mUserDTO.setPassword(String.valueOf(rs
-                                            .getObject("password")));
+                                    mUserDTO.setUsername(rs
+                                            .getString("username"));
+                                    mUserDTO.setPassword(rs
+                                            .getString("password"));
                                     // convert Java object to JSON (Jackson)
                                     ObjectMapper mapper = new ObjectMapper();
                                     String result = "";
