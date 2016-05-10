@@ -4,7 +4,7 @@ package com.adara.pixeldataengineui.dao.pixelmapping;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineGroupDAO {
-    Integer insertGroup(String trigger_key_id, Integer gid, Integer group_type);
+    Integer insertGroup(String trigger_key_id, Integer group_type);
 
     String getGroups();
 
@@ -12,7 +12,7 @@ public interface PixelDataEngineGroupDAO {
 
     String getSameGroup(Integer gid);
 
-    Integer updateGroup(String trigger_key_id, Integer gid, Integer group_type);
+    Integer updateGroup(String trigger_key_id, Integer group_type);
 
     Integer deleteGroup(String keyId);
 }

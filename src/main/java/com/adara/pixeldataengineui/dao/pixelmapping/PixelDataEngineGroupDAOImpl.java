@@ -26,10 +26,10 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(String trigger_key_id, Integer gid, Integer group_type){
+    public Integer insertGroup(String trigger_key_id, Integer group_type){
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
-        String query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, gid, group_type) values(?, ?, ?)";
-         Object[] args = new Object[]{trigger_key_id, gid, group_type};
+        String query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?, ?)";
+         Object[] args = new Object[]{trigger_key_id, group_type};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + ", " + "Executing query -> " + query.toString());
@@ -171,13 +171,13 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
     }
 
 
-    public Integer updateGroup(String trigger_key_id, Integer gid, Integer group_type){
+    public Integer updateGroup(String trigger_key_id, Integer group_type){
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");
-        String query = "UPDATE marketplace.pixel_data_engine_groups SET " + "trigger_key_id" + "=?" + "," + "gid" + "=?" + "," + "group_type" + "=?" + " WHERE trigger_key_id=?";
+        String query = "UPDATE marketplace.pixel_data_engine_groups SET " + "trigger_key_id" + "=?" + "," + "group_type" + "=?" + " WHERE trigger_key_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{trigger_key_id, gid, group_type, trigger_key_id};
+        Object[] args = new Object[]{trigger_key_id, group_type, trigger_key_id};
         Integer result = 0;
         try {
             result = jdbcTemplate.update(query, args);

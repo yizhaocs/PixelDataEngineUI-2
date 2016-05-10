@@ -4,7 +4,7 @@ package com.adara.pixeldataengineui.service.pixelmapping;
  * Created by yzhao on 4/28/16.
  */
 public interface PixelDataEngineGroupService {
-    Integer insertGroup(String triggerKeyId, Integer gid, Integer groupType);
+    Integer insertGroup(String triggerKeyId, Integer groupType);
 
     String getGroups();
 
@@ -12,7 +12,7 @@ public interface PixelDataEngineGroupService {
 
     String getSameGroup(Integer gid);
 
-    Integer updateGroup(String triggerKeyId, Integer gid, Integer groupType);
+    Integer updateGroup(String triggerKeyId, Integer groupType);
 
     Integer deleteGroup(String triggerKeyId);
 }
