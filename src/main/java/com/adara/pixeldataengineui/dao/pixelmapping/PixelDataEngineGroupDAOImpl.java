@@ -28,7 +28,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
 
     public Integer insertGroup(String trigger_key_id, Integer group_type){
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
-        String query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?, ?)";
+        String query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?)";
          Object[] args = new Object[]{trigger_key_id, group_type};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
