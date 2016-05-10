@@ -83,6 +83,10 @@ public class Tools {
                 }
             }
             conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
+        } else if (conditionRuleKey.equals("seg")) {
+            seg = request.getSeg().toString();
+            conditionRuleValue.append("|");
+            conditionRuleValue.append(seg);
         }
 
         return conditionRuleValue.toString();

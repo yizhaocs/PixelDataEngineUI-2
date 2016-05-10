@@ -181,6 +181,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='seg'">
+                                <label class="col-md-2"> Number Of Segments </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.seg.column1">
+                                </div>
+                            </div>
+
+
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
                                 <label class="col-md-2"> Range From </label>
                                 <div class="col-md-2">

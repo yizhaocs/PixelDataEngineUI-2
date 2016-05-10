@@ -19,6 +19,7 @@ public class RuleRequest {
     private Split1 split1;
     private Split2 split2;
     private Len len;
+    private Seg seg;
     private Range range;
     private Substr substr;
     private Dec dec;
@@ -120,6 +121,14 @@ public class RuleRequest {
 
     public void setLen(Len len) {
         this.len = len;
+    }
+
+    public Seg getSeg() {
+        return seg;
+    }
+
+    public void setSeg(Seg seg) {
+        this.seg = seg;
     }
 
     public Range getRange() {

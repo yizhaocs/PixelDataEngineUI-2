@@ -99,7 +99,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'getRule?gid=' + gid +'&keyid=' + keyID + '&priority=' + priority);
         }
 
-        obj.updateRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray) {
+        obj.updateRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray) {
             return $http.post($rootScope.base + 'updateRule', {
                 gid: gid,
                 keyId: keyId,
@@ -111,6 +111,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 split2: split2,
                 conditionRule: conditionRule,
                 len: len,
+                seg: seg,
                 range: range,
                 actionRule: actionRule,
                 substr: substr,
@@ -130,7 +131,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        obj.insertRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray) {
+        obj.insertRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray) {
             return $http.post($rootScope.base + 'insertRule', {
                 gid: gid,
                 keyId: keyId,
@@ -141,6 +142,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 split2: split2,
                 conditionRule: conditionRule,
                 len: len,
+                seg: seg,
                 range: range,
                 actionRule: actionRule,
                 substr: substr,
@@ -154,7 +156,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
 
-        obj.testRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, range, substr, dec, inElementArray, setRuleArray, testValue) {
+        obj.testRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray, testValue) {
             return $http.post($rootScope.base + 'testRule', {
                 gid: gid,
                 keyId: keyId,
@@ -166,6 +168,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 split2: split2,
                 conditionRule: conditionRule,
                 len: len,
+                seg: seg,
                 range: range,
                 actionRule: actionRule,
                 substr: substr,
