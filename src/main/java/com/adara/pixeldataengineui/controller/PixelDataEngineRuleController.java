@@ -136,14 +136,26 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
 
 
-        Map<String, String> result = mPixelDataEngineRuleService.testRule(request);
-
+        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(request);
+        StringBuilder result = new StringBuilder();
+        result.append("{");
+        result.append("\"api\":\"testRule\"");
+        result.append(",");
+        result.append("\"data\":");
+        result.append("[");
+        for(String s: resultMap.keySet()){
+            result.append("\"" + s + "|" + resultMap.get(s) + "\"");
+            result.append(",");
+        }
+        result.deleteCharAt(result.toString().length() - 1);
+        result.append("]");
+        result.append("}");
         ResponseEntity<java.lang.String> response = null;
-//        if (result.length() < 4) {
-//            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-//        } else {
-//            response = new ResponseEntity<String>(result, HttpStatus.OK);
-//        }
+        if (result.toString().length() < 4) {
+            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        } else {
+            response = new ResponseEntity<String>(result.toString(), HttpStatus.OK);
+        }
 
         if (LOG.isDebugEnabled())
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "ResponseEntity:" + response.toString());
