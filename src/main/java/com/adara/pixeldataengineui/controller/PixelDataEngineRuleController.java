@@ -139,8 +139,6 @@ public class PixelDataEngineRuleController {
         Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(request);
         StringBuilder result = new StringBuilder();
         result.append("{");
-        result.append("\"api\":\"testRule\"");
-        result.append(",");
         result.append("\"data\":");
         result.append("[");
         for(String s: resultMap.keySet()){
