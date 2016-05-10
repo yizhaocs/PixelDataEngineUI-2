@@ -117,13 +117,13 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
-                    mPixelDataEngineConfigsDTO.setGid(String.valueOf(rs.getObject("gid")));
-                    mPixelDataEngineConfigsDTO.setKey_id(String.valueOf(rs.getObject("key_id")));
-                    mPixelDataEngineConfigsDTO.setPriority(String.valueOf(rs.getObject("priority")));
-                    mPixelDataEngineConfigsDTO.setType(String.valueOf(rs.getObject("type")));
-                    mPixelDataEngineConfigsDTO.setParse_rule(String.valueOf(rs.getObject("parse_rule")));
-                    mPixelDataEngineConfigsDTO.setCondition_rule(String.valueOf(rs.getObject("condition_rule")));
-                    mPixelDataEngineConfigsDTO.setAction_rule(String.valueOf(rs.getObject("action_rule")));
+                    mPixelDataEngineConfigsDTO.setGid(rs.getString("gid"));
+                    mPixelDataEngineConfigsDTO.setKey_id(rs.getString("key_id"));
+                    mPixelDataEngineConfigsDTO.setPriority(rs.getString("priority"));
+                    mPixelDataEngineConfigsDTO.setType(rs.getString("type"));
+                    mPixelDataEngineConfigsDTO.setParse_rule(rs.getString("parse_rule"));
+                    mPixelDataEngineConfigsDTO.setCondition_rule(rs.getString("condition_rule"));
+                    mPixelDataEngineConfigsDTO.setAction_rule(rs.getString("action_rule"));
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();
                     String result = "";

@@ -78,9 +78,9 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     LiverampDpMappingsDTO mLiverampDpMappingsDTO = new LiverampDpMappingsDTO();
-                    mLiverampDpMappingsDTO.setDp_name(String.valueOf(rs.getObject("dp_name")));
-                    mLiverampDpMappingsDTO.setDp_id(Integer.valueOf(String.valueOf(rs.getObject("dp_id"))));
-                    mLiverampDpMappingsDTO.setThreshold_mb(Long.valueOf(String.valueOf(rs.getObject("threshold_mb"))));
+                    mLiverampDpMappingsDTO.setDp_name(rs.getString("dp_name"));
+                    mLiverampDpMappingsDTO.setDp_id(rs.getInt("dp_id"));
+                    mLiverampDpMappingsDTO.setThreshold_mb(rs.getLong("threshold_mb"));
 
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();

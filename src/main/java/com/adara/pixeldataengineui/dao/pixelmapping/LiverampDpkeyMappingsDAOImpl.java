@@ -78,9 +78,9 @@ public class LiverampDpkeyMappingsDAOImpl implements LiverampDpkeyMappingsDAO {
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     LiverampDpkeyMappingsDTO mLiverampDpkeyMappingsDTO = new LiverampDpkeyMappingsDTO();
-                    mLiverampDpkeyMappingsDTO.setLiveramp_segment_id(Long.valueOf(String.valueOf(rs.getObject("liveramp_segment_id"))));
-                    mLiverampDpkeyMappingsDTO.setDp_key_id(Integer.valueOf(String.valueOf(rs.getObject("dp_key_id"))));
-                    mLiverampDpkeyMappingsDTO.setValue(String.valueOf(rs.getObject("value")));
+                    mLiverampDpkeyMappingsDTO.setLiveramp_segment_id(rs.getLong("liveramp_segment_id"));
+                    mLiverampDpkeyMappingsDTO.setDp_key_id(rs.getInt("dp_key_id"));
+                    mLiverampDpkeyMappingsDTO.setValue(rs.getString("value"));
 
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();

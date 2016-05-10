@@ -80,8 +80,8 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     DataProviderFacebookPixelsDTO mDataProviderFacebookPixelsDTO = new DataProviderFacebookPixelsDTO();
-                    mDataProviderFacebookPixelsDTO.setDp_id(Integer.valueOf(String.valueOf(rs.getObject("dp_id"))));
-                    mDataProviderFacebookPixelsDTO.setFacebook_pixel_id(Long.valueOf(String.valueOf(rs.getObject("facebook_pixel_id"))));
+                    mDataProviderFacebookPixelsDTO.setDp_id(rs.getInt("dp_id"));
+                    mDataProviderFacebookPixelsDTO.setFacebook_pixel_id(rs.getLong("facebook_pixel_id"));
 
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();

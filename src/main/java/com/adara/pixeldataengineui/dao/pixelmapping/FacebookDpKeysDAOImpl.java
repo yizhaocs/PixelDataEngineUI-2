@@ -81,17 +81,17 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     FacebookDpKeysDTO mFacebookDpKeysDTO = new FacebookDpKeysDTO();
-                    mFacebookDpKeysDTO.setKey_id(Integer.valueOf(String.valueOf(rs.getObject("key_id"))));
-                    mFacebookDpKeysDTO.setEnabled(Byte.valueOf(String.valueOf(rs.getObject("enabled"))));
-                    String updateInterval = String.valueOf(rs.getObject("update_interval"));
+                    mFacebookDpKeysDTO.setKey_id(rs.getInt("key_id"));
+                    mFacebookDpKeysDTO.setEnabled(rs.getByte("enabled"));
+                    String updateInterval = rs.getString("update_interval");
                     // Update Interval is allow null
                     if(updateInterval.equals("null") == false){
-                        mFacebookDpKeysDTO.setUpdate_interval(Byte.valueOf(String.valueOf(rs.getObject("update_interval"))));
+                        mFacebookDpKeysDTO.setUpdate_interval(rs.getByte("update_interval"));
                     }else{
                         mFacebookDpKeysDTO.setUpdate_interval(null);
                     }
 
-                    mFacebookDpKeysDTO.setUse_image_pixel(Boolean.valueOf(String.valueOf(rs.getObject("use_image_pixel"))));
+                    mFacebookDpKeysDTO.setUse_image_pixel(rs.getBoolean("use_image_pixel"));
 
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();

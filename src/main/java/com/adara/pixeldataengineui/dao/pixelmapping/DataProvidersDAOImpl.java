@@ -80,9 +80,9 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {
                     DataProvidersDTO mDataProvidersDTO = new DataProvidersDTO();
-                    mDataProvidersDTO.setId(Integer.valueOf(String.valueOf(rs.getObject("id"))));
-                    mDataProvidersDTO.setName(String.valueOf(rs.getObject("name")));
-                    mDataProvidersDTO.setSync_facebook(Boolean.valueOf(String.valueOf(rs.getObject("sync_facebook"))));
+                    mDataProvidersDTO.setId(rs.getInt("id"));
+                    mDataProvidersDTO.setName(rs.getString("name"));
+                    mDataProvidersDTO.setSync_facebook(rs.getBoolean("sync_facebook"));
 
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();

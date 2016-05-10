@@ -80,7 +80,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
                         throws SQLException {
                     DbmConversionPixelMappingsDTO mDbmConversionPixelMappingsDTO = new DbmConversionPixelMappingsDTO();
                     mDbmConversionPixelMappingsDTO.setConversion_pixel_id(rs.getInt("conversion_pixel_id"));
-                    mDbmConversionPixelMappingsDTO.setDbm_url(String.valueOf(rs.getObject("dbm_url")));
+                    mDbmConversionPixelMappingsDTO.setDbm_url(rs.getString("dbm_url"));
                     // convert Java object to JSON (Jackson)
                     ObjectMapper mapper = new ObjectMapper();
                     String result = "";
