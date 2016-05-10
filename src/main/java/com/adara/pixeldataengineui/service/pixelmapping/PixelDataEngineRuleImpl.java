@@ -5,6 +5,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.util.Tools;
 import com.adara.pixeldataengineui.util.model.PixelDataEngineConfig;
 import com.adara.pixeldataengineui.util.processor.RuleProcessor;
+import com.adara.pixeldataengineui.util.processor.TransformRuleProcessor;
 import com.adara.pixeldataengineui.util.rule.RuleFactory;
 import com.adara.pixeldataengineui.util.rule.action.Action;
 import com.adara.pixeldataengineui.util.rule.condition.ConditionChecker;
@@ -88,7 +89,9 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             LOG.error("error parsing pixel data engine rule for key_id:" + keyId, e);
         }
 
-        Map<String, RuleProcessor> ruleProcessorMap = null;
+        Map<String, RuleProcessor> ruleProcessorMap = new HashMap<String, RuleProcessor>();
+        TransformRuleProcessor mTransformRuleProcessor = new TransformRuleProcessor();
+        ruleProcessorMap.put("transform", mTransformRuleProcessor);
 
         Map<String, String> resultMap = new HashMap<String, String>();
 
