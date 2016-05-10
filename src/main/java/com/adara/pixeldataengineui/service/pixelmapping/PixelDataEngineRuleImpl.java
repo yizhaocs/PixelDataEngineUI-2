@@ -95,31 +95,17 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
 
         Map<String, String> resultMap = new HashMap<String, String>();
 
-        //Boolean isIgnoreAction = false;
         try {
             if (testKey != null && testValue != null) {
-                //isIgnoreAction = rule.isIgnoreAction();
                 RuleProcessor ruleProcessor = ruleProcessorMap.get(type);
                 if (ruleProcessor != null) {
                     resultMap = ruleProcessor.processRule(testKey, testValue, rule);
                 }
             }
-
         } catch (Exception e) {
             LOG.warn("testKey:" + testKey + " failed data engine processing", e);
         }
 
-
-        // if the key itself is not returned, and it's not ignore rule, we will log a warning
-        // and put the orig key/value in
-//        if (!isIgnoreAction && testKey != null && (resultMap == null || !resultMap.containsKey(testKey))) {
-//            LOG.warn("the rule processor for key: " + testKey + " didn't return the key itself");
-//
-//            // at least we want to put the original key and value in
-//            if (resultMap == null)
-//                resultMap = new HashMap<String, String>();
-//            resultMap.put(testKey, testValue);
-//        }
 
         return resultMap;
     }

@@ -145,7 +145,11 @@ public class PixelDataEngineRuleController {
             result.append("\"" + s + "|" + resultMap.get(s) + "\"");
             result.append(",");
         }
-        result.deleteCharAt(result.toString().length() - 1);
+
+        if(resultMap.size() != 0){
+            result.deleteCharAt(result.toString().length() - 1);
+        }
+
         result.append("]");
         result.append("}");
         ResponseEntity<java.lang.String> response = null;
