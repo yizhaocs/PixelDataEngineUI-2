@@ -1,10 +1,7 @@
 package com.adara.pixeldataengineui.util.rule;
 
-import com.adara.pixeldataengineui.util.rule.action.Action;
-import com.adara.pixeldataengineui.util.rule.action.DecimalAction;
-import com.adara.pixeldataengineui.util.rule.action.IgnoreAction;
-import com.adara.pixeldataengineui.util.rule.action.SetAction;
-import com.adara.pixeldataengineui.util.rule.action.SubStringAction;
+import com.adara.pixeldataengineui.util.rule.action.*;
+import com.adara.pixeldataengineui.util.rule.condition.*;
 import com.adara.pixeldataengineui.util.rule.parse.DoubleSplitParser;
 import com.adara.pixeldataengineui.util.rule.parse.OrigParser;
 import com.adara.pixeldataengineui.util.rule.parse.Parser;
@@ -20,7 +17,7 @@ public class RuleFactory {
     private static final Logger log = Logger.getLogger(RuleFactory.class);
 
     private enum ParserType { split1, split2, orig };
-    private enum ConditionType { len, range, in, always };
+    private enum ConditionType { len, range, in, seg, always };
     private enum ActionType { set, ignore, substr, dec };
 
     public static Parser createParser(String rule) throws Exception {
@@ -49,8 +46,8 @@ public class RuleFactory {
         return parser;
     }
 
-    public static com.adara.pixeldataengineui.util.rule.condition.ConditionChecker createConditionChecker(String rule) throws Exception {
-        com.adara.pixeldataengineui.util.rule.condition.ConditionChecker conditionChecker = null;
+    public static ConditionChecker createConditionChecker(String rule) throws Exception {
+        ConditionChecker conditionChecker = null;
 
         StrTokenizer st = StrTokenizer.getCSVInstance();
         st.setDelimiterChar('|');
@@ -59,16 +56,19 @@ public class RuleFactory {
 
         switch (ConditionType.valueOf(ruleType)) {
             case len:
-                conditionChecker = new com.adara.pixeldataengineui.util.rule.condition.LengthConditionChecker(ruleArray);
+                conditionChecker = new LengthConditionChecker(ruleArray);
                 break;
             case range:
-                conditionChecker = new com.adara.pixeldataengineui.util.rule.condition.RangeConditionChecker(ruleArray);
+                conditionChecker = new RangeConditionChecker(ruleArray);
                 break;
             case in:
-                conditionChecker = new com.adara.pixeldataengineui.util.rule.condition.InConditionChecker(ruleArray);
+                conditionChecker = new InConditionChecker(ruleArray);
+                break;
+            case seg:
+                conditionChecker = new SegConditionChecker(ruleArray);
                 break;
             case always:
-                conditionChecker = new com.adara.pixeldataengineui.util.rule.condition.AlwaysConditionChecker(ruleArray);
+                conditionChecker = new AlwaysConditionChecker(ruleArray);
                 break;
         }
 
@@ -116,7 +116,10 @@ public class RuleFactory {
 
             action = null;
 
-            action = RuleFactory.createAction("substr|L|0|");
+            action = RuleFactory.createAction("substr|L|0|2");
+
+            ConditionChecker checker = RuleFactory.createConditionChecker("seg|3");
+            System.out.println("checker is: " + checker);
         } catch (Exception e) {
             e.printStackTrace();
         }

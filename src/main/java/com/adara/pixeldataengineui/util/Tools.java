@@ -58,6 +58,7 @@ public class Tools {
         StringBuilder conditionRuleValue = new StringBuilder();
         conditionRuleValue.append(conditionRuleKey);
         String len = null;
+        String seg = null;
         String rangeFrom = null;
         String rangeTo = null;
         List<InElementArray> inElementArrayList = null;

@@ -85,6 +85,9 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             "len": {
                 "column1": null
             },
+            "seg": {
+                "column1": null
+            },
             "range": {
                 "column1": null,
                 "column2": null
@@ -233,7 +236,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         pixelmappingService.testRule($rootScope.base + 'group/edit-rules/' + gid,
             frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid,
             frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1,
-            frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec,
+            frontendRightHandPanelData.split2, frontendRightHandPanelData.len,frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec,
             frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray,
             frontendRightHandPanelData.testValue).then(function (backendData) {
             var result = "";
@@ -312,6 +315,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                         }
                         $scope.processedResponseBackupRuleData.inElementArray.push(inObject);
                     }
+                } else if (conditionRuleSplit[0] == 'seg') {
+                    $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
                 }
 
                 var actionRuleSplit = backendData.action_rule.split("|");

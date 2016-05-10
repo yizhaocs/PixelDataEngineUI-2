@@ -104,6 +104,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
                     resultMap = ruleProcessor.processRule(testKey, testValue, rule);
                 }
             }
+
         } catch (Exception e) {
             LOG.warn("testKey:" + testKey + " failed data engine processing", e);
         }
