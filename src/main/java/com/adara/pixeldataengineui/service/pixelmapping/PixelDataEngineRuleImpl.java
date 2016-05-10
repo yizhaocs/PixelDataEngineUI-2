@@ -27,7 +27,7 @@ import java.util.Map;
 public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
-
+    private final TransformRuleProcessor mTransformRuleProcessor = new TransformRuleProcessor();
     @Autowired
     private PixelDataEngineRuleDAO mPixelDataEngineRuleDAO;
 
@@ -90,7 +90,6 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         }
 
         Map<String, RuleProcessor> ruleProcessorMap = new HashMap<String, RuleProcessor>();
-        TransformRuleProcessor mTransformRuleProcessor = new TransformRuleProcessor();
         ruleProcessorMap.put("transform", mTransformRuleProcessor);
 
         Map<String, String> resultMap = new HashMap<String, String>();
