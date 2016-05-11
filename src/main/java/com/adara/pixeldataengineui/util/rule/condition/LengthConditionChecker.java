@@ -11,23 +11,42 @@ import org.apache.log4j.Logger;
  */
 public class LengthConditionChecker implements ConditionChecker {
 	private static final Logger log = Logger.getLogger(LengthConditionChecker.class);
-	
-	private Integer len;
-	
+
+	private Integer lower;
+	private Integer upper;
+
 	/**
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 */
 	public LengthConditionChecker(String[] ruleArray) throws Exception {
-		// init the len
-		len = Integer.valueOf(ruleArray[1]);
-		
-		if (len <= 0) {
-			throw new Exception("condition length: length can't be zero or negative");
+		// figure out the upper and lower boundaries
+		String lowerStr = null;
+		String upperStr = null;
+
+		lowerStr = ruleArray[1];
+		if (ruleArray.length > 1)
+			upperStr = ruleArray[2];
+
+		if (lowerStr!=null && lowerStr.length()>0) {
+			lower = Integer.valueOf(lowerStr);
 		}
-		
+
+		if (upperStr!=null && upperStr.length()>0) {
+			upper = Integer.valueOf(upperStr);
+		}
+
+		if (lower==null && upper==null) {
+			throw new Exception("condition len: both upper and lower limit are null");
+		}
+
+		if (lower!=null && upper!=null && upper<lower) {
+			throw new Exception("condition len: upper limit(" + upper +") is greater than lower limit(" + lower + ")");
+		}
+
 		if (log.isDebugEnabled())
-			log.debug("for rule:" + ruleArray + ", init the len limit to be:" + len);
+			log.debug("for rule:" + ruleArray + ", init the lower limit to be:" + lower + " and the upper limit to be:" + upper);
+
 	}
 
 	/* (non-Javadoc)
@@ -35,7 +54,23 @@ public class LengthConditionChecker implements ConditionChecker {
 	 */
 	@Override
 	public boolean checkCondition(String key, String value, ParseResult parsedValue) {
-		return value.length() > len;
+		boolean result = true;
+
+		Integer intValue = Integer.valueOf(value.length());
+
+		if (lower != null) {
+			if (intValue < lower) {
+				result = false;
+			}
+		}
+
+		if (upper != null) {
+			if (intValue > upper) {
+				result = false;
+			}
+		}
+
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -43,7 +78,8 @@ public class LengthConditionChecker implements ConditionChecker {
 	 */
 	@Override
 	public String toString() {
-		return "LengthConditionChecker [len=" + len + "]";
+		return "LengthConditionChecker [lower=" + lower + " upper=" + upper + "]";
 	}
 
 }
+

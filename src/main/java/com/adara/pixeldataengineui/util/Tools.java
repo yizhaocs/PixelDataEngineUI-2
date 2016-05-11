@@ -1,6 +1,8 @@
 package com.adara.pixeldataengineui.util;
 
 import com.adara.pixeldataengineui.model.frontend.generalcomponents.InElementArray;
+import com.adara.pixeldataengineui.model.frontend.generalcomponents.Len;
+import com.adara.pixeldataengineui.model.frontend.generalcomponents.Range;
 import com.adara.pixeldataengineui.model.frontend.generalcomponents.SetRuleArray;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 
@@ -63,12 +65,17 @@ public class Tools {
         String rangeTo = null;
         List<InElementArray> inElementArrayList = null;
         if (conditionRuleKey.equals("len")) {
-            len = request.getLen().toString();
+            Len mLen = request.getLen();
+            rangeFrom = mLen.getColumn1();
+            rangeTo = mLen.getColumn2();
             conditionRuleValue.append("|");
-            conditionRuleValue.append(len);
+            conditionRuleValue.append(rangeFrom);
+            conditionRuleValue.append("|");
+            conditionRuleValue.append(rangeTo);
         } else if (conditionRuleKey.equals("range")) {
-            rangeFrom = request.getRange().getColumn1();
-            rangeTo = request.getRange().getColumn2();
+            Range mRange = request.getRange();
+            rangeFrom = mRange.getColumn1();
+            rangeTo = mRange.getColumn2();
             conditionRuleValue.append("|");
             conditionRuleValue.append(rangeFrom);
             conditionRuleValue.append("|");

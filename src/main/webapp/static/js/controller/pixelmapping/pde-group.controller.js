@@ -83,7 +83,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 "column2": null
             },
             "len": {
-                "column1": null
+                "column1": null,
+                "column2": null
             },
             "seg": {
                 "column1": null
@@ -304,6 +305,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 $scope.processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
                 if (conditionRuleSplit[0] == 'len') {
                     $scope.processedResponseBackupRuleData.len.column1 = conditionRuleSplit[1];
+                    $scope.processedResponseBackupRuleData.len.column2 = conditionRuleSplit[2];
                 } else if (conditionRuleSplit[0] == 'range') {
                     $scope.processedResponseBackupRuleData.range.column1 = conditionRuleSplit[1];
                     $scope.processedResponseBackupRuleData.range.column2 = conditionRuleSplit[2];
