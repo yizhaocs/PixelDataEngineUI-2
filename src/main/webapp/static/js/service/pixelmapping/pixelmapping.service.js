@@ -6,12 +6,35 @@
 
 app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
     function ($http, $location, $rootScope) {
-        var obj = {};
+        var service = {};
 
+        // data mapping services
+        service.insertRule = insertRule;
+        service.getMappings = getMappings;
+        service.getMapping = getMapping;
+        service.insertMapping = insertMapping;
+        service.updateMapping = updateMapping;
+        service.deleteMapping = deleteMapping;
+
+        // group services
+        service.getGroups = getGroups;
+        service.getGroup = getGroup;
+        service.insertGroup = insertGroup;
+        service.updateGroup = updateGroup;
+        service.deleteGroup = deleteGroup;
+        service.getSameGroup = getSameGroup;
+
+        // rule services
+        service.getRules = getRules;
+        service.getRule = getRule;
+        service.updateRule = updateRule;
+        service.deleteRule = deleteRule;
+        service.insertRule = insertRule;
+        service.testRule = testRule;
         /**
-         *   Rest API Services
+         *   data mapping services
          **/
-        obj.insertRule = function (username, password, redirectPath) {
+        function insertRule(username, password, redirectPath) {
             // , inElementArray: inElementArray, setRuleArray: setRuleArray
             return $http.post($rootScope.base + 'login', {username: username, password: password}).then(function (status) {
                 $location.path($rootScope.base + 'adobe');
@@ -19,29 +42,29 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        obj.getMappings = function (type) {
+        function getMappings(type) {
             return $http.get($rootScope.base + 'mappings?type=' + type);
         }
 
-        obj.getMapping = function (mappingID, type) {
+        function getMapping(mappingID, type) {
             return $http.get($rootScope.base + 'mapping?id=' + mappingID + '&type=' + type);
         }
 
-        obj.insertMapping = function (redirectPath, frontendData, type) {
+        function insertMapping(redirectPath, frontendData, type) {
             return $http.post($rootScope.base + 'insertMapping', {mapping: frontendData, type: type}).then(function (results) {
                 $location.path(redirectPath);
                 return results;
             });
         };
 
-        obj.updateMapping = function (redirectPath, id, frontendData, type) {
+        function updateMapping(redirectPath, id, frontendData, type) {
             return $http.post($rootScope.base + 'updateMapping', {id: id, mapping: frontendData, type: type}).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
-        obj.deleteMapping = function (redirectPath, id, type) {
+        function deleteMapping(redirectPath, id, type) {
             return $http.delete($rootScope.base + 'deleteMapping?id=' + id + '&type=' + type).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
@@ -49,57 +72,54 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
         /*
-         * group service begin
+         * group services
          * */
-        obj.getGroups = function () {
+        function getGroups() {
             return $http.get($rootScope.base + 'getGroups');
         }
 
-        obj.getGroup = function (keyId) {
+        function getGroup(keyId) {
             return $http.get($rootScope.base + 'group?id=' + keyId);
         }
 
-        obj.insertGroup = function (redirectPath, frontendData) {
+        function insertGroup(redirectPath, frontendData) {
             return $http.post($rootScope.base + 'insertGroup', {mapping: frontendData}).then(function (results) {
                 $location.path(redirectPath);
                 return results;
             });
         };
 
-        obj.updateGroup = function (redirectPath, id, frontendData) {
+        function updateGroup(redirectPath, id, frontendData) {
             return $http.post($rootScope.base + 'updateGroup', {mapping: frontendData}).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
-        obj.deleteGroup = function (redirectPath, id) {
+        function deleteGroup(redirectPath, id) {
             return $http.delete($rootScope.base + 'deleteGroup?id=' + id).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
-        obj.getSameGroup = function (gid) {
+        function getSameGroup(gid) {
             return $http.get($rootScope.base + 'samegroup?id=' + gid);
         }
 
 
-
-
-
         /*
-         * rule service begin
+         * rule services
          * */
-        obj.getRules = function () {
+        function getRules() {
             return $http.get($rootScope.base + 'getRules');
         }
 
-        obj.getRule = function (gid, keyID, priority) {
-            return $http.get($rootScope.base + 'getRule?gid=' + gid +'&keyid=' + keyID + '&priority=' + priority);
+        function getRule(gid, keyID, priority) {
+            return $http.get($rootScope.base + 'getRule?gid=' + gid + '&keyid=' + keyID + '&priority=' + priority);
         }
 
-        obj.updateRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray) {
+        function updateRule(redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray) {
             return $http.post($rootScope.base + 'updateRule', {
                 gid: gid,
                 keyId: keyId,
@@ -124,14 +144,14 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        obj.deleteRule = function (redirectPath, gid, keyID, priority) {
-            return $http.delete($rootScope.base + 'deleteRule?gid=' + gid +'&keyid=' + keyID + '&priority=' + priority).then(function (status) {
+        function deleteRule(redirectPath, gid, keyID, priority) {
+            return $http.delete($rootScope.base + 'deleteRule?gid=' + gid + '&keyid=' + keyID + '&priority=' + priority).then(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
-        obj.insertRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray) {
+        function insertRule(redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray) {
             return $http.post($rootScope.base + 'insertRule', {
                 gid: gid,
                 keyId: keyId,
@@ -156,7 +176,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
 
-        obj.testRule = function (redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray, testValue) {
+        function testRule(redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, range, substr, dec, inElementArray, setRuleArray, testValue) {
             return $http.post($rootScope.base + 'testRule', {
                 gid: gid,
                 keyId: keyId,
@@ -182,6 +202,6 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        return obj;
+        return service;
     }
 ]);
