@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 /**
  * This is the condition checker for string length
- * 
+ *
  * @author jgao
  */
 public class LengthConditionChecker implements ConditionChecker {
@@ -42,6 +42,14 @@ public class LengthConditionChecker implements ConditionChecker {
 
 		if (lower!=null && upper!=null && upper<lower) {
 			throw new Exception("condition len: upper limit(" + upper +") is greater than lower limit(" + lower + ")");
+		}
+
+		if (lower!=null && lower<0) {
+			throw new Exception("condition len: lower limit has to be >= 0");
+		}
+
+		if (upper!=null && upper<0) {
+			throw new Exception("condition len: upper limit has to be >= 0");
 		}
 
 		if (log.isDebugEnabled())
