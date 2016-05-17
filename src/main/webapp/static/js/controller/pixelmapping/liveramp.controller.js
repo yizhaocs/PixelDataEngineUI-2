@@ -33,7 +33,7 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
     };
 
     $scope.saveMapping = function (frontendData) {
-        if (mapping.threshold_mb > 100) {
+        if (frontendData.threshold_mb > 100) {
             alert("Threshold can't be greater than 100MB");
         }
         else {
