@@ -26,4 +26,17 @@
         <property name="url" value="jdbc:mysql://${marketplace.db.svr}/pde?connectTimeout=20000"/>
     </bean>
 
+
+    <bean id="marketplaceLocalReadOnlyDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="username" value="${db.ro.user}" />
+        <property name="password" value="${db.ro.password}" />
+        <property name="testOnBorrow" value="true" />
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="url"
+                  value="jdbc:mysql://${marketplace.ro.db.svr}/marketplace?connectTimeout=20000" />
+        <property name="maxActive" value="5" />
+        <property name="minIdle" value="1" />
+    </bean>
 </beans>

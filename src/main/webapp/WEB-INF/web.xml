@@ -28,6 +28,7 @@
             /WEB-INF/pdeui-servlet.xml
             /WEB-INF/app.xml
             /WEB-INF/datasources.xml
+            /WEB-INF/pixelDataEngine.xml
         </param-value>
     </context-param>
 

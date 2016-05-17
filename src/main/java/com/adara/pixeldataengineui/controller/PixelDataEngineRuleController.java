@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
+import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,12 @@ import java.util.Map;
 public class PixelDataEngineRuleController {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleController.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
+    @Autowired
+    private PixelDataEngineService mPixelDataEngineService;
 
     @Autowired
-    PixelDataEngineRuleService mPixelDataEngineRuleService;
+    private PixelDataEngineRuleService mPixelDataEngineRuleService;
+
 
     @RequestMapping(value = "/insertRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insertRule(@RequestBody RuleRequest request) {
@@ -136,7 +140,7 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
 
 
-        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(request);
+        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, request);
         StringBuilder result = new StringBuilder();
         result.append("{");
         result.append("\"data\":");

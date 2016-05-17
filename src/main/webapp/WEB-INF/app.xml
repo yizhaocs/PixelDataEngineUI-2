@@ -3,6 +3,11 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <bean id="mPixelDataEngineService" class="com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService">
+        <property name="mPixelDataEngine" ref="pixelDataEngine" />
+    </bean>
+
     <bean id="AdobeDpkeyMappingDAO" class="com.adara.pixeldataengineui.dao.pixelmapping.AdobeDpkeyMappingDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
