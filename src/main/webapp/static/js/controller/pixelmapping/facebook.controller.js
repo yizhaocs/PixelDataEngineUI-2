@@ -91,6 +91,9 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
     };
 
     $scope.saveMapping = function (frontendData) {
+        if(frontendData.update_interval == undefined || frontendData.update_interval == ''){
+            frontendData.update_interval = -1;
+        }
         // $location.path('/facebook');
         if (mappingID == '0') {
             pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-key');
