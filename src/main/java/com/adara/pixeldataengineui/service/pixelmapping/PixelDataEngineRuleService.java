@@ -18,5 +18,5 @@ public interface PixelDataEngineRuleService{
 
     Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest);
 
-    Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, RuleRequest request);
+    Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request);
 }

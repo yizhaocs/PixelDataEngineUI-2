@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
+import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService;
 import org.apache.commons.logging.Log;
@@ -25,6 +26,10 @@ public class PixelDataEngineRuleController {
 
     @Autowired
     private PixelDataEngineRuleService mPixelDataEngineRuleService;
+
+    @Autowired
+    private PixelDataEngineGroupService mPixelDataEngineGroupService;
+
 
 
     @RequestMapping(value = "/insertRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -140,7 +145,7 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
 
 
-        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, request);
+        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
         StringBuilder result = new StringBuilder();
         result.append("{");
         result.append("\"data\":");

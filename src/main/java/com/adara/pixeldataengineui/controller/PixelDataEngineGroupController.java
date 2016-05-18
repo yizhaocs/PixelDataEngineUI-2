@@ -29,7 +29,7 @@ public class PixelDataEngineGroupController {
 
         Integer result = 0;
 
-        result = mPixelDataEngineGroupService.insertGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type());
+        result = mPixelDataEngineGroupService.insertGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type(), false);
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -146,7 +146,7 @@ public class PixelDataEngineGroupController {
             return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
         }
 
-        result = mPixelDataEngineGroupService.deleteGroup(id);
+        result = mPixelDataEngineGroupService.deleteGroup(id, false);
 
         ResponseEntity<String> response = null;
         if (result > 0) {

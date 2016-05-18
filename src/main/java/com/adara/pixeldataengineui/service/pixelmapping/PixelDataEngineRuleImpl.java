@@ -42,20 +42,26 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority, isUITest);
     }
 
-    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, RuleRequest request) {
+    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
 
+        String testKeyID = request.getKeyId();
         String testValue = request.getTestValue();
 
-        request.setKeyId("1");
+        // insert group
+        mPixelDataEngineGroupService.insertGroup(testKeyID, 1, true);
+        // insert rule
         request.setGid("1");
         mPixelDataEngineRuleService.insertRule(request, true);
 
         // let the mock table refresh its pixelDataEngineConfigs
         mPixelDataEngineService.mPixelDataEngine.init();
-        Map<String, String> resultMap =  mPixelDataEngineService.mPixelDataEngine.processRule("1", testValue);
+        Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
 
-        mPixelDataEngineRuleService.deleteRule(1,"1",Integer.valueOf(request.getPriority()),true);
+        // delete group
+        mPixelDataEngineGroupService.deleteGroup(testKeyID, true);
+        // delete rule
+        mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getPriority()), true);
 
         return resultMap;
     }

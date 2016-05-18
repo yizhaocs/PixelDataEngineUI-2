@@ -26,10 +26,18 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(String trigger_key_id, Integer group_type){
+    public Integer insertGroup(String trigger_key_id, Integer group_type, Boolean isUITest){
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
-        String query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?)";
-         Object[] args = new Object[]{trigger_key_id, group_type};
+        String query = null;
+        Object[] args = null;
+        if(isUITest){
+            query = "insert into pde.pixel_data_engine_groups(trigger_key_id, gid, group_type) values(?, ?, ?)";
+            args = new Object[]{trigger_key_id, 1, group_type};
+        }else{
+            query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?)";
+            args = new Object[]{trigger_key_id, group_type};
+        }
+
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + ", " + "Executing query -> " + query.toString());
@@ -191,9 +199,15 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return result;
     }
 
-    public Integer deleteGroup(String trigger_key_id){
+    public Integer deleteGroup(String trigger_key_id, Boolean isUITest){
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
-        String query = "DELETE FROM marketplace.pixel_data_engine_groups WHERE trigger_key_id =?";
+
+        String query = null;
+        if(isUITest){
+            query = "DELETE FROM pde.pixel_data_engine_groups WHERE trigger_key_id =?";
+        }else{
+            query = "DELETE FROM marketplace.pixel_data_engine_groups WHERE trigger_key_id =?";
+        }
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
