@@ -51,7 +51,6 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         request.setGid("1");
         mPixelDataEngineRuleService.insertRule(request, true);
 
-
         // let the mock table refresh its pixelDataEngineConfigs
         mPixelDataEngineService.mPixelDataEngine.init();
         Map<String, String> resultMap =  mPixelDataEngineService.mPixelDataEngine.processRule("1", testValue);
