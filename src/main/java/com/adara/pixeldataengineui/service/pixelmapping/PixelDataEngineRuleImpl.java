@@ -2,13 +2,16 @@ package com.adara.pixeldataengineui.service.pixelmapping;
 
 import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineRuleDAO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
+import edu.emory.mathcs.backport.java.util.Collections;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
@@ -64,6 +67,11 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         // delete rule
         mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
 
-        return resultMap;
+
+        // reverse order
+        Map<String, String> treeMapResultMap = new TreeMap<String, String>();
+        treeMapResultMap.putAll(resultMap);
+
+        return treeMapResultMap;
     }
 }
