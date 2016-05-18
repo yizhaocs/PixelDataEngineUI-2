@@ -52,6 +52,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         mPixelDataEngineGroupService.insertGroup(testKeyID, 1, true);
         // insert rule
         request.setGid("1");
+        request.setPriority(request.getNewPriority());
         mPixelDataEngineRuleService.insertRule(request, true);
 
         // let the mock table refresh its pixelDataEngineConfigs
