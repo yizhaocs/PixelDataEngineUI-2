@@ -14,7 +14,7 @@ import java.util.List;
  * Created by yzhao on 5/9/16.
  */
 public class Tools {
-    public static  String getCurrentDateTime() {
+    public static String getCurrentDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date).toString();
@@ -55,7 +55,7 @@ public class Tools {
         return parseRuleValue.toString();
     }
 
-    public static  String conditionRuleBuilder(RuleRequest request) {
+    public static String conditionRuleBuilder(RuleRequest request) {
         String conditionRuleKey = request.getConditionRule();
         StringBuilder conditionRuleValue = new StringBuilder();
         conditionRuleValue.append(conditionRuleKey);
@@ -99,7 +99,7 @@ public class Tools {
         return conditionRuleValue.toString();
     }
 
-    public static  String actionRuleBuilder(RuleRequest request) {
+    public static String actionRuleBuilder(RuleRequest request) {
         String actionRuleKey = request.getActionRule();
         StringBuilder actionRuleValue = new StringBuilder();
         actionRuleValue.append(actionRuleKey);

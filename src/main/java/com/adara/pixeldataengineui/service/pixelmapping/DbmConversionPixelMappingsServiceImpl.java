@@ -10,27 +10,27 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("dbmConversionPixelMappingsService")
 @Transactional
-public class DbmConversionPixelMappingsServiceImpl implements DbmConversionPixelMappingsService{
+public class DbmConversionPixelMappingsServiceImpl implements DbmConversionPixelMappingsService {
     @Autowired
     private DbmConversionPixelMappingsDAO mDbmConversionPixelMappingsDAO;
 
-    public String getMappings(){
+    public String getMappings() {
         return mDbmConversionPixelMappingsDAO.getMappings();
     }
 
-    public String getMapping(String conversionPixelId){
+    public String getMapping(String conversionPixelId) {
         return mDbmConversionPixelMappingsDAO.getMapping(conversionPixelId);
     }
 
-    public Integer insertMapping(Integer conversionPixelId, String dbmUrl){
+    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) {
         return mDbmConversionPixelMappingsDAO.insertMapping(conversionPixelId, dbmUrl);
     }
 
-    public Integer updateMapping(Integer conversionPixelId, String dbmUrl){
+    public Integer updateMapping(Integer conversionPixelId, String dbmUrl) {
         return mDbmConversionPixelMappingsDAO.updateMapping(conversionPixelId, dbmUrl);
     }
 
-    public Integer deleteMapping(String conversionPixelId){
+    public Integer deleteMapping(String conversionPixelId) {
         return mDbmConversionPixelMappingsDAO.deleteMapping(conversionPixelId);
     }
 }

@@ -1,7 +1,7 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
+public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineGroupDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;
@@ -26,14 +26,14 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(String trigger_key_id, Integer group_type, Boolean isUITest){
+    public Integer insertGroup(String trigger_key_id, Integer group_type, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
         String query = null;
         Object[] args = null;
-        if(isUITest){
+        if (isUITest) {
             query = "insert into pde.pixel_data_engine_groups(trigger_key_id, gid, group_type) values(?, ?, ?)";
             args = new Object[]{trigger_key_id, 1, group_type};
-        }else{
+        } else {
             query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?)";
             args = new Object[]{trigger_key_id, group_type};
         }
@@ -55,7 +55,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return result;
     }
 
-    public String getGroups(){
+    public String getGroups() {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups");
         String query = "SELECT a.trigger_key_id, a.gid, a.group_type FROM marketplace.pixel_data_engine_groups a order by a.trigger_key_id";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups" + ", " + "Executing query -> " + query.toString());
@@ -96,7 +96,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return sb.toString();
     }
 
-    public String getGroup(String keyId){
+    public String getGroup(String keyId) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup");
         String query = "SELECT a.trigger_key_id, a.gid, a.group_type FROM marketplace.pixel_data_engine_groups a where a.trigger_key_id= ?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + ", " + "Executing query -> " + query.toString());
@@ -134,7 +134,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return result;
     }
 
-    public String getSameGroup(Integer gid){
+    public String getSameGroup(Integer gid) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getSameGroup");
         String query = "SELECT a.gid, a.key_id, a.priority, a.type, a.parse_rule, a.condition_rule, a.action_rule FROM marketplace.pixel_data_engine_configs a where a.gid=" + gid;
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getSameGroup" + ", " + "Executing query -> " + query.toString());
@@ -179,7 +179,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
     }
 
 
-    public Integer updateGroup(String trigger_key_id, Integer group_type){
+    public Integer updateGroup(String trigger_key_id, Integer group_type) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");
         String query = "UPDATE marketplace.pixel_data_engine_groups SET " + "trigger_key_id" + "=?" + "," + "group_type" + "=?" + " WHERE trigger_key_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "Executing query -> " + query.toString());
@@ -199,13 +199,13 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO{
         return result;
     }
 
-    public Integer deleteGroup(String trigger_key_id, Boolean isUITest){
+    public Integer deleteGroup(String trigger_key_id, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
 
         String query = null;
-        if(isUITest){
+        if (isUITest) {
             query = "DELETE FROM pde.pixel_data_engine_groups WHERE trigger_key_id =?";
-        }else{
+        } else {
             query = "DELETE FROM marketplace.pixel_data_engine_groups WHERE trigger_key_id =?";
         }
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + query.toString());

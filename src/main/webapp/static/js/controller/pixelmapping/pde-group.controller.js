@@ -44,9 +44,9 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     };
 
     $scope.saveGroup = function (frontendData) {
-        if(frontendData.group_type == 'independent'){
+        if (frontendData.group_type == 'independent') {
             frontendData.group_type = 1;
-        }else if(frontendData.group_type == 'sequential'){
+        } else if (frontendData.group_type == 'sequential') {
             frontendData.group_type = 2;
         }
         if (keyId <= 0) {
@@ -237,11 +237,11 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         pixelmappingService.testRule($rootScope.base + 'group/edit-rules/' + gid,
             frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid,
             frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1,
-            frontendRightHandPanelData.split2, frontendRightHandPanelData.len,frontendRightHandPanelData.seg,frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec,
+            frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec,
             frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray,
             frontendRightHandPanelData.testValue).then(function (backendData) {
             var result = "";
-            for(var i = 0; i < backendData.data.length; i++){
+            for (var i = 0; i < backendData.data.length; i++) {
                 result += backendData.data[i] + "\n";
             }
 

@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public interface PixelDataEngineRuleService{
+public interface PixelDataEngineRuleService {
     Integer insertRule(RuleRequest request, Boolean isUITest);
 
     String getRules();

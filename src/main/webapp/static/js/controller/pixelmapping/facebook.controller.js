@@ -91,7 +91,7 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
     };
 
     $scope.saveMapping = function (frontendData) {
-        if(frontendData.update_interval == undefined || frontendData.update_interval == ''){
+        if (frontendData.update_interval == undefined || frontendData.update_interval == '') {
             frontendData.update_interval = -1;
         }
         // $location.path('/facebook');

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("pixelDataEngineGroupService")
 @Transactional
-public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService{
+public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
     @Autowired
     private PixelDataEngineGroupDAO mPixelDataEngineGroupDAO;
 

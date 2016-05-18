@@ -85,9 +85,9 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
                     mFacebookDpKeysDTO.setEnabled(rs.getByte("enabled"));
                     String updateInterval = rs.getString("update_interval");
                     // Update Interval is allow null
-                    if(updateInterval != null){
+                    if (updateInterval != null) {
                         mFacebookDpKeysDTO.setUpdate_interval(rs.getByte("update_interval"));
-                    }else{
+                    } else {
                         mFacebookDpKeysDTO.setUpdate_interval(null);
                     }
 
@@ -117,7 +117,7 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
     public Integer insertMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingFacebookDpKeys");
         String query = "insert into facebook_dp_keys(key_id, enabled, update_interval, use_image_pixel) values(?, ?, ?, ?)";
-        if(update_interval == -1){
+        if (update_interval == -1) {
             update_interval = null;
         }
 
@@ -144,7 +144,7 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         String query = "UPDATE marketplace.facebook_dp_keys SET " + "key_id" + "=?" + "," + "enabled" + "=?" + "," + "update_interval" + "=?" + "," + "use_image_pixel" + "=?" + " WHERE key_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingFacebookDpKeys" + ", " + "Executing query -> " + query.toString());
 
-        if(update_interval == -1){
+        if (update_interval == -1) {
             update_interval = null;
         }
 

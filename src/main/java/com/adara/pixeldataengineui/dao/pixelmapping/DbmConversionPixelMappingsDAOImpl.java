@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMappingsDAO{
+public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMappingsDAO {
     private static final Log LOG = LogFactory.getLog(DbmConversionPixelMappingsDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;
@@ -173,8 +173,8 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
     //
     // https://google.com -> https://google.com
     // http://google.com -> http://google.com
-    private String httpsChecker(String url){
-        if(url == null || url.length() == 0 || (url.length() > 7 && url.substring(0,8).equals("https://")) || (url.length() > 6 && url.substring(0,7).equals("http://")) ){
+    private String httpsChecker(String url) {
+        if (url == null || url.length() == 0 || (url.length() > 7 && url.substring(0, 8).equals("https://")) || (url.length() > 6 && url.substring(0, 7).equals("http://"))) {
             return url;
         }
 

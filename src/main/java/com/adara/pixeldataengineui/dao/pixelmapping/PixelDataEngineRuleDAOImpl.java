@@ -44,9 +44,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         }
 
         String query = null;
-        if(isUITest){
+        if (isUITest) {
             query = "INSERT INTO pde.pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        }else{
+        } else {
             query = "INSERT INTO marketplace.pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }
         Object[] args = new Object[]{gid, keyId, priority, type, parseRuleValue, conditionRuleValue, actionRuleValue, "NULL", Tools.getCurrentDateTime()};
@@ -197,9 +197,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
 
         String query = null;
-        if(isUITest){
+        if (isUITest) {
             query = "DELETE FROM pde.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
-        }else{
+        } else {
             query = "DELETE FROM marketplace.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
         }
 

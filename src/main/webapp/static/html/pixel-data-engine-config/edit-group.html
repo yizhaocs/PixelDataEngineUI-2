@@ -18,7 +18,7 @@
                 <form role="form" name="myForm" class="form-horizontal">
                     <div class="row">
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
-                            <label class="col-md-2"> Trigger Key ID  </label>
+                            <label class="col-md-2"> Trigger Key ID </label>
                             <div class="col-md-2">
                                 <input name="trigger_key_id" ng-model="frontendData.trigger_key_id" type="text" ng-disabled="keyIdDisable" class="form-control" placeholder="trigger_key_id" required/>
                                 <span ng-show="myForm.trigger_key_id.$dirty && myForm.trigger_key_id.$invalid" class="help-inline">Trigger Key Id Required</span>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label class="col-md-2"> Type </label>
                             <!--<tr>-->
-                                <!--<td>Type:</td>-->
+                            <!--<td>Type:</td>-->
                             <div class="col-md-2">
                                 <td>
                                     <select class="form-control" ng-model="frontendData.group_type">

@@ -31,7 +31,6 @@ public class PixelDataEngineRuleController {
     private PixelDataEngineGroupService mPixelDataEngineGroupService;
 
 
-
     @RequestMapping(value = "/insertRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insertRule(@RequestBody RuleRequest request) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule");
@@ -150,15 +149,15 @@ public class PixelDataEngineRuleController {
         result.append("{");
         result.append("\"data\":");
         result.append("[");
-        for(String s: resultMap.keySet()){
+        for (String s : resultMap.keySet()) {
             // we don't take the value is null when we do "ignore Action Rule"
-            if(resultMap.get(s) != null){
+            if (resultMap.get(s) != null) {
                 result.append("\"" + s + "|" + resultMap.get(s) + "\"");
                 result.append(",");
             }
         }
 
-        if(result.toString().charAt(result.toString().length() - 1) ==','){
+        if (result.toString().charAt(result.toString().length() - 1) == ',') {
             result.deleteCharAt(result.toString().length() - 1);
         }
 

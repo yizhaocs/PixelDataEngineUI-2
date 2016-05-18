@@ -5,7 +5,7 @@
 
 
     <bean id="mPixelDataEngineService" class="com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService">
-        <property name="mPixelDataEngine" ref="pixelDataEngine" />
+        <property name="mPixelDataEngine" ref="pixelDataEngine"/>
     </bean>
 
     <bean id="AdobeDpkeyMappingDAO" class="com.adara.pixeldataengineui.dao.pixelmapping.AdobeDpkeyMappingDAOImpl">

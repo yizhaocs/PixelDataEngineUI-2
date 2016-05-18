@@ -38,6 +38,4 @@
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
 
-
-
 </beans>
