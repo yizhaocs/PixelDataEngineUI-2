@@ -129,7 +129,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMapping" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{conversionPixelId, dbmUrl, conversionPixelId};
+        Object[] args = new Object[]{conversionPixelId, httpsChecker(dbmUrl), conversionPixelId};
         Integer result = 0;
         try {
             result = jdbcTemplate.update(query, args);

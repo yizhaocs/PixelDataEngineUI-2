@@ -15,7 +15,7 @@ app.controller('editCtrlDeriveConversion', function ($scope, $rootScope, $locati
     $rootScope.title = (mappingID > 0) ? 'Edit Mapping' : 'Add Mapping';
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
-
+    $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data);
 
     $scope.isClean = function () {
