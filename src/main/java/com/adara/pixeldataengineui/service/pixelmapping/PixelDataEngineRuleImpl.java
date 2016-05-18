@@ -61,7 +61,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         // delete group
         mPixelDataEngineGroupService.deleteGroup(testKeyID, true);
         // delete rule
-        mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getPriority()), true);
+        mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
 
         return resultMap;
     }
