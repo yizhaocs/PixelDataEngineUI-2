@@ -22,8 +22,8 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     @Autowired
     private PixelDataEngineRuleDAO mPixelDataEngineRuleDAO;
 
-    public Integer insertRule(RuleRequest request) {
-        return mPixelDataEngineRuleDAO.insertRule(request);
+    public Integer insertRule(RuleRequest request, Boolean isUITest) {
+        return mPixelDataEngineRuleDAO.insertRule(request, isUITest);
     }
 
     public String getRules() {
@@ -38,16 +38,26 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.updateRule(request);
     }
 
-    public Integer deleteRule(Integer gid, String keyId, Integer priority) {
-        return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority);
+    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) {
+        return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority, isUITest);
     }
 
-    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, RuleRequest request) {
+    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, RuleRequest request) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
-        String testKey = request.getKeyId();
+
         String testValue = request.getTestValue();
 
+        request.setKeyId("1");
+        request.setGid("1");
+        mPixelDataEngineRuleService.insertRule(request, true);
 
-        return mPixelDataEngineService.mPixelDataEngine.processRule(testKey, testValue);
+
+        // let the mock table refresh its pixelDataEngineConfigs
+        mPixelDataEngineService.mPixelDataEngine.init();
+        Map<String, String> resultMap =  mPixelDataEngineService.mPixelDataEngine.processRule("1", testValue);
+
+        mPixelDataEngineRuleService.deleteRule(1,"1",Integer.valueOf(request.getPriority()),true);
+
+        return resultMap;
     }
 }

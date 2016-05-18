@@ -6,7 +6,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineRuleDAO {
-    Integer insertRule(RuleRequest request);
+    Integer insertRule(RuleRequest request, Boolean isUITest);
 
     String getRules();
 
@@ -14,5 +14,5 @@ public interface PixelDataEngineRuleDAO {
 
     Integer updateRule(RuleRequest request);
 
-    Integer deleteRule(Integer gid, String keyId, Integer priority);
+    Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest);
 }

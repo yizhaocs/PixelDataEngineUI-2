@@ -33,7 +33,7 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + ", " + "request data ->" + request.toString());
 
         Integer result = 0;
-        result = mPixelDataEngineRuleService.insertRule(request);
+        result = mPixelDataEngineRuleService.insertRule(request, false);
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -120,7 +120,7 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
         Integer result = 0;
-        result = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority);
+        result = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority, false);
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -140,17 +140,20 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
 
 
-        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, request);
+        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, request);
         StringBuilder result = new StringBuilder();
         result.append("{");
         result.append("\"data\":");
         result.append("[");
         for(String s: resultMap.keySet()){
-            result.append("\"" + s + "|" + resultMap.get(s) + "\"");
-            result.append(",");
+            // we don't take the value is null when we do "ignore Action Rule"
+            if(resultMap.get(s) != null){
+                result.append("\"" + s + "|" + resultMap.get(s) + "\"");
+                result.append(",");
+            }
         }
 
-        if(resultMap.size() != 0){
+        if(result.toString().charAt(result.toString().length() - 1) ==','){
             result.deleteCharAt(result.toString().length() - 1);
         }
 

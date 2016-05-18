@@ -9,7 +9,7 @@
 
 	<bean id="pixelDataEngine" class="com.opinmind.pixeldataengine.PixelDataEngine"
 		init-method="init" destroy-method="destroy">
-		<property name="dataSource" ref="marketplaceLocalReadOnlyDataSource" />
+		<property name="dataSource" ref="pdeLocalReadOnlyDataSource" />
 		<property name="ruleProcessorMap">
 			<map>
 				<entry key="transform" value-ref="transformRuleProcessor" />

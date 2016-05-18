@@ -27,7 +27,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer insertRule(RuleRequest request) {
+    public Integer insertRule(RuleRequest request, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule");
 
         String gid = request.getGid();
@@ -43,7 +43,12 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
             return -1;
         }
 
-        String query = "INSERT INTO pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = null;
+        if(isUITest){
+            query = "INSERT INTO pde.pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        }else{
+            query = "INSERT INTO marketplace.pixel_data_engine_configs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        }
         Object[] args = new Object[]{gid, keyId, priority, type, parseRuleValue, conditionRuleValue, actionRuleValue, "NULL", Tools.getCurrentDateTime()};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -188,9 +193,17 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer deleteRule(Integer gid, String keyId, Integer priority) {
+    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
-        String query = "DELETE FROM marketplace.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
+
+        String query = null;
+        if(isUITest){
+            query = "DELETE FROM pde.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
+        }else{
+            query = "DELETE FROM marketplace.pixel_data_engine_configs WHERE gid=? AND key_id=? AND priority=?";
+        }
+
+
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

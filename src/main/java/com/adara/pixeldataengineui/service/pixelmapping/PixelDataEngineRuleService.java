@@ -8,7 +8,7 @@ import java.util.Map;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineRuleService{
-    Integer insertRule(RuleRequest request);
+    Integer insertRule(RuleRequest request, Boolean isUITest);
 
     String getRules();
 
@@ -16,7 +16,7 @@ public interface PixelDataEngineRuleService{
 
     Integer updateRule(RuleRequest request);
 
-    Integer deleteRule(Integer gid, String keyId, Integer priority);
+    Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest);
 
-    Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, RuleRequest request);
+    Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, RuleRequest request);
 }
