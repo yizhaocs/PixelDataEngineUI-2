@@ -65,7 +65,11 @@ public class PixelDataEngineRuleController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            response = new ResponseEntity<String>(result, HttpStatus.OK);
+            StringBuilder sb = new StringBuilder();
+            sb.append("{\"success\":true,\"data\":");
+            sb.append(result);
+            sb.append("}");
+            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
         if (LOG.isDebugEnabled())
@@ -90,7 +94,11 @@ public class PixelDataEngineRuleController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            response = new ResponseEntity<String>(result, HttpStatus.OK);
+            StringBuilder sb = new StringBuilder();
+            sb.append("{\"success\":true,\"data\":");
+            sb.append(result);
+            sb.append("}");
+            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
         if (LOG.isDebugEnabled())
@@ -148,8 +156,7 @@ public class PixelDataEngineRuleController {
 
         Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
         StringBuilder result = new StringBuilder();
-        result.append("{");
-        result.append("\"data\":");
+        result.append("{\"success\":true,\"data\":");
         result.append("[");
         for (String s : resultMap.keySet()) {
             // we don't take the value is null when we do "ignore Action Rule"

@@ -36,7 +36,8 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
 
 
         function getMappings(type) {
-            return $http.get($rootScope.base + 'mappings?type=' + type);
+            var body = $http.get($rootScope.base + 'mappings?type=' + type);
+            return body;
         }
 
         function getMapping(mappingID, type) {
