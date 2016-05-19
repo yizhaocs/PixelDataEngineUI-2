@@ -21,21 +21,21 @@ app.controller('ManageusersController', function ManageusersController(UserServi
 
     function loadCurrentUser() {
         UserService.GetByUsername($rootScope.globals.currentUser.username)
-            .then(function (user) {
+            .success(function (user) {
                 vm.user = user;
             });
     }
 
     function loadAllUsers() {
         UserService.GetAll()
-            .then(function (users) {
+            .success(function (users) {
                 vm.allUsers = users;
             });
     }
 
     function deleteUser(id) {
         UserService.Delete(id)
-            .then(function () {
+            .success(function () {
                 loadAllUsers();
             });
     }
@@ -43,7 +43,7 @@ app.controller('ManageusersController', function ManageusersController(UserServi
     function updateUser(user) {
         user.password = md5.createHash(user.password);
         UserService.Update(user)
-            .then(function () {
+            .success(function () {
                 $location.path($rootScope.base + 'manageusers');
                 loadAllUsers();
             });

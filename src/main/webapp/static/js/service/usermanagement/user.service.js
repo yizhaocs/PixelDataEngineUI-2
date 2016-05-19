@@ -18,27 +18,27 @@ app.factory("UserService", ['$http', '$rootScope',
         return service;
 
         function GetAll() {
-            return $http.get($rootScope.base + 'usermanagement/users').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get($rootScope.base + 'usermanagement/users').success(handleSuccess, handleError('Error getting all users'));
         }
 
         function GetById(id) {
-            return $http.get($rootScope.base + 'usermanagement/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get($rootScope.base + 'usermanagement/users/' + id).success(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
-            return $http.get($rootScope.base + 'usermanagement/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get($rootScope.base + 'usermanagement/users/' + username).success(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
-            return $http.post($rootScope.base + 'usermanagement/users', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post($rootScope.base + 'usermanagement/users', user).success(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
-            return $http.put($rootScope.base + 'usermanagement/users', user).then(handleSuccess, handleError('Error updating user'));
+            return $http.put($rootScope.base + 'usermanagement/users', user).success(handleSuccess, handleError('Error updating user'));
         }
 
         function Delete(username) {
-            return $http.delete($rootScope.base + 'usermanagement/users/' + username).then(handleSuccess, handleError('Error deleting user'));
+            return $http.delete($rootScope.base + 'usermanagement/users/' + username).success(handleSuccess, handleError('Error deleting user'));
         }
 
         // private functions

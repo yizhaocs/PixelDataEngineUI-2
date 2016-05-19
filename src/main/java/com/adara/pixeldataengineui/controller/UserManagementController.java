@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 import com.adara.pixeldataengineui.service.usermanagement.UserManagementService;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class UserManagementController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
             // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -54,10 +55,10 @@ public class UserManagementController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
             // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -76,7 +77,7 @@ public class UserManagementController {
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result, HttpStatus.OK);
         }
@@ -97,7 +98,7 @@ public class UserManagementController {
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result, HttpStatus.OK);
         }
@@ -119,9 +120,9 @@ public class UserManagementController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -141,10 +142,10 @@ public class UserManagementController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
             // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())

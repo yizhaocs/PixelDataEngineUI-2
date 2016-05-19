@@ -5,7 +5,7 @@
 'use strict';
 
 app.controller('listCtrlKruxDpkey', function ($scope, pixelmappingService) {
-    pixelmappingService.getMappings('krux-dpkey').then(function (backendData) {
+    pixelmappingService.getMappings('krux-dpkey').success(function (backendData) {
         $scope.frontendData = backendData.data;
     });
 });

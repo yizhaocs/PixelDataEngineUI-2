@@ -5,7 +5,7 @@
 'use strict';
 
 app.controller('listCtrlDbm', function ($scope, pixelmappingService) {
-    pixelmappingService.getMappings('dbm').then(function (backendData) {
+    pixelmappingService.getMappings('dbm').success(function (backendData) {
         $scope.frontendData = backendData.data;
     });
 });

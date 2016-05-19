@@ -5,7 +5,7 @@
 'use strict';
 
 app.controller('listPixelGroups', function ($scope, pixelmappingService) {
-    pixelmappingService.getGroups().then(function (backendData) {
+    pixelmappingService.getGroups().success(function (backendData) {
         for (var i = 0; i < backendData.data.length; i++) {
             if (backendData.data[i].group_type == 1) {
                 backendData.data[i].group_type = 'independent';
@@ -180,7 +180,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
-            pixelmappingService.deleteRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority).then(function (backendData) {
+            pixelmappingService.deleteRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority).success(function (backendData) {
                 $scope.refreshLeftPanel();
                 $scope.frontendRightHandPanelData = '';
             });
@@ -197,7 +197,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                     return;
                 }
             }
-            pixelmappingService.insertRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
+            pixelmappingService.insertRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.refreshLeftPanel();
             });
         } else {
@@ -212,7 +212,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 }
 
             }
-            pixelmappingService.updateRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).then(function (backendData) {
+            pixelmappingService.updateRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.refreshLeftPanel();
             });
         }
@@ -239,7 +239,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1,
             frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec,
             frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray,
-            frontendRightHandPanelData.testValue).then(function (backendData) {
+            frontendRightHandPanelData.testValue).success(function (backendData) {
             var result = "";
             for (var i = 0; i < backendData.data.length; i++) {
                 result += backendData.data[i] + "\n";

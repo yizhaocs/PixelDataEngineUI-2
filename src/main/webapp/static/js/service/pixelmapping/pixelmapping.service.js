@@ -9,7 +9,6 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         var service = {};
 
         // data mapping services
-        service.insertRule = insertRule;
         service.getMappings = getMappings;
         service.getMapping = getMapping;
         service.insertMapping = insertMapping;
@@ -34,13 +33,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         /**
          *   data mapping services
          **/
-        function insertRule(username, password, redirectPath) {
-            // , inElementArray: inElementArray, setRuleArray: setRuleArray
-            return $http.post($rootScope.base + 'login', {username: username, password: password}).then(function (status) {
-                $location.path($rootScope.base + 'adobe');
-                return status.data;
-            });
-        };
+
 
         function getMappings(type) {
             return $http.get($rootScope.base + 'mappings?type=' + type);
@@ -51,21 +44,21 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         }
 
         function insertMapping(redirectPath, frontendData, type) {
-            return $http.post($rootScope.base + 'insertMapping', {mapping: frontendData, type: type}).then(function (results) {
+            return $http.post($rootScope.base + 'insertMapping', {mapping: frontendData, type: type}).success(function (results) {
                 $location.path(redirectPath);
                 return results;
             });
         };
 
         function updateMapping(redirectPath, id, frontendData, type) {
-            return $http.post($rootScope.base + 'updateMapping', {id: id, mapping: frontendData, type: type}).then(function (status) {
+            return $http.post($rootScope.base + 'updateMapping', {id: id, mapping: frontendData, type: type}).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
         function deleteMapping(redirectPath, id, type) {
-            return $http.delete($rootScope.base + 'deleteMapping?id=' + id + '&type=' + type).then(function (status) {
+            return $http.delete($rootScope.base + 'deleteMapping?id=' + id + '&type=' + type).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
@@ -83,21 +76,21 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         }
 
         function insertGroup(redirectPath, frontendData) {
-            return $http.post($rootScope.base + 'insertGroup', {mapping: frontendData}).then(function (results) {
+            return $http.post($rootScope.base + 'insertGroup', {mapping: frontendData}).success(function (results) {
                 $location.path(redirectPath);
                 return results;
             });
         };
 
         function updateGroup(redirectPath, id, frontendData) {
-            return $http.post($rootScope.base + 'updateGroup', {mapping: frontendData}).then(function (status) {
+            return $http.post($rootScope.base + 'updateGroup', {mapping: frontendData}).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
         function deleteGroup(redirectPath, id) {
-            return $http.delete($rootScope.base + 'deleteGroup?id=' + id).then(function (status) {
+            return $http.delete($rootScope.base + 'deleteGroup?id=' + id).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
@@ -138,14 +131,14 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 dec: dec,
                 inElementArray: inElementArray,
                 setRuleArray: setRuleArray
-            }).then(function (status) {
+            }).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
         };
 
         function deleteRule(redirectPath, gid, keyID, priority) {
-            return $http.delete($rootScope.base + 'deleteRule?gid=' + gid + '&keyid=' + keyID + '&priority=' + priority).then(function (status) {
+            return $http.delete($rootScope.base + 'deleteRule?gid=' + gid + '&keyid=' + keyID + '&priority=' + priority).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
@@ -169,7 +162,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 dec: dec,
                 inElementArray: inElementArray,
                 setRuleArray: setRuleArray
-            }).then(function (status) {
+            }).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });
@@ -196,7 +189,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 inElementArray: inElementArray,
                 setRuleArray: setRuleArray,
                 testValue: testValue
-            }).then(function (status) {
+            }).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });

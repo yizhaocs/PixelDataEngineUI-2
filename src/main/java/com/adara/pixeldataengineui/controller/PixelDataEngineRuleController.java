@@ -4,6 +4,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class PixelDataEngineRuleController {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleController.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
+   
     @Autowired
     private PixelDataEngineService mPixelDataEngineService;
 
@@ -41,9 +43,9 @@ public class PixelDataEngineRuleController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -61,7 +63,7 @@ public class PixelDataEngineRuleController {
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result, HttpStatus.OK);
         }
@@ -78,7 +80,7 @@ public class PixelDataEngineRuleController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
         if (keyid.equals("0")) {
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         String result = "";
@@ -86,7 +88,7 @@ public class PixelDataEngineRuleController {
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result, HttpStatus.OK);
         }
@@ -107,9 +109,9 @@ public class PixelDataEngineRuleController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -128,9 +130,9 @@ public class PixelDataEngineRuleController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -165,7 +167,7 @@ public class PixelDataEngineRuleController {
         result.append("}");
         ResponseEntity<java.lang.String> response = null;
         if (result.toString().length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result.toString(), HttpStatus.OK);
         }

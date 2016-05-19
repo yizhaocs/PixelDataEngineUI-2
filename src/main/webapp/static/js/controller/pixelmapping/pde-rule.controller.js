@@ -5,7 +5,7 @@
 'use strict';
 
 app.controller('listPixelRules', function ($scope, pixelmappingService) {
-    pixelmappingService.getRules().then(function (backendData) {
+    pixelmappingService.getRules().success(function (backendData) {
         $scope.frontendData = backendData.data;
     });
 });

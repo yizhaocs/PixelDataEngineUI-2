@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.*;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class DataMappingController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mappings");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mappings" + ", " + "request data ->" + "type:" + type);
         if (type == null || type.equals("")) {
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         String result = "";
@@ -64,7 +65,7 @@ public class DataMappingController {
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result, HttpStatus.OK);
         }
@@ -80,7 +81,7 @@ public class DataMappingController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mapping");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "mapping" + ", " + "request data ->" + "id:" + id + " ,type:" + type);
         if (type == null || type.equals("") || id == null || id.equals("")) {
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         String result = "";
@@ -110,7 +111,7 @@ public class DataMappingController {
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             response = new ResponseEntity<String>(result, HttpStatus.OK);
         }
@@ -148,9 +149,9 @@ public class DataMappingController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -191,9 +192,9 @@ public class DataMappingController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())
@@ -207,12 +208,12 @@ public class DataMappingController {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping");
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping" + ", " + "request data ->" + "id:" + id + " ,type:" + type);
         if (type == null || type.equals("") || id == null || id.equals("")) {
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         Integer result = 0;
         if (id.equals("0")) {
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (type.equals("adobe")) {
@@ -235,9 +236,9 @@ public class DataMappingController {
 
         ResponseEntity<String> response = null;
         if (result > 0) {
-            response = new ResponseEntity<String>("{\"status\":\"Success\"}", HttpStatus.OK);
+            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
         } else {
-            response = new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         if (LOG.isDebugEnabled())

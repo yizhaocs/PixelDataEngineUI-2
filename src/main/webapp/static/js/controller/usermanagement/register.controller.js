@@ -11,8 +11,8 @@ app.controller('RegisterController', function RegisterController(UserService, $l
         vm.dataLoading = true;
         vm.user.password = md5.createHash(vm.user.password);
         UserService.Create(vm.user)
-            .then(function (response) {
-                if (response.status == 'Success') {
+            .success(function (response) {
+                if (response.success) {
                     FlashService.Success('Registration successful', true);
                     $location.path($rootScope.base + 'manageusers');
                 } else {
