@@ -26,16 +26,16 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     $scope.isUpdate = (keyId > 0) ? true : false;
     $scope.keyIdDisable = (keyId > 0) ? true : false;
 
-    if (backendData.data.group_type == 1) {
-        backendData.data.group_type = 'independent';
-    } else if (backendData.data.group_type == 2) {
-        backendData.data.group_type = 'sequential';
+    if (backendData.data.data.group_type == 1) {
+        backendData.data.data.group_type = 'independent';
+    } else if (backendData.data.data.group_type == 2) {
+        backendData.data.data.group_type = 'sequential';
     }
 
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.data);
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.data, $scope.frontendData);
     };
 
     $scope.deleteGroup = function (frontendData) {
