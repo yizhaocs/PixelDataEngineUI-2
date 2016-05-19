@@ -132,8 +132,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         }
     };
 
-    $scope.sortPriority(backendData.data);
-    $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
+    $scope.sortPriority(backendData.data.data);
+    $scope.frontendLeftHandPanelData = angular.copy(backendData.data.data);
 
 
     /*
@@ -261,12 +261,12 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             // true if user click on the "edit button"
             if (gid != 0) {
-                $scope.processedResponseBackupRuleData.gid = backendData.gid;
-                $scope.processedResponseBackupRuleData.keyId = backendData.key_id;
-                $scope.processedResponseBackupRuleData.type = backendData.type;
-                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.priority);
+                $scope.processedResponseBackupRuleData.gid = backendData.data.gid;
+                $scope.processedResponseBackupRuleData.keyId = backendData.data.key_id;
+                $scope.processedResponseBackupRuleData.type = backendData.data.type;
+                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.data.priority);
 
-                var parseRuleSplit = backendData.parse_rule.split("|");
+                var parseRuleSplit = backendData.data.parse_rule.split("|");
                 $scope.processedResponseBackupRuleData.parseRule = parseRuleSplit[0];
                 if (parseRuleSplit[0] == 'split1') {
                     // true if -> -> split1|"|"
@@ -301,7 +301,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 }
 
 
-                var conditionRuleSplit = backendData.condition_rule.split("|");
+                var conditionRuleSplit = backendData.data.condition_rule.split("|");
                 $scope.processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
                 if (conditionRuleSplit[0] == 'len') {
                     $scope.processedResponseBackupRuleData.len.column1 = conditionRuleSplit[1];
@@ -321,7 +321,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                     $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
                 }
 
-                var actionRuleSplit = backendData.action_rule.split("|");
+                var actionRuleSplit = backendData.data.action_rule.split("|");
                 $scope.processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
                 if (actionRuleSplit[0] == 'substr') {
                     $scope.processedResponseBackupRuleData.substr.column1 = actionRuleSplit[1];
