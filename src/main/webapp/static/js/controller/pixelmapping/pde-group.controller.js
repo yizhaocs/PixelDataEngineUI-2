@@ -6,15 +6,15 @@
 
 app.controller('listPixelGroups', function ($scope, pixelmappingService) {
     pixelmappingService.getGroups().success(function (backendData) {
-        for (var i = 0; i < backendData.data.length; i++) {
-            if (backendData.data[i].group_type == 1) {
-                backendData.data[i].group_type = 'independent';
-            } else if (backendData.data[i].group_type == 2) {
-                backendData.data[i].group_type = 'sequential';
+        for (var i = 0; i < backendData.body.length; i++) {
+            if (backendData.body[i].group_type == 1) {
+                backendData.body[i].group_type = 'independent';
+            } else if (backendData.body[i].group_type == 2) {
+                backendData.body[i].group_type = 'sequential';
             }
         }
 
-        $scope.frontendData = backendData.data;
+        $scope.frontendData = backendData.body;
     });
 });
 
@@ -228,8 +228,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.refreshLeftPanel = function () {
         pixelmappingService.getSameGroup(gid).success(function (backendData) {
-            $scope.sortPriority(backendData.data);
-            $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
+            $scope.sortPriority(backendData.body);
+            $scope.frontendLeftHandPanelData = angular.copy(backendData.body);
         });
     };
 
@@ -269,12 +269,12 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             // true if user click on the "edit button"
             if (gid != 0) {
-                $scope.processedResponseBackupRuleData.gid = backendData.data.gid;
-                $scope.processedResponseBackupRuleData.keyId = backendData.data.key_id;
-                $scope.processedResponseBackupRuleData.type = backendData.data.type;
-                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.data.priority);
+                $scope.processedResponseBackupRuleData.gid = backendData.body.gid;
+                $scope.processedResponseBackupRuleData.keyId = backendData.body.key_id;
+                $scope.processedResponseBackupRuleData.type = backendData.body.type;
+                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.body.priority);
 
-                var parseRuleSplit = backendData.data.parse_rule.split("|");
+                var parseRuleSplit = backendData.body.parse_rule.split("|");
                 $scope.processedResponseBackupRuleData.parseRule = parseRuleSplit[0];
                 if (parseRuleSplit[0] == 'split1') {
                     // true if -> -> split1|"|"
@@ -309,7 +309,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 }
 
 
-                var conditionRuleSplit = backendData.data.condition_rule.split("|");
+                var conditionRuleSplit = backendData.body.condition_rule.split("|");
                 $scope.processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
                 if (conditionRuleSplit[0] == 'len') {
                     $scope.processedResponseBackupRuleData.len.column1 = conditionRuleSplit[1];
@@ -329,7 +329,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                     $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
                 }
 
-                var actionRuleSplit = backendData.data.action_rule.split("|");
+                var actionRuleSplit = backendData.body.action_rule.split("|");
                 $scope.processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
                 if (actionRuleSplit[0] == 'substr') {
                     $scope.processedResponseBackupRuleData.substr.column1 = actionRuleSplit[1];

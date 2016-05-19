@@ -29,7 +29,7 @@ app.controller('ManageusersController', function ManageusersController(UserServi
     function loadAllUsers() {
         UserService.GetAll()
             .success(function (users) {
-                vm.allUsers = users;
+                vm.allUsers = users.body;
             });
     }
 
