@@ -26,13 +26,16 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     $scope.isUpdate = (keyId > 0) ? true : false;
     $scope.keyIdDisable = (keyId > 0) ? true : false;
 
-    if (backendData.data.data.group_type == 1) {
-        backendData.data.data.group_type = 'independent';
-    } else if (backendData.data.data.group_type == 2) {
-        backendData.data.data.group_type = 'sequential';
+    if(backendData.data != ""){
+        if (backendData.data.data.group_type == 1) {
+            backendData.data.data.group_type = 'independent';
+        } else if (backendData.data.data.group_type == 2) {
+            backendData.data.data.group_type = 'sequential';
+        }
+
+        $scope.frontendData = angular.copy(backendData.data.data);
     }
 
-    $scope.frontendData = angular.copy(backendData.data.data);
 
     $scope.isClean = function () {
         return angular.equals(backendData.data.data, $scope.frontendData);
@@ -127,8 +130,10 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
     $scope.sortPriority = function (data) {
-        for (var i = 0; i < data.length; i++) {
-            data[i].priority = parseInt(data[i].priority);
+        if(data != "" && data != undefined){
+            for (var i = 0; i < data.length; i++) {
+                data[i].priority = parseInt(data[i].priority);
+            }
         }
     };
 
@@ -191,12 +196,15 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         // true if "Add new rule"
         if ($scope.isUpdate == false) {
             // validation for Duplicate Priorities in "insertion" scenario
-            for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
-                if ($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority) {
-                    alert("Disallow Duplicate Priorities");
-                    return;
+            if($scope.frontendLeftHandPanelData != undefined){
+                for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
+                    if ($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority) {
+                        alert("Disallow Duplicate Priorities");
+                        return;
+                    }
                 }
             }
+
             pixelmappingService.insertRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.refreshLeftPanel();
             });
@@ -220,8 +228,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.refreshLeftPanel = function () {
         pixelmappingService.getSameGroup(gid).success(function (backendData) {
-            $scope.sortPriority(backendData);
-            $scope.frontendLeftHandPanelData = angular.copy(backendData);
+            $scope.sortPriority(backendData.data);
+            $scope.frontendLeftHandPanelData = angular.copy(backendData.data);
         });
     };
 
