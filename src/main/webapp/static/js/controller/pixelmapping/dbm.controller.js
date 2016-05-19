@@ -6,7 +6,7 @@
 
 app.controller('listCtrlDbm', function ($scope, pixelmappingService) {
     pixelmappingService.getMappings('dbm').success(function (backendData) {
-        $scope.frontendData = backendData.data;
+        $scope.frontendData = backendData.body;
     });
 });
 
@@ -16,10 +16,10 @@ app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routePar
     $scope.buttonText = (mappingID > 0) ? 'Update Mapping' : 'Add New Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
     $scope.keyIdDisable = (mappingID > 0) ? true : false;
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.body);
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {

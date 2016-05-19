@@ -7,13 +7,13 @@
 
 app.controller('listCtrlFacebook', function ($scope, $location, $anchorScroll, pixelmappingService) {
     pixelmappingService.getMappings('facebook-dp').success(function (backendData) {
-        $scope.frontendDataMappingsDp = backendData.data;
+        $scope.frontendDataMappingsDp = backendData.body;
     });
     pixelmappingService.getMappings('facebook-key').success(function (backendData) {
-        $scope.frontendDataMappingsKey = backendData.data;
+        $scope.frontendDataMappingsKey = backendData.body;
     });
     pixelmappingService.getMappings('facebook-pixel').success(function (backendData) {
-        $scope.frontendDataMappingsPixel = backendData.data;
+        $scope.frontendDataMappingsPixel = backendData.body;
     });
 
     $scope.scrollTo = function (position) {
@@ -30,10 +30,10 @@ app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location,
     $scope.buttonText = (mappingID > 0) ? 'Update Data Provider Pixel' : 'Add New Data Provider Pixel';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
     $scope.keyIdDisable = (mappingID > 0) ? true : false;
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.body);
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {
@@ -59,10 +59,10 @@ app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $r
     $scope.buttonText = 'Update Facebook DP Mapping';
     $scope.isUpdate = (mappingID != '0') ? true : false;
 
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.body);
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     }
 
     $scope.saveMapping = function (frontendData) {
@@ -77,11 +77,11 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
     $scope.buttonText = (mappingID > 0) ? 'Update Facebook Key Mapping' : 'Add New Facebook Key Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false;
     $scope.keyIdDisable = (mappingID > 0) ? true : false;
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.body);
 
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {

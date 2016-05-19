@@ -7,10 +7,10 @@
 
 app.controller('listCtrlLiveramp', function ($scope, pixelmappingService) {
     pixelmappingService.getMappings('liveramp-dp').success(function (backendData) {
-        $scope.mappingsDp = backendData.data;
+        $scope.mappingsDp = backendData.body;
     });
     pixelmappingService.getMappings('liveramp-key').success(function (backendData) {
-        $scope.mappingsKey = backendData.data;
+        $scope.mappingsKey = backendData.body;
     });
 });
 
@@ -20,10 +20,10 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
     $scope.buttonText = (mappingID != '0') ? 'Update Liveramp DP Mapping' : 'Add New Liveramp DP Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
     $scope.keyIdDisable = (mappingID > 0) ? true : false;
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.body);
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {
@@ -54,11 +54,11 @@ app.controller('editCtrlLiverampKey', function ($scope, $rootScope, $location, $
     $scope.buttonText = (mappingID != '0') ? 'Update Liveramp Key Mapping' : 'Add New Liveramp Key Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false;
     $scope.keyIdDisable = (mappingID > 0) ? true : false;
-    $scope.frontendData = angular.copy(backendData.data);
+    $scope.frontendData = angular.copy(backendData.data.body);
 
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     }
 
     $scope.deleteMapping = function (frontendData) {

@@ -80,7 +80,7 @@ public class UserManagementController {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"data\":");
+            sb.append("{\"success\":true,\"body\":");
             sb.append(result);
             sb.append("}");
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
@@ -105,7 +105,7 @@ public class UserManagementController {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"data\":");
+            sb.append("{\"success\":true,\"body\":");
             sb.append(result);
             sb.append("}");
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);

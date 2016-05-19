@@ -27,18 +27,18 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     $scope.keyIdDisable = (keyId > 0) ? true : false;
 
     if(backendData.data != ""){
-        if (backendData.data.data.group_type == 1) {
-            backendData.data.data.group_type = 'independent';
-        } else if (backendData.data.data.group_type == 2) {
-            backendData.data.data.group_type = 'sequential';
+        if (backendData.data.body.group_type == 1) {
+            backendData.data.body.group_type = 'independent';
+        } else if (backendData.data.body.group_type == 2) {
+            backendData.data.body.group_type = 'sequential';
         }
 
-        $scope.frontendData = angular.copy(backendData.data.data);
+        $scope.frontendData = angular.copy(backendData.data.body);
     }
 
 
     $scope.isClean = function () {
-        return angular.equals(backendData.data.data, $scope.frontendData);
+        return angular.equals(backendData.data.body, $scope.frontendData);
     };
 
     $scope.deleteGroup = function (frontendData) {
@@ -137,8 +137,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         }
     };
 
-    $scope.sortPriority(backendData.data.data);
-    $scope.frontendLeftHandPanelData = angular.copy(backendData.data.data);
+    $scope.sortPriority(backendData.data.body);
+    $scope.frontendLeftHandPanelData = angular.copy(backendData.data.body);
 
 
     /*
