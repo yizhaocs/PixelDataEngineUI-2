@@ -14,5 +14,5 @@ public interface PixelDataEngineGroupDAO {
 
     Integer updateGroup(String trigger_key_id, Integer group_type);
 
-    Integer deleteGroup(String keyId, Boolean isUITest);
+    Integer deleteGroup(String keyId, String gid, Boolean isUITest);
 }

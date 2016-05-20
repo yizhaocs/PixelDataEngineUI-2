@@ -199,28 +199,54 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         return result;
     }
 
-    public Integer deleteGroup(String trigger_key_id, Boolean isUITest) {
+    public Integer deleteGroup(String trigger_key_id, String gid, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
 
-        String query = null;
+        /*
+        * Delete group
+        * */
+        String queryDeleteGroup = null;
         if (isUITest) {
-            query = "DELETE FROM pde.pixel_data_engine_groups WHERE trigger_key_id =?";
+            queryDeleteGroup = "DELETE FROM pde.pixel_data_engine_groups WHERE trigger_key_id =?";
         } else {
-            query = "DELETE FROM marketplace.pixel_data_engine_groups WHERE trigger_key_id =?";
+            queryDeleteGroup = "DELETE FROM marketplace.pixel_data_engine_groups WHERE trigger_key_id =?";
         }
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + query.toString());
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + queryDeleteGroup.toString());
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        int result = 0;
+        JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
+        int resultDeleteGroup = 0;
         try {
-            result = jdbcTemplate.update(query, trigger_key_id);
+            resultDeleteGroup = jdbcTemplateDeleteGroup.update(queryDeleteGroup, trigger_key_id);
         } catch (Exception e) {
             LOG.error("Failed to execute sql query", e);
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + "  ,method return -> " + result);
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + "  ,method resultDeleteGroup -> " + resultDeleteGroup);
 
-        return result;
+
+        /*
+        * Delete all rules to that group
+        * */
+        String queryDeleteRulesToThatGroup = null;
+        if (isUITest) {
+            queryDeleteRulesToThatGroup = "DELETE FROM pde.pixel_data_engine_configs WHERE gid =?";
+        } else {
+            queryDeleteRulesToThatGroup = "DELETE FROM marketplace.pixel_data_engine_configs WHERE gid =?";
+        }
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + queryDeleteRulesToThatGroup.toString());
+
+        JdbcTemplate jdbcTemplateRulesToThatGroup = new JdbcTemplate(dataSource);
+        int resultDeleteRulesToThatGroup = 0;
+        try {
+            resultDeleteRulesToThatGroup = jdbcTemplateRulesToThatGroup.update(queryDeleteRulesToThatGroup, gid);
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + "  ,method resultDeleteRulesToThatGroup -> " + resultDeleteRulesToThatGroup);
+
+        return resultDeleteRulesToThatGroup;
     }
 }

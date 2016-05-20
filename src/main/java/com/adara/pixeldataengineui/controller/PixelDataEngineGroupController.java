@@ -158,16 +158,16 @@ public class PixelDataEngineGroupController {
     }
 
     @RequestMapping(value = "/deleteGroup", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteGroup(@RequestParam(value = "id", required = false) String id) {
+    public ResponseEntity<String> deleteGroup(@RequestParam(value = "triggerkeyid", required = false) String triggerKeyId, @RequestParam(value = "gid", required = false) String gid) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "request data ->" + "id:" + id);
+        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "request data ->" + "triggerKeyId:" + triggerKeyId);
 
         Integer result = 0;
-        if (id.equals("0")) {
+        if (triggerKeyId.equals("0")) {
             return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
-        result = mPixelDataEngineGroupService.deleteGroup(id, false);
+        result = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
 
         ResponseEntity<String> response = null;
         if (result > 0) {

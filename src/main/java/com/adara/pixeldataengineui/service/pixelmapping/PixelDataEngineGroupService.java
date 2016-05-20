@@ -14,5 +14,5 @@ public interface PixelDataEngineGroupService {
 
     Integer updateGroup(String triggerKeyId, Integer groupType);
 
-    Integer deleteGroup(String triggerKeyId, Boolean isUITest);
+    Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest);
 }

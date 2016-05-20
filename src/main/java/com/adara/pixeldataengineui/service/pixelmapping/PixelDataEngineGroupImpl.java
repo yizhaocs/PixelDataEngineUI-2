@@ -34,8 +34,8 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
         return mPixelDataEngineGroupDAO.updateGroup(triggerKeyId, groupType);
     }
 
-    public Integer deleteGroup(String triggerKeyId, Boolean isUITest) {
-        return mPixelDataEngineGroupDAO.deleteGroup(triggerKeyId, isUITest);
+    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) {
+        return mPixelDataEngineGroupDAO.deleteGroup(triggerKeyId, gid, isUITest);
     }
 
 }

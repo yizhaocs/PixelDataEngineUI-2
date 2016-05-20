@@ -90,8 +90,8 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        function deleteGroup(redirectPath, id) {
-            return $http.delete($rootScope.base + 'deleteGroup?id=' + id).success(function (status) {
+        function deleteGroup(redirectPath, triggerKeyId, gid) {
+            return $http.delete($rootScope.base + 'deleteGroup?triggerkeyid=' + triggerKeyId + '&gid=' + gid).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;
             });

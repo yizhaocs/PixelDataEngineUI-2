@@ -43,7 +43,7 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 
     $scope.deleteGroup = function (frontendData) {
         if (confirm("Are you sure to delete mapping number: " + frontendData.trigger_key_id) == true)
-            pixelmappingService.deleteGroup($rootScope.base + 'pixel-data-engine-group', frontendData.trigger_key_id);
+            pixelmappingService.deleteGroup($rootScope.base + 'pixel-data-engine-group', frontendData.trigger_key_id, frontendData.gid);
     };
 
     $scope.saveGroup = function (frontendData) {
