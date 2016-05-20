@@ -8,13 +8,8 @@
     <name>Pixel Data Engine UI</name>
 
     <properties>
-        <angularjs.version>1.5.2</angularjs.version>
-        <angular-cookies.version>1.5.2</angular-cookies.version>
-        <angular-md5.version>0.1.8</angular-md5.version>
-        <bootstrap.version>3.3.6</bootstrap.version>
         <spring.framework.version>4.0.0.RELEASE</spring.framework.version>
         <jackson.version>1.9.13</jackson.version>
-        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
         <jstl.version>1.2</jstl.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.apache.maven.plugins.version>2.4</org.apache.maven.plugins.version>
@@ -30,33 +25,30 @@
         <version>1.0</version>
     </parent>
 
+
     <dependencies>
         <!-- Frontend Jar packages for AngularJS & bootstrap -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
-            <version>${angularjs.version}</version>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>angular-cookies</artifactId>
-            <version>${angular-cookies.version}</version>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>angular-md5</artifactId>
-            <version>${angular-md5.version}</version>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>${bootstrap.version}</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -67,23 +59,22 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <!-- Spring Framework transaction management -->
             <artifactId>spring-tx</artifactId>
-            <version>${spring.framework.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.framework.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -94,6 +85,8 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+
+
 
         <!-- Json -->
         <dependency>
@@ -118,7 +111,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.12</version>
         </dependency>
 
 
