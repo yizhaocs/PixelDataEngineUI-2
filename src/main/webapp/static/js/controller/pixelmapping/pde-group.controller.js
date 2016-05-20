@@ -26,7 +26,7 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     $scope.isUpdate = (keyId > 0) ? true : false;
     $scope.keyIdDisable = (keyId > 0) ? true : false;
 
-    if(backendData.data != ""){
+    if (backendData.data != "") {
         if (backendData.data.body.group_type == 1) {
             backendData.data.body.group_type = 'independent';
         } else if (backendData.data.body.group_type == 2) {
@@ -130,7 +130,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     // we need to order the priority col in the front, so we have to parse the 'priority' from string to int type
     $scope.sortPriority = function (data) {
-        if(data != "" && data != undefined){
+        if (data != "" && data != undefined) {
             for (var i = 0; i < data.length; i++) {
                 data[i].priority = parseInt(data[i].priority);
             }
@@ -196,7 +196,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         // true if "Add new rule"
         if ($scope.isUpdate == false) {
             // validation for Duplicate Priorities in "insertion" scenario
-            if($scope.frontendLeftHandPanelData != undefined){
+            if ($scope.frontendLeftHandPanelData != undefined) {
                 for (var i = 0; i < $scope.frontendLeftHandPanelData.length; i++) {
                     if ($scope.frontendLeftHandPanelData[i].priority == $scope.frontendRightHandPanelData.priority) {
                         alert("Disallow Duplicate Priorities");

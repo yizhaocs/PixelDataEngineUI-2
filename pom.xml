@@ -23,6 +23,13 @@
         <properties.dir>../MavenBuild/properties</properties.dir>
     </properties>
 
+    <parent>
+        <groupId>opinmind</groupId>
+        <artifactId>maven-common</artifactId>
+        <relativePath>../MavenCommon/pom.xml</relativePath>
+        <version>1.0</version>
+    </parent>
+
     <dependencies>
         <!-- Frontend Jar packages for AngularJS & bootstrap -->
         <dependency>

@@ -22,7 +22,7 @@ import java.util.Map;
 public class PixelDataEngineRuleController {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleController.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
-   
+
     @Autowired
     private PixelDataEngineService mPixelDataEngineService;
 
