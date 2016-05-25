@@ -29,27 +29,34 @@ public class Tools {
         String split2Level2SplitString = null;
         if (parseRuleKey.equals("split1")) {
             split1 = request.getSplit1().toString();
-            parseRuleValue.append("|");
-            if (split1.equals("|")) {
-                split1 = "\"" + split1 + "\"";
+            if(split1 != null && split1.equals("") == false){
+                parseRuleValue.append("|");
+                if (split1.equals("|")) {
+                    split1 = "\"" + split1 + "\"";
+                }
+                parseRuleValue.append(split1);
             }
 
-            parseRuleValue.append(split1);
         } else if (parseRuleKey.equals("split2")) {
             split2Level1SplitString = request.getSplit2().getColumn1();
             split2Level2SplitString = request.getSplit2().getColumn2();
-            parseRuleValue.append("|");
-            if (split2Level1SplitString.equals("|")) {
-                split2Level1SplitString = "\"" + split2Level1SplitString + "\"";
+
+            if(split2Level1SplitString!=null && split2Level1SplitString.equals("") == false){
+                parseRuleValue.append("|");
+                if (split2Level1SplitString.equals("|")) {
+                    split2Level1SplitString = "\"" + split2Level1SplitString + "\"";
+                }
+                parseRuleValue.append(split2Level1SplitString);
             }
 
-            parseRuleValue.append(split2Level1SplitString);
-            parseRuleValue.append("|");
-            if (split2Level2SplitString.equals("|")) {
-                split2Level2SplitString = "\"" + split2Level2SplitString + "\"";
+            if(split2Level2SplitString != null && split2Level2SplitString.equals("") == false){
+                parseRuleValue.append("|");
+                if (split2Level2SplitString.equals("|")) {
+                    split2Level2SplitString = "\"" + split2Level2SplitString + "\"";
+                }
+                parseRuleValue.append(split2Level2SplitString);
             }
 
-            parseRuleValue.append(split2Level2SplitString);
         }
 
         return parseRuleValue.toString();
@@ -68,23 +75,35 @@ public class Tools {
             Len mLen = request.getLen();
             rangeFrom = mLen.getColumn1();
             rangeTo = mLen.getColumn2();
-            conditionRuleValue.append("|");
-            conditionRuleValue.append(rangeFrom);
-            conditionRuleValue.append("|");
-            conditionRuleValue.append(rangeTo);
+
+            if(rangeFrom!=null && rangeFrom.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(rangeFrom);
+            }
+
+            if(rangeTo != null && rangeTo.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(rangeTo);
+            }
         } else if (conditionRuleKey.equals("range")) {
             Range mRange = request.getRange();
             rangeFrom = mRange.getColumn1();
             rangeTo = mRange.getColumn2();
-            conditionRuleValue.append("|");
-            conditionRuleValue.append(rangeFrom);
-            conditionRuleValue.append("|");
-            conditionRuleValue.append(rangeTo);
+            if(rangeFrom!=null && rangeFrom.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(rangeFrom);
+            }
+
+            if(rangeTo!=null && rangeTo.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(rangeTo);
+            }
+
         } else if (conditionRuleKey.equals("in")) {
             inElementArrayList = request.getInElementArray();
             conditionRuleValue.append("|");
             for (InElementArray i : inElementArrayList) {
-                if (i.getColumn2().length() > 0) {
+                if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
                     conditionRuleValue.append(i.getColumn2());
                     conditionRuleValue.append("|");
                 }
@@ -92,8 +111,10 @@ public class Tools {
             conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
         } else if (conditionRuleKey.equals("seg")) {
             seg = request.getSeg().toString();
-            conditionRuleValue.append("|");
-            conditionRuleValue.append(seg);
+            if(seg !=null  && seg.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(seg);
+            }
         }
 
         return conditionRuleValue.toString();
@@ -112,17 +133,25 @@ public class Tools {
             substrDirection = request.getSubstr().getColumn1();
             substrStartIndex = request.getSubstr().getColumn2();
             substrLength = request.getSubstr().getColumn3();
-            actionRuleValue.append("|");
-            actionRuleValue.append(substrDirection);
-            actionRuleValue.append("|");
-            actionRuleValue.append(substrStartIndex);
-            actionRuleValue.append("|");
-            actionRuleValue.append(substrLength);
+            if(substrDirection !=null && substrDirection.equals("") == false){
+                actionRuleValue.append("|");
+                actionRuleValue.append(substrDirection);
+            }
+
+            if(substrStartIndex != null && substrStartIndex.equals("") == false){
+                actionRuleValue.append("|");
+                actionRuleValue.append(substrStartIndex);
+            }
+
+            if(substrLength != null && substrLength.equals("") == false){
+                actionRuleValue.append("|");
+                actionRuleValue.append(substrLength);
+            }
         } else if (actionRuleKey.equals("set")) {
             setRuleArrayDTOList = request.getSetRuleArray();
             actionRuleValue.append("|");
             for (SetRuleArray s : setRuleArrayDTOList) {
-                if (s.getColumn2().length() > 0) {
+                if (s.getColumn2() != null && s.getColumn2().equals("") == false) {
                     actionRuleValue.append(s.getColumn2());
                     actionRuleValue.append("|");
                 }
@@ -130,8 +159,10 @@ public class Tools {
             actionRuleValue.deleteCharAt(actionRuleValue.length() - 1);
         } else if (actionRuleKey.equals("dec")) {
             dec = request.getDec().toString();
-            actionRuleValue.append("|");
-            actionRuleValue.append(dec);
+            if(dec != null && dec.equals("") == false){
+                actionRuleValue.append("|");
+                actionRuleValue.append(dec);
+            }
         }
         return actionRuleValue.toString();
     }
