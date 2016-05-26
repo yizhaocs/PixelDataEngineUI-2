@@ -120,7 +120,12 @@ public class Tools {
             contains = request.getContains().toString();
             if(contains !=null  && contains.equals("") == false){
                 conditionRuleValue.append("|");
-                conditionRuleValue.append(contains);
+                if(contains.equals("|")){
+                    conditionRuleValue.append("\"" + contains + "\"");
+                }else{
+                    conditionRuleValue.append(contains);
+                }
+
             }
         }
 

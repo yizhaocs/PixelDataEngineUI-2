@@ -331,7 +331,12 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 } else if (conditionRuleSplit[0] == 'seg') {
                     $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
                 } else if (conditionRuleSplit[0] == 'contains') {
-                    $scope.processedResponseBackupRuleData.contains.column1 = conditionRuleSplit[1];
+                    if (conditionRuleSplit.length == 3) {
+                        $scope.processedResponseBackupRuleData.contains.column1 = "\"|\"";
+                    }else{
+                        $scope.processedResponseBackupRuleData.contains.column1 = conditionRuleSplit[1];
+                    }
+
                 }
 
                 var actionRuleSplit = backendData.body.action_rule.split("|");
