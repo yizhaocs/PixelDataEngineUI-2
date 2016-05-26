@@ -30,11 +30,11 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         service.deleteRule = deleteRule;
         service.insertRule = insertRule;
         service.testRule = testRule;
+
+
         /**
          *   data mapping services
          **/
-
-
         function getMappings(type) {
             var body = $http.get($rootScope.base + 'mappings?type=' + type);
             return body;
