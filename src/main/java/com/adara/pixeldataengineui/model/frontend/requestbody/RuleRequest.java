@@ -20,6 +20,7 @@ public class RuleRequest {
     private Split2 split2;
     private Len len;
     private Seg seg;
+    private Contains contains;
     private Range range;
     private Substr substr;
     private Dec dec;
@@ -129,6 +130,14 @@ public class RuleRequest {
 
     public void setSeg(Seg seg) {
         this.seg = seg;
+    }
+
+    public Contains getContains() {
+        return contains;
+    }
+
+    public void setContains(Contains contains) {
+        this.contains = contains;
     }
 
     public Range getRange() {

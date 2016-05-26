@@ -68,6 +68,7 @@ public class Tools {
         conditionRuleValue.append(conditionRuleKey);
         String len = null;
         String seg = null;
+        String contains = null;
         String rangeFrom = null;
         String rangeTo = null;
         List<InElementArray> inElementArrayList = null;
@@ -114,6 +115,12 @@ public class Tools {
             if(seg !=null  && seg.equals("") == false){
                 conditionRuleValue.append("|");
                 conditionRuleValue.append(seg);
+            }
+        } else if (conditionRuleKey.equals("contains")) {
+            contains = request.getContains().toString();
+            if(contains !=null  && contains.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(contains);
             }
         }
 

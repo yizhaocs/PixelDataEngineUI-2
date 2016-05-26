@@ -170,6 +170,7 @@
                                         <option value="range">range</option>
                                         <option value="in">in</option>
                                         <option value="seg">seg</option>
+                                        <option value="contains">contains</option>
                                     </select>
                                 </div>
                             </div>
@@ -193,6 +194,13 @@
                                 <label class="col-md-2"> Number Of Segments </label>
                                 <div class="col-md-2">
                                     <input type="text" class="form-control" ng-model="frontendRightHandPanelData.seg.column1">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
+                                <label class="col-md-2"> Character/String </label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.column1">
                                 </div>
                             </div>
 
