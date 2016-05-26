@@ -221,7 +221,14 @@ app.run(['$location', '$rootScope', '$cookieStore', '$http', function ($location
         $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
     }
 
-    $rootScope.isroot = false;
+
+    // true if reenter the "http://localhost:8080/pdeui/" as root user, so that we allow "Manage-Users" page still appear on the top
+    if($rootScope.globals != '' && $rootScope.globals.currentUser != undefined && $rootScope.globals.currentUser.username != undefined && $rootScope.globals.currentUser.username != 'root'){
+        $rootScope.isroot = false;
+    }else{
+        $rootScope.isroot = true;
+    }
+
     $rootScope.base = '';
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
