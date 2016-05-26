@@ -225,6 +225,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             }
             pixelmappingService.updateRule($rootScope.base + 'group/edit-rules/' + gid, frontendRightHandPanelData.parseRule, frontendRightHandPanelData.conditionRule, frontendRightHandPanelData.actionRule, frontendRightHandPanelData.gid, frontendRightHandPanelData.keyId, $scope.leftPanelSelectedPriority, frontendRightHandPanelData.priority, frontendRightHandPanelData.type, frontendRightHandPanelData.split1, frontendRightHandPanelData.split2, frontendRightHandPanelData.len, frontendRightHandPanelData.seg, frontendRightHandPanelData.contains, frontendRightHandPanelData.range, frontendRightHandPanelData.substr, frontendRightHandPanelData.dec, frontendRightHandPanelData.inElementArray, frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.refreshLeftPanel();
+                alert("Rule Updated");
             });
         }
     };

@@ -46,6 +46,7 @@ app.controller('ManageusersController', function ManageusersController(UserServi
             .success(function () {
                 $location.path($rootScope.base + 'manageusers');
                 loadAllUsers();
+                alert("Password Updated");
             });
     }
 });
