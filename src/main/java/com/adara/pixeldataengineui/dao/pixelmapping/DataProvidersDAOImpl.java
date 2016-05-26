@@ -108,13 +108,13 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         return result;
     }
 
-    public Integer updateMappingDataProviders(Integer id, String name, Byte sync_facebook) {
+    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviders");
         String query = "UPDATE marketplace.data_providers SET " + "id" + "=?" + "," + "name" + "=?" + "," + "sync_facebook" + "=?" + " WHERE id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviders" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{id, name, sync_facebook, id};
+        Object[] args = new Object[]{id, name, syncFacebook, id};
         Integer result = 0;
         try {
             result = jdbcTemplate.update(query, args);

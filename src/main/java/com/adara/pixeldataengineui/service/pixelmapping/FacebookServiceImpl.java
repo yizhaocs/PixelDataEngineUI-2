@@ -46,24 +46,24 @@ public class FacebookServiceImpl implements FacebookService {
         return mFacebookDpKeysDAO.getFacebookKeyMapping(id);
     }
 
-    public Integer insertMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id) {
-        return mDataProviderFacebookPixelsDAO.insertMappingDataProviderFacebookPixels(dp_id, facebook_pixel_id);
+    public Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) {
+        return mDataProviderFacebookPixelsDAO.insertMappingDataProviderFacebookPixels(dpId, facebookPixelId);
     }
 
-    public Integer insertMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel) {
-        return mFacebookDpKeysDAO.insertMappingFacebookDpKeys(key_id, enabled, update_interval, use_image_pixel);
+    public Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
+        return mFacebookDpKeysDAO.insertMappingFacebookDpKeys(keyId, enabled, updateInterval, useImagePixel);
     }
 
-    public Integer updateMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id) {
-        return mDataProviderFacebookPixelsDAO.updateMappingDataProviderFacebookPixels(dp_id, facebook_pixel_id);
+    public Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) {
+        return mDataProviderFacebookPixelsDAO.updateMappingDataProviderFacebookPixels(dpId, facebookPixelId);
     }
 
-    public Integer updateMappingDataProviders(Integer id, String name, Byte sync_facebook) {
-        return mDataProvidersDAO.updateMappingDataProviders(id, name, sync_facebook);
+    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) {
+        return mDataProvidersDAO.updateMappingDataProviders(id, name, syncFacebook);
     }
 
-    public Integer updateMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel) {
-        return mFacebookDpKeysDAO.updateMappingFacebookDpKeys(key_id, enabled, update_interval, use_image_pixel);
+    public Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
+        return mFacebookDpKeysDAO.updateMappingFacebookDpKeys(keyId, enabled, updateInterval, useImagePixel);
     }
 
     public Integer deleteFacebookPixelMapping(String id) {

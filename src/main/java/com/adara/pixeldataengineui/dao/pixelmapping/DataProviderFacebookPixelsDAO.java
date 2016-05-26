@@ -10,9 +10,9 @@ public interface DataProviderFacebookPixelsDAO {
 
     String getFacebookPixelMapping(String id);
 
-    Integer insertMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id);
+    Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
 
-    Integer updateMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id);
+    Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
 
     Integer deleteFacebookPixelMapping(String id);
 }

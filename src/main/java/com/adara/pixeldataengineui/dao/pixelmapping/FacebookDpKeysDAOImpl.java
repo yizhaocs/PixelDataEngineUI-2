@@ -114,14 +114,14 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         return result;
     }
 
-    public Integer insertMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel) {
+    public Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingFacebookDpKeys");
         String query = "insert into facebook_dp_keys(key_id, enabled, update_interval, use_image_pixel) values(?, ?, ?, ?)";
-        if (update_interval == -1) {
-            update_interval = null;
+        if (updateInterval == -1) {
+            updateInterval = null;
         }
 
-        Object[] args = new Object[]{key_id, enabled, update_interval, use_image_pixel};
+        Object[] args = new Object[]{keyId, enabled, updateInterval, useImagePixel};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingFacebookDpKeys" + ", " + "Executing query -> " + query.toString());
@@ -139,17 +139,17 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         return result;
     }
 
-    public Integer updateMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel) {
+    public Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingFacebookDpKeys");
         String query = "UPDATE marketplace.facebook_dp_keys SET " + "key_id" + "=?" + "," + "enabled" + "=?" + "," + "update_interval" + "=?" + "," + "use_image_pixel" + "=?" + " WHERE key_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingFacebookDpKeys" + ", " + "Executing query -> " + query.toString());
 
-        if (update_interval == -1) {
-            update_interval = null;
+        if (updateInterval == -1) {
+            updateInterval = null;
         }
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{key_id, enabled, update_interval, use_image_pixel, key_id};
+        Object[] args = new Object[]{keyId, enabled, updateInterval, useImagePixel, keyId};
         // Integer result = query.executeUpdate();
         Integer result = 0;
         try {

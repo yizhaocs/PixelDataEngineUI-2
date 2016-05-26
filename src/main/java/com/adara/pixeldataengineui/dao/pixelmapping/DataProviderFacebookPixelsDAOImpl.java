@@ -106,10 +106,10 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         return result;
     }
 
-    public Integer insertMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id) {
+    public Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingDataProviderFacebookPixels");
         String query = "insert into data_provider_facebook_pixels(dp_id, facebook_pixel_id) values(?, ?)";
-        Object[] args = new Object[]{dp_id, facebook_pixel_id};
+        Object[] args = new Object[]{dpId, facebookPixelId};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingDataProviderFacebookPixels" + ", " + "Executing query -> " + query.toString());
@@ -127,13 +127,13 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         return result;
     }
 
-    public Integer updateMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id) {
+    public Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviderFacebookPixels");
         String query = "UPDATE marketplace.data_provider_facebook_pixels SET " + "dp_id" + "=?" + "," + "facebook_pixel_id" + "=?" + " WHERE dp_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviderFacebookPixels" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{dp_id, facebook_pixel_id, dp_id};
+        Object[] args = new Object[]{dpId, facebookPixelId, dpId};
         Integer result = 0;
         try {
             result = jdbcTemplate.update(query, args);

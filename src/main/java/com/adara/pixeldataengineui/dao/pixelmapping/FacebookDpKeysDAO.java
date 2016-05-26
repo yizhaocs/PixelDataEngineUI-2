@@ -8,9 +8,9 @@ public interface FacebookDpKeysDAO {
 
     String getFacebookKeyMapping(String id);
 
-    Integer insertMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel);
+    Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel);
 
-    Integer updateMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel);
+    Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel);
 
     Integer deleteFacebookKeyMapping(String id);
 }

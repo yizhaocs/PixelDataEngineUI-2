@@ -63,7 +63,7 @@ public class DeriveComboPixelDaoImpl implements DeriveComboPixelDao {
         return sb.toString();
     }
 
-    public String getMapping(String dp_key_id) {
+    public String getMapping(String dpKeyId) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMapping");
         String query = "SELECT d.dp_key_id, d.advertiser_id, d.cp_id FROM marketplace.derive_combo_pixel_mappings d where d.dp_key_id= ?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMapping" + ", " + "Executing query -> " + query.toString());
@@ -71,7 +71,7 @@ public class DeriveComboPixelDaoImpl implements DeriveComboPixelDao {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
         try {
-            result = jdbcTemplate.queryForObject(query, new Object[]{dp_key_id}, new RowMapper<String>() {
+            result = jdbcTemplate.queryForObject(query, new Object[]{dpKeyId}, new RowMapper<String>() {
                 @Override
                 public String mapRow(ResultSet rs, int rowNum)
                         throws SQLException {

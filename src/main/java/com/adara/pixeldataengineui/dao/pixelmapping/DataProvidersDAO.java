@@ -8,5 +8,5 @@ public interface DataProvidersDAO {
 
     String getFacebookDpMapping(String id);
 
-    Integer updateMappingDataProviders(Integer id, String name, Byte sync_facebook);
+    Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook);
 }

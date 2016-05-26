@@ -18,15 +18,15 @@ public interface FacebookService {
 
     String getFacebookKeyMapping(String id);
 
-    Integer insertMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id);
+    Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
 
-    Integer insertMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel);
+    Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel);
 
-    Integer updateMappingDataProviderFacebookPixels(Integer dp_id, BigInteger facebook_pixel_id);
+    Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
 
-    Integer updateMappingDataProviders(Integer id, String name, Byte sync_facebook);
+    Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook);
 
-    Integer updateMappingFacebookDpKeys(Integer key_id, Byte enabled, Byte update_interval, Byte use_image_pixel);
+    Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel);
 
     Integer deleteFacebookPixelMapping(String id);
 

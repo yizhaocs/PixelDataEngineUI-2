@@ -26,16 +26,16 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(String trigger_key_id, Integer group_type, Boolean isUITest) {
+    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
         String query = null;
         Object[] args = null;
         if (isUITest) {
             query = "insert into pde.pixel_data_engine_groups(trigger_key_id, gid, group_type) values(?, ?, ?)";
-            args = new Object[]{trigger_key_id, 1, group_type};
+            args = new Object[]{triggerKeyId, 1, groupType};
         } else {
             query = "insert into marketplace.pixel_data_engine_groups(trigger_key_id, group_type) values(?, ?)";
-            args = new Object[]{trigger_key_id, group_type};
+            args = new Object[]{triggerKeyId, groupType};
         }
 
 
@@ -179,13 +179,13 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
     }
 
 
-    public Integer updateGroup(String trigger_key_id, Integer group_type) {
+    public Integer updateGroup(String triggerKeyId, Integer groupType) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");
         String query = "UPDATE marketplace.pixel_data_engine_groups SET " + "trigger_key_id" + "=?" + "," + "group_type" + "=?" + " WHERE trigger_key_id=?";
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] args = new Object[]{trigger_key_id, group_type, trigger_key_id};
+        Object[] args = new Object[]{triggerKeyId, groupType, triggerKeyId};
         Integer result = 0;
         try {
             result = jdbcTemplate.update(query, args);
@@ -199,7 +199,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         return result;
     }
 
-    public Integer deleteGroup(String trigger_key_id, String gid, Boolean isUITest) {
+    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
 
         /*
@@ -216,7 +216,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
         int resultDeleteGroup = 0;
         try {
-            resultDeleteGroup = jdbcTemplateDeleteGroup.update(queryDeleteGroup, trigger_key_id);
+            resultDeleteGroup = jdbcTemplateDeleteGroup.update(queryDeleteGroup, triggerKeyId);
         } catch (Exception e) {
             LOG.error("Failed to execute sql query", e);
         }
