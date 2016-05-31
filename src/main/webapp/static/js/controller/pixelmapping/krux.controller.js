@@ -32,11 +32,10 @@ app.controller('editCtrlKruxDpkey', function ($scope, $rootScope, $location, $ro
 
     $scope.saveMapping = function (frontendData) {
         // $location.path('/adobe');
-        if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'krux-dpkey', frontendData, 'krux-dpkey');
-        }
-        else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'krux-dpkey', mappingID, frontendData, 'krux-dpkey');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'krux-dpkey', frontendData, 'krux-dpkey');
         }
     };
 });

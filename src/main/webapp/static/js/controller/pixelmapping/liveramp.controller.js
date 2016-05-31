@@ -16,8 +16,8 @@ app.controller('listCtrlLiveramp', function ($scope, pixelmappingService) {
 
 app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
-    $rootScope.title = (mappingID != '0') ? 'Edit Liveramp DP Mapping' : 'Add Liveramp DP Mapping';
-    $scope.buttonText = (mappingID != '0') ? 'Update Liveramp DP Mapping' : 'Add New Liveramp DP Mapping';
+    $rootScope.title = (mappingID > 0) ? 'Edit Liveramp DP Mapping' : 'Add Liveramp DP Mapping';
+    $scope.buttonText = (mappingID > 0) ? 'Update Liveramp DP Mapping' : 'Add New Liveramp DP Mapping';
     $scope.isUpdate = (mappingID > 0) ? true : false; // false to get rid of "Delete" button
     $scope.keyIdDisable = (mappingID > 0) ? true : false;
     $scope.frontendData = angular.copy(backendData.data.body);
@@ -35,14 +35,12 @@ app.controller('editCtrlLiverampDp', function ($scope, $rootScope, $location, $r
     $scope.saveMapping = function (frontendData) {
         if (frontendData.threshold_mb > 100) {
             alert("Threshold can't be greater than 100MB");
-        }
-        else {
+        } else {
             // $location.path('/liveramp');
-            if (mappingID == '0') {
-                pixelmappingService.insertMapping($rootScope.base + 'liveramp', frontendData, 'liveramp-dp');
-            }
-            else {
+            if (mappingID > 0) {
                 pixelmappingService.updateMapping($rootScope.base + 'liveramp', mappingID, frontendData, 'liveramp-dp');
+            } else {
+                pixelmappingService.insertMapping($rootScope.base + 'liveramp', frontendData, 'liveramp-dp');
             }
         }
     };
@@ -69,11 +67,10 @@ app.controller('editCtrlLiverampKey', function ($scope, $rootScope, $location, $
 
     $scope.saveMapping = function (frontendData) {
         // $location.path('/liveramp');
-        if (mappingID == '0') {
-            pixelmappingService.insertMapping($rootScope.base + 'liveramp', frontendData, 'liveramp-key');
-        }
-        else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'liveramp', mappingID, frontendData, 'liveramp-key');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'liveramp', frontendData, 'liveramp-key');
         }
     };
 });

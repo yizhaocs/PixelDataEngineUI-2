@@ -30,11 +30,10 @@ app.controller('editCtrlDeriveConversion', function ($scope, $rootScope, $locati
 
     $scope.saveMapping = function (frontendData) {
         // $location.path('/adobe');
-        if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'derive-conversion', frontendData, 'derive-conversion');
-        }
-        else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'derive-conversion', mappingID, frontendData, 'derive-conversion');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'derive-conversion', frontendData, 'derive-conversion');
         }
     };
 });

@@ -52,10 +52,10 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
         } else if (frontendData.group_type == 'sequential') {
             frontendData.group_type = 2;
         }
-        if (keyId <= 0) {
-            pixelmappingService.insertGroup($rootScope.base + 'pixel-data-engine-group', frontendData);
-        } else {
+        if (keyId > 0) {
             pixelmappingService.updateGroup($rootScope.base + 'pixel-data-engine-group', keyId, frontendData);
+        } else {
+            pixelmappingService.insertGroup($rootScope.base + 'pixel-data-engine-group', frontendData);
         }
     };
 });

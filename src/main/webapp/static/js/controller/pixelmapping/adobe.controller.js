@@ -30,10 +30,10 @@ app.controller('editCtrlAdobe', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.saveMapping = function (frontendData) {
-        if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'adobe', frontendData, 'adobe');
-        } else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'adobe', mappingID, frontendData, 'adobe');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'adobe', frontendData, 'adobe');
         }
     };
 });

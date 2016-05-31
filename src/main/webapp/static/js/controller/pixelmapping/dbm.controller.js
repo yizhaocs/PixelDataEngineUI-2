@@ -28,11 +28,10 @@ app.controller('editCtrlDbm', function ($scope, $rootScope, $location, $routePar
     };
 
     $scope.saveMapping = function (frontendData) {
-        if (mappingID <= 0) {
-            pixelmappingService.insertMapping($rootScope.base + 'dbm', frontendData, 'dbm');
-        }
-        else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'dbm', mappingID, frontendData, 'dbm');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'dbm', frontendData, 'dbm');
         }
     };
 });

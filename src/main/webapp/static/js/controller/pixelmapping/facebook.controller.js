@@ -44,11 +44,10 @@ app.controller('editCtrlFacebookPixel', function ($scope, $rootScope, $location,
 
     $scope.saveMapping = function (frontendData) {
         // $location.path('/facebook');
-        if (mappingID == '0') {
-            pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-pixel');
-        }
-        else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, frontendData, 'facebook-pixel');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-pixel');
         }
     };
 });
@@ -57,7 +56,7 @@ app.controller('editCtrlFacebookDp', function ($scope, $rootScope, $location, $r
     var mappingID = ($routeParams.mappingID) ? $routeParams.mappingID : '0';
     $rootScope.title = 'Edit Facebook DP Mapping';
     $scope.buttonText = 'Update Facebook DP Mapping';
-    $scope.isUpdate = (mappingID != '0') ? true : false;
+    $scope.isUpdate = (mappingID > 0) ? true : false;
 
     $scope.frontendData = angular.copy(backendData.data.body);
 
@@ -95,11 +94,10 @@ app.controller('editCtrlFacebookKey', function ($scope, $rootScope, $location, $
             frontendData.update_interval = -1;
         }
         // $location.path('/facebook');
-        if (mappingID == '0') {
-            pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-key');
-        }
-        else {
+        if (mappingID > 0) {
             pixelmappingService.updateMapping($rootScope.base + 'facebook', mappingID, frontendData, 'facebook-key');
+        } else {
+            pixelmappingService.insertMapping($rootScope.base + 'facebook', frontendData, 'facebook-key');
         }
     };
 });
