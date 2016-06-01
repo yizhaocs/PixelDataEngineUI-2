@@ -6,13 +6,13 @@ import java.math.BigInteger;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface LiverampDpMappingsDAO {
-    String getLiverampDpMappings();
+    String getLiverampDpMappings() throws Exception;
 
-    String getLiverampDpMapping(String id);
+    String getLiverampDpMapping(String id) throws Exception;
 
-    Integer insertLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb);
+    Integer insertLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb) throws Exception;
 
-    Integer updateLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb);
+    Integer updateLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb) throws Exception;
 
-    Integer deleteLiverampDpMapping(String id);
+    Integer deleteLiverampDpMapping(String id) throws Exception;
 }

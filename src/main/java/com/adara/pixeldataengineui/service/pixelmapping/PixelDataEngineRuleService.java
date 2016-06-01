@@ -8,15 +8,15 @@ import java.util.Map;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineRuleService {
-    Integer insertRule(RuleRequest request, Boolean isUITest);
+    Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception;
 
-    String getRules();
+    String getRules() throws Exception;
 
-    String getRule(Integer gid, String keyId, Integer priority);
+    String getRule(Integer gid, String keyId, Integer priority) throws Exception;
 
-    Integer updateRule(RuleRequest request);
+    Integer updateRule(RuleRequest request) throws Exception;
 
-    Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest);
+    Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception;
 
-    Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request);
+    Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception;
 }

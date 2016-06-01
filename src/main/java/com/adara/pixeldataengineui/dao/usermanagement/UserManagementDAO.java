@@ -6,15 +6,15 @@ import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface UserManagementDAO {
-    String getAllUser();
+    String getAllUser() throws Exception;
 
-    String getByUsername(String username);
+    String getByUsername(String username) throws Exception;
 
-    Integer login(UserDTO request);
+    Integer login(UserDTO request) throws Exception;
 
-    Integer createUser(UserDTO request);
+    Integer createUser(UserDTO request) throws Exception;
 
-    Integer deleteUser(String username);
+    Integer deleteUser(String username) throws Exception;
 
-    Integer updateUser(UserDTO request);
+    Integer updateUser(UserDTO request) throws Exception;
 }

@@ -23,27 +23,27 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     @Autowired
     private PixelDataEngineRuleDAO mPixelDataEngineRuleDAO;
 
-    public Integer insertRule(RuleRequest request, Boolean isUITest) {
+    public Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception {
         return mPixelDataEngineRuleDAO.insertRule(request, isUITest);
     }
 
-    public String getRules() {
+    public String getRules() throws Exception {
         return mPixelDataEngineRuleDAO.getRules();
     }
 
-    public String getRule(Integer gid, String keyId, Integer priority) {
+    public String getRule(Integer gid, String keyId, Integer priority) throws Exception {
         return mPixelDataEngineRuleDAO.getRule(gid, keyId, priority);
     }
 
-    public Integer updateRule(RuleRequest request) {
+    public Integer updateRule(RuleRequest request) throws Exception {
         return mPixelDataEngineRuleDAO.updateRule(request);
     }
 
-    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) {
+    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception {
         return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority, isUITest);
     }
 
-    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) {
+    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
         LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
 
         String testKeyID = request.getKeyId();

@@ -15,28 +15,28 @@ public class UserManagementImpl implements UserManagementService {
     @Autowired
     private UserManagementDAO mUserManagementDAO;
 
-    public String getAllUser() {
+    public String getAllUser() throws Exception {
         return mUserManagementDAO.getAllUser();
     }
 
-    public String getByUsername(String username) {
+    public String getByUsername(String username) throws Exception {
         return mUserManagementDAO.getByUsername(username);
     }
 
-    public Integer login(UserDTO request) {
+    public Integer login(UserDTO request) throws Exception {
         return mUserManagementDAO.login(request);
     }
 
-    public Integer createUser(UserDTO request) {
+    public Integer createUser(UserDTO request) throws Exception {
         return mUserManagementDAO.createUser(request);
     }
 
-    public Integer deleteUser(String username) {
+    public Integer deleteUser(String username) throws Exception {
         return mUserManagementDAO.deleteUser(username);
     }
 
 
-    public Integer updateUser(UserDTO request) {
+    public Integer updateUser(UserDTO request) throws Exception {
         return mUserManagementDAO.updateUser(request);
     }
 }

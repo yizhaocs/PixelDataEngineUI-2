@@ -25,19 +25,15 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         this.dataSource = dataSource;
     }
 
-    public String getFacebookDpMappings() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookDpMappings");
+    public String getFacebookDpMappings() throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookDpMappings" + "]";
         String query = "SELECT a.id, a.name, a.sync_facebook FROM marketplace.data_providers a order by a.id";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookDpMappings" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-        try {
             listMap = jdbcTemplate.queryForList(query);
-        } catch (Exception e) {
 
-            LOG.error("Failed to execute sql query", e);
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -49,31 +45,26 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
             // convert Java object to JSON (Jackson)
             ObjectMapper mapper = new ObjectMapper();
             String tmp = "";
-            try {
                 tmp = mapper.writeValueAsString(mDataProvidersDTO);
-            } catch (Exception e) {
 
-                LOG.error("Failed to convert Java object to JSON", e);
-            }
             sb.append(tmp + ",");
         }
         sb.deleteCharAt(sb.toString().length() - 1);
         sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookDpMappings" + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
         return sb.toString();
     }
 
-    public String getFacebookDpMapping(String id) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookDpMapping");
+    public String getFacebookDpMapping(String id) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookDpMapping" + "]";
         String query = "SELECT a.id, a.name, a.sync_facebook FROM marketplace.data_providers a where a.id= ?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookDpMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-        try {
             result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
 
                 @Override
@@ -94,36 +85,30 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
                         LOG.error("Failed to convert Java object to JSON", e);
                     }
 
-                    LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookDpMapping" + "  ,method return -> " + result);
+                    LOG.info(LOG_HEADER + "  ,method return -> " + result);
                     return result;
                 }
             });
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviders");
+    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateMappingDataProviders" + "]";
         String query = "UPDATE marketplace.data_providers SET " + "id" + "=?" + "," + "name" + "=?" + "," + "sync_facebook" + "=?" + " WHERE id=?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviders" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{id, name, syncFacebook, id};
         Integer result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingDataProviders" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
         return result;
     }
 }

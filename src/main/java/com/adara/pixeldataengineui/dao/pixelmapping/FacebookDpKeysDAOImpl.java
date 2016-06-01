@@ -25,19 +25,14 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         this.dataSource = dataSource;
     }
 
-    public String getFacebookKeyMappings() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookKeyMappings");
+    public String getFacebookKeyMappings() throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookKeyMappings" + "]";
         String query = "SELECT a.key_id, a.enabled, a.update_interval, a.use_image_pixel FROM marketplace.facebook_dp_keys a order by a.key_id";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookKeyMappings" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-        try {
             listMap = jdbcTemplate.queryForList(query);
-        } catch (Exception e) {
-
-            LOG.error("Failed to execute sql query", e);
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -62,19 +57,18 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookKeyMappings" + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
         return sb.toString();
     }
 
-    public String getFacebookKeyMapping(String id) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookKeyMapping");
+    public String getFacebookKeyMapping(String id) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookKeyMapping" + "]";
         String query = "SELECT a.key_id, a.enabled, a.update_interval, a.use_image_pixel FROM marketplace.facebook_dp_keys a where a.key_id=?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getFacebookKeyMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-        try {
             result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
 
                 @Override
@@ -104,18 +98,15 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
                     return result;
                 }
             });
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingFacebookDpKeys");
+    public Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertMappingFacebookDpKeys" + "]";
         String query = "insert into facebook_dp_keys(key_id, enabled, update_interval, use_image_pixel) values(?, ?, ?, ?)";
         if (updateInterval == -1) {
             updateInterval = null;
@@ -124,25 +115,20 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         Object[] args = new Object[]{keyId, enabled, updateInterval, useImagePixel};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingFacebookDpKeys" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMappingFacebookDpKeys" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingFacebookDpKeys");
+    public Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateMappingFacebookDpKeys" + "]";
         String query = "UPDATE marketplace.facebook_dp_keys SET " + "key_id" + "=?" + "," + "enabled" + "=?" + "," + "update_interval" + "=?" + "," + "use_image_pixel" + "=?" + " WHERE key_id=?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingFacebookDpKeys" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         if (updateInterval == -1) {
             updateInterval = null;
@@ -152,33 +138,25 @@ public class FacebookDpKeysDAOImpl implements FacebookDpKeysDAO {
         Object[] args = new Object[]{keyId, enabled, updateInterval, useImagePixel, keyId};
         // Integer result = query.executeUpdate();
         Integer result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMappingFacebookDpKeys" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer deleteFacebookKeyMapping(String id) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteFacebookKeyMapping");
+    public Integer deleteFacebookKeyMapping(String id) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteFacebookKeyMapping" + "]";
         String query = "DELETE FROM marketplace.facebook_dp_keys WHERE key_id =?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteFacebookKeyMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, id);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteFacebookKeyMapping" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }

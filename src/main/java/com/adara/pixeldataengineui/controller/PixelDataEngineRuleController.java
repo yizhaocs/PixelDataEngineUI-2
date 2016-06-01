@@ -35,12 +35,15 @@ public class PixelDataEngineRuleController {
 
     @RequestMapping(value = "/insertRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insertRule(@RequestBody RuleRequest request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + ", " + "request data ->" + request.toString());
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertRule" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
         Integer result = 0;
-        result = mPixelDataEngineRuleService.insertRule(request, false);
-
+        try {
+            result = mPixelDataEngineRuleService.insertRule(request, false);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result > 0) {
             response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
@@ -49,18 +52,21 @@ public class PixelDataEngineRuleController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertRule" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
     @RequestMapping(value = "/getRules", method = RequestMethod.GET)
     public ResponseEntity<String> getRules() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRules");
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRules" + "]";
 
         String result = "";
-        result = mPixelDataEngineRuleService.getRules();
-
+        try {
+            result = mPixelDataEngineRuleService.getRules();
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
@@ -73,22 +79,26 @@ public class PixelDataEngineRuleController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRules" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
     @RequestMapping(value = "/getRule", method = RequestMethod.GET)
     public ResponseEntity<String> getRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRule" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
         if (keyid.equals("0")) {
             return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         }
 
         String result = "";
-        result = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
+        try {
+            result = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
@@ -102,19 +112,22 @@ public class PixelDataEngineRuleController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
     @RequestMapping(value = "/updateRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateRule(@RequestBody RuleRequest request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "request data ->" + request.toString());
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateRule" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
         Integer result = 0;
-        result = mPixelDataEngineRuleService.updateRule(request);
-
+        try {
+            result = mPixelDataEngineRuleService.updateRule(request);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result > 0) {
             response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
@@ -123,19 +136,22 @@ public class PixelDataEngineRuleController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
     @RequestMapping(value = "/deleteRule", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteRule" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
 
         Integer result = 0;
-        result = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority, false);
-
+        try {
+            result = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority, false);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result > 0) {
             response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
@@ -144,17 +160,22 @@ public class PixelDataEngineRuleController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteRule" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
         return response;
     }
 
     @RequestMapping(value = "/testRule", method = RequestMethod.POST)
     public ResponseEntity<String> testRule(@RequestBody RuleRequest request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule" + ", " + "request data ->" + request.toString());
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
 
-        Map<String, String> resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
+        Map<String, String> resultMap = null;
+        try {
+            resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         StringBuilder result = new StringBuilder();
         result.append("{\"success\":true,\"data\":");
         result.append("[");
@@ -180,7 +201,7 @@ public class PixelDataEngineRuleController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateRule" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

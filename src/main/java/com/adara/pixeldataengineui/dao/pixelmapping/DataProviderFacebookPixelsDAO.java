@@ -6,13 +6,13 @@ import java.math.BigInteger;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface DataProviderFacebookPixelsDAO {
-    String getFacebookPixelMappings();
+    String getFacebookPixelMappings() throws Exception;
 
-    String getFacebookPixelMapping(String id);
+    String getFacebookPixelMapping(String id) throws Exception;
 
-    Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
+    Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) throws Exception;
 
-    Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
+    Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) throws Exception;
 
-    Integer deleteFacebookPixelMapping(String id);
+    Integer deleteFacebookPixelMapping(String id) throws Exception;
 }

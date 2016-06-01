@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 public class PixelDataEngineService {
     PixelDataEngine mPixelDataEngine;
 
-    public PixelDataEngine getmPixelDataEngine() {
+    public PixelDataEngine getmPixelDataEngine() throws Exception {
         return mPixelDataEngine;
     }
 
-    public void setmPixelDataEngine(PixelDataEngine mPixelDataEngine) {
+    public void setmPixelDataEngine(PixelDataEngine mPixelDataEngine) throws Exception {
         this.mPixelDataEngine = mPixelDataEngine;
     }
 }

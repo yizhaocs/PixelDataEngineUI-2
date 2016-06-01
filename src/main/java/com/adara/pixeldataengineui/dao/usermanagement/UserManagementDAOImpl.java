@@ -26,21 +26,15 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         this.dataSource = dataSource;
     }
 
-    public String getAllUser() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "getAllUser");
+    public String getAllUser() throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getAllUser" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "getAllUser" + ", " + "Executing query -> "
+        LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-        try {
             listMap = jdbcTemplate.queryForList(query);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -63,23 +57,19 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                    + "getAllUser" + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
         return sb.toString();
     }
 
-    public String getByUsername(String username) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "getByUsername");
+    public String getByUsername(String username) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getByUsername" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users WHERE username =?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "getByUsername" + ", " + "Executing query -> "
+        LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-        try {
             result = jdbcTemplate.queryForObject(query,
                     new Object[]{username}, new RowMapper<String>() {
 
@@ -102,35 +92,26 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                                         "Failed to convert Java object to JSON",
                                         e);
                             }
-                            LOG.info("Invoked " + "Class -> " + CLASS_NAME
-                                    + ", " + "method ->" + "getByUsername"
+                            LOG.info(LOG_HEADER
                                     + "  ,method return -> " + tmp);
                             return tmp;
                         }
                     });
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                    + "getRule" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer login(UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "login");
-
+    public Integer login(UserDTO request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "login" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users p where p.username =?"
                 + " and " + " p.password = ?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "login" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-        try {
             result = jdbcTemplate
                     .queryForObject(query, new Object[]{
                                     request.getUsername(), request.getPassword()},
@@ -159,23 +140,17 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                                     return result;
                                 }
                             });
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         return result.length();
     }
 
-    public Integer createUser(UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "createUser");
-
+    public Integer createUser(UserDTO request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "createUser" + "]";
         String username = request.getUsername();
         String password = request.getPassword();
         if (username == null || username.length() == 0 || password == null
                 || password.length() == 0) {
-            LOG.error("Invoked " + "Class -> " + CLASS_NAME + ", "
-                    + "method ->" + "createUser"
+            LOG.error(LOG_HEADER
                     + "  ,Error: username or password is null");
             return -1;
         }
@@ -183,59 +158,43 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         String query = "insert into pde.pixel_data_engine_users (username, password) values(?, ?)";
         Object[] args = new Object[]{username, password};
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "createUser" + ", " + "Executing query -> "
+        LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
         LOG.info("Executing query:" + query.toString());
 
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                    + "createUser" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer deleteUser(String username) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "deleteUser");
+    public Integer deleteUser(String username) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteUser" + "]";
         String query = "DELETE FROM pde.pixel_data_engine_users WHERE username =?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "deleteUser" + ", " + "Executing query -> "
+        LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, username);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                    + "deleteUser" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer updateUser(UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "updateUser");
-
+    public Integer updateUser(UserDTO request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateUser" + "]";
         String username = request.getUsername();
         String password = request.getPassword();
         if (username == null || username.length() == 0 || password == null
                 || password.length() == 0) {
 
-            LOG.error("Invoked " + "Class -> " + CLASS_NAME + ", "
-                    + "method ->" + "updateUser"
+            LOG.error(LOG_HEADER
                     + "  ,Error: username or password is null");
             return -1;
         }
@@ -243,23 +202,16 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         String query = "UPDATE pde.pixel_data_engine_users SET " + "username"
                 + "=?" + "," + "password" + "=?" + " WHERE username=?";
 
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                + "updateUser" + ", " + "Executing query -> "
+        LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{username, password, username};
         Integer result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->"
-                    + "updateUser" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }

@@ -26,8 +26,8 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup");
+    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertGroup" + "]";
         String query = null;
         Object[] args = null;
         if (isUITest) {
@@ -40,33 +40,25 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
 
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertGroup" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public String getGroups() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups");
+    public String getGroups() throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
         String query = "SELECT a.trigger_key_id, a.gid, a.group_type FROM marketplace.pixel_data_engine_groups a order by a.trigger_key_id";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-        try {
             listMap = jdbcTemplate.queryForList(query);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -91,19 +83,18 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroups" + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
         return sb.toString();
     }
 
-    public String getGroup(String keyId) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup");
+    public String getGroup(String keyId) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroup" + "]";
         String query = "SELECT a.trigger_key_id, a.gid, a.group_type FROM marketplace.pixel_data_engine_groups a where a.trigger_key_id= ?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-        try {
             result = jdbcTemplate.queryForObject(query, new Object[]{keyId}, new RowMapper<String>() {
 
                 @Override
@@ -124,28 +115,21 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
                     return result;
                 }
             });
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public String getSameGroup(Integer gid) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getSameGroup");
+    public String getSameGroup(Integer gid) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getSameGroup" + "]";
         String query = "SELECT a.gid, a.key_id, a.priority, a.type, a.parse_rule, a.condition_rule, a.action_rule FROM marketplace.pixel_data_engine_configs a where a.gid=" + gid;
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getSameGroup" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-        try {
             listMap = jdbcTemplate.queryForList(query);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -173,34 +157,30 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getGroup" + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
         return sb.toString();
     }
 
 
-    public Integer updateGroup(String triggerKeyId, Integer groupType) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup");
+    public Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateGroup" + "]";
         String query = "UPDATE marketplace.pixel_data_engine_groups SET " + "trigger_key_id" + "=?" + "," + "group_type" + "=?" + " WHERE trigger_key_id=?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{triggerKeyId, groupType, triggerKeyId};
         Integer result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateGroup" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup");
+    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteGroup" + "]";
 
         /*
         * Delete group
@@ -211,7 +191,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         } else {
             queryDeleteGroup = "DELETE FROM marketplace.pixel_data_engine_groups WHERE trigger_key_id =?";
         }
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "Executing query -> " + queryDeleteGroup.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + queryDeleteGroup.toString());
 
         JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
         int resultDeleteGroup = 0;
@@ -222,7 +202,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + "  ,method resultDeleteGroup -> " + resultDeleteGroup);
+            LOG.debug(LOG_HEADER + "  ,method resultDeleteGroup -> " + resultDeleteGroup);
 
 
         /*

@@ -6,29 +6,29 @@ import java.math.BigInteger;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface FacebookService {
-    String getFacebookPixelMappings();
+    String getFacebookPixelMappings() throws Exception;
 
-    String getFacebookDpMappings();
+    String getFacebookDpMappings() throws Exception;
 
-    String getFacebookKeyMappings();
+    String getFacebookKeyMappings() throws Exception;
 
-    String getFacebookPixelMapping(String id);
+    String getFacebookPixelMapping(String id) throws Exception;
 
-    String getFacebookDpMapping(String id);
+    String getFacebookDpMapping(String id) throws Exception;
 
-    String getFacebookKeyMapping(String id);
+    String getFacebookKeyMapping(String id) throws Exception;
 
-    Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
+    Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) throws Exception;
 
-    Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel);
+    Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) throws Exception;
 
-    Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId);
+    Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) throws Exception;
 
-    Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook);
+    Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) throws Exception;
 
-    Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel);
+    Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) throws Exception;
 
-    Integer deleteFacebookPixelMapping(String id);
+    Integer deleteFacebookPixelMapping(String id) throws Exception;
 
-    Integer deleteFacebookKeyMapping(String id);
+    Integer deleteFacebookKeyMapping(String id) throws Exception;
 }

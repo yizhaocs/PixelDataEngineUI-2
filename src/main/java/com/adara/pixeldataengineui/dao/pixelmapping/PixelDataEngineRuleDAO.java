@@ -6,13 +6,13 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineRuleDAO {
-    Integer insertRule(RuleRequest request, Boolean isUITest);
+    Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception;
 
-    String getRules();
+    String getRules() throws Exception;
 
-    String getRule(Integer gid, String keyId, Integer priority);
+    String getRule(Integer gid, String keyId, Integer priority) throws Exception;
 
-    Integer updateRule(RuleRequest request);
+    Integer updateRule(RuleRequest request) throws Exception;
 
-    Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest);
+    Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception;
 }

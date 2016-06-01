@@ -24,11 +24,15 @@ public class UserManagementController {
 
     @RequestMapping(value = "/usermanagement/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login(@RequestBody UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "login");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "login" + ", " + "request data ->" + request.toString());
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "login" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
         Integer result = 0;
-        result = mUserManagementService.login(request);
+        try {
+            result = mUserManagementService.login(request);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -39,7 +43,7 @@ public class UserManagementController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "login" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
@@ -47,11 +51,15 @@ public class UserManagementController {
 
     @RequestMapping(value = "/usermanagement/users", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createUser(@RequestBody UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "createUser");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "createUser" + ", " + "request data ->" + request.toString());
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "createUser" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
         Integer result = 0;
-        result = mUserManagementService.createUser(request);
+        try {
+            result = mUserManagementService.createUser(request);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -62,7 +70,7 @@ public class UserManagementController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "createUser" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
@@ -70,11 +78,14 @@ public class UserManagementController {
 
     @RequestMapping(value = "/usermanagement/users", method = RequestMethod.GET)
     public ResponseEntity<String> getAllUser() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getAllUser");
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getAllUser" + "]";
 
         String result = "";
-        result = mUserManagementService.getAllUser();
-
+        try {
+            result = mUserManagementService.getAllUser();
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
@@ -87,19 +98,22 @@ public class UserManagementController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getAllUser" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
     @RequestMapping(value = "/usermanagement/users/{username}", method = RequestMethod.GET)
     public ResponseEntity<String> getByUsername(@PathVariable("username") String username) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getByUsername");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getByUsername" + ", " + "request data ->" + username);
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getByUsername" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + username);
 
         String result = "";
-        result = mUserManagementService.getByUsername(username);
-
+        try {
+            result = mUserManagementService.getByUsername(username);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
@@ -112,7 +126,7 @@ public class UserManagementController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getByUsername" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
@@ -120,12 +134,15 @@ public class UserManagementController {
 
     @RequestMapping(value = "/usermanagement/users/{username}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteUser(@PathVariable("username") String username) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteUser");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteUser" + ", " + "request data ->" + username);
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteUser" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + username);
 
         Integer result = 0;
-        result = mUserManagementService.deleteUser(username);
-
+        try {
+            result = mUserManagementService.deleteUser(username);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
         ResponseEntity<String> response = null;
         if (result > 0) {
             response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
@@ -134,7 +151,7 @@ public class UserManagementController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteUser" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
@@ -142,11 +159,15 @@ public class UserManagementController {
 
     @RequestMapping(value = "/usermanagement/users", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateUser(@RequestBody UserDTO request) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateUser");
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateUser" + ", " + "request data ->" + request.toString());
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateUser" + "]";
+        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
         Integer result = 0;
-        result = mUserManagementService.updateUser(request);
+        try {
+            result = mUserManagementService.updateUser(request);
+        } catch (Exception e) {
+            LOG.error(LOG_HEADER + " Service error: " + e, e);
+        }
 
         ResponseEntity<String> response = null;
         if (result > 0) {
@@ -157,7 +178,7 @@ public class UserManagementController {
         }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateUser" + ", " + "ResponseEntity:" + response.toString());
+            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

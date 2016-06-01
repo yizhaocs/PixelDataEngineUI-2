@@ -25,18 +25,15 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         this.dataSource = dataSource;
     }
 
-    public String getMappings() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMappings");
+    public String getMappings() throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getMappings" + "]";
         String query = "SELECT d.conversion_pixel_id, d.dbm_url FROM marketplace.dbm_conversion_pixel_mappings d order by d.conversion_pixel_id";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMappings" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-        try {
             listMap = jdbcTemplate.queryForList(query);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -48,31 +45,26 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
             // convert Java object to JSON (Jackson)
             ObjectMapper mapper = new ObjectMapper();
             String tmp = "";
-            try {
                 tmp = mapper.writeValueAsString(mDbmConversionPixelMappingsDTO);
-            } catch (Exception e) {
 
-                LOG.error("Failed to convert Java object to JSON", e);
-            }
             sb.append(tmp + ",");
         }
         sb.deleteCharAt(sb.toString().length() - 1);
         sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMappings" + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
         return sb.toString();
     }
 
-    public String getMapping(String conversionPixelId) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMapping");
+    public String getMapping(String conversionPixelId) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getMapping" + "]";
         String query = "SELECT d.conversion_pixel_id, d.dbm_url FROM marketplace.dbm_conversion_pixel_mappings d where d.conversion_pixel_id= ?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-        try {
             result = jdbcTemplate.queryForObject(query, new Object[]{conversionPixelId}, new RowMapper<String>() {
 
                 @Override
@@ -92,72 +84,60 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
                     return result;
                 }
             });
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getRule" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping");
+    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertMapping" + "]";
         String query = "insert into dbm_conversion_pixel_mappings(conversion_pixel_id, dbm_url) values(?, ?)";
         Object[] args = new Object[]{conversionPixelId, httpsChecker(dbmUrl)};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "insertMapping" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer updateMapping(Integer conversionPixelId, String dbmUrl) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMapping");
+    public Integer updateMapping(Integer conversionPixelId, String dbmUrl) throws Exception {
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateMapping" + "]";
         String query = "UPDATE marketplace.dbm_conversion_pixel_mappings SET " + "conversion_pixel_id" + "=?" + "," + "dbm_url" + "=?" + " WHERE conversion_pixel_id=?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{conversionPixelId, httpsChecker(dbmUrl), conversionPixelId};
         Integer result = 0;
-        try {
             result = jdbcTemplate.update(query, args);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "updateMapping" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }
 
-    public Integer deleteMapping(String conversionPixelId) {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping");
+    public Integer deleteMapping(String conversionPixelId) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteMapping" + "]";
         String query = "DELETE FROM marketplace.dbm_conversion_pixel_mappings WHERE conversion_pixel_id =?";
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping" + ", " + "Executing query -> " + query.toString());
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-        try {
             result = jdbcTemplate.update(query, conversionPixelId);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteMapping" + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }

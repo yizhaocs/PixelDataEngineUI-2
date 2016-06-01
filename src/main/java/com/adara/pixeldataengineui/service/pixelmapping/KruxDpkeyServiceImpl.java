@@ -14,23 +14,23 @@ public class KruxDpkeyServiceImpl implements KruxDpkeyService {
     @Autowired
     private KruxDpkeyDAO mKruxDpkeyDAO;
 
-    public String getMappings() {
+    public String getMappings() throws Exception {
         return mKruxDpkeyDAO.getMappings();
     }
 
-    public String getMapping(String kruxSegmentId) {
+    public String getMapping(String kruxSegmentId) throws Exception {
         return mKruxDpkeyDAO.getMapping(kruxSegmentId);
     }
 
-    public Integer insertMapping(String kruxSegmentId, Integer dpKeyId) {
+    public Integer insertMapping(String kruxSegmentId, Integer dpKeyId) throws Exception {
         return mKruxDpkeyDAO.insertMapping(kruxSegmentId, dpKeyId);
     }
 
-    public Integer updateMapping(String kruxSegmentId, Integer dpKeyId) {
+    public Integer updateMapping(String kruxSegmentId, Integer dpKeyId) throws Exception {
         return mKruxDpkeyDAO.updateMapping(kruxSegmentId, dpKeyId);
     }
 
-    public Integer deleteMapping(String kruxSegmentId) {
+    public Integer deleteMapping(String kruxSegmentId) throws Exception {
         return mKruxDpkeyDAO.deleteMapping(kruxSegmentId);
     }
 }

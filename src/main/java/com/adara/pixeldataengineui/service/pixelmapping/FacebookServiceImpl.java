@@ -22,55 +22,55 @@ public class FacebookServiceImpl implements FacebookService {
     @Autowired
     private DataProviderFacebookPixelsDAO mDataProviderFacebookPixelsDAO;
 
-    public String getFacebookPixelMappings() {
+    public String getFacebookPixelMappings() throws Exception {
         return mDataProviderFacebookPixelsDAO.getFacebookPixelMappings();
     }
 
-    public String getFacebookDpMappings() {
+    public String getFacebookDpMappings() throws Exception {
         return mDataProvidersDAO.getFacebookDpMappings();
     }
 
-    public String getFacebookKeyMappings() {
+    public String getFacebookKeyMappings() throws Exception {
         return mFacebookDpKeysDAO.getFacebookKeyMappings();
     }
 
-    public String getFacebookPixelMapping(String id) {
+    public String getFacebookPixelMapping(String id) throws Exception {
         return mDataProviderFacebookPixelsDAO.getFacebookPixelMapping(id);
     }
 
-    public String getFacebookDpMapping(String id) {
+    public String getFacebookDpMapping(String id) throws Exception {
         return mDataProvidersDAO.getFacebookDpMapping(id);
     }
 
-    public String getFacebookKeyMapping(String id) {
+    public String getFacebookKeyMapping(String id) throws Exception {
         return mFacebookDpKeysDAO.getFacebookKeyMapping(id);
     }
 
-    public Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) {
+    public Integer insertMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) throws Exception {
         return mDataProviderFacebookPixelsDAO.insertMappingDataProviderFacebookPixels(dpId, facebookPixelId);
     }
 
-    public Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
+    public Integer insertMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) throws Exception {
         return mFacebookDpKeysDAO.insertMappingFacebookDpKeys(keyId, enabled, updateInterval, useImagePixel);
     }
 
-    public Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) {
+    public Integer updateMappingDataProviderFacebookPixels(Integer dpId, BigInteger facebookPixelId) throws Exception {
         return mDataProviderFacebookPixelsDAO.updateMappingDataProviderFacebookPixels(dpId, facebookPixelId);
     }
 
-    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) {
+    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) throws Exception {
         return mDataProvidersDAO.updateMappingDataProviders(id, name, syncFacebook);
     }
 
-    public Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) {
+    public Integer updateMappingFacebookDpKeys(Integer keyId, Byte enabled, Byte updateInterval, Byte useImagePixel) throws Exception {
         return mFacebookDpKeysDAO.updateMappingFacebookDpKeys(keyId, enabled, updateInterval, useImagePixel);
     }
 
-    public Integer deleteFacebookPixelMapping(String id) {
+    public Integer deleteFacebookPixelMapping(String id) throws Exception {
         return mDataProviderFacebookPixelsDAO.deleteFacebookPixelMapping(id);
     }
 
-    public Integer deleteFacebookKeyMapping(String id) {
+    public Integer deleteFacebookKeyMapping(String id) throws Exception {
         return mFacebookDpKeysDAO.deleteFacebookKeyMapping(id);
     }
 

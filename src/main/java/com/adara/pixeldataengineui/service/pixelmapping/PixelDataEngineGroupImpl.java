@@ -14,27 +14,27 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
     @Autowired
     private PixelDataEngineGroupDAO mPixelDataEngineGroupDAO;
 
-    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) {
+    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception{
         return mPixelDataEngineGroupDAO.insertGroup(triggerKeyId, groupType, isUITest);
     }
 
-    public String getGroups() {
+    public String getGroups() throws Exception {
         return mPixelDataEngineGroupDAO.getGroups();
     }
 
-    public String getGroup(String triggerKeyId) {
+    public String getGroup(String triggerKeyId) throws Exception {
         return mPixelDataEngineGroupDAO.getGroup(triggerKeyId);
     }
 
-    public String getSameGroup(Integer gid) {
+    public String getSameGroup(Integer gid) throws Exception {
         return mPixelDataEngineGroupDAO.getSameGroup(gid);
     }
 
-    public Integer updateGroup(String triggerKeyId, Integer groupType) {
+    public Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception {
         return mPixelDataEngineGroupDAO.updateGroup(triggerKeyId, groupType);
     }
 
-    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) {
+    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception {
         return mPixelDataEngineGroupDAO.deleteGroup(triggerKeyId, gid, isUITest);
     }
 
