@@ -44,7 +44,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     }
 
     public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "testRule");
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
         String testKeyID = request.getKeyId();
         String testValue = request.getTestValue();
