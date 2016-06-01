@@ -3,6 +3,7 @@ package com.adara.pixeldataengineui.controller;
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.util.Constants;
+import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class PixelDataEngineGroupController {
 
         String result = "";
         if (id.equals("0")) {
-            StringBuilder sb = resultMaker(result);
+            StringBuilder sb = Tools.resultMaker(result);
             return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
         }
 
@@ -69,7 +70,7 @@ public class PixelDataEngineGroupController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = resultMaker(result);
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -86,7 +87,7 @@ public class PixelDataEngineGroupController {
 
         String result = "";
         if (id.equals("0")) {
-            StringBuilder sb = resultMaker(result);
+            StringBuilder sb = Tools.resultMaker(result);
             return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
         }
 
@@ -100,7 +101,7 @@ public class PixelDataEngineGroupController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = resultMaker(result);
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -125,7 +126,7 @@ public class PixelDataEngineGroupController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = resultMaker(result);
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -190,11 +191,4 @@ public class PixelDataEngineGroupController {
         return response;
     }
 
-    private StringBuilder resultMaker(String result) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"success\":true,\"body\":");
-        sb.append(result);
-        sb.append("}");
-        return sb;
-    }
 }

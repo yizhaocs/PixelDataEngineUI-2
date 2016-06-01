@@ -5,6 +5,7 @@ import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupServ
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService;
 import com.adara.pixeldataengineui.util.Constants;
+import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,10 +72,7 @@ public class PixelDataEngineRuleController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -104,10 +102,7 @@ public class PixelDataEngineRuleController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 

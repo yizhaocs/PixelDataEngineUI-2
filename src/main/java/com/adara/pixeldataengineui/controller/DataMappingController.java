@@ -3,6 +3,7 @@ package com.adara.pixeldataengineui.controller;
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.*;
 import com.adara.pixeldataengineui.util.Constants;
+import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,16 +67,14 @@ public class DataMappingController {
             }
         } catch (Exception e) {
             LOG.error(LOG_HEADER + " Service error: " + e, e);
+            // return new ResponseEntity<String>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         ResponseEntity<String> response = null;
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -126,10 +125,7 @@ public class DataMappingController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = Tools.resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 

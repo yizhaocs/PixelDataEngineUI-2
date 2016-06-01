@@ -178,4 +178,12 @@ public class Tools {
         }
         return actionRuleValue.toString();
     }
+
+    public static StringBuilder resultMaker(String result) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"success\":true,\"body\":");
+        sb.append(result);
+        sb.append("}");
+        return sb;
+    }
 }
