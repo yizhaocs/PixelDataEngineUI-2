@@ -8,11 +8,11 @@ app.controller('LoginController', function LoginController($rootScope, $location
     var vm = this;
     vm.login = login;
 
-    (function initController() {
+    function initController() {
         // reset login status
         $rootScope.isroot = false;
         AuthenticationService.ClearCredentials();
-    })();
+    };
 
     function login() {
         vm.dataLoading = true;
