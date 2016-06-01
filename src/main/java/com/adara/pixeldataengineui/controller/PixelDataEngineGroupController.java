@@ -52,10 +52,7 @@ public class PixelDataEngineGroupController {
 
         String result = "";
         if (id.equals("0")) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = resultMaker(result);
             return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
         }
 
@@ -65,10 +62,7 @@ public class PixelDataEngineGroupController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -85,10 +79,7 @@ public class PixelDataEngineGroupController {
 
         String result = "";
         if (id.equals("0")) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = resultMaker(result);
             return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
         }
 
@@ -98,10 +89,7 @@ public class PixelDataEngineGroupController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -122,10 +110,7 @@ public class PixelDataEngineGroupController {
         if (result.length() < 4) {
             response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"success\":true,\"body\":");
-            sb.append(result);
-            sb.append("}");
+            StringBuilder sb = resultMaker(result);
             response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
         }
 
@@ -180,5 +165,13 @@ public class PixelDataEngineGroupController {
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + ", " + "ResponseEntity:" + response.toString());
 
         return response;
+    }
+
+    private StringBuilder resultMaker(String result){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"success\":true,\"body\":");
+        sb.append(result);
+        sb.append("}");
+        return sb;
     }
 }
