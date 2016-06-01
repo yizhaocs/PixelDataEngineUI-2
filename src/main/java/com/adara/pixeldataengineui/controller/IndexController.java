@@ -20,7 +20,8 @@ public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getIndexPage() {
-        LOG.info("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "getIndexPage");
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "group" + "]";
+        LOG.info("Invoked at -> " + LOG_HEADER);
         return "index";
     }
 }
