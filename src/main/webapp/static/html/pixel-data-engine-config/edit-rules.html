@@ -142,27 +142,54 @@
 
                             <hr>
 
-                            <table >
+                            <table>
                                 <tr>
-                                    <td class="form-group">
-                                        <label class="col-md-2"> Parse Rule </label>
-                                        <select class="form-control" ng-model="frontendRightHandPanelData.parseRule">
-                                            <option value="orig">orig</option>
-                                            <option value="split1">split1</option>
-                                            <option value="split2">split2</option>
-                                        </select>
+                                    <td>
+                                        <table >
+                                            <tr>
+                                                <td>
+                                                    <label class="col-md-2"> Parse Rule </label>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" ng-model="frontendRightHandPanelData.parseRule">
+                                                        <option value="orig">orig</option>
+                                                        <option value="split1">split1</option>
+                                                        <option value="split2">split2</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
 
-                                    <td class="form-group">
-                                        <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split1'"> Split String </label>
-                                        <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split1'" ng-model="frontendRightHandPanelData.split1.column1">
-
-
-                                        <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 1 </label>
-                                        <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split2'" ng-model="frontendRightHandPanelData.split2.column1">
-                                        </br>
-                                        <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 2 </label>
-                                        <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split2'" ng-model="frontendRightHandPanelData.split2.column2">
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split1'"> Split String </label>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split1'" ng-model="frontendRightHandPanelData.split1.column1">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 1 </label>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split2'" ng-model="frontendRightHandPanelData.split2.column1">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 2 </label>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split2'" ng-model="frontendRightHandPanelData.split2.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
 
