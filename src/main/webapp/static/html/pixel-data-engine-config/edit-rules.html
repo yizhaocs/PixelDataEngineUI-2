@@ -144,10 +144,10 @@
 
                             <table class="form-group">
                                 <tr>
-                                    <td style="padding:0 35px 0 0;">
-                                        <table width="300px">
+                                    <td style="padding:0 15px 0 15px;">
+                                        <table width="370px">
                                             <tr>
-                                                <td width="30px">
+                                                <td width="10px" style="padding:0 75px 0 0;">
                                                     <label > Parse Rule </label>
                                                 </td>
                                                 <td width="100px">
@@ -161,29 +161,31 @@
                                         </table>
                                     </td>
 
-                                    <td style="padding:0 0 0 35px;">
+                                    <td style="padding:0 0 0 15px;">
                                         <table width="300px">
                                             <tr>
                                                 <td>
-                                                    <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split1'"> Split String </label>
+                                                    <label ng-show="frontendRightHandPanelData.parseRule=='split1'"> Split String </label>
                                                 </td>
                                                 <td>
                                                     <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split1'" ng-model="frontendRightHandPanelData.split1.column1">
                                                 </td>
                                             </tr>
                                         </table>
-                                        <table>
+                                        <table width="300px">
                                             <tr>
                                                 <td>
-                                                    <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 1 </label>
+                                                    <label ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 1 </label>
                                                 </td>
                                                 <td>
                                                     <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split2'" ng-model="frontendRightHandPanelData.split2.column1">
                                                 </td>
                                             </tr>
+                                            <tr height="5px">
+                                            </tr>
                                             <tr>
                                                 <td>
-                                                    <label class="col-md-2" ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 2 </label>
+                                                    <label ng-show="frontendRightHandPanelData.parseRule=='split2'"> Level 2 </label>
                                                 </td>
                                                 <td>
                                                     <input class="form-control" type="text" ng-show="frontendRightHandPanelData.parseRule=='split2'" ng-model="frontendRightHandPanelData.split2.column2">
