@@ -195,80 +195,122 @@
 
                             </table>
 
-                            <hr>
+                            <table class="form-group">
+                                <tr>
+                                    <td style="padding:0 15px 0 15px;">
+                                        <table width="370px">
+                                            <tr>
+                                                <td width="10px" style="padding:0 75px 0 0;">
+                                                    <label> Condition Rule </label>
+                                                </td>
+                                                <td width="100px">
+                                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionRule">
+                                                        <option value="len">len</option>
+                                                        <option value="always">always</option>
+                                                        <option value="range">range</option>
+                                                        <option value="in">in</option>
+                                                        <option value="seg">seg</option>
+                                                        <option value="contains">contains</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
 
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
-                                <label class="col-md-2"> Condition Rule </label>
-                                <div class="col-md-2">
-                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionRule">
-                                        <option value="len">len</option>
-                                        <option value="always">always</option>
-                                        <option value="range">range</option>
-                                        <option value="in">in</option>
-                                        <option value="seg">seg</option>
-                                        <option value="contains">contains</option>
-                                    </select>
-                                </div>
-                            </div>
+                                    <td style="padding:0 0 0 15px;">
+                                        <table width="300px" ng-show="frontendRightHandPanelData.conditionRule=='len'">
+                                            <tr>
+                                                <td>
+                                                    <label> Range From </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column1">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label> Range To </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='len'">
-                                <label class="col-md-2"> Range From </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column1">
-                                </div>
-                            </div>
+                                        <table width="300px"  ng-show="frontendRightHandPanelData.conditionRule=='seg'">
+                                            <tr>
+                                                <td>
+                                                    <label> Number Of Segments </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.seg.column1">
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='len'">
-                                <label class="col-md-2"> Range To </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column2">
-                                </div>
-                            </div>
+                                        <table width="300px" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
+                                            <tr>
+                                                <td>
+                                                    <label> Character/String </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.column1">
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table width="300px" ng-show="frontendRightHandPanelData.conditionRule=='range'">
+                                            <tr>
+                                                <td>
+                                                    <label> Range From </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column1">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label> Range To </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table width="300px" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inElementArray">
+                                            <tr>
+                                                <td>
+                                                    <label> element_{{element.column1}}: </label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" ng-model="element.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table width="300px" ng-show="frontendRightHandPanelData.conditionRule=='in'">
+                                            <tr>
+                                                <td>
+                                                    <label>  </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addInElement()">+</button>
+                                                    <button type="button" ng-click="removeInElement()">-</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
 
 
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='seg'">
-                                <label class="col-md-2"> Number Of Segments </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.seg.column1">
-                                </div>
-                            </div>
-
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
-                                <label class="col-md-2"> Character/String </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.column1">
-                                </div>
-                            </div>
 
 
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
-                                <label class="col-md-2"> Range From </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column1">
-                                </div>
-                            </div>
-
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='range'">
-                                <label class="col-md-2"> Range To </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column2">
-                                </div>
-                            </div>
-
-                            <div class="form-group" ng-class="{error: myForm.name.$invalid}" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inElementArray">
-                                <label class="col-md-2"> element_{{element.column1}}: </label>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" ng-model="element.column2">
-                                </div>
-                            </div>
-
-                            <div class="form-group" ng-show="frontendRightHandPanelData.conditionRule=='in'">
-                                <label class="col-md-2"></label>
-                                <div class="col-md-2">
-                                    <button type="button" ng-click="addInElement()">+</button>
-                                    <button type="button" ng-click="removeInElement()">-</button>
-                                </div>
-                            </div>
 
                             <hr>
 
