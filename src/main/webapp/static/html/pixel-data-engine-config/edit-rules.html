@@ -51,6 +51,14 @@
         width: 170px;
     }
 
+    .rightColumnPadding{
+        padding:0 0 0 15px;
+    }
+
+    .leftColumnPadding {
+        padding:0 15px 0 15px;
+    }
+
     #parseRuleSpacing {
         width: 10px;
         padding:0 75px 0 0;
@@ -139,7 +147,7 @@
 
                             <table class="form-group">
                                 <tr>
-                                    <td style="padding:0 15px 0 15px;">
+                                    <td class="leftColumnPadding">
                                         <table width="370px">
                                             <tr>
                                                 <td id="parseRuleSpacing">
@@ -156,7 +164,7 @@
                                         </table>
                                     </td>
 
-                                    <td style="padding:0 0 0 15px;">
+                                    <td class="rightColumnPadding">
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.parseRule=='split1'">
                                             <tr>
                                                 <td>
@@ -189,7 +197,7 @@
 
                             <table class="form-group">
                                 <tr>
-                                    <td style="padding:0 15px 0 15px;">
+                                    <td class="leftColumnPadding">
                                         <table width="370px">
                                             <tr>
                                                 <td id="conditionRuleSpacing">
@@ -209,7 +217,7 @@
                                         </table>
                                     </td>
 
-                                    <td style="padding:0 0 0 15px;">
+                                    <td class="rightColumnPadding">
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'">
                                             <tr>
                                                 <td>
@@ -289,7 +297,7 @@
 
                             <table class="form-group">
                                 <tr>
-                                    <td style="padding:0 15px 0 15px;">
+                                    <td class="leftColumnPadding">
                                         <table width="370px">
                                             <tr>
                                                 <td id="actionRuleSpacing">
@@ -308,7 +316,7 @@
                                         </table>
                                     </td>
 
-                                    <td style="padding:0 0 0 15px;">
+                                    <td class="rightColumnPadding">
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
                                             <tr>
                                                 <td>
