@@ -9,8 +9,8 @@
 app.controller('geoFileManagerController', function ($scope, geoFileManagerService) {
     $scope.save = function (csvFile) {
         console.log("hahhaha:" + csvFile)
-        var fileSplitedByLine = $scope.processData(csvFile);
-        geoFileManagerService.overrideTable(fileSplitedByLine);
+        //var fileSplitedByLine = $scope.processData(csvFile);
+        geoFileManagerService.overrideTable(csvFile);
     };
 
 

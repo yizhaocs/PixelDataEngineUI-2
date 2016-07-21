@@ -57,4 +57,9 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+
+    <bean id="LocationDAO" class="com.adara.pixeldataengineui.dao.geofilemanager.LocationDAOImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

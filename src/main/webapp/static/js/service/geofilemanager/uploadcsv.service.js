@@ -15,13 +15,13 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
 
         function appendTable(csvData) {
-            return $http.post($rootScope.base + 'appendTable', {data: csvData}).success(function (status) {
+            return $http.post($rootScope.base + 'appendLocationTable', {data: csvData}).success(function (status) {
                 return status.data;
             });
         };
 
         function overrideTable(csvData) {
-            return $http.post($rootScope.base + 'overrideTable', {data: csvData}).success(function (status) {
+            return $http.post($rootScope.base + 'overrideLocationTable', {data: csvData}).success(function (status) {
                 return status.data;
             });
         };
