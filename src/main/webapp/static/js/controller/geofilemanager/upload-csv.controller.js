@@ -5,11 +5,13 @@
 'use strict';
 
 
-app.controller('geoFileManagerController', ['$scope', function ($scope) {
+
+app.controller('geoFileManagerController', function ($scope, geoFileManagerService) {
     $scope.save = function (csvFile) {
         console.log("hahhaha:" + csvFile)
-        $scope.processData(csvFile);
-    }
+        var fileSplitedByLine = $scope.processData(csvFile);
+        geoFileManagerService.overrideTable(fileSplitedByLine);
+    };
 
 
     $scope.processData = function processData(csvFile) {
@@ -24,13 +26,11 @@ app.controller('geoFileManagerController', ['$scope', function ($scope) {
             lines.push(tarr);
         }
 
-        for (var i = 0; i < lines.length; i++) {
-        }
-        console.log(lines[0]);
+        return lines;
     };
 
 
-}])
+})
 
 app.directive('fileReader', function () {
     return {
