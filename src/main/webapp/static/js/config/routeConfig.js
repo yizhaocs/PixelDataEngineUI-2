@@ -208,6 +208,11 @@ app.config(['$routeProvider', '$locationProvider',
                     }
                 }
             })
+            .when(base + 'geo-file-manager', {
+                title: 'Geo File Manager',
+                templateUrl: 'static/html/geo-file-manager/index.html',
+                controller: 'geoFileManagerController'
+            })
             .otherwise({
                 templateUrl: 'static/html/usermanagement/login/login.view.html',
                 redirectTo: base + 'login'
