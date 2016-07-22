@@ -4,22 +4,49 @@ package com.adara.pixeldataengineui.model.frontend.generalcomponents;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public class Range {
-    private String column1;
-    private String column2;
+    private String seg;
+    private String row;
+    private String column;
+    private String rangeFrom;
+    private String rangeTo;
 
-    public String getColumn2() {
-        return column2;
+    public String getSeg() {
+        return seg;
     }
 
-    public void setColumn2(String column2) {
-        this.column2 = column2;
+    public void setSeg(String seg) {
+        this.seg = seg;
     }
 
-    public String getColumn1() {
-        return column1;
+    public String getRow() {
+        return row;
     }
 
-    public void setColumn1(String column1) {
-        this.column1 = column1;
+    public void setRow(String row) {
+        this.row = row;
+    }
+
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
+
+    public String getRangeFrom() {
+        return rangeFrom;
+    }
+
+    public void setRangeFrom(String rangeFrom) {
+        this.rangeFrom = rangeFrom;
+    }
+
+    public String getRangeTo() {
+        return rangeTo;
+    }
+
+    public void setRangeTo(String rangeTo) {
+        this.rangeTo = rangeTo;
     }
 }

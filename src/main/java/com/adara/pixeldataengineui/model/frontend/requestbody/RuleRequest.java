@@ -26,7 +26,8 @@ public class RuleRequest {
     private Substr substr;
     private Dec dec;
     private String testValue;
-    private List<InElementArray> inElementArray;
+    private In in;
+//    private List<InElementArray> inElementArray;
     private List<SetRuleArray> setRuleArray;
 
     public String getParseRule() {
@@ -101,13 +102,21 @@ public class RuleRequest {
         this.type = type;
     }
 
-    public List<InElementArray> getInElementArray() {
-        return inElementArray;
+    public In getIn() {
+        return in;
     }
 
-    public void setInElementArray(List<InElementArray> inElementArray) {
-        this.inElementArray = inElementArray;
+    public void setIn(In in) {
+        this.in = in;
     }
+
+    //    public List<InElementArray> getInElementArray() {
+//        return inElementArray;
+//    }
+//
+//    public void setInElementArray(List<InElementArray> inElementArray) {
+//        this.inElementArray = inElementArray;
+//    }
 
     public Split1 getSplit1() {
         return split1;

@@ -243,7 +243,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
                                                 <td>
                                                     <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectSeg">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.seg">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -252,7 +252,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectRow">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.row">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -261,7 +261,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectColumn">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -270,7 +270,7 @@
                                             <tr>
                                                 <td>
                                                     <label> Range From: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column1">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.rangeFrom">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -278,7 +278,7 @@
                                             <tr>
                                                 <td>
                                                     <label> Range To: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column2">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.rangeTo">
                                                 </td>
                                             </tr>
                                         </table>
@@ -359,7 +359,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
                                                 <td>
                                                     <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectSeg">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.seg">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -368,7 +368,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectRow">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.row">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -377,7 +377,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectColumn">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -385,7 +385,7 @@
                                             <tr>
                                                 <td>
                                                     <label> Range From: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column1">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.rangeFrom">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -393,12 +393,12 @@
                                             <tr>
                                                 <td>
                                                     <label> Range To: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column2">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.rangeTo">
                                                 </td>
                                             </tr>
                                         </table>
 
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inElementArray">
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.in.inElementArray">
                                             <tr>
                                                 <td>
                                                     <label> Sub Parse Rule: </label>
@@ -416,7 +416,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
                                                 <td>
                                                     <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectSeg">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.in.seg">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -425,7 +425,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectRow">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.in.row">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
@@ -434,7 +434,7 @@
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectColumn">
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.in.column">
                                                 </td>
                                             </tr>
                                             <tr height="5px">
