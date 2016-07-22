@@ -3,6 +3,7 @@ package com.adara.pixeldataengineui.dao.geofilemanager;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
@@ -19,9 +20,19 @@ public class LocationDAOImpl implements  LocationDAO {
     }
 
     public Integer append(GeoFileManagerRequest request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "append" + "]";
+        String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return 33;
     }
     public Integer override(GeoFileManagerRequest request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "override" + "]";
+        String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return 33;
     }
 }
