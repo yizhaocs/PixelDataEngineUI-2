@@ -228,12 +228,12 @@
 
                                             <tr>
                                                 <td>
-                                                    <label> Parse Rule: </label>
+                                                    <label> Sub Parse Rule: </label>
                                                     <select class="form-control" ng-model="frontendRightHandPanelData.conditionsubselect">
                                                         <option disabled selected value> -- select an option --</option>
                                                         <option value="orig">orig</option>
                                                         <option value="split1">split1</option>
-                                                        <option value="split2">split2</option>
+                                                        <option ng-show="frontendRightHandPanelData.parseRule=='split2'" value="split2">split2</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -295,12 +295,12 @@
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
                                             <tr>
                                                 <td>
-                                                    <label> Parse Rule: </label>
+                                                    <label> Sub Parse Rule: </label>
                                                     <select class="form-control" ng-model="frontendRightHandPanelData.conditionsubselect">
                                                         <option disabled selected value> -- select an option --</option>
                                                         <option value="orig">orig</option>
                                                         <option value="split1">split1</option>
-                                                        <option value="split2">split2</option>
+                                                        <option ng-show="frontendRightHandPanelData.parseRule=='split2'" value="split2">split2</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -344,12 +344,12 @@
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'">
                                             <tr>
                                                 <td>
-                                                    <label> Parse Rule: </label>
+                                                    <label> Sub Parse Rule: </label>
                                                     <select class="form-control" ng-model="frontendRightHandPanelData.conditionsubselect">
                                                         <option disabled selected value> -- select an option --</option>
                                                         <option value="orig">orig</option>
                                                         <option value="split1">split1</option>
-                                                        <option value="split2">split2</option>
+                                                        <option ng-show="frontendRightHandPanelData.parseRule=='split2'" value="split2">split2</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -399,6 +399,47 @@
                                         </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inElementArray">
+                                            <tr>
+                                                <td>
+                                                    <label> Sub Parse Rule: </label>
+                                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionsubselect">
+                                                        <option disabled selected value> -- select an option --</option>
+                                                        <option value="orig">orig</option>
+                                                        <option value="split1">split1</option>
+                                                        <option ng-show="frontendRightHandPanelData.parseRule=='split2'" value="split2">split2</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+
+                                            <tr ng-show="frontendRightHandPanelData.conditionsubselect=='split1'">
+                                                <td>
+                                                    <label> Seg: </label>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectSeg">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+
+                                            <tr ng-show="frontendRightHandPanelData.conditionsubselect=='split2'">
+                                                <td>
+                                                    <label> Row: </label>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectRow">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+
+                                            <tr ng-show="frontendRightHandPanelData.conditionsubselect=='split2'">
+                                                <td>
+                                                    <label> Column: </label>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.conditionSubselectColumn">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+
                                             <tr>
                                                 <td>
                                                     <label> element_{{element.column1}}: </label>
