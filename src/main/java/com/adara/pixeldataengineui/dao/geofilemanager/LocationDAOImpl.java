@@ -22,17 +22,34 @@ public class LocationDAOImpl implements  LocationDAO {
     public Integer append(GeoFileManagerRequest request) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "append" + "]";
         String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
-        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+        Object[] args = new Object[]{null, null};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return 33;
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+
+        int result = 0;
+        result = jdbcTemplate.update(query, args);
+
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        return result;
     }
     public Integer override(GeoFileManagerRequest request) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "override" + "]";
         String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
-        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+        Object[] args = new Object[]{null, null};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return 33;
-    }
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+
+        int result = 0;
+        result = jdbcTemplate.update(query, args);
+
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        return result;
 }
