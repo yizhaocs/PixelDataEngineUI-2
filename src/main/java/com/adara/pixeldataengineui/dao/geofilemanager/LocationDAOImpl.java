@@ -19,9 +19,9 @@ public class LocationDAOImpl implements  LocationDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer append(GeoFileManagerRequest request) throws Exception{
+    public Integer append(GeoFileManagerRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "append" + "]";
-        String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
+        String query = "insert into geoip.location(adobe_segment_id, dp_key_id) values(?, ?)";
         Object[] args = new Object[]{null, null};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -36,9 +36,10 @@ public class LocationDAOImpl implements  LocationDAO {
 
         return result;
     }
-    public Integer override(GeoFileManagerRequest request) throws Exception{
+
+    public Integer override(GeoFileManagerRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "override" + "]";
-        String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
+        String query = "insert into geoip.location(adobe_segment_id, dp_key_id) values(?, ?)";
         Object[] args = new Object[]{null, null};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -52,4 +53,5 @@ public class LocationDAOImpl implements  LocationDAO {
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
+    }
 }
