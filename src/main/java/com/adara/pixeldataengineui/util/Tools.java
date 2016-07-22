@@ -64,6 +64,7 @@ public class Tools {
 
     public static String conditionRuleBuilder(RuleRequest request) {
         String conditionRuleKey = request.getConditionRule();
+        String conditionSubselect = request.getConditionSubselect();
         StringBuilder conditionRuleValue = new StringBuilder();
         conditionRuleValue.append(conditionRuleKey);
         String len = null;

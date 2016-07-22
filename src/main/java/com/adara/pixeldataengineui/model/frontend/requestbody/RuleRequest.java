@@ -10,6 +10,7 @@ import java.util.List;
 public class RuleRequest {
     private String parseRule;
     private String conditionRule;
+    private String conditionSubselect;
     private String actionRule;
     private String gid;
     private String keyId;
@@ -50,6 +51,14 @@ public class RuleRequest {
 
     public void setConditionRule(String conditionRule) {
         this.conditionRule = conditionRule;
+    }
+
+    public String getConditionSubselect() {
+        return conditionSubselect;
+    }
+
+    public void setConditionSubselect(String conditionSubselect) {
+        this.conditionSubselect = conditionSubselect;
     }
 
     public String getGid() {

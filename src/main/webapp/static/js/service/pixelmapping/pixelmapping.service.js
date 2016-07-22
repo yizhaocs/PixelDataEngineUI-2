@@ -113,7 +113,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'getRule?gid=' + gid + '&keyid=' + keyID + '&priority=' + priority);
         }
 
-        function updateRule(redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, contains, range, substr, dec, inElementArray, setRuleArray) {
+        function updateRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, contains, range, substr, dec, inElementArray, setRuleArray) {
             return $http.post($rootScope.base + 'updateRule', {
                 gid: gid,
                 keyId: keyId,
@@ -124,6 +124,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 split1: split1,
                 split2: split2,
                 conditionRule: conditionRule,
+                conditionSubselect: conditionSubselect,
                 len: len,
                 seg: seg,
                 contains: contains,
@@ -146,7 +147,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        function insertRule(redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, type, split1, split2, len, seg, contains, range, substr, dec, inElementArray, setRuleArray) {
+        function insertRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, type, split1, split2, len, seg, contains, range, substr, dec, inElementArray, setRuleArray) {
             return $http.post($rootScope.base + 'insertRule', {
                 gid: gid,
                 keyId: keyId,
@@ -156,6 +157,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 split1: split1,
                 split2: split2,
                 conditionRule: conditionRule,
+                conditionSubselect: conditionSubselect,
                 len: len,
                 seg: seg,
                 contains: contains,
@@ -183,6 +185,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 split1: split1,
                 split2: split2,
                 conditionRule: conditionRule,
+                conditionSubselect: conditionSubselect,
                 len: len,
                 seg: seg,
                 contains: contains,
