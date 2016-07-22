@@ -1,9 +1,6 @@
 package com.adara.pixeldataengineui.util;
 
-import com.adara.pixeldataengineui.model.frontend.generalcomponents.InElementArray;
-import com.adara.pixeldataengineui.model.frontend.generalcomponents.Len;
-import com.adara.pixeldataengineui.model.frontend.generalcomponents.Range;
-import com.adara.pixeldataengineui.model.frontend.generalcomponents.SetRuleArray;
+import com.adara.pixeldataengineui.model.frontend.generalcomponents.*;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 
 import java.text.SimpleDateFormat;
@@ -69,14 +66,14 @@ public class Tools {
         conditionRuleValue.append(conditionRuleKey);
         String len = null;
         String seg = null;
-        String contains = null;
-        String rangeFrom = null;
-        String rangeTo = null;
+        Contains contains = null;
+
+
         List<InElementArray> inElementArrayList = null;
         if (conditionRuleKey.equals("len")) {
             Len mLen = request.getLen();
-            rangeFrom = mLen.getColumn1();
-            rangeTo = mLen.getColumn2();
+            String rangeFrom = mLen.getColumn1();
+            String rangeTo = mLen.getColumn2();
 
             if(rangeFrom!=null && rangeFrom.equals("") == false){
                 conditionRuleValue.append("|");
@@ -89,8 +86,8 @@ public class Tools {
             }
         } else if (conditionRuleKey.equals("range")) {
             Range mRange = request.getRange();
-            rangeFrom = mRange.getColumn1();
-            rangeTo = mRange.getColumn2();
+            String rangeFrom = mRange.getColumn1();
+            String rangeTo = mRange.getColumn2();
             if(rangeFrom!=null && rangeFrom.equals("") == false){
                 conditionRuleValue.append("|");
                 conditionRuleValue.append(rangeFrom);
@@ -118,14 +115,46 @@ public class Tools {
                 conditionRuleValue.append(seg);
             }
         } else if (conditionRuleKey.equals("contains")) {
-            contains = request.getContains().toString();
+            contains = request.getContains();
+            String charString = contains.getCharString();
+            String conditionSubselectSeg = contains.getSeg();
+            String conditionSubselectRow = contains.getRow();
+            String conditionSubselectColumn = contains.getColumn();
+
             if(contains !=null  && contains.equals("") == false){
-                conditionRuleValue.append("|");
-                if(contains.equals("|")){
-                    conditionRuleValue.append("\"" + contains + "\"");
-                }else{
-                    conditionRuleValue.append(contains);
+                if(conditionSubselect.equals("orig")){
+                    conditionRuleValue.append("|");
+                    if(charString.equals("|")){
+                        conditionRuleValue.append("\"" + charString + "\"");
+                    }else{
+                        conditionRuleValue.append(charString);
+                    }
+                }else if(conditionSubselect.equals("split1")){
+                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(conditionSubselect);
+                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(conditionSubselectSeg);
+                    conditionRuleValue.append("|");
+                    if(charString.equals("|")){
+                        conditionRuleValue.append("\"" + charString + "\"");
+                    }else{
+                        conditionRuleValue.append(charString);
+                    }
+                }else if(conditionSubselect.equals("split2")){
+                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(conditionSubselect);
+                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(conditionSubselectRow);
+                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(conditionSubselectColumn);
+                    conditionRuleValue.append("|");
+                    if(charString.equals("|")){
+                        conditionRuleValue.append("\"" + charString + "\"");
+                    }else{
+                        conditionRuleValue.append(charString);
+                    }
                 }
+
 
             }
         }

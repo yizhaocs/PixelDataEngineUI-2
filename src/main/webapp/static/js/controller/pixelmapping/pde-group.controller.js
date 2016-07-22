@@ -397,12 +397,30 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 } else if (conditionRuleSplit[0] == 'seg') {
                     $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
                 } else if (conditionRuleSplit[0] == 'contains') {
-                    if (conditionRuleSplit.length == 3) {
+                    if(conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2' ) {
+                        $scope.processedResponseBackupRuleData.conditionSubselect = 'orig';
+                    }else if(conditionRuleSplit[1] == 'split1'){
+                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
+                        $scope.processedResponseBackupRuleData.contains.seg = conditionRuleSplit[2];
+                    }else if(conditionRuleSplit[1] == 'split2'){
+                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
+                        $scope.processedResponseBackupRuleData.contains.row = conditionRuleSplit[2];
+                        $scope.processedResponseBackupRuleData.contains.column = conditionRuleSplit[3];
+                    }
+
+                    if(conditionRuleSplit[conditionRuleSplit.length - 1] == '"' && conditionRuleSplit[conditionRuleSplit.length - 2] == '"'){
+                        $scope.processedResponseBackupRuleData.contains.charString = "\"|\""; // contains|"|"
+                    }else{
+                        $scope.processedResponseBackupRuleData.contains.charString = conditionRuleSplit[conditionRuleSplit.length - 1];
+                    }
+
+                    /*
+                    if (conditionRuleSplit.length == 3) { // contains|"|"
                         $scope.processedResponseBackupRuleData.contains.column1 = "\"|\"";
                     }else{
                         $scope.processedResponseBackupRuleData.contains.column1 = conditionRuleSplit[1];
                     }
-
+*/
                 }
 
                 var actionRuleSplit = backendData.body.action_rule.split("|");
