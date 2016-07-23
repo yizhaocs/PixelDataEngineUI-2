@@ -147,7 +147,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
             });
         };
 
-        function insertRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, type, split1, split2, len, seg, contains, range, substr, dec, inElementArray, setRuleArray) {
+        function insertRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, type, split1, split2, len, seg, contains, range, substr, dec, inElement, setRuleArray) {
             return $http.post($rootScope.base + 'insertRule', {
                 gid: gid,
                 keyId: keyId,
@@ -165,7 +165,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 actionRule: actionRule,
                 substr: substr,
                 dec: dec,
-                inElementArray: inElementArray,
+                in: inElement,
                 setRuleArray: setRuleArray
             }).success(function (status) {
                 $location.path(redirectPath);
@@ -174,7 +174,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
 
-        function testRule(redirectPath, parseRule, conditionRule, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, contains, range, substr, dec, inElementArray, setRuleArray, testValue) {
+        function testRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, contains, range, substr, dec, inElement, setRuleArray, testValue) {
             return $http.post($rootScope.base + 'testRule', {
                 gid: gid,
                 keyId: keyId,
@@ -193,7 +193,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 actionRule: actionRule,
                 substr: substr,
                 dec: dec,
-                inElementArray: inElementArray,
+                in: inElement,
                 setRuleArray: setRuleArray,
                 testValue: testValue
             }).success(function (status) {

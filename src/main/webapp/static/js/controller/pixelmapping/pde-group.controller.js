@@ -310,6 +310,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             $rootScope.base + 'group/edit-rules/' + gid,
             frontendRightHandPanelData.parseRule,
             frontendRightHandPanelData.conditionRule,
+            frontendRightHandPanelData.conditionSubselect,
             frontendRightHandPanelData.actionRule,
             frontendRightHandPanelData.gid,
             frontendRightHandPanelData.keyId,

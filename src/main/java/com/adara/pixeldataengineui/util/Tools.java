@@ -66,7 +66,6 @@ public class Tools {
         conditionRuleValue.append(conditionRuleKey);
 
 
-        List<In.InElementArray> inElementArrayList = null;
         if (conditionRuleKey.equals("len")) {
             Len len = request.getLen();
 
@@ -219,7 +218,7 @@ public class Tools {
                 String conditionSubselectSeg = in.getSeg();
                 String conditionSubselectRow = in.getRow();
                 String conditionSubselectColumn = in.getColumn();
-                In.InElementArray mInElementArray = in.getInElementArray();
+                List<In.InElementArray> inElementArrayList = in.getInElementArray();
 
 
                 if (in != null && in.equals("") == false) {
