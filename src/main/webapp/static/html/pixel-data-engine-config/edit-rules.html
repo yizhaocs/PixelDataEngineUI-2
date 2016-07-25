@@ -398,7 +398,7 @@
                                             </tr>
                                         </table>
 
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.in.inElementArray">
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'">
                                             <tr>
                                                 <td>
                                                     <label> Sub Parse Rule: </label>
@@ -430,7 +430,9 @@
                                             </tr>
                                             <tr height="5px">
                                             </tr>
+                                        </table>
 
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.in.inElementArray">
                                             <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
                                                 <td>
                                                     <label> Column: </label>
