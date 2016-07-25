@@ -77,7 +77,6 @@ public class Tools {
 
             if (len != null && len.equals("") == false) {
                 if (conditionSubselect.equals("orig")) {
-                    conditionRuleValue.append("|");
 
                     if (rangeFrom != null && rangeFrom.equals("") == false) {
                         conditionRuleValue.append("|");
@@ -135,7 +134,6 @@ public class Tools {
                     conditionRuleValue.append("|");
 
                     if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append("|");
                         conditionRuleValue.append(rangeFrom);
                     }
 
