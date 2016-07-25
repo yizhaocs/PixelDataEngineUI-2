@@ -423,21 +423,37 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 } else if (conditionRuleSplit[0] == 'in') {
                     if(conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2' ) {
                         $scope.processedResponseBackupRuleData.conditionSubselect = 'orig';
+
+                        for (var i = 1; i < conditionRuleSplit.length; i++) {
+                            var inObject = {
+                                column1: i - 1,
+                                column2: conditionRuleSplit[i]
+                            }
+                            $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
+                        }
                     }else if(conditionRuleSplit[1] == 'split1'){
                         $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
                         $scope.processedResponseBackupRuleData.in.seg = conditionRuleSplit[2];
+
+                        for (var i = 3; i < conditionRuleSplit.length; i++) {
+                            var inObject = {
+                                column1: i - 3,
+                                column2: conditionRuleSplit[i]
+                            }
+                            $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
+                        }
                     }else if(conditionRuleSplit[1] == 'split2'){
                         $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
                         $scope.processedResponseBackupRuleData.in.row = conditionRuleSplit[2];
                         $scope.processedResponseBackupRuleData.in.column = conditionRuleSplit[3];
-                    }
 
-                    for (var i = 1; i < conditionRuleSplit.length; i++) {
-                        var inObject = {
-                            column1: i - 1,
-                            column2: conditionRuleSplit[i]
+                        for (var i = 4; i < conditionRuleSplit.length; i++) {
+                            var inObject = {
+                                column1: i - 4,
+                                column2: conditionRuleSplit[i]
+                            }
+                            $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
                         }
-                        $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
                     }
                 } else if (conditionRuleSplit[0] == 'seg') {
                     $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
