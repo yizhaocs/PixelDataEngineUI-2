@@ -218,14 +218,14 @@ public class Tools {
                 String conditionSubselectSeg = in.getSeg();
                 String conditionSubselectRow = in.getRow();
                 String conditionSubselectColumn = in.getColumn();
-                List<In.InElementArray> inElementArrayList = in.getInElementArray();
+                List<InElementArray> inElementArrayList = in.getInElementArray();
 
 
                 if (in != null && in.equals("") == false) {
                     if (conditionSubselect.equals("orig")) {
                         conditionRuleValue.append("|");
 
-                        for (In.InElementArray i : inElementArrayList) {
+                        for (InElementArray i : inElementArrayList) {
                             if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
                                 conditionRuleValue.append(i.getColumn2());
                                 conditionRuleValue.append("|");
@@ -239,7 +239,7 @@ public class Tools {
                         conditionRuleValue.append(conditionSubselectSeg);
                         conditionRuleValue.append("|");
 
-                        for (In.InElementArray i : inElementArrayList) {
+                        for (InElementArray i : inElementArrayList) {
                             if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
                                 conditionRuleValue.append(i.getColumn2());
                                 conditionRuleValue.append("|");
@@ -255,7 +255,7 @@ public class Tools {
                         conditionRuleValue.append(conditionSubselectColumn);
                         conditionRuleValue.append("|");
 
-                        for (In.InElementArray i : inElementArrayList) {
+                        for (InElementArray i : inElementArrayList) {
                             if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
                                 conditionRuleValue.append(i.getColumn2());
                                 conditionRuleValue.append("|");
