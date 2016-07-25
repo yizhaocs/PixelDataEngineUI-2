@@ -93,7 +93,6 @@ public class Tools {
                     conditionRuleValue.append(conditionSubselect);
                     conditionRuleValue.append("|");
                     conditionRuleValue.append(conditionSubselectSeg);
-                    conditionRuleValue.append("|");
 
                     if (rangeFrom != null && rangeFrom.equals("") == false) {
                         conditionRuleValue.append("|");
@@ -109,9 +108,8 @@ public class Tools {
                     conditionRuleValue.append(conditionSubselect);
                     conditionRuleValue.append("|");
                     conditionRuleValue.append(conditionSubselectRow);
-                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(",");
                     conditionRuleValue.append(conditionSubselectColumn);
-                    conditionRuleValue.append("|");
 
                     if (rangeFrom != null && rangeFrom.equals("") == false) {
                         conditionRuleValue.append("|");
@@ -124,23 +122,6 @@ public class Tools {
                     }
                 }
             }
-
-            /*
-            Len mLen = request.getLen();
-            String rangeFrom = mLen.getColumn1();
-            String rangeTo = mLen.getColumn2();
-
-            if(rangeFrom!=null && rangeFrom.equals("") == false){
-                conditionRuleValue.append("|");
-                conditionRuleValue.append(rangeFrom);
-            }
-
-            if(rangeTo != null && rangeTo.equals("") == false){
-                conditionRuleValue.append("|");
-                conditionRuleValue.append(rangeTo);
-            }
-            */
-
         } else if (conditionRuleKey.equals("range")) {
             Range mRange = request.getRange();
             String conditionSubselectSeg = mRange.getSeg();
@@ -167,7 +148,6 @@ public class Tools {
                     conditionRuleValue.append(conditionSubselect);
                     conditionRuleValue.append("|");
                     conditionRuleValue.append(conditionSubselectSeg);
-                    conditionRuleValue.append("|");
 
                     if (rangeFrom != null && rangeFrom.equals("") == false) {
                         conditionRuleValue.append("|");
@@ -183,9 +163,8 @@ public class Tools {
                     conditionRuleValue.append(conditionSubselect);
                     conditionRuleValue.append("|");
                     conditionRuleValue.append(conditionSubselectRow);
-                    conditionRuleValue.append("|");
+                    conditionRuleValue.append(",");
                     conditionRuleValue.append(conditionSubselectColumn);
-                    conditionRuleValue.append("|");
 
                     if (rangeFrom != null && rangeFrom.equals("") == false) {
                         conditionRuleValue.append("|");
@@ -198,20 +177,6 @@ public class Tools {
                     }
                 }
             }
-            /*
-            Range mRange = request.getRange();
-            String rangeFrom = mRange.getColumn1();
-            String rangeTo = mRange.getColumn2();
-            if(rangeFrom!=null && rangeFrom.equals("") == false){
-                conditionRuleValue.append("|");
-                conditionRuleValue.append(rangeFrom);
-            }
-
-            if(rangeTo!=null && rangeTo.equals("") == false){
-                conditionRuleValue.append("|");
-                conditionRuleValue.append(rangeTo);
-            }
-*/
         } else {
             if (conditionRuleKey.equals("in")) {
                 In in = request.getIn();
@@ -251,7 +216,7 @@ public class Tools {
                         conditionRuleValue.append(conditionSubselect);
                         conditionRuleValue.append("|");
                         conditionRuleValue.append(conditionSubselectRow);
-                        conditionRuleValue.append("|");
+                        conditionRuleValue.append(",");
                         conditionRuleValue.append(conditionSubselectColumn);
                         conditionRuleValue.append("|");
 
@@ -264,16 +229,6 @@ public class Tools {
                         conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
                     }
                 }
-/*
-            inElementArrayList = request.getInElementArray();
-            conditionRuleValue.append("|");
-            for (InElementArray i : inElementArrayList) {
-                if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
-                    conditionRuleValue.append(i.getColumn2());
-                    conditionRuleValue.append("|");
-                }
-            }
-            conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);*/
             } else if (conditionRuleKey.equals("seg")) {
                 String seg = request.getSeg().toString();
                 if (seg != null && seg.equals("") == false) {
@@ -312,7 +267,7 @@ public class Tools {
                         conditionRuleValue.append(conditionSubselect);
                         conditionRuleValue.append("|");
                         conditionRuleValue.append(conditionSubselectRow);
-                        conditionRuleValue.append("|");
+                        conditionRuleValue.append(",");
                         conditionRuleValue.append(conditionSubselectColumn);
                         conditionRuleValue.append("|");
                         if (charString.equals("|")) {
