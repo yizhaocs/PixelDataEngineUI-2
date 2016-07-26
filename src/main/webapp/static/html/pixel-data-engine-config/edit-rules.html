@@ -576,6 +576,23 @@
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <table width="370px">
+                                    <tr>
+                                        <td id="testingOptions">
+                                            <label class="col-md-2"> Individual/Group </label>
+                                        </td>
+                                        <td width="155px">
+                                            <select class="form-control" ng-model="frontendRightHandPanelData.testOption">
+                                                <option disabled selected value> -- select an option --</option>
+                                                <option value="individual">Individual</option>
+                                                <option value="group">Group</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Result </label>
                                 <div class="col-md-5">
                                     <textarea rows="6" cols="80" ng-disabled=true class="form-control" ng-model="frontendRightHandPanelData.testResult">  </textarea>

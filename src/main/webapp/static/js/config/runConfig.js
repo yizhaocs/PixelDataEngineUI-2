@@ -1,3 +1,6 @@
+/**
+ * @author YI ZHAO[yi.zhao@adara.com]
+ */
 
 app.run(['$location', '$rootScope', '$cookieStore', '$http', function ($location, $rootScope, $cookieStore, $http) {
     // keep user logged in after page refresh
