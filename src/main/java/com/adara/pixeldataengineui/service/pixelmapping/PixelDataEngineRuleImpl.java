@@ -46,29 +46,34 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
-        String testKeyID = request.getKeyId();
-        String testValue = request.getTestValue();
-
-        // insert group
-        mPixelDataEngineGroupService.insertGroup(testKeyID, 1, true);
-        // insert rule
-        request.setGid("1");
-        request.setPriority(request.getNewPriority());
-        mPixelDataEngineRuleService.insertRule(request, true);
-
-        // let the mock table refresh its pixelDataEngineConfigs
-        mPixelDataEngineService.mPixelDataEngine.init();
-        Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
-
-        // delete group
-        mPixelDataEngineGroupService.deleteGroup(testKeyID, "1", true);
-        // delete rule
-        mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
-
-
-        // reverse order
         Map<String, String> treeMapResultMap = new TreeMap<String, String>();
-        treeMapResultMap.putAll(resultMap);
+
+        if(request.getTestOption().equals("individual")){
+            String testKeyID = request.getKeyId();
+            String testValue = request.getTestValue();
+
+            // insert group
+            mPixelDataEngineGroupService.insertGroup(testKeyID, 1, true);
+            // insert rule
+            request.setGid("1");
+            request.setPriority(request.getNewPriority());
+            mPixelDataEngineRuleService.insertRule(request, true);
+
+            // let the mock table refresh its pixelDataEngineConfigs
+            mPixelDataEngineService.mPixelDataEngine.init();
+            Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
+
+            // delete group
+            mPixelDataEngineGroupService.deleteGroup(testKeyID, "1", true);
+            // delete rule
+            mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
+
+
+            // reverse order
+            treeMapResultMap.putAll(resultMap);
+        }else if(request.getTestOption().equals("group")){
+
+        }
 
         return treeMapResultMap;
     }

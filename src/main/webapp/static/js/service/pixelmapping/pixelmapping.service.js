@@ -174,7 +174,7 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
         };
 
 
-        function testRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, contains, range, substr, dec, inElement, setRuleArray, testValue) {
+        function testRule(redirectPath, parseRule, conditionRule, conditionSubselect, actionRule, gid, keyId, priority, newPriority, type, split1, split2, len, seg, contains, range, substr, dec, inElement, setRuleArray, testValue, testOption) {
             return $http.post($rootScope.base + 'testRule', {
                 gid: gid,
                 keyId: keyId,
@@ -195,7 +195,8 @@ app.factory("pixelmappingService", ['$http', '$location', '$rootScope',
                 dec: dec,
                 in: inElement,
                 setRuleArray: setRuleArray,
-                testValue: testValue
+                testValue: testValue,
+                testOption: testOption
             }).success(function (status) {
                 $location.path(redirectPath);
                 return status.data;

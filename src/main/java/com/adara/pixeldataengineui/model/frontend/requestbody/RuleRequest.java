@@ -26,6 +26,7 @@ public class RuleRequest {
     private Substr substr;
     private Dec dec;
     private String testValue;
+    private String testOption;
     private In in;
 //    private List<InElementArray> inElementArray;
     private List<SetRuleArray> setRuleArray;
@@ -196,5 +197,13 @@ public class RuleRequest {
 
     public void setSetRuleArray(List<SetRuleArray> setRuleArray) {
         this.setRuleArray = setRuleArray;
+    }
+
+    public String getTestOption() {
+        return testOption;
+    }
+
+    public void setTestOption(String testOption) {
+        this.testOption = testOption;
     }
 }

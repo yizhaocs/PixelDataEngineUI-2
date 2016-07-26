@@ -327,7 +327,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.dec,
             frontendRightHandPanelData.in,
             frontendRightHandPanelData.setRuleArray,
-            frontendRightHandPanelData.testValue
+            frontendRightHandPanelData.testValue,
+            frontendRightHandPanelData.testOption
         ).success(function (backendData) {
             var result = "";
             for (var i = 0; i < backendData.data.length; i++) {
