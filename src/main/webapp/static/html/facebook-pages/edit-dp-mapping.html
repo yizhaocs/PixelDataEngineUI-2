@@ -17,11 +17,11 @@
 
                 <form role="form" name="myForm" class="form-horizontal">
                     <div class="row">
-                        <div class="form-group" ng-class="{error: myForm.id.$invalid}">
+                        <div class="form-group" ng-class="{error: myForm.dp_id.$invalid}">
                             <label class="col-md-2"> DP Id </label>
                             <div class="col-md-4">
-                                <input name="id" ng-disabled="true" ng-model="frontendData.id" type="text" class="form-control" placeholder="id" required/>
-                                <span ng-show="myForm.id.$dirty && myForm.id.$invalid" class="help-inline">DP Id Required</span>
+                                <input name="dp_id" ng-disabled="true" ng-model="frontendData.dp_id" type="text" class="form-control" placeholder="dp_id" required/>
+                                <span ng-show="myForm.dp_id.$dirty && myForm.dp_id.$invalid" class="help-inline">DP Id Required</span>
                             </div>
                         </div>
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">

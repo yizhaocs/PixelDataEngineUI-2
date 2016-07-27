@@ -39,7 +39,7 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         sb.append("[");
         for (Map<String, Object> m : listMap) {
             DataProvidersDTO mDataProvidersDTO = new DataProvidersDTO();
-            mDataProvidersDTO.setId(Integer.valueOf(String.valueOf(m.get("id"))));
+            mDataProvidersDTO.setDp_id(Integer.valueOf(String.valueOf(m.get("id"))));
             mDataProvidersDTO.setName(String.valueOf(m.get("name")));
             mDataProvidersDTO.setSync_facebook(Boolean.valueOf(String.valueOf(m.get("sync_facebook"))));
             // convert Java object to JSON (Jackson)
@@ -71,7 +71,7 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
             public String mapRow(ResultSet rs, int rowNum)
                     throws SQLException {
                 DataProvidersDTO mDataProvidersDTO = new DataProvidersDTO();
-                mDataProvidersDTO.setId(rs.getInt("id"));
+                mDataProvidersDTO.setDp_id(rs.getInt("id"));
                 mDataProvidersDTO.setName(rs.getString("name"));
                 mDataProvidersDTO.setSync_facebook(rs.getBoolean("sync_facebook"));
 

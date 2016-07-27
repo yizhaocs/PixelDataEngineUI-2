@@ -196,7 +196,7 @@ public class DataMappingController {
                 result = mFacebookService.updateMappingDataProviderFacebookPixels(request.getMapping().getDp_id(), request.getMapping().getFacebook_pixel_id());
             } else if (request.getType().equals("facebook-dp")) {
                 Byte syncFacebook = request.getMapping().getSync_facebook() == false ? (byte) 0 : 1;
-                result = mFacebookService.updateMappingDataProviders(request.getMapping().getId(), request.getMapping().getName(), syncFacebook);
+                result = mFacebookService.updateMappingDataProviders(request.getMapping().getDp_id(), request.getMapping().getName(), syncFacebook);
             } else if (request.getType().equals("facebook-key")) {
                 Byte useImagePixel = request.getMapping().getUse_image_pixel() == false ? (byte) 0 : 1;
                 result = mFacebookService.updateMappingFacebookDpKeys(request.getMapping().getKey_id(), request.getMapping().getEnabled(), request.getMapping().getUpdate_interval(), useImagePixel);

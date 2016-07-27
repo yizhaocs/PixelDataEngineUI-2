@@ -1,10 +1,14 @@
 package com.adara.pixeldataengineui.model.backend.dto.pixelmapping;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.BaseDTO;
+
+import java.io.Serializable;
+
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class DataProvidersDTO {
-    private Integer id; // int(11)
+public class DataProvidersDTO extends BaseDTO implements Serializable {
+    private Integer dp_id; // int(11)
     private String name; // varchar(64)
     private Boolean sync_facebook; // tinyint(1)
 
@@ -12,8 +16,8 @@ public class DataProvidersDTO {
 
     }
 
-    public DataProvidersDTO(Integer id, String name, Boolean sync_facebook) {
-        this.id = id;
+    public DataProvidersDTO(Integer dp_id, String name, Boolean sync_facebook) {
+        this.dp_id = dp_id;
         this.name = name;
         this.sync_facebook = sync_facebook;
     }
@@ -34,17 +38,17 @@ public class DataProvidersDTO {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getDp_id() {
+        return dp_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDp_id(Integer dp_id) {
+        this.dp_id = dp_id;
     }
 
     @Override
     public String toString() {
-        return "DataProvidersDTO [id=" + id + ", name=" + name
+        return "DataProvidersDTO [id=" + dp_id + ", name=" + name
                 + ", sync_facebook=" + sync_facebook + "]";
     }
 
@@ -52,7 +56,7 @@ public class DataProvidersDTO {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((dp_id == null) ? 0 : dp_id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((sync_facebook == null) ? 0 : sync_facebook.hashCode());
         return result;
@@ -70,11 +74,11 @@ public class DataProvidersDTO {
             return false;
         }
         DataProvidersDTO other = (DataProvidersDTO) obj;
-        if (id == null) {
-            if (other.id != null) {
+        if (dp_id == null) {
+            if (other.dp_id != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!dp_id.equals(other.dp_id)) {
             return false;
         }
         if (name == null) {
