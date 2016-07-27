@@ -40,4 +40,8 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
         return mPixelDataEngineGroupDAO.deleteGroup(triggerKeyId, gid, isUITest);
     }
 
+    public void truncatePixelDataEngineGroupsTable(Boolean isUITest) throws Exception {
+        mPixelDataEngineGroupDAO.truncatePixelDataEngineGroupsTable(isUITest);
+    }
+
 }

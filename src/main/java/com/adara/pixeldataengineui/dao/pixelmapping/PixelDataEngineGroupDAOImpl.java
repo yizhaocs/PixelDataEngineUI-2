@@ -232,4 +232,20 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
 
         return resultDeleteRulesToThatGroup;
     }
+
+    public void truncatePixelDataEngineGroupsTable(Boolean isUITest) throws Exception{
+        String query = null;
+        if (isUITest) {
+            query = "truncate table pde.pixel_data_engine_groups";
+        } else {
+            query = "truncate table marketplace.pixel_data_engine_groups";
+        }
+
+        JdbcTemplate jdbcTemplateRulesToThatGroup = new JdbcTemplate(dataSource);
+        try {
+            jdbcTemplateRulesToThatGroup.execute(query);
+        } catch (Exception e) {
+            LOG.error("Failed to execute sql query", e);
+        }
+    }
 }

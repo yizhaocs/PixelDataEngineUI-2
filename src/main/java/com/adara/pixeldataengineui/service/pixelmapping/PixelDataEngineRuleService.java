@@ -19,4 +19,6 @@ public interface PixelDataEngineRuleService {
     Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception;
 
     Map<String, String> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception;
+
+    void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception;
 }

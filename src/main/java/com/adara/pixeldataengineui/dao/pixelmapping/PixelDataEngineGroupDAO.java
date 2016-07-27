@@ -18,4 +18,6 @@ public interface PixelDataEngineGroupDAO {
     Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception;
 
     Integer deleteGroup(String keyId, String gid, Boolean isUITest) throws Exception;
+
+    void truncatePixelDataEngineGroupsTable(Boolean isUITest) throws Exception;
 }

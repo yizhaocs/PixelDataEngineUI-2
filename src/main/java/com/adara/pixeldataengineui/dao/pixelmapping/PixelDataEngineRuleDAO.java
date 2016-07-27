@@ -15,4 +15,6 @@ public interface PixelDataEngineRuleDAO {
     Integer updateRule(RuleRequest request) throws Exception;
 
     Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception;
+
+    void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception;
 }

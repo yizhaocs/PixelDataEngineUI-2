@@ -46,6 +46,10 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority, isUITest);
     }
 
+    public void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception{
+        mPixelDataEngineRuleDAO.truncatePixelDataEngineConfigsTable(isUITest);
+    }
+
     public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
@@ -66,11 +70,10 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             mPixelDataEngineService.mPixelDataEngine.init();
             Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
 
-            // delete group
-            mPixelDataEngineGroupService.deleteGroup(testKeyID, "1", true);
-            // delete rule
-            mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
-
+            // truncate pixel_data_engine_groups
+            mPixelDataEngineGroupService.truncatePixelDataEngineGroupsTable(true);
+            // truncate pixel_data_engine_configs
+            mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
 
             // reverse order
             treeMapResultMap.putAll(resultMap);
@@ -110,10 +113,10 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             mPixelDataEngineService.mPixelDataEngine.init();
             Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
 
-            // delete group
-            mPixelDataEngineGroupService.deleteGroup(testKeyID, "1", true);
-            // delete rule
-            mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
+            // truncate pixel_data_engine_groups
+            mPixelDataEngineGroupService.truncatePixelDataEngineGroupsTable(true);
+            // truncate pixel_data_engine_configs
+            mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
             // reverse order
             treeMapResultMap.putAll(resultMap);
         }
