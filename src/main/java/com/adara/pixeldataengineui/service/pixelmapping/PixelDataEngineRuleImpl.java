@@ -48,7 +48,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
 
         Map<String, String> treeMapResultMap = new TreeMap<String, String>();
 
-        if(request.getTestOption().equals("individual")){
+        if (request.getTestOption().equals("individual")) {
             String testKeyID = request.getKeyId();
             String testValue = request.getTestValue();
 
@@ -71,8 +71,41 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
 
             // reverse order
             treeMapResultMap.putAll(resultMap);
-        }else if(request.getTestOption().equals("group")){
+        } else if (request.getTestOption().equals("group")) {
+            String testGroupID = request.getGid();
+            String testKeyID = request.getKeyId();
+            String testValue = request.getTestValue();
 
+            // group = {"trigger_key_id":"3003","gid":3003,"group_type":2}
+            String group = mPixelDataEngineGroupService.getGroup(testKeyID);
+            String removeFirstLastCurlyBracesGroup = group.substring(1, group.length() - 1);
+            String[] groupSplitLevel1 = removeFirstLastCurlyBracesGroup.split(",");
+
+            String triggerKeyIdNew = null;
+            String gidNew = null;
+            String groupTypeNew = null;
+
+            for (int i = 0; i < groupSplitLevel1.length; i++) {
+                String[] groupSplitLevel2 = groupSplitLevel1[i].split(":");
+                if (i == 0) {
+                    triggerKeyIdNew = groupSplitLevel2[1].substring(1, groupSplitLevel2[1].length() - 1);
+                } else if (i == 2) {
+                    groupTypeNew = groupSplitLevel2[1];
+                }
+            }
+
+            mPixelDataEngineGroupService.insertGroup(triggerKeyIdNew, Integer.valueOf(groupTypeNew), true);
+
+            // [{"gid":"3003","key_id":"3003","priority":"1","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|L|0|3"},{"gid":"3003","key_id":"3003","priority":"2","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|R|0|2"},{"gid":"3003","key_id":"3003","priority":"3","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|L|0|1"}]
+            String sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
+
+            // let the mock table refresh its pixelDataEngineConfigs
+            mPixelDataEngineService.mPixelDataEngine.init();
+            Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
+
+
+            // reverse order
+            treeMapResultMap.putAll(resultMap);
         }
 
         return treeMapResultMap;
