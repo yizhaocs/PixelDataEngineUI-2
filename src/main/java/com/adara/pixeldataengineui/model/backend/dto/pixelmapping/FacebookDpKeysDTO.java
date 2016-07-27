@@ -66,14 +66,54 @@ public class FacebookDpKeysDTO extends BaseDTO implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result
-                + ((key_id == null) ? 0 : key_id.hashCode());
-        result = prime * result
-                + ((enabled == null) ? 0 : enabled.hashCode());
-        result = prime * result
-                + ((update_interval == null) ? 0 : update_interval.hashCode());
+        result = prime * result + ((key_id == null) ? 0 : key_id.hashCode());
+        result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
+        result = prime * result + ((update_interval == null) ? 0 : update_interval.hashCode());
         result = prime * result + ((use_image_pixel == null) ? 0 : use_image_pixel.hashCode());
 
         return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        FacebookDpKeysDTO other = (FacebookDpKeysDTO) obj;
+        if (key_id == null) {
+            if (other.key_id != null) {
+                return false;
+            }
+        } else if (!key_id.equals(other.key_id)) {
+            return false;
+        }
+        if (enabled == null) {
+            if (other.enabled != null) {
+                return false;
+            }
+        } else if (!enabled.equals(other.enabled)) {
+            return false;
+        }
+        if (update_interval == null) {
+            if (other.update_interval != null) {
+                return false;
+            }
+        } else if (!update_interval.equals(other.update_interval)) {
+            return false;
+        }
+        if (use_image_pixel == null) {
+            if (other.use_image_pixel != null) {
+                return false;
+            }
+        } else if (!use_image_pixel.equals(other.use_image_pixel)) {
+            return false;
+        }
+        return true;
     }
 }

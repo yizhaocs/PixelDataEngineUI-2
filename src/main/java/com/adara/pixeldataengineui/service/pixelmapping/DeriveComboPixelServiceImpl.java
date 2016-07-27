@@ -14,7 +14,7 @@ public class DeriveComboPixelServiceImpl implements DeriveComboPixelService {
     @Autowired
     private DeriveComboPixelDao mDeriveComboPixelDao;
 
-    public String getMappings() throws Exception{
+    public String getMappings() throws Exception {
         return mDeriveComboPixelDao.getMappings();
     }
 

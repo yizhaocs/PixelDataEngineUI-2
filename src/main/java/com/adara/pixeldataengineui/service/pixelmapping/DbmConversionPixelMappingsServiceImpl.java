@@ -14,23 +14,23 @@ public class DbmConversionPixelMappingsServiceImpl implements DbmConversionPixel
     @Autowired
     private DbmConversionPixelMappingsDAO mDbmConversionPixelMappingsDAO;
 
-    public String getMappings() throws Exception{
+    public String getMappings() throws Exception {
         return mDbmConversionPixelMappingsDAO.getMappings();
     }
 
-    public String getMapping(String conversionPixelId) throws Exception{
+    public String getMapping(String conversionPixelId) throws Exception {
         return mDbmConversionPixelMappingsDAO.getMapping(conversionPixelId);
     }
 
-    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) throws Exception{
+    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) throws Exception {
         return mDbmConversionPixelMappingsDAO.insertMapping(conversionPixelId, dbmUrl);
     }
 
-    public Integer updateMapping(Integer conversionPixelId, String dbmUrl) throws Exception{
+    public Integer updateMapping(Integer conversionPixelId, String dbmUrl) throws Exception {
         return mDbmConversionPixelMappingsDAO.updateMapping(conversionPixelId, dbmUrl);
     }
 
-    public Integer deleteMapping(String conversionPixelId) throws Exception{
+    public Integer deleteMapping(String conversionPixelId) throws Exception {
         return mDbmConversionPixelMappingsDAO.deleteMapping(conversionPixelId);
     }
 }

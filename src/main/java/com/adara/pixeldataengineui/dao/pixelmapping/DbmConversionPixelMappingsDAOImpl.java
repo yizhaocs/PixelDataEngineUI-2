@@ -25,14 +25,14 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         this.dataSource = dataSource;
     }
 
-    public String getMappings() throws Exception{
+    public String getMappings() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getMappings" + "]";
         String query = "SELECT d.conversion_pixel_id, d.dbm_url FROM marketplace.dbm_conversion_pixel_mappings d order by d.conversion_pixel_id";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
 
         StringBuilder sb = new StringBuilder();
@@ -45,7 +45,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
             // convert Java object to JSON (Jackson)
             ObjectMapper mapper = new ObjectMapper();
             String tmp = "";
-                tmp = mapper.writeValueAsString(mDbmConversionPixelMappingsDTO);
+            tmp = mapper.writeValueAsString(mDbmConversionPixelMappingsDTO);
 
             sb.append(tmp + ",");
         }
@@ -58,32 +58,32 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         return sb.toString();
     }
 
-    public String getMapping(String conversionPixelId) throws Exception{
+    public String getMapping(String conversionPixelId) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getMapping" + "]";
         String query = "SELECT d.conversion_pixel_id, d.dbm_url FROM marketplace.dbm_conversion_pixel_mappings d where d.conversion_pixel_id= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query, new Object[]{conversionPixelId}, new RowMapper<String>() {
+        result = jdbcTemplate.queryForObject(query, new Object[]{conversionPixelId}, new RowMapper<String>() {
 
-                @Override
-                public String mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    DbmConversionPixelMappingsDTO mDbmConversionPixelMappingsDTO = new DbmConversionPixelMappingsDTO();
-                    mDbmConversionPixelMappingsDTO.setConversion_pixel_id(rs.getInt("conversion_pixel_id"));
-                    mDbmConversionPixelMappingsDTO.setDbm_url(rs.getString("dbm_url"));
-                    // convert Java object to JSON (Jackson)
-                    ObjectMapper mapper = new ObjectMapper();
-                    String result = "";
-                    try {
-                        result = mapper.writeValueAsString(mDbmConversionPixelMappingsDTO);
-                    } catch (Exception e) {
-                        LOG.error("Failed to convert Java object to JSON", e);
-                    }
-                    return result;
+            @Override
+            public String mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                DbmConversionPixelMappingsDTO mDbmConversionPixelMappingsDTO = new DbmConversionPixelMappingsDTO();
+                mDbmConversionPixelMappingsDTO.setConversion_pixel_id(rs.getInt("conversion_pixel_id"));
+                mDbmConversionPixelMappingsDTO.setDbm_url(rs.getString("dbm_url"));
+                // convert Java object to JSON (Jackson)
+                ObjectMapper mapper = new ObjectMapper();
+                String result = "";
+                try {
+                    result = mapper.writeValueAsString(mDbmConversionPixelMappingsDTO);
+                } catch (Exception e) {
+                    LOG.error("Failed to convert Java object to JSON", e);
                 }
-            });
+                return result;
+            }
+        });
 
 
         if (LOG.isDebugEnabled())
@@ -92,7 +92,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         return result;
     }
 
-    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) throws Exception{
+    public Integer insertMapping(Integer conversionPixelId, String dbmUrl) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertMapping" + "]";
         String query = "insert into dbm_conversion_pixel_mappings(conversion_pixel_id, dbm_url) values(?, ?)";
         Object[] args = new Object[]{conversionPixelId, httpsChecker(dbmUrl)};
@@ -101,7 +101,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         int result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
 
         if (LOG.isDebugEnabled())
@@ -118,7 +118,7 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{conversionPixelId, httpsChecker(dbmUrl), conversionPixelId};
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
 
         if (LOG.isDebugEnabled())
@@ -127,14 +127,14 @@ public class DbmConversionPixelMappingsDAOImpl implements DbmConversionPixelMapp
         return result;
     }
 
-    public Integer deleteMapping(String conversionPixelId) throws Exception{
+    public Integer deleteMapping(String conversionPixelId) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteMapping" + "]";
         String query = "DELETE FROM marketplace.dbm_conversion_pixel_mappings WHERE conversion_pixel_id =?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-            result = jdbcTemplate.update(query, conversionPixelId);
+        result = jdbcTemplate.update(query, conversionPixelId);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);

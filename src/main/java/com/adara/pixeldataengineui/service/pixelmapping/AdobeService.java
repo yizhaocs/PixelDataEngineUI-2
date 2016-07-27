@@ -4,7 +4,7 @@ package com.adara.pixeldataengineui.service.pixelmapping;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface AdobeService {
-    String getMappings () throws Exception;
+    String getMappings() throws Exception;
 
     String getMapping(String id) throws Exception;
 

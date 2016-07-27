@@ -7,18 +7,18 @@ import java.io.Serializable;
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class DeriveComboPixelDTO  extends BaseDTO implements Serializable {
+public class DeriveComboPixelDTO extends BaseDTO implements Serializable {
     private Integer dp_key_id; // int(11)
 
     private Integer advertiser_id; // int(11)
 
     private Integer cp_id; // int(11)
 
-    public DeriveComboPixelDTO(){
+    public DeriveComboPixelDTO() {
 
     }
 
-    public DeriveComboPixelDTO(Integer dp_key_id, Integer advertiser_id, Integer cp_id){
+    public DeriveComboPixelDTO(Integer dp_key_id, Integer advertiser_id, Integer cp_id) {
         this.dp_key_id = dp_key_id;
         this.advertiser_id = advertiser_id;
         this.cp_id = cp_id;
@@ -58,13 +58,45 @@ public class DeriveComboPixelDTO  extends BaseDTO implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result
-                + ((dp_key_id == null) ? 0 : dp_key_id.hashCode());
-        result = prime * result
-                + ((advertiser_id == null) ? 0 : advertiser_id.hashCode());
-        result = prime * result
-                + ((cp_id == null) ? 0 : cp_id.hashCode());
-
+        result = prime * result + ((dp_key_id == null) ? 0 : dp_key_id.hashCode());
+        result = prime * result + ((advertiser_id == null) ? 0 : advertiser_id.hashCode());
+        result = prime * result + ((cp_id == null) ? 0 : cp_id.hashCode());
         return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        DeriveComboPixelDTO other = (DeriveComboPixelDTO) obj;
+        if (dp_key_id == null) {
+            if (other.dp_key_id != null) {
+                return false;
+            }
+        } else if (!dp_key_id.equals(other.dp_key_id)) {
+            return false;
+        }
+        if (advertiser_id == null) {
+            if (other.advertiser_id != null) {
+                return false;
+            }
+        } else if (!advertiser_id.equals(other.advertiser_id)) {
+            return false;
+        }
+        if (cp_id == null) {
+            if (other.cp_id != null) {
+                return false;
+            }
+        } else if (!cp_id.equals(other.cp_id)) {
+            return false;
+        }
+        return true;
     }
 }

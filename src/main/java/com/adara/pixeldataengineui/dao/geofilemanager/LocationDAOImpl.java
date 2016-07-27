@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 /**
  * Created by yzhao on 7/21/16.
  */
-public class LocationDAOImpl implements  LocationDAO {
+public class LocationDAOImpl implements LocationDAO {
     private static final Log LOG = LogFactory.getLog(LocationDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;

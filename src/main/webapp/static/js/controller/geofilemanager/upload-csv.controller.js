@@ -5,7 +5,6 @@
 'use strict';
 
 
-
 app.controller('geoFileManagerController', function ($scope, geoFileManagerService) {
     $scope.save = function (csvFile) {
         console.log("hahhaha:" + csvFile)

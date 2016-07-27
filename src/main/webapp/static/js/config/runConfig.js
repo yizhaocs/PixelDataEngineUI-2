@@ -11,9 +11,9 @@ app.run(['$location', '$rootScope', '$cookieStore', '$http', function ($location
 
 
     // true if reenter the "http://localhost:8080/pdeui/" as root user, so that we allow "Manage-Users" page still appear on the top
-    if($rootScope.globals != '' && $rootScope.globals.currentUser != undefined && $rootScope.globals.currentUser.username != undefined && $rootScope.globals.currentUser.username != 'root'){
+    if ($rootScope.globals != '' && $rootScope.globals.currentUser != undefined && $rootScope.globals.currentUser.username != undefined && $rootScope.globals.currentUser.username != 'root') {
         $rootScope.isroot = false;
-    }else{
+    } else {
         $rootScope.isroot = true;
     }
 

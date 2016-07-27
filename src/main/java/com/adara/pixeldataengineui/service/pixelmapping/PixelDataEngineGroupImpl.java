@@ -16,7 +16,7 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
     @Autowired
     private PixelDataEngineGroupDAO mPixelDataEngineGroupDAO;
 
-    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception{
+    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception {
         return mPixelDataEngineGroupDAO.insertGroup(triggerKeyId, groupType, isUITest);
     }
 

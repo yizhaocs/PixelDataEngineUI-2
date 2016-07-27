@@ -25,14 +25,14 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         this.dataSource = dataSource;
     }
 
-    public String getFacebookDpMappings() throws Exception{
+    public String getFacebookDpMappings() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookDpMappings" + "]";
         String query = "SELECT a.id, a.name, a.sync_facebook FROM marketplace.data_providers a order by a.id";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
 
         StringBuilder sb = new StringBuilder();
@@ -45,7 +45,7 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
             // convert Java object to JSON (Jackson)
             ObjectMapper mapper = new ObjectMapper();
             String tmp = "";
-                tmp = mapper.writeValueAsString(mDataProvidersDTO);
+            tmp = mapper.writeValueAsString(mDataProvidersDTO);
 
             sb.append(tmp + ",");
         }
@@ -58,37 +58,37 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         return sb.toString();
     }
 
-    public String getFacebookDpMapping(String id) throws Exception{
+    public String getFacebookDpMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookDpMapping" + "]";
         String query = "SELECT a.id, a.name, a.sync_facebook FROM marketplace.data_providers a where a.id= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
+        result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
 
-                @Override
-                public String mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    DataProvidersDTO mDataProvidersDTO = new DataProvidersDTO();
-                    mDataProvidersDTO.setId(rs.getInt("id"));
-                    mDataProvidersDTO.setName(rs.getString("name"));
-                    mDataProvidersDTO.setSync_facebook(rs.getBoolean("sync_facebook"));
+            @Override
+            public String mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                DataProvidersDTO mDataProvidersDTO = new DataProvidersDTO();
+                mDataProvidersDTO.setId(rs.getInt("id"));
+                mDataProvidersDTO.setName(rs.getString("name"));
+                mDataProvidersDTO.setSync_facebook(rs.getBoolean("sync_facebook"));
 
-                    // convert Java object to JSON (Jackson)
-                    ObjectMapper mapper = new ObjectMapper();
-                    String result = "";
-                    try {
-                        result = mapper.writeValueAsString(mDataProvidersDTO);
-                    } catch (Exception e) {
+                // convert Java object to JSON (Jackson)
+                ObjectMapper mapper = new ObjectMapper();
+                String result = "";
+                try {
+                    result = mapper.writeValueAsString(mDataProvidersDTO);
+                } catch (Exception e) {
 
-                        LOG.error("Failed to convert Java object to JSON", e);
-                    }
-
-                    LOG.info(LOG_HEADER + "  ,method return -> " + result);
-                    return result;
+                    LOG.error("Failed to convert Java object to JSON", e);
                 }
-            });
+
+                LOG.info(LOG_HEADER + "  ,method return -> " + result);
+                return result;
+            }
+        });
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -96,7 +96,7 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         return result;
     }
 
-    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) throws Exception{
+    public Integer updateMappingDataProviders(Integer id, String name, Byte syncFacebook) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateMappingDataProviders" + "]";
         String query = "UPDATE marketplace.data_providers SET " + "id" + "=?" + "," + "name" + "=?" + "," + "sync_facebook" + "=?" + " WHERE id=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
@@ -104,7 +104,7 @@ public class DataProvidersDAOImpl implements DataProvidersDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{id, name, syncFacebook, id};
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
 
         if (LOG.isDebugEnabled())

@@ -7,5 +7,6 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequ
  */
 public interface LocationDAO {
     Integer append(GeoFileManagerRequest request) throws Exception;
+
     Integer override(GeoFileManagerRequest request) throws Exception;
 }

@@ -6,6 +6,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequ
  * Created by yzhao on 7/21/16.
  */
 public interface GeoFileManagerService {
-    Integer append (GeoFileManagerRequest request) throws Exception;
-    Integer override (GeoFileManagerRequest request) throws Exception;
+    Integer append(GeoFileManagerRequest request) throws Exception;
+
+    Integer override(GeoFileManagerRequest request) throws Exception;
 }

@@ -26,14 +26,14 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         this.dataSource = dataSource;
     }
 
-    public String getFacebookPixelMappings() throws Exception{
+    public String getFacebookPixelMappings() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookPixelMappings" + "]";
         String query = "SELECT a.dp_id, a.facebook_pixel_id FROM marketplace.data_provider_facebook_pixels a order by a.dp_id";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
 
         StringBuilder sb = new StringBuilder();
@@ -45,7 +45,7 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
             // convert Java object to JSON (Jackson)
             ObjectMapper mapper = new ObjectMapper();
             String tmp = "";
-                tmp = mapper.writeValueAsString(mDataProviderFacebookPixelsDTO);
+            tmp = mapper.writeValueAsString(mDataProviderFacebookPixelsDTO);
 
             sb.append(tmp + ",");
         }
@@ -58,34 +58,34 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         return sb.toString();
     }
 
-    public String getFacebookPixelMapping(String id) throws Exception{
+    public String getFacebookPixelMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getFacebookPixelMapping" + "]";
         String query = "SELECT a.dp_id, a.facebook_pixel_id FROM marketplace.data_provider_facebook_pixels a where a.dp_id= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
+        result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
 
-                @Override
-                public String mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    DataProviderFacebookPixelsDTO mDataProviderFacebookPixelsDTO = new DataProviderFacebookPixelsDTO();
-                    mDataProviderFacebookPixelsDTO.setDp_id(rs.getInt("dp_id"));
-                    mDataProviderFacebookPixelsDTO.setFacebook_pixel_id(rs.getLong("facebook_pixel_id"));
+            @Override
+            public String mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                DataProviderFacebookPixelsDTO mDataProviderFacebookPixelsDTO = new DataProviderFacebookPixelsDTO();
+                mDataProviderFacebookPixelsDTO.setDp_id(rs.getInt("dp_id"));
+                mDataProviderFacebookPixelsDTO.setFacebook_pixel_id(rs.getLong("facebook_pixel_id"));
 
-                    // convert Java object to JSON (Jackson)
-                    ObjectMapper mapper = new ObjectMapper();
-                    String result = "";
-                    try {
-                        result = mapper.writeValueAsString(mDataProviderFacebookPixelsDTO);
-                    }catch (Exception e){
-                        LOG.error("Failed to convert Java object to JSON", e);
-                    }
-
-                    return result;
+                // convert Java object to JSON (Jackson)
+                ObjectMapper mapper = new ObjectMapper();
+                String result = "";
+                try {
+                    result = mapper.writeValueAsString(mDataProviderFacebookPixelsDTO);
+                } catch (Exception e) {
+                    LOG.error("Failed to convert Java object to JSON", e);
                 }
-            });
+
+                return result;
+            }
+        });
 
 
         if (LOG.isDebugEnabled())
@@ -102,7 +102,7 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
         int result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
 
         if (LOG.isDebugEnabled())
@@ -119,7 +119,7 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{dpId, facebookPixelId, dpId};
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
 
         if (LOG.isDebugEnabled())
@@ -128,14 +128,14 @@ public class DataProviderFacebookPixelsDAOImpl implements DataProviderFacebookPi
         return result;
     }
 
-    public Integer deleteFacebookPixelMapping(String id) throws Exception{
+    public Integer deleteFacebookPixelMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteFacebookPixelMapping" + "]";
         String query = "DELETE FROM marketplace.data_provider_facebook_pixels WHERE dp_id = ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-            result = jdbcTemplate.update(query, id);
+        result = jdbcTemplate.update(query, id);
 
 
         if (LOG.isDebugEnabled())

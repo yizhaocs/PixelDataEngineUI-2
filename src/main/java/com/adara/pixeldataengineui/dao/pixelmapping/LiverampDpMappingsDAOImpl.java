@@ -26,13 +26,13 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
         this.dataSource = dataSource;
     }
 
-    public String getLiverampDpMappings() throws Exception{
+    public String getLiverampDpMappings() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getLiverampDpMappings" + "]";
         String query = "SELECT a.dp_name, a.dp_id, a.threshold_mb FROM marketplace.liveramp_dp_mappings a order by a.dp_name";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -60,34 +60,34 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
         return sb.toString();
     }
 
-    public String getLiverampDpMapping(String id) throws Exception{
+    public String getLiverampDpMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getLiverampDpMapping" + "]";
         String query = "SELECT a.dp_name, a.dp_id, a.threshold_mb FROM marketplace.liveramp_dp_mappings a where a.dp_name=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
+        result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
 
-                @Override
-                public String mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    LiverampDpMappingsDTO mLiverampDpMappingsDTO = new LiverampDpMappingsDTO();
-                    mLiverampDpMappingsDTO.setDp_name(rs.getString("dp_name"));
-                    mLiverampDpMappingsDTO.setDp_id(rs.getInt("dp_id"));
-                    mLiverampDpMappingsDTO.setThreshold_mb(rs.getLong("threshold_mb"));
+            @Override
+            public String mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                LiverampDpMappingsDTO mLiverampDpMappingsDTO = new LiverampDpMappingsDTO();
+                mLiverampDpMappingsDTO.setDp_name(rs.getString("dp_name"));
+                mLiverampDpMappingsDTO.setDp_id(rs.getInt("dp_id"));
+                mLiverampDpMappingsDTO.setThreshold_mb(rs.getLong("threshold_mb"));
 
-                    // convert Java object to JSON (Jackson)
-                    ObjectMapper mapper = new ObjectMapper();
-                    String result = "";
-                    try {
-                        result = mapper.writeValueAsString(mLiverampDpMappingsDTO);
-                    } catch (Exception e) {
-                        LOG.error("Failed to convert Java object to JSON", e);
-                    }
-                    return result;
+                // convert Java object to JSON (Jackson)
+                ObjectMapper mapper = new ObjectMapper();
+                String result = "";
+                try {
+                    result = mapper.writeValueAsString(mLiverampDpMappingsDTO);
+                } catch (Exception e) {
+                    LOG.error("Failed to convert Java object to JSON", e);
                 }
-            });
+                return result;
+            }
+        });
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -95,7 +95,7 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
         return result;
     }
 
-    public Integer insertLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb) throws Exception{
+    public Integer insertLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertLiverampDpMapping" + "]";
 
         String query = "insert into liveramp_dp_mappings(dp_name, dp_id, threshold_mb) values(?, ?, ?)";
@@ -104,7 +104,7 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
         int result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -112,7 +112,7 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
         return result;
     }
 
-    public Integer updateLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb) throws Exception{
+    public Integer updateLiverampDpMapping(String dpName, Integer liverampDpId, BigInteger thresholdMb) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateLiverampDpMapping" + "]";
         String query = "UPDATE marketplace.liveramp_dp_mappings SET " + "dp_name" + "=?" + "," + "dp_id" + "=?" + "," + "threshold_mb" + "=?" + " WHERE dp_name=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
@@ -120,7 +120,7 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{dpName, liverampDpId, thresholdMb, dpName};
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -129,14 +129,14 @@ public class LiverampDpMappingsDAOImpl implements LiverampDpMappingsDAO {
     }
 
 
-    public Integer deleteLiverampDpMapping(String id) throws Exception{
+    public Integer deleteLiverampDpMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteLiverampDpMapping" + "]";
         String query = "DELETE FROM marketplace.liveramp_dp_mappings WHERE dp_name= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-            result = jdbcTemplate.update(query, id);
+        result = jdbcTemplate.update(query, id);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);

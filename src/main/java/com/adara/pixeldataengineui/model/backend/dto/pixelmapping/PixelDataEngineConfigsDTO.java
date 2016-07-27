@@ -110,49 +110,66 @@ public class PixelDataEngineConfigsDTO extends BaseDTO implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (!super.equals(obj))
+        }
+        if (!super.equals(obj)) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PixelDataEngineConfigsDTO other = (PixelDataEngineConfigsDTO) obj;
         if (gid == null) {
-            if (other.gid != null)
+            if (other.gid != null) {
                 return false;
-        } else if (!gid.equals(other.gid))
+            }
+        } else if (!gid.equals(other.gid)) {
             return false;
+        }
         if (key_id == null) {
-            if (other.key_id != null)
+            if (other.key_id != null) {
                 return false;
-        } else if (!key_id.equals(other.key_id))
+            }
+        } else if (!key_id.equals(other.key_id)) {
             return false;
+        }
         if (priority == null) {
-            if (other.priority != null)
+            if (other.priority != null) {
                 return false;
-        } else if (!priority.equals(other.priority))
+            }
+        } else if (!priority.equals(other.priority)) {
             return false;
+        }
         if (type == null) {
-            if (other.type != null)
+            if (other.type != null) {
                 return false;
+            }
         } else if (!type
-                .equals(other.type))
+                .equals(other.type)) {
             return false;
+        }
         if (parse_rule == null) {
-            if (other.parse_rule != null)
+            if (other.parse_rule != null) {
                 return false;
-        } else if (!parse_rule.equals(other.parse_rule))
+            }
+        } else if (!parse_rule.equals(other.parse_rule)) {
             return false;
+        }
         if (condition_rule == null) {
-            if (other.condition_rule != null)
+            if (other.condition_rule != null) {
                 return false;
-        } else if (!condition_rule.equals(other.condition_rule))
+            }
+        } else if (!condition_rule.equals(other.condition_rule)) {
             return false;
+        }
         if (action_rule == null) {
-            if (other.action_rule != null)
+            if (other.action_rule != null) {
                 return false;
-        } else if (!action_rule.equals(other.action_rule))
+            }
+        } else if (!action_rule.equals(other.action_rule)) {
             return false;
+        }
 
         return true;
     }

@@ -11,16 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("geoFileManagerService")
 @Transactional
-public class GeoFileManagerServiceImpl implements GeoFileManagerService{
+public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     @Autowired
     private LocationDAOImpl mLocationDAOImpl;
 
 
-    public Integer append (GeoFileManagerRequest request) throws Exception{
+    public Integer append(GeoFileManagerRequest request) throws Exception {
 
         return mLocationDAOImpl.append(request);
     }
-    public Integer override (GeoFileManagerRequest request) throws Exception{
+
+    public Integer override(GeoFileManagerRequest request) throws Exception {
         return mLocationDAOImpl.override(request);
     }
 }

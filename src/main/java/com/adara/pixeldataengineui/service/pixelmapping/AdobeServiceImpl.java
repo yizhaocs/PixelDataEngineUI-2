@@ -14,23 +14,23 @@ public class AdobeServiceImpl implements AdobeService {
     @Autowired
     private AdobeDpkeyMappingDAO mAdobeDpkeyMappingDAO;
 
-    public String getMappings() throws Exception{
+    public String getMappings() throws Exception {
         return mAdobeDpkeyMappingDAO.getMappings();
     }
 
-    public String getMapping(String id) throws Exception{
+    public String getMapping(String id) throws Exception {
         return mAdobeDpkeyMappingDAO.getMapping(id);
     }
 
-    public Integer insertMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception{
+    public Integer insertMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception {
         return mAdobeDpkeyMappingDAO.insertMapping(adobeSegmentId, adobeDpKeyId);
     }
 
-    public Integer updateMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception{
+    public Integer updateMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception {
         return mAdobeDpkeyMappingDAO.updateMapping(adobeSegmentId, adobeDpKeyId);
     }
 
-    public Integer deleteMapping(String id) throws Exception{
+    public Integer deleteMapping(String id) throws Exception {
         return mAdobeDpkeyMappingDAO.deleteMapping(id);
     }
 }

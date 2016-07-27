@@ -28,6 +28,8 @@ public class RuleRequest {
     private String testValue;
     private String testOption;
     private In in;
+    //    private List<InElementArray> inElementArray;
+    private List<SetRuleArray> setRuleArray;
 
     public RuleRequest() {
 
@@ -55,9 +57,6 @@ public class RuleRequest {
         this.testOption = testOption;
         this.in = in;
     }
-
-    //    private List<InElementArray> inElementArray;
-    private List<SetRuleArray> setRuleArray;
 
     public String getParseRule() {
         return parseRule;

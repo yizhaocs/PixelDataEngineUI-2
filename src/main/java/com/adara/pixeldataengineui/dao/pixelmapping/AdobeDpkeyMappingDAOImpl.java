@@ -25,14 +25,14 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         this.dataSource = dataSource;
     }
 
-    public String getMappings() throws Exception{
+    public String getMappings() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getMappings" + "]";
         String query = "SELECT a.adobe_segment_id, a.dp_key_id FROM marketplace.adobe_dpkey_mapping a order by a.adobe_segment_id";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
 
         StringBuilder sb = new StringBuilder();
@@ -45,7 +45,7 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
             // convert Java object to JSON (Jackson)
             ObjectMapper mapper = new ObjectMapper();
             String tmp = "";
-                tmp = mapper.writeValueAsString(adobeDpkeyMappingDTO);
+            tmp = mapper.writeValueAsString(adobeDpkeyMappingDTO);
 
             sb.append(tmp + ",");
         }
@@ -58,32 +58,32 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         return sb.toString();
     }
 
-    public String getMapping(String id) throws Exception{
+    public String getMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getMapping" + "]";
         String query = "SELECT a.adobe_segment_id, a.dp_key_id FROM marketplace.adobe_dpkey_mapping a where a.adobe_segment_id= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
+        result = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<String>() {
 
-                @Override
-                public String mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    AdobeDpkeyMappingDTO adobeDpkeyMappingDTO = new AdobeDpkeyMappingDTO();
-                    adobeDpkeyMappingDTO.setAdobe_segment_id(rs.getInt("adobe_segment_id"));
-                    adobeDpkeyMappingDTO.setDp_key_id(rs.getInt("dp_key_id"));
-                    // convert Java object to JSON (Jackson)
-                    ObjectMapper mapper = new ObjectMapper();
-                    String result = "";
-                    try {
-                        result = mapper.writeValueAsString(adobeDpkeyMappingDTO);
-                    } catch (Exception e) {
-                        LOG.error("Failed to convert Java object to JSON", e);
-                    }
-                    return result;
+            @Override
+            public String mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                AdobeDpkeyMappingDTO adobeDpkeyMappingDTO = new AdobeDpkeyMappingDTO();
+                adobeDpkeyMappingDTO.setAdobe_segment_id(rs.getInt("adobe_segment_id"));
+                adobeDpkeyMappingDTO.setDp_key_id(rs.getInt("dp_key_id"));
+                // convert Java object to JSON (Jackson)
+                ObjectMapper mapper = new ObjectMapper();
+                String result = "";
+                try {
+                    result = mapper.writeValueAsString(adobeDpkeyMappingDTO);
+                } catch (Exception e) {
+                    LOG.error("Failed to convert Java object to JSON", e);
                 }
-            });
+                return result;
+            }
+        });
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -91,7 +91,7 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         return result;
     }
 
-    public Integer insertMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception{
+    public Integer insertMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertMapping" + "]";
         String query = "insert into marketplace.adobe_dpkey_mapping(adobe_segment_id, dp_key_id) values(?, ?)";
         Object[] args = new Object[]{adobeSegmentId, adobeDpKeyId};
@@ -100,7 +100,7 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         int result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
 
         if (LOG.isDebugEnabled())
@@ -109,7 +109,7 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         return result;
     }
 
-    public Integer updateMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception{
+    public Integer updateMapping(Integer adobeSegmentId, Integer adobeDpKeyId) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateMapping" + "]";
         String query = "UPDATE marketplace.adobe_dpkey_mapping SET " + "adobe_segment_id" + "=?" + "," + "dp_key_id" + "=?" + " WHERE adobe_segment_id=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
@@ -117,7 +117,7 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{adobeSegmentId, adobeDpKeyId, adobeSegmentId};
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -125,14 +125,14 @@ public class AdobeDpkeyMappingDAOImpl implements AdobeDpkeyMappingDAO {
         return result;
     }
 
-    public Integer deleteMapping(String id) throws Exception{
+    public Integer deleteMapping(String id) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteMapping" + "]";
         String query = "DELETE FROM marketplace.adobe_dpkey_mapping WHERE adobe_segment_id =?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-            result = jdbcTemplate.update(query, id);
+        result = jdbcTemplate.update(query, id);
 
 
         if (LOG.isDebugEnabled())

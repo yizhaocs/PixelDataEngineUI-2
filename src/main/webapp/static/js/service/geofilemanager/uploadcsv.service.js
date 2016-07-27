@@ -5,13 +5,12 @@
 'use strict';
 
 app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
-    function geoFileManagerService ($http, $location, $rootScope) {
+    function geoFileManagerService($http, $location, $rootScope) {
         var service = {};
 
         // data mapping services
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
-
 
 
         function appendTable(csvData) {
@@ -25,7 +24,6 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 return status.data;
             });
         };
-
 
 
         return service;

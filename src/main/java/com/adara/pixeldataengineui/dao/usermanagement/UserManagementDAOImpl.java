@@ -26,7 +26,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         this.dataSource = dataSource;
     }
 
-    public String getAllUser() throws Exception{
+    public String getAllUser() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getAllUser" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users";
         LOG.info(LOG_HEADER + ", " + "Executing query -> "
@@ -34,7 +34,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -62,7 +62,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return sb.toString();
     }
 
-    public String getByUsername(String username) throws Exception{
+    public String getByUsername(String username) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getByUsername" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users WHERE username =?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> "
@@ -70,33 +70,33 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query,
-                    new Object[]{username}, new RowMapper<String>() {
+        result = jdbcTemplate.queryForObject(query,
+                new Object[]{username}, new RowMapper<String>() {
 
-                        @Override
-                        public String mapRow(ResultSet rs, int rowNum)
-                                throws SQLException {
-                            UserDTO mUserDTO = new UserDTO();
-                            mUserDTO.setUsername(rs
-                                    .getString("username"));
-                            mUserDTO.setPassword(rs
-                                    .getString("password"));
-                            // convert Java object to JSON (Jackson)
-                            ObjectMapper mapper = new ObjectMapper();
-                            String tmp = "";
-                            try {
-                                tmp = mapper.writeValueAsString(mUserDTO);
-                            } catch (Exception e) {
+                    @Override
+                    public String mapRow(ResultSet rs, int rowNum)
+                            throws SQLException {
+                        UserDTO mUserDTO = new UserDTO();
+                        mUserDTO.setUsername(rs
+                                .getString("username"));
+                        mUserDTO.setPassword(rs
+                                .getString("password"));
+                        // convert Java object to JSON (Jackson)
+                        ObjectMapper mapper = new ObjectMapper();
+                        String tmp = "";
+                        try {
+                            tmp = mapper.writeValueAsString(mUserDTO);
+                        } catch (Exception e) {
 
-                                LOG.error(
-                                        "Failed to convert Java object to JSON",
-                                        e);
-                            }
-                            LOG.info(LOG_HEADER
-                                    + "  ,method return -> " + tmp);
-                            return tmp;
+                            LOG.error(
+                                    "Failed to convert Java object to JSON",
+                                    e);
                         }
-                    });
+                        LOG.info(LOG_HEADER
+                                + "  ,method return -> " + tmp);
+                        return tmp;
+                    }
+                });
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -104,7 +104,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer login(UserDTO request) throws Exception{
+    public Integer login(UserDTO request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "login" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users p where p.username =?"
                 + " and " + " p.password = ?";
@@ -112,39 +112,39 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate
-                    .queryForObject(query, new Object[]{
-                                    request.getUsername(), request.getPassword()},
-                            new RowMapper<String>() {
+        result = jdbcTemplate
+                .queryForObject(query, new Object[]{
+                                request.getUsername(), request.getPassword()},
+                        new RowMapper<String>() {
 
-                                @Override
-                                public String mapRow(ResultSet rs, int rowNum)
-                                        throws SQLException {
-                                    UserDTO mUserDTO = new UserDTO();
-                                    mUserDTO.setUsername(rs
-                                            .getString("username"));
-                                    mUserDTO.setPassword(rs
-                                            .getString("password"));
-                                    // convert Java object to JSON (Jackson)
-                                    ObjectMapper mapper = new ObjectMapper();
-                                    String result = "";
-                                    try {
-                                        result = mapper
-                                                .writeValueAsString(mUserDTO);
-                                    } catch (Exception e) {
+                            @Override
+                            public String mapRow(ResultSet rs, int rowNum)
+                                    throws SQLException {
+                                UserDTO mUserDTO = new UserDTO();
+                                mUserDTO.setUsername(rs
+                                        .getString("username"));
+                                mUserDTO.setPassword(rs
+                                        .getString("password"));
+                                // convert Java object to JSON (Jackson)
+                                ObjectMapper mapper = new ObjectMapper();
+                                String result = "";
+                                try {
+                                    result = mapper
+                                            .writeValueAsString(mUserDTO);
+                                } catch (Exception e) {
 
-                                        LOG.error(
-                                                "Failed to convert Java object to JSON",
-                                                e);
-                                    }
-                                    return result;
+                                    LOG.error(
+                                            "Failed to convert Java object to JSON",
+                                            e);
                                 }
-                            });
+                                return result;
+                            }
+                        });
 
         return result.length();
     }
 
-    public Integer createUser(UserDTO request) throws Exception{
+    public Integer createUser(UserDTO request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "createUser" + "]";
         String username = request.getUsername();
         String password = request.getPassword();
@@ -163,7 +163,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         LOG.info("Executing query:" + query.toString());
 
         int result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -171,7 +171,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer deleteUser(String username) throws Exception{
+    public Integer deleteUser(String username) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteUser" + "]";
         String query = "DELETE FROM pde.pixel_data_engine_users WHERE username =?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> "
@@ -179,7 +179,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-            result = jdbcTemplate.update(query, username);
+        result = jdbcTemplate.update(query, username);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -187,7 +187,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer updateUser(UserDTO request) throws Exception{
+    public Integer updateUser(UserDTO request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateUser" + "]";
         String username = request.getUsername();
         String password = request.getPassword();
@@ -208,7 +208,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{username, password, username};
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);

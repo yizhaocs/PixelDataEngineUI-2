@@ -27,7 +27,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception{
+    public Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertRule" + "]";
 
         String gid = request.getGid();
@@ -54,7 +54,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
         int result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -62,14 +62,14 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public String getRules() throws Exception{
+    public String getRules() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRules" + "]";
         String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p order by p.key_id";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Map<String, Object>> listMap = null;
-            listMap = jdbcTemplate.queryForList(query);
+        listMap = jdbcTemplate.queryForList(query);
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -101,36 +101,36 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return sb.toString();
     }
 
-    public String getRule(Integer gid, String keyId, Integer priority) throws Exception{
+    public String getRule(Integer gid, String keyId, Integer priority) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRule" + "]";
         String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p WHERE p.gid=? AND p.key_id=? AND p.priority=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String result = null;
-            result = jdbcTemplate.queryForObject(query, new Object[]{gid, keyId, priority}, new RowMapper<String>() {
-                @Override
-                public String mapRow(ResultSet rs, int rowNum)
-                        throws SQLException {
-                    PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
-                    mPixelDataEngineConfigsDTO.setGid(rs.getString("gid"));
-                    mPixelDataEngineConfigsDTO.setKey_id(rs.getString("key_id"));
-                    mPixelDataEngineConfigsDTO.setPriority(rs.getString("priority"));
-                    mPixelDataEngineConfigsDTO.setType(rs.getString("type"));
-                    mPixelDataEngineConfigsDTO.setParse_rule(rs.getString("parse_rule"));
-                    mPixelDataEngineConfigsDTO.setCondition_rule(rs.getString("condition_rule"));
-                    mPixelDataEngineConfigsDTO.setAction_rule(rs.getString("action_rule"));
-                    // convert Java object to JSON (Jackson)
-                    ObjectMapper mapper = new ObjectMapper();
-                    String result = "";
-                    try {
-                        result = mapper.writeValueAsString(mPixelDataEngineConfigsDTO);
-                    } catch (Exception e) {
-                        LOG.error("Failed to convert Java object to JSON", e);
-                    }
-                    return result;
+        result = jdbcTemplate.queryForObject(query, new Object[]{gid, keyId, priority}, new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
+                mPixelDataEngineConfigsDTO.setGid(rs.getString("gid"));
+                mPixelDataEngineConfigsDTO.setKey_id(rs.getString("key_id"));
+                mPixelDataEngineConfigsDTO.setPriority(rs.getString("priority"));
+                mPixelDataEngineConfigsDTO.setType(rs.getString("type"));
+                mPixelDataEngineConfigsDTO.setParse_rule(rs.getString("parse_rule"));
+                mPixelDataEngineConfigsDTO.setCondition_rule(rs.getString("condition_rule"));
+                mPixelDataEngineConfigsDTO.setAction_rule(rs.getString("action_rule"));
+                // convert Java object to JSON (Jackson)
+                ObjectMapper mapper = new ObjectMapper();
+                String result = "";
+                try {
+                    result = mapper.writeValueAsString(mPixelDataEngineConfigsDTO);
+                } catch (Exception e) {
+                    LOG.error("Failed to convert Java object to JSON", e);
                 }
-            });
+                return result;
+            }
+        });
 
 
         if (LOG.isDebugEnabled())
@@ -138,7 +138,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer updateRule(RuleRequest request) throws Exception{
+    public Integer updateRule(RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateRule" + "]";
 
         String gid = request.getGid();
@@ -169,7 +169,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         Object[] args = new Object[]{gid, keyId, newPriority, type, parseRuleValue, conditionRuleValue, actionRuleValue, gid, keyId, priority};
 
         Integer result = 0;
-            result = jdbcTemplate.update(query, args);
+        result = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -177,7 +177,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception{
+    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteRule" + "]";
 
         String query = null;
@@ -191,7 +191,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int result = 0;
-            result = jdbcTemplate.update(query, gid, keyId, priority);
+        result = jdbcTemplate.update(query, gid, keyId, priority);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -199,7 +199,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception{
+    public void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception {
         String query = null;
         if (isUITest) {
             query = "truncate table pde.pixel_data_engine_configs";
