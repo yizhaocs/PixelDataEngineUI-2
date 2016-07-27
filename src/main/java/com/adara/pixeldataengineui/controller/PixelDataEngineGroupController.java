@@ -84,33 +84,20 @@ public class PixelDataEngineGroupController {
 
     @RequestMapping(value = "/samegroup", method = RequestMethod.GET)
     public ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> samegroup(@RequestParam(value = "id", required = false) Integer id) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "samegroup" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + "id:" + id);
-
-//        String result = "";
-//        if (id.equals("0")) {
-//            StringBuilder sb = Tools.resultMaker(result);
-//            return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
-//        }
-
-        GenericDTOList<PixelDataEngineConfigsDTO> result = null;
-        try {
-            result = mPixelDataEngineGroupService.getSameGroup(id);
-        } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-
         ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> response = null;
-       // if (result.length() < 4) {
-        //    response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-       //} else {
-          //  StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(result, HttpStatus.OK);
-       // }
+        GenericDTOList<PixelDataEngineConfigsDTO> retval = null;
 
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
-
+        try {
+            retval = mPixelDataEngineGroupService.getSameGroup(id);
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineGroupController.samegroup] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return response;
     }
 

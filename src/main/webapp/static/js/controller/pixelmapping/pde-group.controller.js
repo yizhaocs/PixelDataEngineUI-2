@@ -284,6 +284,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.dec,
                 frontendRightHandPanelData.in,
                 frontendRightHandPanelData.setRuleArray).success(function (backendData) {
+                $scope.leftPanelSelectedPriority = frontendRightHandPanelData.priority, // add this for fixing bug when updated the priority more than once
                 $scope.refreshLeftPanel();
                 alert("Rule Updated");
             });
