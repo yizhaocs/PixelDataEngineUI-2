@@ -7,17 +7,17 @@ import java.io.Serializable;
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class FacebookDpKeysDTO  extends BaseDTO implements Serializable {
+public class FacebookDpKeysDTO extends BaseDTO implements Serializable {
     private Integer key_id; // int(11)
     private Byte enabled; // tinyint(4)
     private Byte update_interval; // tinyint(4)
     private Boolean use_image_pixel; // tinyint(1)
 
-    public FacebookDpKeysDTO(){
+    public FacebookDpKeysDTO() {
 
     }
 
-    public FacebookDpKeysDTO(Integer key_id, Byte enabled, Byte update_interval, Boolean use_image_pixel){
+    public FacebookDpKeysDTO(Integer key_id, Byte enabled, Byte update_interval, Boolean use_image_pixel) {
         this.key_id = key_id;
         this.enabled = enabled;
         this.update_interval = update_interval;
@@ -62,4 +62,18 @@ public class FacebookDpKeysDTO  extends BaseDTO implements Serializable {
                 + ", update_interval=" + update_interval + ", use_image_pixel=" + use_image_pixel + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((key_id == null) ? 0 : key_id.hashCode());
+        result = prime * result
+                + ((enabled == null) ? 0 : enabled.hashCode());
+        result = prime * result
+                + ((update_interval == null) ? 0 : update_interval.hashCode());
+        result = prime * result + ((use_image_pixel == null) ? 0 : use_image_pixel.hashCode());
+
+        return result;
+    }
 }

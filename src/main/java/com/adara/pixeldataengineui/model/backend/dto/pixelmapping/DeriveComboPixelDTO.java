@@ -54,4 +54,17 @@ public class DeriveComboPixelDTO  extends BaseDTO implements Serializable {
                 + ", cp_id=" + cp_id + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((dp_key_id == null) ? 0 : dp_key_id.hashCode());
+        result = prime * result
+                + ((advertiser_id == null) ? 0 : advertiser_id.hashCode());
+        result = prime * result
+                + ((cp_id == null) ? 0 : cp_id.hashCode());
+
+        return result;
+    }
 }

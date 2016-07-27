@@ -43,4 +43,15 @@ public class AdobeDpkeyMappingDTO  extends BaseDTO implements Serializable {
         return "AdobeDpkeyMappingDTO [adobe_segment_id=" + adobe_segment_id + ", dp_key_id=" + dp_key_id + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((adobe_segment_id == null) ? 0 : adobe_segment_id.hashCode());
+        result = prime * result
+                + ((dp_key_id == null) ? 0 : dp_key_id.hashCode());
+
+        return result;
+    }
 }

@@ -41,4 +41,15 @@ public class UserDTO extends BaseDTO implements Serializable {
         return "UserDTO [username=" + username + ", password=" + password + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((username == null) ? 0 : username.hashCode());
+        result = prime * result
+                + ((password == null) ? 0 : password.hashCode());
+
+        return result;
+    }
 }

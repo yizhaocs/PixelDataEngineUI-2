@@ -42,4 +42,15 @@ public class KruxDpkeyDTO  extends BaseDTO implements Serializable {
                + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((krux_segment_id == null) ? 0 : krux_segment_id.hashCode());
+        result = prime * result
+                + ((dp_key_id == null) ? 0 : dp_key_id.hashCode());
+
+        return result;
+    }
 }

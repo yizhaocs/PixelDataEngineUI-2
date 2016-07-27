@@ -41,4 +41,15 @@ public class DataProviderFacebookPixelsDTO extends BaseDTO implements Serializab
         return "DataProviderFacebookPixelsDTO [dp_id=" + dp_id + ", facebook_pixel_id=" + facebook_pixel_id + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((dp_id == null) ? 0 : dp_id.hashCode());
+        result = prime * result
+                + ((facebook_pixel_id == null) ? 0 : facebook_pixel_id.hashCode());
+
+        return result;
+    }
 }

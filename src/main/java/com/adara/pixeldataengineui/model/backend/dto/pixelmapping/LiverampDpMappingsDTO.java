@@ -52,4 +52,17 @@ public class LiverampDpMappingsDTO  extends BaseDTO implements Serializable {
                 + ", threshold_mb=" + threshold_mb + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((dp_name == null) ? 0 : dp_name.hashCode());
+        result = prime * result
+                + ((dp_id == null) ? 0 : dp_id.hashCode());
+        result = prime * result
+                + ((threshold_mb == null) ? 0 : threshold_mb.hashCode());
+
+        return result;
+    }
 }

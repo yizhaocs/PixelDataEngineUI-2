@@ -52,4 +52,17 @@ public class LiverampDpkeyMappingsDTO  extends BaseDTO implements Serializable {
                 + ", value=" + value + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((liveramp_segment_id == null) ? 0 : liveramp_segment_id.hashCode());
+        result = prime * result
+                + ((dp_key_id == null) ? 0 : dp_key_id.hashCode());
+        result = prime * result
+                + ((value == null) ? 0 : value.hashCode());
+
+        return result;
+    }
 }

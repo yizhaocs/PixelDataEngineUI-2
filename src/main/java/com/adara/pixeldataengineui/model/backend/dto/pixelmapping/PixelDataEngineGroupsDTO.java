@@ -52,4 +52,17 @@ public class PixelDataEngineGroupsDTO  extends BaseDTO implements Serializable {
                 + ", group_type=" + group_type + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((trigger_key_id == null) ? 0 : trigger_key_id.hashCode());
+        result = prime * result
+                + ((gid == null) ? 0 : gid.hashCode());
+        result = prime * result
+                + ((group_type == null) ? 0 : group_type.hashCode());
+
+        return result;
+    }
 }

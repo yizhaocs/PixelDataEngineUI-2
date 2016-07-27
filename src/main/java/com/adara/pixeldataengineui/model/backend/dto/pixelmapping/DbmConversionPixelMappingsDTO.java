@@ -41,4 +41,15 @@ public class DbmConversionPixelMappingsDTO  extends BaseDTO implements Serializa
         return "DbmConversionPixelMappingsDTO [conversion_pixel_id=" + conversion_pixel_id + ", dbm_url=" + dbm_url + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((conversion_pixel_id == null) ? 0 : conversion_pixel_id.hashCode());
+        result = prime * result
+                + ((dbm_url == null) ? 0 : dbm_url.hashCode());
+
+        return result;
+    }
 }
