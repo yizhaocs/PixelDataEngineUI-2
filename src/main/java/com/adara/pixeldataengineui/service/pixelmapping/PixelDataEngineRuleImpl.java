@@ -46,17 +46,21 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority, isUITest);
     }
 
-    public void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception{
+    public void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception {
         mPixelDataEngineRuleDAO.truncatePixelDataEngineConfigsTable(isUITest);
     }
 
     public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
-
-        // truncate pixel_data_engine_groups
+        /*
+        * truncate pixel_data_engine_groups
+        * */
         mPixelDataEngineGroupService.truncatePixelDataEngineGroupsTable(true);
-        // truncate pixel_data_engine_configs
+
+        /*
+        * truncate pixel_data_engine_configs
+        * */
         mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
 
 
@@ -66,18 +70,27 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             String testKeyID = request.getKeyId();
             String testValue = request.getTestValue();
 
-            // insert group
+            /*
+            * insert group
+            * */
             mPixelDataEngineGroupService.insertGroup(testKeyID, 1, true);
-            // insert rule
+
+            /*
+            * insert the latest changed rule on the webpage
+            * */
             request.setGid("1");
             request.setPriority(request.getNewPriority());
             mPixelDataEngineRuleService.insertRule(request, true);
 
-            // let the mock table refresh its pixelDataEngineConfigs
+            /*
+            * let the mock table refresh its pixelDataEngineConfigs
+            * */
             mPixelDataEngineService.mPixelDataEngine.init();
             Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
 
-            // reverse order
+            /*
+            * reverse order
+            * */
             treeMapResultMap.putAll(resultMap);
         } else if (request.getTestOption().equals("group")) {
             String testGroupID = request.getGid();
@@ -108,30 +121,40 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             GenericDTOList<PixelDataEngineConfigsDTO> sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
             Collection<PixelDataEngineConfigsDTO> sameGroupRulesList = sameGroupRules.getList();
             for (PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO : sameGroupRulesList) {
-                if(mPixelDataEngineConfigsDTO.getPriority().equals(request.getPriority()) == false){
+                if (mPixelDataEngineConfigsDTO.getPriority().equals(request.getPriority()) == false) {
                     RuleRequest mRuleRequest = new RuleRequest(mPixelDataEngineConfigsDTO.getParse_rule(), mPixelDataEngineConfigsDTO.getCondition_rule(), null, mPixelDataEngineConfigsDTO.getAction_rule(), "1", mPixelDataEngineConfigsDTO.getKey_id(), mPixelDataEngineConfigsDTO.getPriority(), null, mPixelDataEngineConfigsDTO.getType(), null, null, null, null, null, null, null, null, null, null, null);
                     mPixelDataEngineRuleService.insertRule(mRuleRequest, true);
                 }
             }
 
-            // insert the latest changed rule on the webpage
+            /*
+            * insert the latest changed rule on the webpage
+            * */
             request.setGid("1");
             request.setPriority(request.getNewPriority());
             mPixelDataEngineRuleService.insertRule(request, true);
 
-            // let the mock table refresh its pixelDataEngineConfigs
+            /*
+            * let the mock table refresh its pixelDataEngineConfigs
+            * */
             mPixelDataEngineService.mPixelDataEngine.init();
-            Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
+            Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testGroupID, testValue);
 
-            // reverse order
+            /*
+            * reverse order
+            * */
             treeMapResultMap.putAll(resultMap);
         }
 
-        // truncate pixel_data_engine_groups
+        /*
+        * truncate pixel_data_engine_groups
+        * */
         mPixelDataEngineGroupService.truncatePixelDataEngineGroupsTable(true);
-        // truncate pixel_data_engine_configs
-        mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
 
+        /*
+        * truncate pixel_data_engine_configs
+        * */
+        mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
 
         return treeMapResultMap;
     }
