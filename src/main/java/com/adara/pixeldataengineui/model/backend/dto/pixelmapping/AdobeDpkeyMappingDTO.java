@@ -24,5 +24,4 @@ public class AdobeDpkeyMappingDTO {
         this.dp_key_id = dp_key_id;
     }
 
-
 }

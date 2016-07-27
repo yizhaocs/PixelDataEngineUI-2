@@ -131,6 +131,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         List<Map<String, Object>> listMap = null;
             listMap = jdbcTemplate.queryForList(query);
 
+       // GenericDTOList<PixelDataEngineConfigsDTO> result = new GenericDTOList<PixelDataEngineConfigsDTO>();
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (Map<String, Object> m : listMap) {
