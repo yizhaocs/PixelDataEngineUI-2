@@ -1,6 +1,6 @@
 package com.adara.pixeldataengineui.model.backend.dto.pixelmapping;
 
-import com.adara.pixeldataengineui.model.backend.dto.highlevel.BaseDTO;
+import com.adara.pixeldataengineui.model.backend.dto.generic.BaseDTO;
 
 import java.io.Serializable;
 

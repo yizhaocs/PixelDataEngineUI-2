@@ -1,6 +1,6 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
-import com.adara.pixeldataengineui.model.backend.dto.highlevel.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import org.apache.commons.logging.Log;

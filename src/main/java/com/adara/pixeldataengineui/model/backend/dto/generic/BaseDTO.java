@@ -1,4 +1,4 @@
-package com.adara.pixeldataengineui.model.backend.dto.highlevel;
+package com.adara.pixeldataengineui.model.backend.dto.generic;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;

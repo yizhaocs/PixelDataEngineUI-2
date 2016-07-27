@@ -1,4 +1,4 @@
-package com.adara.pixeldataengineui.model.backend.dto.highlevel;
+package com.adara.pixeldataengineui.model.backend.dto.generic;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,7 +1,7 @@
 package com.adara.pixeldataengineui.service.pixelmapping;
 
 import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineGroupDAO;
-import com.adara.pixeldataengineui.model.backend.dto.highlevel.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

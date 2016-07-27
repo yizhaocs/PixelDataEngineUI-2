@@ -1,6 +1,6 @@
 package com.adara.pixeldataengineui.controller;
 
-import com.adara.pixeldataengineui.model.backend.dto.highlevel.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;

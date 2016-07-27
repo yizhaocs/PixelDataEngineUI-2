@@ -1,4 +1,4 @@
-package com.adara.pixeldataengineui.model.backend.dto.highlevel;
+package com.adara.pixeldataengineui.model.backend.dto.generic;
 
 public class ErrorField implements Cloneable {
 
