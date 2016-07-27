@@ -1,5 +1,6 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
+import com.adara.pixeldataengineui.model.backend.dto.highlevel.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import org.apache.commons.logging.Log;
@@ -131,9 +132,9 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         List<Map<String, Object>> listMap = null;
             listMap = jdbcTemplate.queryForList(query);
 
-       // GenericDTOList<PixelDataEngineConfigsDTO> result = new GenericDTOList<PixelDataEngineConfigsDTO>();
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+       GenericDTOList<PixelDataEngineConfigsDTO> result = new GenericDTOList<PixelDataEngineConfigsDTO>();
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("[");
         for (Map<String, Object> m : listMap) {
             PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
             mPixelDataEngineConfigsDTO.setGid(String.valueOf(m.get("gid")));
@@ -143,24 +144,25 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
             mPixelDataEngineConfigsDTO.setParse_rule(String.valueOf(m.get("parse_rule")));
             mPixelDataEngineConfigsDTO.setCondition_rule(String.valueOf(m.get("condition_rule")));
             mPixelDataEngineConfigsDTO.setAction_rule(String.valueOf(m.get("action_rule")));
-            // convert Java object to JSON (Jackson)
-            ObjectMapper mapper = new ObjectMapper();
-            String tmp = "";
-            try {
-                tmp = mapper.writeValueAsString(mPixelDataEngineConfigsDTO);
-            } catch (Exception e) {
-                LOG.error("Failed to execute sql query", e);
-            }
-            sb.append(tmp + ",");
+            result.add(mPixelDataEngineConfigsDTO);
+//            // convert Java object to JSON (Jackson)
+//            ObjectMapper mapper = new ObjectMapper();
+//            String tmp = "";
+//            try {
+//                tmp = mapper.writeValueAsString(mPixelDataEngineConfigsDTO);
+//            } catch (Exception e) {
+//                LOG.error("Failed to execute sql query", e);
+//            }
+//            sb.append(tmp + ",");
         }
 
-        sb.deleteCharAt(sb.toString().length() - 1);
-        sb.append("]");
+//        sb.deleteCharAt(sb.toString().length() - 1);
+//        sb.append("]");
 
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
+//        if (LOG.isDebugEnabled())
+//            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
-        return sb.toString();
+        return result.toString();
     }
 
 
