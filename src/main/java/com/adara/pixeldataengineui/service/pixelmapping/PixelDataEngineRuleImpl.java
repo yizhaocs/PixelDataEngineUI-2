@@ -114,8 +114,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
                 }
             }
 
-            //
-
+            // insert the latest changed rule on the webpage
             request.setGid("1");
             request.setPriority(request.getNewPriority());
             mPixelDataEngineRuleService.insertRule(request, true);
