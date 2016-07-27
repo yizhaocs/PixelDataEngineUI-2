@@ -123,7 +123,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         return result;
     }
 
-    public String getSameGroup(Integer gid) throws Exception{
+    public GenericDTOList<PixelDataEngineConfigsDTO> getSameGroup(Integer gid) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getSameGroup" + "]";
         String query = "SELECT a.gid, a.key_id, a.priority, a.type, a.parse_rule, a.condition_rule, a.action_rule FROM marketplace.pixel_data_engine_configs a where a.gid=" + gid;
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
@@ -162,7 +162,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
 //        if (LOG.isDebugEnabled())
 //            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
 
-        return result.toString();
+        return result;
     }
 
 

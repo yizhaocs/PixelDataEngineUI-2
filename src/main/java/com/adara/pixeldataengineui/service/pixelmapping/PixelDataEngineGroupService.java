@@ -1,5 +1,8 @@
 package com.adara.pixeldataengineui.service.pixelmapping;
 
+import com.adara.pixeldataengineui.model.backend.dto.highlevel.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
+
 /**
  * Created by yzhao on 4/28/16.
  */
@@ -10,7 +13,7 @@ public interface PixelDataEngineGroupService {
 
     String getGroup(String triggerKeyId) throws Exception;
 
-    String getSameGroup(Integer gid) throws Exception;
+    GenericDTOList<PixelDataEngineConfigsDTO> getSameGroup(Integer gid) throws Exception;
 
     Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception;
 

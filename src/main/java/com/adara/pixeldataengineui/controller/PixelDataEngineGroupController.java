@@ -1,5 +1,7 @@
 package com.adara.pixeldataengineui.controller;
 
+import com.adara.pixeldataengineui.model.backend.dto.highlevel.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.util.Constants;
@@ -81,29 +83,30 @@ public class PixelDataEngineGroupController {
     }
 
     @RequestMapping(value = "/samegroup", method = RequestMethod.GET)
-    public ResponseEntity<String> samegroup(@RequestParam(value = "id", required = false) Integer id) {
+    public ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> samegroup(@RequestParam(value = "id", required = false) Integer id) {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "samegroup" + "]";
         LOG.info(LOG_HEADER + ", " + "request data ->" + "id:" + id);
 
-        String result = "";
-        if (id.equals("0")) {
-            StringBuilder sb = Tools.resultMaker(result);
-            return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
-        }
+//        String result = "";
+//        if (id.equals("0")) {
+//            StringBuilder sb = Tools.resultMaker(result);
+//            return new ResponseEntity<String>(sb.toString(), HttpStatus.NO_CONTENT);
+//        }
 
+        GenericDTOList<PixelDataEngineConfigsDTO> result = null;
         try {
             result = mPixelDataEngineGroupService.getSameGroup(id);
         } catch (Exception e) {
             LOG.error(LOG_HEADER + " Service error: " + e, e);
         }
 
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        } else {
-            StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
-        }
+        ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> response = null;
+       // if (result.length() < 4) {
+        //    response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
+       //} else {
+          //  StringBuilder sb = Tools.resultMaker(result);
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(result, HttpStatus.OK);
+       // }
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());

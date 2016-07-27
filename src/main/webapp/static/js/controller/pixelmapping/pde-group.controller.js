@@ -155,8 +155,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         }
     };
 
-    $scope.sortPriority(backendData.data.body);
-    $scope.frontendLeftHandPanelData = angular.copy(backendData.data.body);
+    $scope.sortPriority(backendData.data.list);
+    $scope.frontendLeftHandPanelData = angular.copy(backendData.data.list);
 
 
     /*
@@ -292,8 +292,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.refreshLeftPanel = function () {
         pixelmappingService.getSameGroup(gid).success(function (backendData) {
-            $scope.sortPriority(backendData.body);
-            $scope.frontendLeftHandPanelData = angular.copy(backendData.body);
+            $scope.sortPriority(backendData.list);
+            $scope.frontendLeftHandPanelData = angular.copy(backendData.list);
         });
     };
 

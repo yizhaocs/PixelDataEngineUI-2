@@ -97,7 +97,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             mPixelDataEngineGroupService.insertGroup(triggerKeyIdNew, Integer.valueOf(groupTypeNew), true);
 
             // [{"gid":"3003","key_id":"3003","priority":"1","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|L|0|3"},{"gid":"3003","key_id":"3003","priority":"2","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|R|0|2"},{"gid":"3003","key_id":"3003","priority":"3","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|L|0|1"}]
-            String sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
+           // String sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
 
             // let the mock table refresh its pixelDataEngineConfigs
             mPixelDataEngineService.mPixelDataEngine.init();
