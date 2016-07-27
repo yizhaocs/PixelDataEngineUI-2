@@ -8,6 +8,16 @@ public class DataProvidersDTO {
     private String name; // varchar(64)
     private Boolean sync_facebook; // tinyint(1)
 
+    public DataProvidersDTO(){
+
+    }
+
+    public DataProvidersDTO(Integer id, String name, Boolean sync_facebook){
+        this.id = id;
+        this.name = name;
+        this.sync_facebook = sync_facebook;
+    }
+
     public Boolean getSync_facebook() {
         return sync_facebook;
     }
@@ -30,6 +40,12 @@ public class DataProvidersDTO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "DataProvidersDTO [id=" + id + ", name=" + name
+                + ", sync_facebook=" + sync_facebook + "]";
     }
 
 }

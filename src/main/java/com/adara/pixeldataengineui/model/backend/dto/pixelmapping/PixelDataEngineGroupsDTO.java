@@ -1,12 +1,26 @@
 package com.adara.pixeldataengineui.model.backend.dto.pixelmapping;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.BaseDTO;
+
+import java.io.Serializable;
+
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class PixelDataEngineGroupsDTO {
+public class PixelDataEngineGroupsDTO  extends BaseDTO implements Serializable {
     private String trigger_key_id;
     private Integer gid;
     private Integer group_type;
+
+    public PixelDataEngineGroupsDTO(){
+
+    }
+
+    public PixelDataEngineGroupsDTO(String trigger_key_id, Integer gid, Integer group_type){
+        this.trigger_key_id = trigger_key_id;
+        this.gid = gid;
+        this.group_type = group_type;
+    }
 
     public String getTrigger_key_id() {
         return trigger_key_id;
@@ -32,5 +46,10 @@ public class PixelDataEngineGroupsDTO {
         this.gid = gid;
     }
 
+    @Override
+    public String toString() {
+        return "PixelDataEngineGroupsDTO [trigger_key_id=" + trigger_key_id + ", gid=" + gid
+                + ", group_type=" + group_type + "]";
+    }
 
 }

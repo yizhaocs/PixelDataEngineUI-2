@@ -1,12 +1,26 @@
 package com.adara.pixeldataengineui.model.backend.dto.pixelmapping;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.BaseDTO;
+
+import java.io.Serializable;
+
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
  */
-public class LiverampDpMappingsDTO {
+public class LiverampDpMappingsDTO  extends BaseDTO implements Serializable {
     private String dp_name; // varchar(80)
     private Integer dp_id; // int(11)
     private Long threshold_mb; // bigint(20)
+
+    public LiverampDpMappingsDTO(){
+
+    }
+
+    public LiverampDpMappingsDTO(String dp_name, Integer dp_id, Long threshold_mb){
+        this.dp_name = dp_name;
+        this.dp_id = dp_id;
+        this.threshold_mb = threshold_mb;
+    }
 
     public Long getThreshold_mb() {
         return threshold_mb;
@@ -32,5 +46,10 @@ public class LiverampDpMappingsDTO {
         this.dp_name = dp_name;
     }
 
+    @Override
+    public String toString() {
+        return "LiverampDpMappingsDTO [dp_name=" + dp_name + ", dp_id=" + dp_id
+                + ", threshold_mb=" + threshold_mb + "]";
+    }
 
 }
