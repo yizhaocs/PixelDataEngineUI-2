@@ -107,6 +107,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             Collection<PixelDataEngineConfigsDTO> sameGroupRulesList = sameGroupRules.getList();
             for (PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO : sameGroupRulesList) {
                 if(mPixelDataEngineConfigsDTO.getPriority().equals(request.getPriority())){
+                    request.setGid("1");
                     request.setPriority(request.getNewPriority());
                     mPixelDataEngineRuleService.insertRule(request, true);
                 }else{
