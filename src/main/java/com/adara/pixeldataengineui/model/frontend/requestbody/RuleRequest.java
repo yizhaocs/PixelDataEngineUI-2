@@ -28,7 +28,35 @@ public class RuleRequest {
     private String testValue;
     private String testOption;
     private In in;
-//    private List<InElementArray> inElementArray;
+
+    public RuleRequest() {
+
+    }
+
+    public RuleRequest(String parseRule, String conditionRule, String conditionSubselect, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, Len len, Seg seg, Contains contains, Range range, Substr substr, Dec dec, String testValue, String testOption, In in) {
+        this.parseRule = parseRule;
+        this.conditionRule = conditionRule;
+        this.conditionSubselect = conditionSubselect;
+        this.actionRule = actionRule;
+        this.gid = gid;
+        this.keyId = keyId;
+        this.priority = priority;
+        this.newPriority = newPriority;
+        this.type = type;
+        this.split1 = split1;
+        this.split2 = split2;
+        this.len = len;
+        this.seg = seg;
+        this.contains = contains;
+        this.range = range;
+        this.substr = substr;
+        this.dec = dec;
+        this.testValue = testValue;
+        this.testOption = testOption;
+        this.in = in;
+    }
+
+    //    private List<InElementArray> inElementArray;
     private List<SetRuleArray> setRuleArray;
 
     public String getParseRule() {

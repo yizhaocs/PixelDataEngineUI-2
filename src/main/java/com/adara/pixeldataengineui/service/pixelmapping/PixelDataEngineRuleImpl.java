@@ -1,6 +1,8 @@
 package com.adara.pixeldataengineui.service.pixelmapping;
 
 import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineRuleDAO;
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -97,13 +100,20 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             mPixelDataEngineGroupService.insertGroup(triggerKeyIdNew, Integer.valueOf(groupTypeNew), true);
 
             // [{"gid":"3003","key_id":"3003","priority":"1","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|L|0|3"},{"gid":"3003","key_id":"3003","priority":"2","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|R|0|2"},{"gid":"3003","key_id":"3003","priority":"3","type":"transform","parse_rule":"orig","condition_rule":"len|1|4","action_rule":"substr|L|0|1"}]
-           // String sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
-
+            GenericDTOList<PixelDataEngineConfigsDTO> sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
+            Collection<PixelDataEngineConfigsDTO> sameGroupRulesList = sameGroupRules.getList();
+            for (PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO : sameGroupRulesList) {
+                RuleRequest mRuleRequest = new RuleRequest(mPixelDataEngineConfigsDTO.getParse_rule(), mPixelDataEngineConfigsDTO.getCondition_rule(), null, mPixelDataEngineConfigsDTO.getAction_rule(), "1", mPixelDataEngineConfigsDTO.getKey_id(), mPixelDataEngineConfigsDTO.getPriority(), null, mPixelDataEngineConfigsDTO.getType(), null, null, null, null, null, null, null, null, null, null, null);
+                mPixelDataEngineRuleService.insertRule(mRuleRequest, true);
+            }
             // let the mock table refresh its pixelDataEngineConfigs
             mPixelDataEngineService.mPixelDataEngine.init();
             Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testKeyID, testValue);
 
-
+            // delete group
+            mPixelDataEngineGroupService.deleteGroup(testKeyID, "1", true);
+            // delete rule
+            mPixelDataEngineRuleService.deleteRule(1, testKeyID, Integer.valueOf(request.getNewPriority()), true);
             // reverse order
             treeMapResultMap.putAll(resultMap);
         }
