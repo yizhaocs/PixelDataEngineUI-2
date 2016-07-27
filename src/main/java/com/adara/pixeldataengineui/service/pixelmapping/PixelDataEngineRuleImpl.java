@@ -83,7 +83,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             String testValue = request.getTestValue();
 
             // group = {"trigger_key_id":"3003","gid":3003,"group_type":2}
-            String group = mPixelDataEngineGroupService.getGroup(testKeyID);
+            String group = mPixelDataEngineGroupService.getGroup(testGroupID);
             String removeFirstLastCurlyBracesGroup = group.substring(1, group.length() - 1);
             String[] groupSplitLevel1 = removeFirstLastCurlyBracesGroup.split(",");
 
@@ -106,8 +106,14 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             GenericDTOList<PixelDataEngineConfigsDTO> sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
             Collection<PixelDataEngineConfigsDTO> sameGroupRulesList = sameGroupRules.getList();
             for (PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO : sameGroupRulesList) {
-                RuleRequest mRuleRequest = new RuleRequest(mPixelDataEngineConfigsDTO.getParse_rule(), mPixelDataEngineConfigsDTO.getCondition_rule(), null, mPixelDataEngineConfigsDTO.getAction_rule(), "1", mPixelDataEngineConfigsDTO.getKey_id(), mPixelDataEngineConfigsDTO.getPriority(), null, mPixelDataEngineConfigsDTO.getType(), null, null, null, null, null, null, null, null, null, null, null);
-                mPixelDataEngineRuleService.insertRule(mRuleRequest, true);
+                if(mPixelDataEngineConfigsDTO.getPriority().equals(request.getPriority())){
+                    request.setPriority(request.getNewPriority());
+                    mPixelDataEngineRuleService.insertRule(request, true);
+                }else{
+                    RuleRequest mRuleRequest = new RuleRequest(mPixelDataEngineConfigsDTO.getParse_rule(), mPixelDataEngineConfigsDTO.getCondition_rule(), null, mPixelDataEngineConfigsDTO.getAction_rule(), "1", mPixelDataEngineConfigsDTO.getKey_id(), mPixelDataEngineConfigsDTO.getPriority(), null, mPixelDataEngineConfigsDTO.getType(), null, null, null, null, null, null, null, null, null, null, null);
+                    mPixelDataEngineRuleService.insertRule(mRuleRequest, true);
+                }
+
             }
             // let the mock table refresh its pixelDataEngineConfigs
             mPixelDataEngineService.mPixelDataEngine.init();
