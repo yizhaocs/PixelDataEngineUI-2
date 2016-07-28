@@ -128,7 +128,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             * let the mock table refresh its pixelDataEngineConfigs
             * */
             mPixelDataEngineService.mPixelDataEngine.init();
-            Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(testGroupID, testValue);
+            Map<String, String> resultMap = mPixelDataEngineService.mPixelDataEngine.processRule(triggerKeyIdNew, testValue);
 
             /*
             * reverse order
