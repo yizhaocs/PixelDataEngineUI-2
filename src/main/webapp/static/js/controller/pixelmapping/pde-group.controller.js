@@ -335,15 +335,22 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.testOption
         ).success(function (backendData) {
             var result = "";
-            for (var i = 0; i < backendData.list.length; i++) {
-                var key = backendData.list[i].key;
-                var value = backendData.list[i].value;
-                result += key + "=" + value + "\n";
-            }
+            if(backendData != ''){
+                for (var i = 0; i < backendData.list.length; i++) {
+                    var key = backendData.list[i].key;
+                    var value = backendData.list[i].value;
+                    result += key + "=" + value + "\n";
+                }
 
-            if(backendData.list.length == 0){
+                if(backendData.list.length == 0){
+                    result = "null/empty result";
+                }
+
+            }else{
                 result = "null/empty result";
             }
+
+
 
             $scope.frontendRightHandPanelData.testResult = result;
         });
