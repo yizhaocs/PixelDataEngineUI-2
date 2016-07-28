@@ -6,7 +6,6 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -91,33 +90,25 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public String getRule(Integer gid, String keyId, Integer priority) throws Exception {
+    public PixelDataEngineConfigsDTO getRule(Integer gid, String keyId, Integer priority) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRule" + "]";
         String query = "SELECT p.gid, p.key_id, p.priority, p.type, p.parse_rule, p.condition_rule, p.action_rule FROM marketplace.pixel_data_engine_configs p WHERE p.gid=? AND p.key_id=? AND p.priority=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String result = null;
-        result = jdbcTemplate.queryForObject(query, new Object[]{gid, keyId, priority}, new RowMapper<String>() {
+        final PixelDataEngineConfigsDTO result = new PixelDataEngineConfigsDTO();
+        jdbcTemplate.queryForObject(query, new Object[]{gid, keyId, priority}, new RowMapper<PixelDataEngineConfigsDTO>() {
             @Override
-            public String mapRow(ResultSet rs, int rowNum)
+            public PixelDataEngineConfigsDTO mapRow(ResultSet rs, int rowNum)
                     throws SQLException {
-                PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO = new PixelDataEngineConfigsDTO();
-                mPixelDataEngineConfigsDTO.setGid(rs.getString("gid"));
-                mPixelDataEngineConfigsDTO.setKey_id(rs.getString("key_id"));
-                mPixelDataEngineConfigsDTO.setPriority(rs.getString("priority"));
-                mPixelDataEngineConfigsDTO.setType(rs.getString("type"));
-                mPixelDataEngineConfigsDTO.setParse_rule(rs.getString("parse_rule"));
-                mPixelDataEngineConfigsDTO.setCondition_rule(rs.getString("condition_rule"));
-                mPixelDataEngineConfigsDTO.setAction_rule(rs.getString("action_rule"));
-                // convert Java object to JSON (Jackson)
-                ObjectMapper mapper = new ObjectMapper();
-                String result = "";
-                try {
-                    result = mapper.writeValueAsString(mPixelDataEngineConfigsDTO);
-                } catch (Exception e) {
-                    LOG.error("Failed to convert Java object to JSON", e);
-                }
+                result.setGid(rs.getString("gid"));
+                result.setKey_id(rs.getString("key_id"));
+                result.setPriority(rs.getString("priority"));
+                result.setType(rs.getString("type"));
+                result.setParse_rule(rs.getString("parse_rule"));
+                result.setCondition_rule(rs.getString("condition_rule"));
+                result.setAction_rule(rs.getString("action_rule"));
+
                 return result;
             }
         });

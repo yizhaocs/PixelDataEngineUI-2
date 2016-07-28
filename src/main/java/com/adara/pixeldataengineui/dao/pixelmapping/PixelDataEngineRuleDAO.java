@@ -12,7 +12,7 @@ public interface PixelDataEngineRuleDAO {
 
     GenericDTOList<PixelDataEngineConfigsDTO> getRules() throws Exception;
 
-    String getRule(Integer gid, String keyId, Integer priority) throws Exception;
+    PixelDataEngineConfigsDTO getRule(Integer gid, String keyId, Integer priority) throws Exception;
 
     Integer updateRule(RuleRequest request) throws Exception;
 

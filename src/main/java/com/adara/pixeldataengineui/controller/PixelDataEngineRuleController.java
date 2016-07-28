@@ -7,7 +7,6 @@ import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupServ
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService;
 import com.adara.pixeldataengineui.util.Constants;
-import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,31 +80,21 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/getRule", method = RequestMethod.GET)
-    public ResponseEntity<String> getRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRule" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
+    public ResponseEntity<PixelDataEngineConfigsDTO> getRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
+        ResponseEntity<PixelDataEngineConfigsDTO> response = null;
+        PixelDataEngineConfigsDTO retval = null;
 
         if (keyid.equals("0")) {
-            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        String result = "";
-        try {
-            result = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
-        } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.NO_CONTENT);
         } else {
-            StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
+            try {
+                retval = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
+                response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.OK);
+            } catch (Exception e) {
+                LOG.error("[PixelDataEngineRuleController.getRule] Service error: " + e, e);
+                response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

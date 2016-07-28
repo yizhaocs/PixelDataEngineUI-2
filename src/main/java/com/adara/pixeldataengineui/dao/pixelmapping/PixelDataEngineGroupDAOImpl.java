@@ -89,14 +89,6 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
                 result.setTrigger_key_id(rs.getString("trigger_key_id"));
                 result.setGid(rs.getInt("gid"));
                 result.setGroup_type(rs.getInt("group_type"));
-                // convert Java object to JSON (Jackson)
-               /* ObjectMapper mapper = new ObjectMapper();
-                String result = "";
-                try {
-                    result = mapper.writeValueAsString(mPixelDataEngineGroupsDTO);
-                } catch (Exception e) {
-                    LOG.error("Failed to convert Java object to JSON", e);
-                }*/
                 return result;
             }
         });

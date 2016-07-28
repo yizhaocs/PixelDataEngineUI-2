@@ -352,12 +352,12 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             // true if user click on the "edit button"
             if (gid != 0) {
-                $scope.processedResponseBackupRuleData.gid = backendData.body.gid;
-                $scope.processedResponseBackupRuleData.keyId = backendData.body.key_id;
-                $scope.processedResponseBackupRuleData.type = backendData.body.type;
-                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.body.priority);
+                $scope.processedResponseBackupRuleData.gid = backendData.gid;
+                $scope.processedResponseBackupRuleData.keyId = backendData.key_id;
+                $scope.processedResponseBackupRuleData.type = backendData.type;
+                $scope.processedResponseBackupRuleData.priority = parseInt(backendData.priority);
 
-                var parseRuleSplit = backendData.body.parse_rule.split("|");
+                var parseRuleSplit = backendData.parse_rule.split("|");
                 $scope.processedResponseBackupRuleData.parseRule = parseRuleSplit[0];
                 if (parseRuleSplit[0] == 'split1') {
                     // true if -> -> split1|"|"
@@ -392,7 +392,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 }
 
 
-                var conditionRuleSplit = backendData.body.condition_rule.split("|");
+                var conditionRuleSplit = backendData.condition_rule.split("|");
                 $scope.processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
                 if (conditionRuleSplit[0] == 'len') {
                     if (conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2') {
@@ -490,7 +490,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                      */
                 }
 
-                var actionRuleSplit = backendData.body.action_rule.split("|");
+                var actionRuleSplit = backendData.action_rule.split("|");
                 $scope.processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
                 if (actionRuleSplit[0] == 'substr') {
                     $scope.processedResponseBackupRuleData.substr.column1 = actionRuleSplit[1];

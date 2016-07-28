@@ -35,7 +35,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.getRules();
     }
 
-    public String getRule(Integer gid, String keyId, Integer priority) throws Exception {
+    public PixelDataEngineConfigsDTO getRule(Integer gid, String keyId, Integer priority) throws Exception {
         return mPixelDataEngineRuleDAO.getRule(gid, keyId, priority);
     }
 
