@@ -77,16 +77,20 @@ public class PixelDataEngineGroupController {
         ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> response = null;
         GenericDTOList<PixelDataEngineConfigsDTO> retval = null;
 
-        try {
-            retval = mPixelDataEngineGroupService.getSameGroup(id);
-            if (retval.getList().size() == 0) {
-                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
-            } else {
-                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.OK);
+        if(id.equals("0")){
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
+        }else {
+            try {
+                retval = mPixelDataEngineGroupService.getSameGroup(id);
+                if (retval.getList().size() == 0) {
+                    response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
+                } else {
+                    response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.OK);
+                }
+            } catch (Exception e) {
+                LOG.error("[PixelDataEngineGroupController.samegroup] Service error: " + e, e);
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (Exception e) {
-            LOG.error("[PixelDataEngineGroupController.samegroup] Service error: " + e, e);
-            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return response;
