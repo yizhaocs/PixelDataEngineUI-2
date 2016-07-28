@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineRuleService;
@@ -14,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 /**
  * @author YI ZHAO[yi.zhao@adara.com]
@@ -147,43 +146,21 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/testRule", method = RequestMethod.POST)
-    public ResponseEntity<String> testRule(@RequestBody RuleRequest request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
+    public ResponseEntity<GenericDTOList<TestRuleDTO>> testRule(@RequestBody RuleRequest request) {
+        ResponseEntity<GenericDTOList<TestRuleDTO>> response = null;
+        GenericDTOList<TestRuleDTO> retval = null;
 
-
-        Map<String, String> resultMap = null;
         try {
-            resultMap = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
-        } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-        StringBuilder result = new StringBuilder();
-        result.append("{\"success\":true,\"data\":");
-        result.append("[");
-        for (String s : resultMap.keySet()) {
-            // we don't take the value is null when we do "ignore Action Rule"
-            if (resultMap.get(s) != null) {
-                result.append("\"" + s + "|" + resultMap.get(s) + "\"");
-                result.append(",");
+            retval = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.OK);
             }
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineRuleController.testRule] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        if (result.toString().charAt(result.toString().length() - 1) == ',') {
-            result.deleteCharAt(result.toString().length() - 1);
-        }
-
-        result.append("]");
-        result.append("}");
-        ResponseEntity<java.lang.String> response = null;
-        if (result.toString().length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        } else {
-            response = new ResponseEntity<String>(result.toString(), HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

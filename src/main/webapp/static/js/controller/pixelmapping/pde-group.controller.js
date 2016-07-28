@@ -311,7 +311,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
     $scope.testRule = function (frontendRightHandPanelData) {
         pixelmappingService.testRule(
-            $rootScope.base + 'group/edit-rules/' + gid,
+            $rootScope.base + 'group/edit-rules/triggerkeyid=' + triggerKeyId + '&gid=' + gid,
             frontendRightHandPanelData.parseRule,
             frontendRightHandPanelData.conditionRule,
             frontendRightHandPanelData.conditionSubselect,
@@ -335,11 +335,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.testOption
         ).success(function (backendData) {
             var result = "";
-            for (var i = 0; i < backendData.data.length; i++) {
-                result += backendData.data[i] + "\n";
+            for (var i = 0; i < backendData.list.length; i++) {
+                var key = backendData.list[i].key;
+                var value = backendData.list[i].value;
+                result += key + "=" + value + "\n";
             }
 
-            if(result == ""){
+            if(backendData.list.length == 0){
                 result = "null/empty result";
             }
 

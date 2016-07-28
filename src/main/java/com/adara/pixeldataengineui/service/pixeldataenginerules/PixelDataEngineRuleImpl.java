@@ -4,6 +4,7 @@ import com.adara.pixeldataengineui.dao.pixeldataenginerules.PixelDataEngineRuleD
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineGroupsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,9 +52,10 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         mPixelDataEngineRuleDAO.truncatePixelDataEngineConfigsTable(isUITest);
     }
 
-    public Map<String, String> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
+    public GenericDTOList<TestRuleDTO> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
+        GenericDTOList<TestRuleDTO> result = new GenericDTOList<TestRuleDTO>();
         /*
         * truncate pixel_data_engine_groups
         * */
@@ -146,6 +148,12 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         * */
         mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
 
-        return treeMapResultMap;
+
+        for(String key: treeMapResultMap.keySet()){
+            TestRuleDTO mTestRuleDTO = new TestRuleDTO(key, treeMapResultMap.get(key));
+            result.add(mTestRuleDTO);
+        }
+
+        return result;
     }
 }
