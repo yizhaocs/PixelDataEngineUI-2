@@ -168,7 +168,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/list-group.html',
                 controller: 'listPixelGroups'
             })
-            .when(base + 'group/edit-group/:keyId', {
+            .when(base + 'group/edit-group/triggerkeyid=:keyId', {
                 title: 'Edit Pixel Data Engine Group',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-group.html',
                 controller: 'editPixelGroup',
@@ -196,7 +196,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/list-rule.html',
                 controller: 'listPixelRules'
             })
-            .when(base + 'rule/edit-rule/:keyId', {
+            /*.when(base + 'rule/edit-rule/:keyId', {
                 title: 'Edit Pixel Data Engine Rule',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
                 controller: 'editPixelRule',
@@ -208,7 +208,7 @@ app.config(['$routeProvider', '$locationProvider',
                         return pixelmappingService.getRule(gid, keyId, priority);
                     }
                 }
-            })
+            })*/
             .when(base + 'geo-file-manager', {
                 title: 'Geo File Manager',
                 templateUrl: 'static/html/geo-file-manager/index.html',
