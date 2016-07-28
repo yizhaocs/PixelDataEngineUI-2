@@ -196,7 +196,7 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/html/pixel-data-engine-config/list-rule.html',
                 controller: 'listPixelRules'
             })
-            /*.when(base + 'rule/edit-rule/:keyId', {
+            /*.when(base + 'rule/edit-rule/triggerkeyid=:keyId', {
                 title: 'Edit Pixel Data Engine Rule',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
                 controller: 'editPixelRule',

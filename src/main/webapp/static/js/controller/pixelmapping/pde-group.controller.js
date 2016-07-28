@@ -266,7 +266,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             }
             pixelmappingService.updateRule(
-                $rootScope.base + 'group/edit-rules/' + gid,
+                $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.parseRule,
                 frontendRightHandPanelData.conditionRule,
                 frontendRightHandPanelData.conditionSubselect,

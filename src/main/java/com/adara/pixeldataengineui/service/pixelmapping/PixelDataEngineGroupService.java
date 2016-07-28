@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.service.pixelmapping;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 
@@ -8,7 +9,7 @@ import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngin
  * Created by yzhao on 4/28/16.
  */
 public interface PixelDataEngineGroupService {
-    Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception;
+    ResponseDTO insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception;
 
     GenericDTOList<PixelDataEngineGroupsDTO> getGroups() throws Exception;
 

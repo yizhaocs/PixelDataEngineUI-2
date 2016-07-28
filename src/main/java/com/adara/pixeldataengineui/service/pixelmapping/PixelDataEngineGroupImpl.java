@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.service.pixelmapping;
 
 import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineGroupDAO;
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
     @Autowired
     private PixelDataEngineGroupDAO mPixelDataEngineGroupDAO;
 
-    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception {
+    public ResponseDTO insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception {
         return mPixelDataEngineGroupDAO.insertGroup(triggerKeyId, groupType, isUITest);
     }
 

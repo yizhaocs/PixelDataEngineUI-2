@@ -1,8 +1,10 @@
 package com.adara.pixeldataengineui.dao.pixelmapping;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,7 +28,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception {
+    public ResponseDTO insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertGroup" + "]";
         String query = null;
         Object[] args = null;
@@ -42,9 +44,15 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
-        int result = 0;
-        result = jdbcTemplate.update(query, args);
+        int retval = 0;
+        retval = jdbcTemplate.update(query, args);
 
+        ResponseDTO result = new ResponseDTO();
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
