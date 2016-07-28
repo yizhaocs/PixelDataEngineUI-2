@@ -179,14 +179,15 @@ app.config(['$routeProvider', '$locationProvider',
                     }
                 }
             })
-            .when(base + 'group/edit-rules/:gid', {
+            .when(base + 'group/edit-rules/triggerkeyid=:trigger_key_id&gid=:gid', {
                 title: 'Group Id :gid',
                 templateUrl: 'static/html/pixel-data-engine-config/edit-rules.html',
                 controller: 'editSameGroup',
                 resolve: {
                     backendData: function (pixelmappingService, $route) {
                         var gid = $route.current.params.gid;
-                        return pixelmappingService.getSameGroup(gid);
+                        var triggerKeyId = $route.current.params.trigger_key_id;
+                        return pixelmappingService.getSameGroup(triggerKeyId, gid);
                     }
                 }
             })

@@ -62,6 +62,8 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
 
 app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeParams, pixelmappingService, backendData) {
     var gid = ($routeParams.gid) ? parseInt($routeParams.gid) : 0;
+    var triggerKeyId = ($routeParams.trigger_key_id) ? parseInt($routeParams.trigger_key_id) : 0;
+
     $scope.title = 'Group ID:' + gid;
     $scope.buttonText = 'Add New Rule';
     $scope.isUpdate = false; // false to get rid of "Delete" button
@@ -303,6 +305,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.leftPanelSelectedkeyid = frontendData.key_id;
         $scope.leftPanelSelectedPriority = frontendData.priority;
         $scope.leftPanelSelectedGid = frontendData.gid;
+
         $scope.getRule();
     };
 
@@ -348,6 +351,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.buttonText = 'Update Rule';
         $scope.isUpdate = true; // true to display "Delete" button
         $scope.groupIdInputDisable = true;
+        $scope.groupTypeDisable = true;
         $scope.keyIdDisable = true;
         pixelmappingService.getRule($scope.leftPanelSelectedGid, $scope.leftPanelSelectedkeyid, $scope.leftPanelSelectedPriority).success(function (backendData) {
             // frontendRightHandPanelDataForClean = backendData;
@@ -515,6 +519,21 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             $scope.frontendRightHandPanelData = angular.copy($scope.processedResponseBackupRuleData);
 
+
+            /*
+            * This is for hard setting for the Group Type on the frontend Right Hand Panel
+            * */
+            pixelmappingService.getGroup(triggerKeyId).success(function (backendData) {
+                var group = backendData;
+                if(group.group_type == 1){
+                    $scope.frontendRightHandPanelData.groupType = "independent";
+                }else if(group.group_type == 2){
+                    $scope.frontendRightHandPanelData.groupType = "sequential";
+                }
+            });
+
+            //----------------------------------------------------------------------------------------------------------------
+
             // if no inElementArray || setRuleArray data from backend, then init them
             if ($scope.frontendRightHandPanelData.in.inElementArray.length == 0) {
                 $scope.frontendRightHandPanelData.in.inElementArray = [{
@@ -529,6 +548,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                     column2: ''
                 }];
             }
+
 
             frontendRightHandPanelDataForClean = angular.copy($scope.frontendRightHandPanelData);
         });
