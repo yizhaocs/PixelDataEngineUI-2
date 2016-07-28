@@ -10,7 +10,7 @@ import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngin
 public interface PixelDataEngineGroupDAO {
     Integer insertGroup(String triggerKeyId, Integer groupType, Boolean isUITest) throws Exception;
 
-    String getGroups() throws Exception;
+    GenericDTOList<PixelDataEngineGroupsDTO> getGroups() throws Exception;
 
     PixelDataEngineGroupsDTO getGroup(String keyId) throws Exception;
 

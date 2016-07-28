@@ -21,7 +21,7 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
         return mPixelDataEngineGroupDAO.insertGroup(triggerKeyId, groupType, isUITest);
     }
 
-    public String getGroups() throws Exception {
+    public GenericDTOList<PixelDataEngineGroupsDTO> getGroups() throws Exception {
         return mPixelDataEngineGroupDAO.getGroups();
     }
 

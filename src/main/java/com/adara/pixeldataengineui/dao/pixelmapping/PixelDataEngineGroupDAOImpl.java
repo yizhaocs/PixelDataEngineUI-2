@@ -5,7 +5,6 @@ import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngin
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -52,7 +51,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         return result;
     }
 
-    public String getGroups() throws Exception {
+    public GenericDTOList<PixelDataEngineGroupsDTO> getGroups() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
         String query = "SELECT a.trigger_key_id, a.gid, a.group_type FROM marketplace.pixel_data_engine_groups a order by a.trigger_key_id";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
@@ -61,32 +60,19 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         List<Map<String, Object>> listMap = null;
         listMap = jdbcTemplate.queryForList(query);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        GenericDTOList<PixelDataEngineGroupsDTO> result = new GenericDTOList<PixelDataEngineGroupsDTO>();
         for (Map<String, Object> m : listMap) {
             PixelDataEngineGroupsDTO mPixelDataEngineGroupsDTO = new PixelDataEngineGroupsDTO();
             mPixelDataEngineGroupsDTO.setTrigger_key_id(String.valueOf(m.get("trigger_key_id")));
             mPixelDataEngineGroupsDTO.setGid(Integer.valueOf(String.valueOf(m.get("gid"))));
             mPixelDataEngineGroupsDTO.setGroup_type(Integer.valueOf(String.valueOf(m.get("group_type"))));
-
-            // convert Java object to JSON (Jackson)
-            ObjectMapper mapper = new ObjectMapper();
-            String tmp = "";
-            try {
-                tmp = mapper.writeValueAsString(mPixelDataEngineGroupsDTO);
-            } catch (Exception e) {
-
-                LOG.error("Failed to convert Java object to JSON", e);
-            }
-            sb.append(tmp + ",");
+            result.add(mPixelDataEngineGroupsDTO);
         }
-        sb.deleteCharAt(sb.toString().length() - 1);
-        sb.append("]");
 
         if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result.toString());
 
-        return sb.toString();
+        return result;
     }
 
     public PixelDataEngineGroupsDTO getGroup(String keyId) throws Exception {

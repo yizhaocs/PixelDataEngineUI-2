@@ -6,7 +6,6 @@ import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngin
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.util.Constants;
-import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +56,9 @@ public class PixelDataEngineGroupController {
         ResponseEntity<PixelDataEngineGroupsDTO> response = null;
         PixelDataEngineGroupsDTO retval = null;
 
-        if(id.equals("0")){
+        if (id.equals("0")) {
             response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.NO_CONTENT);
-        }else {
+        } else {
             try {
                 retval = mPixelDataEngineGroupService.getGroup(id);
                 response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.OK);
@@ -77,9 +76,9 @@ public class PixelDataEngineGroupController {
         ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> response = null;
         GenericDTOList<PixelDataEngineConfigsDTO> retval = null;
 
-        if(id.equals("0")){
+        if (id.equals("0")) {
             response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
-        }else {
+        } else {
             try {
                 retval = mPixelDataEngineGroupService.getSameGroup(id);
                 if (retval.getList().size() == 0) {
@@ -97,26 +96,21 @@ public class PixelDataEngineGroupController {
     }
 
     @RequestMapping(value = "/getGroups", method = RequestMethod.GET)
-    public ResponseEntity<String> getGroups() {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
+    public ResponseEntity<GenericDTOList<PixelDataEngineGroupsDTO>> getGroups() {
+        ResponseEntity<GenericDTOList<PixelDataEngineGroupsDTO>> response = null;
+        GenericDTOList<PixelDataEngineGroupsDTO> retval = null;
 
-        String result = "";
         try {
-            result = mPixelDataEngineGroupService.getGroups();
+            retval = mPixelDataEngineGroupService.getGroups();
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineGroupsDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineGroupsDTO>>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[PixelDataEngineGroupController.getGroups] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineGroupsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        } else {
-            StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

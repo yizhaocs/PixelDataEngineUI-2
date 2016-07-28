@@ -6,15 +6,15 @@
 
 app.controller('listPixelGroups', function ($scope, pixelmappingService) {
     pixelmappingService.getGroups().success(function (backendData) {
-        for (var i = 0; i < backendData.body.length; i++) {
-            if (backendData.body[i].group_type == 1) {
-                backendData.body[i].group_type = 'independent';
-            } else if (backendData.body[i].group_type == 2) {
-                backendData.body[i].group_type = 'sequential';
+        for (var i = 0; i < backendData.list.length; i++) {
+            if (backendData.list[i].group_type == 1) {
+                backendData.list[i].group_type = 'independent';
+            } else if (backendData.list[i].group_type == 2) {
+                backendData.list[i].group_type = 'sequential';
             }
         }
 
-        $scope.frontendData = backendData.body;
+        $scope.frontendData = backendData.list;
     });
 });
 
