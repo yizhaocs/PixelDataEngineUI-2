@@ -164,4 +164,33 @@ public class PixelDataEngineRuleController {
 
         return response;
     }
+/*
+    @RequestMapping(value = "/testRule", method = RequestMethod.POST)
+    public ResponseEntity<GenericDTOList<TestRuleDTO>> testRule(@RequestBody RuleRequest request) {
+        ResponseEntity<GenericDTOList<TestRuleDTO>> response = null;
+        GenericDTOList<TestRuleDTO> retval = null;
+
+
+        try {
+            retval = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
+//            if (retval.getList().size() == 0) {
+//                response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.NO_CONTENT);
+//            } else {
+            response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.OK);
+//            }
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineRuleController.testRule] Service error: " + e, e);
+            retval = new GenericDTOList<TestRuleDTO>();
+            TestRuleDTO mTestRuleDTO = new TestRuleDTO("error",e.getCause().t);
+            retval.add(mTestRuleDTO);
+            response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.OK);
+            *//*
+            retval = new GenericDTOList<TestRuleDTO>();
+            TestRuleDTO mTestRuleDTO = new TestRuleDTO("error",e.getCause().toString());
+            response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+            *//*
+        }
+        return response;
+    }
+    */
 }
