@@ -1,7 +1,7 @@
-package com.adara.pixeldataengineui.service.pixelmapping;
+package com.adara.pixeldataengineui.service.pixeldataenginerules;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 
 import java.util.Map;

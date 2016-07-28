@@ -1,9 +1,9 @@
-package com.adara.pixeldataengineui.service.pixelmapping;
+package com.adara.pixeldataengineui.service.pixeldataenginerules;
 
-import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineRuleDAO;
+import com.adara.pixeldataengineui.dao.pixeldataenginerules.PixelDataEngineRuleDAO;
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineGroupsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

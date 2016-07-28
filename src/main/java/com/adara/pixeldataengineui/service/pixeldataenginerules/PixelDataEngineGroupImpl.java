@@ -1,10 +1,10 @@
-package com.adara.pixeldataengineui.service.pixelmapping;
+package com.adara.pixeldataengineui.service.pixeldataenginerules;
 
-import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineGroupDAO;
+import com.adara.pixeldataengineui.dao.pixeldataenginerules.PixelDataEngineGroupDAO;
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineGroupsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

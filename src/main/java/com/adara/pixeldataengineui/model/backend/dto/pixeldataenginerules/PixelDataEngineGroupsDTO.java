@@ -1,4 +1,4 @@
-package com.adara.pixeldataengineui.model.backend.dto.pixelmapping;
+package com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.BaseDTO;
 

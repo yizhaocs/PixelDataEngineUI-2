@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="mPixelDataEngineService" class="com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineService">
+    <bean id="mPixelDataEngineService" class="com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineService">
         <property name="mPixelDataEngine" ref="pixelDataEngine"/>
     </bean>
 
@@ -49,11 +49,11 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="PixelDataEngineRuleDAO" class="com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineRuleDAOImpl">
+    <bean id="PixelDataEngineRuleDAO" class="com.adara.pixeldataengineui.dao.pixeldataenginerules.PixelDataEngineRuleDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="PixelDataEngineGroupDAO" class="com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineGroupDAOImpl">
+    <bean id="PixelDataEngineGroupDAO" class="com.adara.pixeldataengineui.dao.pixeldataenginerules.PixelDataEngineGroupDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

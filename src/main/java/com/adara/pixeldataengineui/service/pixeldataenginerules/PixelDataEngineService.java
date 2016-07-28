@@ -1,4 +1,4 @@
-package com.adara.pixeldataengineui.service.pixelmapping;
+package com.adara.pixeldataengineui.service.pixeldataenginerules;
 
 import com.opinmind.pixeldataengine.PixelDataEngine;
 import org.springframework.stereotype.Service;
