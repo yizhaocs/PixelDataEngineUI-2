@@ -336,6 +336,10 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 result += backendData.data[i] + "\n";
             }
 
+            if(result == ""){
+                result = "null/empty result";
+            }
+
             $scope.frontendRightHandPanelData.testResult = result;
         });
     };
