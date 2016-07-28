@@ -59,19 +59,23 @@ public class GenericDTOList<T> extends BaseDTO {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (!super.equals(obj))
+        }
+        if (!super.equals(obj)) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         GenericDTOList<?> other = (GenericDTOList<?>) obj;
         if (list == null) {
-            if (other.list != null)
+            if (other.list != null) {
                 return false;
-        } else if (!list.equals(other.list))
+            }
+        } else if (!list.equals(other.list)) {
             return false;
+        }
         return true;
     }
-
 }

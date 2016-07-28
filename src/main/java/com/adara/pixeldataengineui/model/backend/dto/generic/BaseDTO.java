@@ -93,30 +93,36 @@ public class BaseDTO extends ResourceSupport {
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + ((errors == null) ? 0 : errors.hashCode());
-        result = prime * result
-                + ((fieldNames == null) ? 0 : fieldNames.hashCode());
+        result = prime * result + ((fieldNames == null) ? 0 : fieldNames.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null || !super.equals(obj))  // Spring resource support cannot take obj as null
+        }
+        if (obj == null || !super.equals(obj)) { // Spring resource support cannot take obj as null
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         BaseDTO other = (BaseDTO) obj;
         if (errors == null) {
-            if (other.errors != null)
+            if (other.errors != null) {
                 return false;
-        } else if (!errors.equals(other.errors))
+            }
+        } else if (!errors.equals(other.errors)) {
             return false;
+        }
         if (fieldNames == null) {
-            if (other.fieldNames != null)
+            if (other.fieldNames != null) {
                 return false;
-        } else if (!fieldNames.equals(other.fieldNames))
+            }
+        } else if (!fieldNames.equals(other.fieldNames)) {
             return false;
+        }
         return true;
     }
 
