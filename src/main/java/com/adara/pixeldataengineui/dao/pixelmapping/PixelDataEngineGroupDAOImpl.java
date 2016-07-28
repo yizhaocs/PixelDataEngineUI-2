@@ -89,30 +89,28 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         return sb.toString();
     }
 
-    public String getGroup(String keyId) throws Exception {
+    public PixelDataEngineGroupsDTO getGroup(String keyId) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroup" + "]";
         String query = "SELECT a.trigger_key_id, a.gid, a.group_type FROM marketplace.pixel_data_engine_groups a where a.trigger_key_id= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String result = null;
-        result = jdbcTemplate.queryForObject(query, new Object[]{keyId}, new RowMapper<String>() {
-
+        final PixelDataEngineGroupsDTO result = new PixelDataEngineGroupsDTO();
+        jdbcTemplate.queryForObject(query, new Object[]{keyId}, new RowMapper<PixelDataEngineGroupsDTO>() {
             @Override
-            public String mapRow(ResultSet rs, int rowNum)
+            public PixelDataEngineGroupsDTO mapRow(ResultSet rs, int rowNum)
                     throws SQLException {
-                PixelDataEngineGroupsDTO mPixelDataEngineGroupsDTO = new PixelDataEngineGroupsDTO();
-                mPixelDataEngineGroupsDTO.setTrigger_key_id(rs.getString("trigger_key_id"));
-                mPixelDataEngineGroupsDTO.setGid(rs.getInt("gid"));
-                mPixelDataEngineGroupsDTO.setGroup_type(rs.getInt("group_type"));
+                result.setTrigger_key_id(rs.getString("trigger_key_id"));
+                result.setGid(rs.getInt("gid"));
+                result.setGroup_type(rs.getInt("group_type"));
                 // convert Java object to JSON (Jackson)
-                ObjectMapper mapper = new ObjectMapper();
+               /* ObjectMapper mapper = new ObjectMapper();
                 String result = "";
                 try {
                     result = mapper.writeValueAsString(mPixelDataEngineGroupsDTO);
                 } catch (Exception e) {
                     LOG.error("Failed to convert Java object to JSON", e);
-                }
+                }*/
                 return result;
             }
         });

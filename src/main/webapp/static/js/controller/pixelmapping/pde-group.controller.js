@@ -27,13 +27,13 @@ app.controller('editPixelGroup', function ($scope, $rootScope, $location, $route
     $scope.keyIdDisable = (keyId > 0) ? true : false;
 
     if (backendData.data != "") {
-        if (backendData.data.body.group_type == 1) {
-            backendData.data.body.group_type = 'independent';
-        } else if (backendData.data.body.group_type == 2) {
-            backendData.data.body.group_type = 'sequential';
+        if (backendData.data.group_type == 1) {
+            backendData.data.group_type = 'independent';
+        } else if (backendData.data.group_type == 2) {
+            backendData.data.group_type = 'sequential';
         }
 
-        $scope.frontendData = angular.copy(backendData.data.body);
+        $scope.frontendData = angular.copy(backendData.data);
     }
 
 

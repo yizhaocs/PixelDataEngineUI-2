@@ -3,6 +3,7 @@ package com.adara.pixeldataengineui.service.pixelmapping;
 import com.adara.pixeldataengineui.dao.pixelmapping.PixelDataEngineRuleDAO;
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineGroupsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -98,24 +99,13 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             String testValue = request.getTestValue();
 
             // group = {"trigger_key_id":"3003","gid":3003,"group_type":2}
-            String group = mPixelDataEngineGroupService.getGroup(testGroupID);
-            String removeFirstLastCurlyBracesGroup = group.substring(1, group.length() - 1);
-            String[] groupSplitLevel1 = removeFirstLastCurlyBracesGroup.split(",");
+            PixelDataEngineGroupsDTO group = mPixelDataEngineGroupService.getGroup(testGroupID);
 
-            String triggerKeyIdNew = null;
+            String triggerKeyIdNew = group.getTrigger_key_id();
             String gidNew = null;
-            String groupTypeNew = null;
+            Integer groupTypeNew = group.getGroup_type();
 
-            for (int i = 0; i < groupSplitLevel1.length; i++) {
-                String[] groupSplitLevel2 = groupSplitLevel1[i].split(":");
-                if (i == 0) {
-                    triggerKeyIdNew = groupSplitLevel2[1].substring(1, groupSplitLevel2[1].length() - 1);
-                } else if (i == 2) {
-                    groupTypeNew = groupSplitLevel2[1];
-                }
-            }
-
-            mPixelDataEngineGroupService.insertGroup(triggerKeyIdNew, Integer.valueOf(groupTypeNew), true);
+            mPixelDataEngineGroupService.insertGroup(triggerKeyIdNew, groupTypeNew, true);
 
             // List [list=[PixelDataEngineConfigsDTO [gid=1001, key_id=1001, priority=1, type=transform, parse_rule=orig, condition_rule=len|1|4, action_rule=substr|L|0|1], PixelDataEngineConfigsDTO [gid=1001, key_id=1001, priority=2, type=transform, parse_rule=orig, condition_rule=in|a, action_rule=ignore]]]
             GenericDTOList<PixelDataEngineConfigsDTO> sameGroupRules = mPixelDataEngineGroupService.getSameGroup(Integer.valueOf(testGroupID));
