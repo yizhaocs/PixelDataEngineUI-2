@@ -1,5 +1,7 @@
 package com.adara.pixeldataengineui.service.pixelmapping;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 
 import java.util.Map;
@@ -10,7 +12,7 @@ import java.util.Map;
 public interface PixelDataEngineRuleService {
     Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception;
 
-    String getRules() throws Exception;
+    GenericDTOList<PixelDataEngineConfigsDTO> getRules() throws Exception;
 
     String getRule(Integer gid, String keyId, Integer priority) throws Exception;
 

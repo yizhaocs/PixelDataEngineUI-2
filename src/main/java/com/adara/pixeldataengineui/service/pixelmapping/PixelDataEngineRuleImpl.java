@@ -31,7 +31,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.insertRule(request, isUITest);
     }
 
-    public String getRules() throws Exception {
+    public GenericDTOList<PixelDataEngineConfigsDTO> getRules() throws Exception {
         return mPixelDataEngineRuleDAO.getRules();
     }
 

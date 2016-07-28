@@ -6,6 +6,6 @@
 
 app.controller('listPixelRules', function ($scope, pixelmappingService) {
     pixelmappingService.getRules().success(function (backendData) {
-        $scope.frontendData = backendData.body;
+        $scope.frontendData = backendData.list;
     });
 });

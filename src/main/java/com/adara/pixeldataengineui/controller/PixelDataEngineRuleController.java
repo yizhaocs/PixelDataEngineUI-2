@@ -1,5 +1,7 @@
 package com.adara.pixeldataengineui.controller;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixelmapping.PixelDataEngineRuleService;
@@ -59,25 +61,21 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/getRules", method = RequestMethod.GET)
-    public ResponseEntity<String> getRules() {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getRules" + "]";
+    public ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> getRules() {
+        ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>> response = null;
+        GenericDTOList<PixelDataEngineConfigsDTO> retval = null;
 
-        String result = "";
         try {
-            result = mPixelDataEngineRuleService.getRules();
+            retval = mPixelDataEngineRuleService.getRules();
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[PixelDataEngineRuleController.getRules] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        } else {
-            StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
