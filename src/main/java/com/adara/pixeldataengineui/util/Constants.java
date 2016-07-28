@@ -6,4 +6,7 @@ package com.adara.pixeldataengineui.util;
 public class Constants {
     public static final String SUCCESS_TRUE = "{\"success\":true}";
     public static final String SUCCESS_FALSE = "{\"success\":false}";
+
+    public static final String SUCCESS = "SUCCESS";
+    public static final String FAILURE = "FAILURE";
 }
