@@ -1,5 +1,6 @@
 package com.adara.pixeldataengineui.dao.usermanagement;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 import com.adara.pixeldataengineui.util.Constants;
@@ -28,7 +29,7 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         this.dataSource = dataSource;
     }
 
-    public String getAllUser() throws Exception {
+    public GenericDTOList<UserDTO> getAllUser() throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getAllUser" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users";
         LOG.info(LOG_HEADER + ", " + "Executing query -> "
@@ -38,30 +39,20 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         List<Map<String, Object>> listMap = null;
         listMap = jdbcTemplate.queryForList(query);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        GenericDTOList<UserDTO> result = new GenericDTOList<UserDTO>();
         for (Map<String, Object> m : listMap) {
             UserDTO mUserDTO = new UserDTO();
             mUserDTO.setUsername(String.valueOf(m.get("username")));
             mUserDTO.setPassword(String.valueOf(m.get("password")));
-            // convert Java object to JSON (Jackson)
-            ObjectMapper mapper = new ObjectMapper();
-            String tmp = "";
-            try {
-                tmp = mapper.writeValueAsString(mUserDTO);
-            } catch (Exception e) {
-                LOG.error("Failed to convert Java object to JSON", e);
-            }
-            sb.append(tmp + ",");
 
+            result.add(mUserDTO);
         }
-        sb.deleteCharAt(sb.toString().length() - 1);
-        sb.append("]");
+
 
         if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + sb.toString());
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result.toString());
 
-        return sb.toString();
+        return result;
     }
 
     public String getByUsername(String username) throws Exception {

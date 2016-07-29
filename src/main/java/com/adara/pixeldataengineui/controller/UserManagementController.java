@@ -1,5 +1,6 @@
 package com.adara.pixeldataengineui.controller;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 import com.adara.pixeldataengineui.service.usermanagement.UserManagementService;
@@ -59,25 +60,21 @@ public class UserManagementController {
 
 
     @RequestMapping(value = "/usermanagement/users", method = RequestMethod.GET)
-    public ResponseEntity<String> getAllUser() {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getAllUser" + "]";
+    public ResponseEntity<GenericDTOList<UserDTO>> getAllUser() {
+        ResponseEntity<GenericDTOList<UserDTO>> response = null;
+        GenericDTOList<UserDTO> retval = null;
 
-        String result = "";
         try {
-            result = mUserManagementService.getAllUser();
+            retval = mUserManagementService.getAllUser();
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<UserDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<UserDTO>>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[UserManagementController.getAllUser] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<UserDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        } else {
-            StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

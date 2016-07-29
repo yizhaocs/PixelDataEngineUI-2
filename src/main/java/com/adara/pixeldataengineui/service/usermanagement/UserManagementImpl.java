@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.service.usermanagement;
 
 import com.adara.pixeldataengineui.dao.usermanagement.UserManagementDAO;
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class UserManagementImpl implements UserManagementService {
     @Autowired
     private UserManagementDAO mUserManagementDAO;
 
-    public String getAllUser() throws Exception {
+    public GenericDTOList<UserDTO> getAllUser() throws Exception {
         return mUserManagementDAO.getAllUser();
     }
 
