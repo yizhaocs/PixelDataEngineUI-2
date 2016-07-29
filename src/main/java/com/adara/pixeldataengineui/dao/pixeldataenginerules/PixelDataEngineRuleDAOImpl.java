@@ -218,12 +218,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         }
 
         JdbcTemplate jdbcTemplateRulesToThatGroup = new JdbcTemplate(dataSource);
-        try {
             jdbcTemplateRulesToThatGroup.execute(query);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+
     }
-
-
 }
