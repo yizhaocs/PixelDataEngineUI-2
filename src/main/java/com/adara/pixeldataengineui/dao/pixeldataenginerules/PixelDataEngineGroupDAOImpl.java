@@ -173,9 +173,10 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         return result;
     }
 
-    public Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception {
+    public ResponseDTO deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteGroup" + "]";
 
+        ResponseDTO result = new ResponseDTO();
         /*
         * Delete group
         * */
@@ -218,10 +219,16 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
             LOG.error("Failed to execute sql query", e);
         }
 
+        if(resultDeleteRulesToThatGroup > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
+
         if (LOG.isDebugEnabled())
             LOG.debug("Invoked " + "Class -> " + CLASS_NAME + ", " + "method ->" + "deleteGroup" + "  ,method resultDeleteRulesToThatGroup -> " + resultDeleteRulesToThatGroup);
 
-        return resultDeleteRulesToThatGroup;
+        return result;
     }
 
     public void truncatePixelDataEngineGroupsTable(Boolean isUITest) throws Exception {

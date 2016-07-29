@@ -19,7 +19,7 @@ public interface PixelDataEngineGroupService {
 
     ResponseDTO updateGroup(String triggerKeyId, Integer groupType) throws Exception;
 
-    Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception;
+    ResponseDTO deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception;
 
     void truncatePixelDataEngineGroupsTable(Boolean isUITest) throws Exception;
 }

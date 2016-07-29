@@ -125,30 +125,21 @@ public class PixelDataEngineGroupController {
     }
 
     @RequestMapping(value = "/deleteGroup", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteGroup(@RequestParam(value = "triggerkeyid", required = false) String triggerKeyId, @RequestParam(value = "gid", required = false) String gid) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteGroup" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + "triggerKeyId:" + triggerKeyId);
+    public ResponseEntity<ResponseDTO> deleteGroup(@RequestParam(value = "triggerkeyid", required = false) String triggerKeyId, @RequestParam(value = "gid", required = false) String gid) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         if (triggerKeyId.equals("0")) {
-            return new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
+        }else {
+            try {
+                retval = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            } catch (Exception e) {
+                LOG.error("[PixelDataEngineGroupController.updateGroup] Service error: " + e, e);
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-
-        try {
-            result = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
-        } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
