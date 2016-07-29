@@ -190,15 +190,22 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer deleteUser(String username) throws Exception {
+    public ResponseDTO deleteUser(String username) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteUser" + "]";
+        ResponseDTO result = new ResponseDTO();
         String query = "DELETE FROM pde.pixel_data_engine_users WHERE username =?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        int result = 0;
-        result = jdbcTemplate.update(query, username);
+        int retval = 0;
+        retval = jdbcTemplate.update(query, username);
+
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -206,8 +213,10 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer updateUser(UserDTO request) throws Exception {
+    public ResponseDTO updateUser(UserDTO request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateUser" + "]";
+        ResponseDTO result = new ResponseDTO();
+
         String username = request.getUsername();
         String password = request.getPassword();
         if (username == null || username.length() == 0 || password == null
@@ -215,7 +224,8 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 
             LOG.error(LOG_HEADER
                     + "  ,Error: username or password is null");
-            return -1;
+            result.setMessage(Constants.FAILURE);
+            return result;
         }
 
         String query = "UPDATE pde.pixel_data_engine_users SET " + "username"
@@ -226,8 +236,17 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{username, password, username};
-        Integer result = 0;
-        result = jdbcTemplate.update(query, args);
+        Integer retval = 0;
+        retval = jdbcTemplate.update(query, args);
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);

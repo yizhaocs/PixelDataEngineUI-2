@@ -32,12 +32,12 @@ public class UserManagementImpl implements UserManagementService {
         return mUserManagementDAO.createUser(request);
     }
 
-    public Integer deleteUser(String username) throws Exception {
+    public ResponseDTO deleteUser(String username) throws Exception {
         return mUserManagementDAO.deleteUser(username);
     }
 
 
-    public Integer updateUser(UserDTO request) throws Exception {
+    public ResponseDTO updateUser(UserDTO request) throws Exception {
         return mUserManagementDAO.updateUser(request);
     }
 }

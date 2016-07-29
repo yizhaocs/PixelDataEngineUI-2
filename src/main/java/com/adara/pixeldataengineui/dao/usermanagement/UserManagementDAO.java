@@ -15,7 +15,7 @@ public interface UserManagementDAO {
 
     ResponseDTO createUser(UserDTO request) throws Exception;
 
-    Integer deleteUser(String username) throws Exception;
+    ResponseDTO deleteUser(String username) throws Exception;
 
-    Integer updateUser(UserDTO request) throws Exception;
+    ResponseDTO updateUser(UserDTO request) throws Exception;
 }

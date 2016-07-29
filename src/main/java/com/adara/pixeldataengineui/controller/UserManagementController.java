@@ -109,51 +109,34 @@ public class UserManagementController {
 
 
     @RequestMapping(value = "/usermanagement/users/{username}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteUser(@PathVariable("username") String username) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteUser" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + username);
+    public ResponseEntity<ResponseDTO> deleteUser(@PathVariable("username") String username) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         try {
-            result = mUserManagementService.deleteUser(username);
+            retval = mUserManagementService.deleteUser(username);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[UserManagementController.deleteUser] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
 
     @RequestMapping(value = "/usermanagement/users", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateUser(@RequestBody UserDTO request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateUser" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
+    public ResponseEntity<ResponseDTO> updateUser(@RequestBody UserDTO request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         try {
-            result = mUserManagementService.updateUser(request);
+            retval = mUserManagementService.updateUser(request);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[UserManagementController.updateUser] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
