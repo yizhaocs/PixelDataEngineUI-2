@@ -154,15 +154,18 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer createUser(UserDTO request) throws Exception {
+    public ResponseDTO createUser(UserDTO request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "createUser" + "]";
+        ResponseDTO result = new ResponseDTO();
+
         String username = request.getUsername();
         String password = request.getPassword();
         if (username == null || username.length() == 0 || password == null
                 || password.length() == 0) {
             LOG.error(LOG_HEADER
                     + "  ,Error: username or password is null");
-            return -1;
+            result.setMessage(Constants.FAILURE);
+            return result;
         }
 
         String query = "insert into pde.pixel_data_engine_users (username, password) values(?, ?)";
@@ -172,11 +175,17 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                 + query.toString());
         LOG.info("Executing query:" + query.toString());
 
-        int result = 0;
-        result = jdbcTemplate.update(query, args);
+        int retval = 0;
+        retval = jdbcTemplate.update(query, args);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
 
         return result;
     }

@@ -28,7 +28,7 @@ public class UserManagementImpl implements UserManagementService {
         return mUserManagementDAO.login(request);
     }
 
-    public Integer createUser(UserDTO request) throws Exception {
+    public ResponseDTO createUser(UserDTO request) throws Exception {
         return mUserManagementDAO.createUser(request);
     }
 

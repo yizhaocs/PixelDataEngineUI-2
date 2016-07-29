@@ -13,7 +13,7 @@ public interface UserManagementService {
 
     ResponseDTO login(UserDTO request) throws Exception;
 
-    Integer createUser(UserDTO request) throws Exception;
+    ResponseDTO createUser(UserDTO request) throws Exception;
 
     Integer deleteUser(String username) throws Exception;
 

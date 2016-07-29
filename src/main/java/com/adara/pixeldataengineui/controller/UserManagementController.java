@@ -42,27 +42,17 @@ public class UserManagementController {
 
 
     @RequestMapping(value = "/usermanagement/users", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createUser(@RequestBody UserDTO request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "createUser" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
+    public ResponseEntity<ResponseDTO> createUser(@RequestBody UserDTO request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         try {
-            result = mUserManagementService.createUser(request);
+            retval = mUserManagementService.createUser(request);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[UserManagementController.createUser] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-            // response = new ResponseEntity<String>("{\"success\":\"true\"}", HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
