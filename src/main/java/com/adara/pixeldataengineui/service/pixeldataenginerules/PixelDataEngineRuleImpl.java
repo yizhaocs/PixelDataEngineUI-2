@@ -41,11 +41,11 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         return mPixelDataEngineRuleDAO.getRule(gid, keyId, priority);
     }
 
-    public Integer updateRule(RuleRequest request) throws Exception {
+    public ResponseDTO updateRule(RuleRequest request) throws Exception {
         return mPixelDataEngineRuleDAO.updateRule(request);
     }
 
-    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception {
+    public ResponseDTO deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception {
         return mPixelDataEngineRuleDAO.deleteRule(gid, keyId, priority, isUITest);
     }
 

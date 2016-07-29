@@ -8,7 +8,6 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineService;
-import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,49 +91,34 @@ public class PixelDataEngineRuleController {
     }
 
     @RequestMapping(value = "/updateRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateRule(@RequestBody RuleRequest request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateRule" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
+    public ResponseEntity<ResponseDTO> updateRule(@RequestBody RuleRequest request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         try {
-            result = mPixelDataEngineRuleService.updateRule(request);
+            retval = mPixelDataEngineRuleService.updateRule(request);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[PixelDataEngineRuleController.updateRule] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
 
     @RequestMapping(value = "/deleteRule", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteRule" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data -> gid:" + gid + "  ,keyid:" + keyid + "  ,priority:" + priority);
+    public ResponseEntity<ResponseDTO> deleteRule(@RequestParam(value = "gid", required = false) Integer gid, @RequestParam(value = "keyid", required = false) String keyid, @RequestParam(value = "priority", required = false) Integer priority) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         try {
-            result = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority, false);
+            retval = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority, false);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
+            LOG.error("[PixelDataEngineRuleController.deleteRule] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
         return response;
     }
 

@@ -130,8 +130,10 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer updateRule(RuleRequest request) throws Exception {
+    public ResponseDTO updateRule(RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateRule" + "]";
+
+        ResponseDTO result = new ResponseDTO();
 
         String gid = request.getGid();
 
@@ -151,7 +153,8 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
         if (keyId == null || keyId.length() == 0 || type == null || type.length() == 0 || parseRuleValue == null || parseRuleValue.length() == 0 || conditionRuleValue == null || conditionRuleValue.length() == 0 || actionRuleValue == null || actionRuleValue.length() == 0) {
             LOG.error(LOG_HEADER + "  ,Error: keyId or type or parseRuleValue or conditionRuleValue or actionRuleValue is null");
-            return -1;
+            result.setMessage(Constants.FAILURE);
+            return result;
         }
 
         String query = "UPDATE marketplace.pixel_data_engine_configs SET " + "gid" + "=?" + "," + "key_id" + "=?" + "," + "priority" + "=?" + "," + "type" + "=?" + "," + "parse_rule" + "=?" + "," + "condition_rule" + "=?" + "," + "action_rule" + "=?" + " WHERE gid=? AND key_id=? AND priority=?";
@@ -160,8 +163,15 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{gid, keyId, newPriority, type, parseRuleValue, conditionRuleValue, actionRuleValue, gid, keyId, priority};
 
-        Integer result = 0;
-        result = jdbcTemplate.update(query, args);
+        Integer retval = 0;
+        retval = jdbcTemplate.update(query, args);
+
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
+
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
@@ -169,8 +179,10 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         return result;
     }
 
-    public Integer deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception {
+    public ResponseDTO deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "deleteRule" + "]";
+
+        ResponseDTO result = new ResponseDTO();
 
         String query = null;
         if (isUITest) {
@@ -182,8 +194,14 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        int result = 0;
-        result = jdbcTemplate.update(query, gid, keyId, priority);
+        int retval = 0;
+        retval = jdbcTemplate.update(query, gid, keyId, priority);
+
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
