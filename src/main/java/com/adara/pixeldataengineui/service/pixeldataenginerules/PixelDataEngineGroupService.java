@@ -17,7 +17,7 @@ public interface PixelDataEngineGroupService {
 
     GenericDTOList<PixelDataEngineConfigsDTO> getSameGroup(Integer gid) throws Exception;
 
-    Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception;
+    ResponseDTO updateGroup(String triggerKeyId, Integer groupType) throws Exception;
 
     Integer deleteGroup(String triggerKeyId, String gid, Boolean isUITest) throws Exception;
 

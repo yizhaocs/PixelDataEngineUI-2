@@ -108,27 +108,18 @@ public class PixelDataEngineGroupController {
     }
 
     @RequestMapping(value = "/updateGroup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateGroup(@RequestBody InsertUpdateRequest request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateGroup" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
+    public ResponseEntity<ResponseDTO> updateGroup(@RequestBody InsertUpdateRequest request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
         try {
-            result = mPixelDataEngineGroupService.updateGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type());
+            retval = mPixelDataEngineGroupService.updateGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type());
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[PixelDataEngineGroupController.updateGroup] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

@@ -150,15 +150,22 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
     }
 
 
-    public Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception {
+    public ResponseDTO updateGroup(String triggerKeyId, Integer groupType) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updateGroup" + "]";
         String query = "UPDATE marketplace.pixel_data_engine_groups SET " + "trigger_key_id" + "=?" + "," + "group_type" + "=?" + " WHERE trigger_key_id=?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{triggerKeyId, groupType, triggerKeyId};
-        Integer result = 0;
-        result = jdbcTemplate.update(query, args);
+        Integer retval = 0;
+        retval = jdbcTemplate.update(query, args);
+
+        ResponseDTO result = new ResponseDTO();
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);

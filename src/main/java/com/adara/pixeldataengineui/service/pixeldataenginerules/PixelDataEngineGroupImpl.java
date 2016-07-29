@@ -34,7 +34,7 @@ public class PixelDataEngineGroupImpl implements PixelDataEngineGroupService {
         return mPixelDataEngineGroupDAO.getSameGroup(gid);
     }
 
-    public Integer updateGroup(String triggerKeyId, Integer groupType) throws Exception {
+    public ResponseDTO updateGroup(String triggerKeyId, Integer groupType) throws Exception {
         return mPixelDataEngineGroupDAO.updateGroup(triggerKeyId, groupType);
     }
 
