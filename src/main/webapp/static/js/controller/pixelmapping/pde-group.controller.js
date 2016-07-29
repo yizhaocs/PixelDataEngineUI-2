@@ -206,7 +206,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
             pixelmappingService.deleteRule(
-                $rootScope.base + 'group/edit-rules/' + gid,
+                $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.gid,
                 frontendRightHandPanelData.keyId,
                 $scope.leftPanelSelectedPriority
@@ -231,7 +231,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             }
 
             pixelmappingService.insertRule(
-                $rootScope.base + 'group/edit-rules/' + gid,
+                $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.parseRule,
                 frontendRightHandPanelData.conditionRule,
                 frontendRightHandPanelData.conditionSubselect,
