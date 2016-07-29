@@ -294,7 +294,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.refreshLeftPanel = function () {
-        pixelmappingService.getSameGroup(gid).success(function (backendData) {
+        pixelmappingService.getSameGroup(triggerKeyId,gid).success(function (backendData) {
             $scope.sortPriority(backendData.list);
             $scope.frontendLeftHandPanelData = angular.copy(backendData.list);
         });
