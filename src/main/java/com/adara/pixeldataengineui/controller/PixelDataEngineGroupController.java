@@ -49,14 +49,14 @@ public class PixelDataEngineGroupController {
 
         if (id.equals("0")) {
             response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.NO_CONTENT);
-        } else {
-            try {
-                retval = mPixelDataEngineGroupService.getGroup(id);
-                response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.OK);
-            } catch (Exception e) {
-                LOG.error("[PixelDataEngineGroupController.group] Service error: " + e, e);
-                response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return response;
+        }
+        try {
+            retval = mPixelDataEngineGroupService.getGroup(id);
+            response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineGroupController.group] Service error: " + e, e);
+            response = new ResponseEntity<PixelDataEngineGroupsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return response;
@@ -69,18 +69,18 @@ public class PixelDataEngineGroupController {
 
         if (id.equals("0")) {
             response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
-        } else {
-            try {
-                retval = mPixelDataEngineGroupService.getSameGroup(id);
-                if (retval.getList().size() == 0) {
-                    response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
-                } else {
-                    response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.OK);
-                }
-            } catch (Exception e) {
-                LOG.error("[PixelDataEngineGroupController.samegroup] Service error: " + e, e);
-                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+            return response;
+        }
+        try {
+            retval = mPixelDataEngineGroupService.getSameGroup(id);
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.OK);
             }
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineGroupController.samegroup] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineConfigsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return response;
@@ -130,14 +130,15 @@ public class PixelDataEngineGroupController {
 
         if (triggerKeyId.equals("0")) {
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
-        }else {
-            try {
-                retval = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
-                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
-            } catch (Exception e) {
-                LOG.error("[PixelDataEngineGroupController.updateGroup] Service error: " + e, e);
-                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return response;
+        }
+
+        try {
+            retval = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineGroupController.updateGroup] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return response;

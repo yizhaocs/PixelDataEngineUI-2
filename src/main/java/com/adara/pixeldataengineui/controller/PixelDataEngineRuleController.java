@@ -77,16 +77,16 @@ public class PixelDataEngineRuleController {
 
         if (keyid.equals("0")) {
             response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.NO_CONTENT);
-        } else {
-            try {
-                retval = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
-                response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.OK);
-            } catch (Exception e) {
-                LOG.error("[PixelDataEngineRuleController.getRule] Service error: " + e, e);
-                response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return response;
         }
 
+        try {
+            retval = mPixelDataEngineRuleService.getRule(gid, keyid, priority);
+            response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineRuleController.getRule] Service error: " + e, e);
+            response = new ResponseEntity<PixelDataEngineConfigsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return response;
     }
 
