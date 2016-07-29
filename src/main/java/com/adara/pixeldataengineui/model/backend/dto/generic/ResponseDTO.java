@@ -7,8 +7,10 @@ package com.adara.pixeldataengineui.model.backend.dto.generic;
 
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
 
-public class ResponseDTO {
+
+public class ResponseDTO extends BaseDTO implements Serializable {
     protected String message;
     protected HttpStatus statusCode;
 
