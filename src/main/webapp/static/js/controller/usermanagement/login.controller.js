@@ -17,7 +17,7 @@ app.controller('LoginController', function LoginController($rootScope, $location
     function login() {
         vm.dataLoading = true;
         AuthenticationService.Login(vm.username, vm.password, function (response) {
-            if (response.success) {
+            if (response.message == 'SUCCESS') {
                 if (vm.username == 'root') {
                     $rootScope.isroot = true;
                 }

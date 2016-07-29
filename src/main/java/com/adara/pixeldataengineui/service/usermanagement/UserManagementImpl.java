@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.service.usermanagement;
 
 import com.adara.pixeldataengineui.dao.usermanagement.UserManagementDAO;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class UserManagementImpl implements UserManagementService {
         return mUserManagementDAO.getByUsername(username);
     }
 
-    public Integer login(UserDTO request) throws Exception {
+    public ResponseDTO login(UserDTO request) throws Exception {
         return mUserManagementDAO.login(request);
     }
 

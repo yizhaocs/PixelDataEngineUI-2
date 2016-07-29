@@ -1,6 +1,8 @@
 package com.adara.pixeldataengineui.dao.usermanagement;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -104,15 +106,17 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public Integer login(UserDTO request) throws Exception {
+    public ResponseDTO login(UserDTO request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "login" + "]";
+        ResponseDTO result = new ResponseDTO();
+
         String query = "SELECT * FROM pde.pixel_data_engine_users p where p.username =?"
                 + " and " + " p.password = ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String result = null;
-        result = jdbcTemplate
+        String retval = null;
+        retval = jdbcTemplate
                 .queryForObject(query, new Object[]{
                                 request.getUsername(), request.getPassword()},
                         new RowMapper<String>() {
@@ -141,7 +145,13 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                             }
                         });
 
-        return result.length();
+        if(retval.length() > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
+
+        return result;
     }
 
     public Integer createUser(UserDTO request) throws Exception {

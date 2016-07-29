@@ -1,5 +1,6 @@
 package com.adara.pixeldataengineui.service.usermanagement;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 
 /**
@@ -10,7 +11,7 @@ public interface UserManagementService {
 
     String getAllUser() throws Exception;
 
-    Integer login(UserDTO request) throws Exception;
+    ResponseDTO login(UserDTO request) throws Exception;
 
     Integer createUser(UserDTO request) throws Exception;
 
