@@ -21,7 +21,7 @@ public class UserManagementImpl implements UserManagementService {
         return mUserManagementDAO.getAllUser();
     }
 
-    public String getByUsername(String username) throws Exception {
+    public UserDTO getByUsername(String username) throws Exception {
         return mUserManagementDAO.getByUsername(username);
     }
 

@@ -10,7 +10,7 @@ import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 public interface UserManagementDAO {
     GenericDTOList<UserDTO> getAllUser() throws Exception;
 
-    String getByUsername(String username) throws Exception;
+    UserDTO getByUsername(String username) throws Exception;
 
     ResponseDTO login(UserDTO request) throws Exception;
 

@@ -55,39 +55,26 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         return result;
     }
 
-    public String getByUsername(String username) throws Exception {
+    public UserDTO getByUsername(String username) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getByUsername" + "]";
         String query = "SELECT * FROM pde.pixel_data_engine_users WHERE username =?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> "
                 + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String result = null;
-        result = jdbcTemplate.queryForObject(query,
-                new Object[]{username}, new RowMapper<String>() {
+        final UserDTO result = new UserDTO();
+        jdbcTemplate.queryForObject(query,
+                new Object[]{username}, new RowMapper<UserDTO>() {
 
                     @Override
-                    public String mapRow(ResultSet rs, int rowNum)
+                    public UserDTO mapRow(ResultSet rs, int rowNum)
                             throws SQLException {
-                        UserDTO mUserDTO = new UserDTO();
-                        mUserDTO.setUsername(rs
+                        result.setUsername(rs
                                 .getString("username"));
-                        mUserDTO.setPassword(rs
+                        result.setPassword(rs
                                 .getString("password"));
-                        // convert Java object to JSON (Jackson)
-                        ObjectMapper mapper = new ObjectMapper();
-                        String tmp = "";
-                        try {
-                            tmp = mapper.writeValueAsString(mUserDTO);
-                        } catch (Exception e) {
 
-                            LOG.error(
-                                    "Failed to convert Java object to JSON",
-                                    e);
-                        }
-                        LOG.info(LOG_HEADER
-                                + "  ,method return -> " + tmp);
-                        return tmp;
+                        return result;
                     }
                 });
 

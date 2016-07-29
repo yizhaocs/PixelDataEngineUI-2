@@ -4,8 +4,6 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.usermanagement.UserDTO;
 import com.adara.pixeldataengineui.service.usermanagement.UserManagementService;
-import com.adara.pixeldataengineui.util.Constants;
-import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,26 +78,18 @@ public class UserManagementController {
     }
 
     @RequestMapping(value = "/usermanagement/users/{username}", method = RequestMethod.GET)
-    public ResponseEntity<String> getByUsername(@PathVariable("username") String username) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getByUsername" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + username);
+    public ResponseEntity<UserDTO> getByUsername(@PathVariable("username") String username) {
+        ResponseEntity<UserDTO> response = null;
+        UserDTO retval = null;
 
-        String result = "";
+
         try {
-            result = mUserManagementService.getByUsername(username);
+            retval = mUserManagementService.getByUsername(username);
+            response = new ResponseEntity<UserDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[UserManagementController.getByUsername] Service error: " + e, e);
+            response = new ResponseEntity<UserDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity<String> response = null;
-        if (result.length() < 4) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        } else {
-            StringBuilder sb = Tools.resultMaker(result);
-            response = new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }
