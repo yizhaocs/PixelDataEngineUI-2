@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.service.pixeldataenginerules;
 
 import com.adara.pixeldataengineui.dao.pixeldataenginerules.PixelDataEngineRuleDAO;
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineGroupsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
@@ -28,7 +29,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     @Autowired
     private PixelDataEngineRuleDAO mPixelDataEngineRuleDAO;
 
-    public Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception {
+    public ResponseDTO insertRule(RuleRequest request, Boolean isUITest) throws Exception {
         return mPixelDataEngineRuleDAO.insertRule(request, isUITest);
     }
 

@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
@@ -35,25 +36,17 @@ public class PixelDataEngineRuleController {
 
 
     @RequestMapping(value = "/insertRule", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> insertRule(@RequestBody RuleRequest request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertRule" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
+    public ResponseEntity<ResponseDTO> insertRule(@RequestBody RuleRequest request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
 
-        Integer result = 0;
         try {
-            result = mPixelDataEngineRuleService.insertRule(request, false);
+            retval = mPixelDataEngineRuleService.insertRule(request, false);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
+            LOG.error("[PixelDataEngineRuleController.insertRule] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
 
         return response;
     }

@@ -1,8 +1,10 @@
 package com.adara.pixeldataengineui.dao.pixeldataenginerules;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
+import com.adara.pixeldataengineui.util.Constants;
 import com.adara.pixeldataengineui.util.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,9 +29,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception {
+    public ResponseDTO insertRule(RuleRequest request, Boolean isUITest) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "insertRule" + "]";
-
+        ResponseDTO result = new ResponseDTO();
         String gid = request.getGid();
         String keyId = request.getKeyId();
         String priority = request.getPriority();
@@ -40,7 +42,8 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
         if (gid == null || keyId == null || priority == null || keyId.length() == 0 || type == null || type.length() == 0 || parseRuleValue == null || parseRuleValue.length() == 0 || conditionRuleValue == null || conditionRuleValue.length() == 0 || actionRuleValue == null || actionRuleValue.length() == 0) {
             LOG.error(LOG_HEADER + "  ,Error: keyId or type or parseRuleValue or conditionRuleValue or actionRuleValue is null");
-            return -1;
+            result.setMessage(Constants.FAILURE);
+            return result;
         }
 
         String query = null;
@@ -53,11 +56,19 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
-        int result = 0;
-        result = jdbcTemplate.update(query, args);
+        int retval = 0;
+        retval = jdbcTemplate.update(query, args);
+
+
+
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
 
         if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result.toString());
 
         return result;
     }

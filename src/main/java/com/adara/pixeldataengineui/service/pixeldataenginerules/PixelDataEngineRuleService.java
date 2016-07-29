@@ -1,6 +1,7 @@
 package com.adara.pixeldataengineui.service.pixeldataenginerules;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineConfigsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
@@ -9,7 +10,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public interface PixelDataEngineRuleService {
-    Integer insertRule(RuleRequest request, Boolean isUITest) throws Exception;
+    ResponseDTO insertRule(RuleRequest request, Boolean isUITest) throws Exception;
 
     GenericDTOList<PixelDataEngineConfigsDTO> getRules() throws Exception;
 
