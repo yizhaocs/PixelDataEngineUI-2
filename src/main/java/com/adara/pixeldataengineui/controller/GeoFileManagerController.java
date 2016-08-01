@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -38,14 +39,12 @@ public class GeoFileManagerController {
 
         if (!file.isEmpty()) {
             try {
-                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + file.getOriginalFilename() + "!");
+                inputStreamToFile(file);
+//                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
+//                redirectAttributes.addFlashAttribute("message",
+//                        "You successfully uploaded " + file.getOriginalFilename() + "!");
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
-            } catch (IOException  e) {
-                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
-                //redirectAttributes.addFlashAttribute("message", "Failued to upload " + file.getOriginalFilename() + " => " + e.getMessage());
-            } catch (RuntimeException e){
+            }catch (Exception  e) {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
@@ -53,7 +52,28 @@ public class GeoFileManagerController {
            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
         }
 
-        return null;
+        return response;
+    }
+
+
+    private void inputStreamToFile(MultipartFile file) throws  Exception{
+        InputStream inputStream = null;
+        BufferedReader br = null;
+        FileWriter out = null;
+            inputStream = file.getInputStream();
+            br = new BufferedReader(new InputStreamReader(inputStream));
+            out = new FileWriter("/Users/yzhao/Desktop/output.txt");
+            String line;
+            while ((line = br.readLine()) != null) {
+                out.write(line);
+                out.write("\n");
+                //sb.append(line);
+            }
+
+        if(out != null){
+            out.close();
+        }
+
     }
 
     @RequestMapping(value = "/appendLocationTable", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
