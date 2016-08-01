@@ -14,11 +14,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
 
-        function appendTable(file) {
+        function appendTable(file, table) {
             var fd = new FormData();
             fd.append('file', file);
 
-            $http.post($rootScope.base + 'appendTable', fd, {
+            $http.post($rootScope.base + 'appendTable?table=' + table, fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
@@ -30,11 +30,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 });
         };
 
-        function overrideTable(file) {
+        function overrideTable(file, table) {
             var fd = new FormData();
             fd.append('file', file);
 
-            $http.post($rootScope.base + 'overrideTable', fd, {
+            $http.post($rootScope.base + 'overrideTable?table=' + table, fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })

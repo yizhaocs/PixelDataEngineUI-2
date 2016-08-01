@@ -16,9 +16,9 @@
             <div class="form-group">
                 <div class="col-md-2">
                     <td>
-                        <select class="form-control" ng-model="frontendData.group_type">
-                            <option value="independent">independent</option>
-                            <option value="sequential">sequential</option>
+                        <select class="form-control" ng-model="frontendData.append.tableName">
+                            <option disabled selected value> -- select an option --</option>
+                            <option value="geoip.location">geoip.location</option>
                         </select>
                     </td>
                 </div>
@@ -33,9 +33,9 @@
 
             <div class="col-md-2">
                 <td>
-                    <select class="form-control" ng-model="frontendData.group_type">
-                        <option value="independent">independent</option>
-                        <option value="sequential">sequential</option>
+                    <select class="form-control" ng-model="frontendData.override.tableName">
+                        <option disabled selected value> -- select an option --</option>
+                        <option value="geoip.location">geoip.location</option>
                     </select>
                 </td>
             </div>

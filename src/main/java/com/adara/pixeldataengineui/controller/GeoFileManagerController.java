@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -27,12 +26,13 @@ public class GeoFileManagerController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/appendTable")
-    public ResponseEntity<ResponseDTO>  appendTable(@RequestParam("file") MultipartFile file,
-                                                         RedirectAttributes redirectAttributes) {
+    public ResponseEntity<ResponseDTO> appendTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table
+    ) {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
 
-
+        String x = table;
+        System.out.println(x);
 
         if (!file.isEmpty()) {
             try {
@@ -42,23 +42,25 @@ public class GeoFileManagerController {
 //                redirectAttributes.addFlashAttribute("message",
 //                        "You successfully uploaded " + file.getOriginalFilename() + "!");
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
-            }catch (Exception  e) {
+            } catch (Exception e) {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
-           // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
         }
 
         return response;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/overrideTable")
-    public ResponseEntity<ResponseDTO>  overrideTable(@RequestParam("file") MultipartFile file,
-                                                    RedirectAttributes redirectAttributes) {
+    public ResponseEntity<ResponseDTO> overrideTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table
+    ) {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
 
+        String x = table;
+        System.out.println(x);
 
         if (!file.isEmpty()) {
             try {
@@ -68,7 +70,7 @@ public class GeoFileManagerController {
 //                redirectAttributes.addFlashAttribute("message",
 //                        "You successfully uploaded " + file.getOriginalFilename() + "!");
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
-            }catch (Exception  e) {
+            } catch (Exception e) {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
