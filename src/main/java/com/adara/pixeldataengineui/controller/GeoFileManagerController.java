@@ -34,7 +34,7 @@ public class GeoFileManagerController {
     public ResponseEntity<ResponseDTO>  handleFileUpload(@RequestParam("file") MultipartFile file,
                                                          RedirectAttributes redirectAttributes) {
         ResponseEntity<ResponseDTO> response = null;
-        ResponseDTO retval = null;
+        ResponseDTO retval = new ResponseDTO();
 
         if (!file.isEmpty()) {
             try {
@@ -53,7 +53,7 @@ public class GeoFileManagerController {
            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
         }
 
-        return response;
+        return null;
     }
 
     @RequestMapping(value = "/appendLocationTable", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
