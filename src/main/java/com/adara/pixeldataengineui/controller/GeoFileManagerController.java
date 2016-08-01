@@ -41,12 +41,15 @@ public class GeoFileManagerController {
                 Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
                 redirectAttributes.addFlashAttribute("message",
                         "You successfully uploaded " + file.getOriginalFilename() + "!");
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             } catch (IOException  e) {
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
                 //redirectAttributes.addFlashAttribute("message", "Failued to upload " + file.getOriginalFilename() + " => " + e.getMessage());
             } catch (RuntimeException e){
-
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
         }
 
