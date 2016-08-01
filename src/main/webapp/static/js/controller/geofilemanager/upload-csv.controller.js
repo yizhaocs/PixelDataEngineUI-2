@@ -6,13 +6,23 @@
 
 
 app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){
-    $scope.uploadFile = function(){
+    $scope.appendTable = function(){
         var file = $scope.myFile;
 
         console.log('file is ' );
         console.dir(file);
 
-        geoFileManagerService.uploadFileToUrl(file);
+        geoFileManagerService.appendTable(file);
+    };
+
+
+    $scope.overrideTable = function(){
+        var file = $scope.myFile;
+
+        console.log('file is ' );
+        console.dir(file);
+
+        geoFileManagerService.overrideTable(file);
     };
 }]);
 

@@ -26,8 +26,8 @@ public class GeoFileManagerController {
     GeoFileManagerService mGeoFileManagerService;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/fileUpload")
-    public ResponseEntity<ResponseDTO>  handleFileUpload(@RequestParam("file") MultipartFile file,
+    @RequestMapping(method = RequestMethod.POST, value = "/appendTable")
+    public ResponseEntity<ResponseDTO>  appendTable(@RequestParam("file") MultipartFile file,
                                                          RedirectAttributes redirectAttributes) {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
@@ -53,6 +53,32 @@ public class GeoFileManagerController {
         return response;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/overrideTable")
+    public ResponseEntity<ResponseDTO>  overrideTable(@RequestParam("file") MultipartFile file,
+                                                    RedirectAttributes redirectAttributes) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = new ResponseDTO();
+
+
+
+        if (!file.isEmpty()) {
+            try {
+                mGeoFileManagerService.override(file);
+                //inputStreamToFile(file);
+//                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
+//                redirectAttributes.addFlashAttribute("message",
+//                        "You successfully uploaded " + file.getOriginalFilename() + "!");
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }catch (Exception  e) {
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
+            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+        }
+
+        return response;
+    }
 
 
 /*

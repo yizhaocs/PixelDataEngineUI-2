@@ -29,16 +29,17 @@ public class LocationDAOImpl implements LocationDAO {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
         String fileName = "/Users/yzhao/Desktop/output.csv";
-//       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
-//                "' INTO TABLE geoip.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
-        String query = "LOAD DATA LOCAL INFILE '" + fileName +
-                "' INTO TABLE geoip.location  FIELDS\n" +
-                " TERMINATED BY ',';";
+
         if (inputStreamToFile(file)) {
             JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
+
+            //       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
+//                "' INTO TABLE geoip.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
+            String query = "LOAD DATA LOCAL INFILE '" + fileName +
+                    "' INTO TABLE geoip.location  FIELDS\n" +
+                    " TERMINATED BY ',';";
             jdbcTemplateDeleteGroup.execute(query);
         }
-
 
 
         return response;
@@ -47,7 +48,37 @@ public class LocationDAOImpl implements LocationDAO {
     public ResponseEntity<ResponseDTO> override(MultipartFile file) throws Exception {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
+        String fileName = "/Users/yzhao/Desktop/output.csv";
 
+        if (inputStreamToFile(file)) {
+            JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
+
+            String firstQuery = "truncate table geoip.location;";
+
+            String secondQuery = "LOAD DATA LOCAL INFILE '" + fileName +
+                    "' INTO TABLE geoip.location  FIELDS\n" +
+                    " TERMINATED BY ',';";
+
+            jdbcTemplateDeleteGroup.execute(firstQuery);
+            jdbcTemplateDeleteGroup.execute(secondQuery);
+        }
+/*
+        String query = "UPDATE geoip.location SET " + "id" + "=?" + "," + "country" + "=?" + "," + "state" + "=?" + "," + "city" + "=?" + "," + "zipcode" + "=?" + "," + "latitude" + "=?" + "," + "longitude" + "=?"
+                + "," + "metrocode" + "=?"
+                + "," + "areacode" + "=?"
+                + "," + "gmt_offset" + "=?"
+                + "," + "cbsa_code" + "=?"
+                + "," + "csa_code" + "=?"
+                + "," + "md_code" + "=?"
+                + "," + "md_title" + "=?"
+                + "," + "income" + "=?"
+                + "," + "political_affiliation" + "=?"
+                + "," + "ethnicity" + "=?"
+                + "," + "rent_owned" + "=?"
+                + "," + "education" + "=?"
+                + "," + "modification_ts" + "=?"
+                + " WHERE id=?";
+        */
         return response;
     }
 
