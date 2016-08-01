@@ -5,6 +5,36 @@
 'use strict';
 
 
+app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){
+    $scope.uploadFile = function(){
+        var file = $scope.myFile;
+
+        console.log('file is ' );
+        console.dir(file);
+
+        geoFileManagerService.uploadFileToUrl(file);
+    };
+}]);
+
+
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+/*
+
 app.controller('geoFileManagerController', function ($scope, geoFileManagerService) {
     $scope.save = function (csvFile) {
         console.log("hahhaha:" + csvFile)
@@ -56,3 +86,4 @@ app.directive('fileReader', function () {
     };
 });
 
+*/

@@ -1,5 +1,6 @@
 package com.adara.pixeldataengineui.controller;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import com.adara.pixeldataengineui.util.Constants;
@@ -9,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -21,10 +25,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class GeoFileManagerController {
     private static final Log LOG = LogFactory.getLog(GeoFileManagerController.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
-
+    public static final String ROOT = "upload-dir";
     @Autowired
     GeoFileManagerService mGeoFileManagerService;
 
+
+    @RequestMapping(method = RequestMethod.POST, value = "/fileUpload")
+    public ResponseEntity<ResponseDTO>  handleFileUpload(@RequestParam("file") MultipartFile file,
+                                                         RedirectAttributes redirectAttributes) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
+
+        if (!file.isEmpty()) {
+            try {
+                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
+                redirectAttributes.addFlashAttribute("message",
+                        "You successfully uploaded " + file.getOriginalFilename() + "!");
+            } catch (IOException  e) {
+                //redirectAttributes.addFlashAttribute("message", "Failued to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+            } catch (RuntimeException e){
+
+            }
+        } else {
+           // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+        }
+
+        return response;
+    }
 
     @RequestMapping(value = "/appendLocationTable", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> appendLocationTable(@RequestBody GeoFileManagerRequest request) {

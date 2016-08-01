@@ -11,7 +11,24 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         // data mapping services
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
+        service.uploadFileToUrl = uploadFileToUrl;
 
+        function uploadFileToUrl(file) {
+            var fd = new FormData();
+            fd.append('file', file);
+
+            $http.post($rootScope.base + 'fileUpload', fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+
+                .success(function () {
+                })
+
+                .error(function () {
+                });
+        }
+        ;
 
         function appendTable(csvData) {
             return $http.post($rootScope.base + 'appendLocationTable', {data: csvData}).success(function (status) {
@@ -28,4 +45,5 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
         return service;
     }
-]);
+])
+;
