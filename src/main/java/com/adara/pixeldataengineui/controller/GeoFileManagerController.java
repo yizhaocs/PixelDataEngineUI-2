@@ -1,23 +1,18 @@
 package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
-import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
-import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -37,9 +32,12 @@ public class GeoFileManagerController {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
 
+
+
         if (!file.isEmpty()) {
             try {
-                inputStreamToFile(file);
+                mGeoFileManagerService.append(file);
+                //inputStreamToFile(file);
 //                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
 //                redirectAttributes.addFlashAttribute("message",
 //                        "You successfully uploaded " + file.getOriginalFilename() + "!");
@@ -56,26 +54,8 @@ public class GeoFileManagerController {
     }
 
 
-    private void inputStreamToFile(MultipartFile file) throws  Exception{
-        InputStream inputStream = null;
-        BufferedReader br = null;
-        FileWriter out = null;
-            inputStream = file.getInputStream();
-            br = new BufferedReader(new InputStreamReader(inputStream));
-            out = new FileWriter("/Users/yzhao/Desktop/output.txt");
-            String line;
-            while ((line = br.readLine()) != null) {
-                out.write(line);
-                out.write("\n");
-                //sb.append(line);
-            }
 
-        if(out != null){
-            out.close();
-        }
-
-    }
-
+/*
     @RequestMapping(value = "/appendLocationTable", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> appendLocationTable(@RequestBody GeoFileManagerRequest request) {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "appendLocationTable" + "]";
@@ -125,4 +105,5 @@ public class GeoFileManagerController {
 
         return response;
     }
+    */
 }

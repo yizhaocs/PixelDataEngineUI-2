@@ -1,12 +1,14 @@
 package com.adara.pixeldataengineui.service.geofilemanager;
 
-import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequest;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by yzhao on 7/21/16.
  */
 public interface GeoFileManagerService {
-    Integer append(GeoFileManagerRequest request) throws Exception;
+    ResponseEntity<ResponseDTO> append(MultipartFile file) throws Exception;
 
-    Integer override(GeoFileManagerRequest request) throws Exception;
+    ResponseEntity<ResponseDTO> override(MultipartFile file) throws Exception;
 }

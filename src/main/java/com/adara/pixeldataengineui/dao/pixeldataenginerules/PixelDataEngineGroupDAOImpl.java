@@ -189,12 +189,7 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + queryDeleteGroup.toString());
 
         JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
-        int resultDeleteGroup = 0;
-        try {
-            resultDeleteGroup = jdbcTemplateDeleteGroup.update(queryDeleteGroup, triggerKeyId);
-        } catch (Exception e) {
-            LOG.error("Failed to execute sql query", e);
-        }
+        int resultDeleteGroup = jdbcTemplateDeleteGroup.update(queryDeleteGroup, triggerKeyId);
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method resultDeleteGroup -> " + resultDeleteGroup);

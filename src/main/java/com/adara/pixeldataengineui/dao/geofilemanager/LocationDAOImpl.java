@@ -1,11 +1,17 @@
 package com.adara.pixeldataengineui.dao.geofilemanager;
 
-import com.adara.pixeldataengineui.model.frontend.requestbody.GeoFileManagerRequest;
+import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -19,39 +25,53 @@ public class LocationDAOImpl implements LocationDAO {
         this.dataSource = dataSource;
     }
 
-    public Integer append(GeoFileManagerRequest request) throws Exception {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "append" + "]";
-        String query = "insert into geoip.location(adobe_segment_id, dp_key_id) values(?, ?)";
-        Object[] args = new Object[]{null, null};
+    public ResponseEntity<ResponseDTO> append(MultipartFile file) throws Exception {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = new ResponseDTO();
+        String fileName = "/Users/yzhao/Desktop/output.csv";
+//       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
+//                "' INTO TABLE geoip.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
+        String query = "LOAD DATA LOCAL INFILE '" + fileName +
+                "' INTO TABLE geoip.location  FIELDS\n" +
+                " TERMINATED BY ',';";
+        if (inputStreamToFile(file)) {
+            JdbcTemplate jdbcTemplateDeleteGroup = new JdbcTemplate(dataSource);
+            jdbcTemplateDeleteGroup.execute(query);
+        }
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
-
-        int result = 0;
-        result = jdbcTemplate.update(query, args);
 
 
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
-
-        return result;
+        return response;
     }
 
-    public Integer override(GeoFileManagerRequest request) throws Exception {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "override" + "]";
-        String query = "insert into geoip.location(adobe_segment_id, dp_key_id) values(?, ?)";
-        Object[] args = new Object[]{null, null};
+    public ResponseEntity<ResponseDTO> override(MultipartFile file) throws Exception {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = new ResponseDTO();
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+        return response;
+    }
 
-        int result = 0;
-        result = jdbcTemplate.update(query, args);
+    private boolean inputStreamToFile(MultipartFile file) throws Exception {
+        Boolean success = false;
+        InputStream inputStream = null;
+        BufferedReader br = null;
+        FileWriter out = null;
+        inputStream = file.getInputStream();
+        br = new BufferedReader(new InputStreamReader(inputStream));
+        out = new FileWriter("/Users/yzhao/Desktop/output.csv");
+        String line;
+        while ((line = br.readLine()) != null) {
+            out.write(line);
+            out.write("\n");
+            //sb.append(line);
+        }
 
+        if (out != null) {
+            out.close();
+            success = true;
+        }
 
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+        return success;
 
-        return result;
     }
 }
