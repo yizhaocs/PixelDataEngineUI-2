@@ -9,13 +9,39 @@
 </style>
 <div>
     <form role="form" name="myForm" class="form-horizontal">
-    <div class="form-group">
-        <input type="file" file-model="myFile"/>
-        <button ng-click="appendTable()">Append the Table</button>
-    </div>
-    <div class="form-group">
-        <input type="file" file-model="myFile"/>
-        <button ng-click="overrideTable()">Override the Table</button>
-    </div>
-        </form>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2"> Append the Table </label>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <td>
+                        <select class="form-control" ng-model="frontendData.group_type">
+                            <option value="independent">independent</option>
+                            <option value="sequential">sequential</option>
+                        </select>
+                    </td>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="file" file-model="myFile"/>
+                <button ng-click="appendTable()">Append the Table</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2"> Override the Table </label>
+
+            <div class="col-md-2">
+                <td>
+                    <select class="form-control" ng-model="frontendData.group_type">
+                        <option value="independent">independent</option>
+                        <option value="sequential">sequential</option>
+                    </select>
+                </td>
+            </div>
+
+            <input type="file" file-model="myFile"/>
+            <button ng-click="overrideTable()">Override the Table</button>
+        </div>
+    </form>
 </div>
