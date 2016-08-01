@@ -60,7 +60,6 @@ public class GeoFileManagerController {
         ResponseDTO retval = new ResponseDTO();
 
 
-
         if (!file.isEmpty()) {
             try {
                 mGeoFileManagerService.override(file);
