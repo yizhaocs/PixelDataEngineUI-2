@@ -1,9 +1,21 @@
-<hr>
-    <input type = "file" file-model = "myFile"/>
-    <button ng-click = "appendTable()">Append the Table</button>
+<style type="text/css">
+    .form-horizontal input.ng-invalid.ng-dirty {
+        border-color: #FA787E;
+    }
 
-    </hr>
-
-    <input type = "file" file-model = "myFile"/>
-    <button ng-click = "overrideTable()">Override the Table</button>
+    .form-horizontal input.ng-valid.ng-dirty {
+        border-color: #78FA89;
+    }
+</style>
+<div>
+    <form role="form" name="myForm" class="form-horizontal">
+    <div class="form-group">
+        <input type="file" file-model="myFile"/>
+        <button ng-click="appendTable()">Append the Table</button>
+    </div>
+    <div class="form-group">
+        <input type="file" file-model="myFile"/>
+        <button ng-click="overrideTable()">Override the Table</button>
+    </div>
+        </form>
 </div>
