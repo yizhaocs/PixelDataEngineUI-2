@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Created by yzhao on 7/21/16.
  */
 public interface LocationDAO {
-    ResponseEntity<ResponseDTO> append(MultipartFile file ) throws Exception;
+    ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception;
 
-    ResponseEntity<ResponseDTO> override(MultipartFile file ) throws Exception;
+    ResponseEntity<ResponseDTO> override(MultipartFile file, String table) throws Exception;
 }

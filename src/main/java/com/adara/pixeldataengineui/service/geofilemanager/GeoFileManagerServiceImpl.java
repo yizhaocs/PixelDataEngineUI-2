@@ -18,11 +18,11 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     private LocationDAOImpl mLocationDAOImpl;
 
 
-    public ResponseEntity<ResponseDTO> append(MultipartFile file ) throws Exception {
-        return mLocationDAOImpl.append(file);
+    public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
+        return mLocationDAOImpl.append(file, table);
     }
 
-    public ResponseEntity<ResponseDTO> override(MultipartFile file ) throws Exception {
-        return mLocationDAOImpl.override(file);
+    public ResponseEntity<ResponseDTO> override(MultipartFile file, String table) throws Exception {
+        return mLocationDAOImpl.override(file, table);
     }
 }

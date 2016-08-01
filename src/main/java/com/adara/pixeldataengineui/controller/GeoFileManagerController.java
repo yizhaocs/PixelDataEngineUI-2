@@ -36,7 +36,7 @@ public class GeoFileManagerController {
 
         if (!file.isEmpty()) {
             try {
-                mGeoFileManagerService.append(file);
+                mGeoFileManagerService.append(file, table);
                 //inputStreamToFile(file);
 //                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
 //                redirectAttributes.addFlashAttribute("message",
@@ -64,7 +64,7 @@ public class GeoFileManagerController {
 
         if (!file.isEmpty()) {
             try {
-                mGeoFileManagerService.override(file);
+                mGeoFileManagerService.override(file, table);
                 //inputStreamToFile(file);
 //                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
 //                redirectAttributes.addFlashAttribute("message",

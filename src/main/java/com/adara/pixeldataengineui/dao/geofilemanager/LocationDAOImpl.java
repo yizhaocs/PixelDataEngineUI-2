@@ -25,7 +25,7 @@ public class LocationDAOImpl implements LocationDAO {
         this.dataSource = dataSource;
     }
 
-    public ResponseEntity<ResponseDTO> append(MultipartFile file) throws Exception {
+    public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
         String fileName = "/Users/yzhao/Desktop/output.csv";
@@ -36,7 +36,7 @@ public class LocationDAOImpl implements LocationDAO {
             //       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
 //                "' INTO TABLE geoip.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
             String query = "LOAD DATA LOCAL INFILE '" + fileName +
-                    "' INTO TABLE geoip.location  FIELDS\n" +
+                    "' INTO TABLE geoip."  + table + "  FIELDS\n" +
                     " TERMINATED BY ',';";
             jdbcTemplateDeleteGroup.execute(query);
         }
@@ -45,7 +45,7 @@ public class LocationDAOImpl implements LocationDAO {
         return response;
     }
 
-    public ResponseEntity<ResponseDTO> override(MultipartFile file) throws Exception {
+    public ResponseEntity<ResponseDTO> override(MultipartFile file, String table) throws Exception {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
         String fileName = "/Users/yzhao/Desktop/output.csv";
@@ -56,7 +56,7 @@ public class LocationDAOImpl implements LocationDAO {
             String firstQuery = "truncate table geoip.location;";
 
             String secondQuery = "LOAD DATA LOCAL INFILE '" + fileName +
-                    "' INTO TABLE geoip.location  FIELDS\n" +
+                    "' INTO TABLE geoip." + table + "  FIELDS\n" +
                     " TERMINATED BY ',';";
 
             jdbcTemplateDeleteGroup.execute(firstQuery);
