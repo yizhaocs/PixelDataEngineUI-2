@@ -84,7 +84,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public GenericDTOList<PdeMapTableDTO> getPdeMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT a.value, a.mapped_value FROM pde." + tableName + " a";
+        String query = "SELECT a.value, a.mapped_value FROM pde.pde_map_" + tableName + " a";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

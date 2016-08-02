@@ -22,8 +22,9 @@ app.controller('listGeoMapsController', function ($scope, geoFileManagerService)
 });
 
 
-app.controller('getPdeMapController', function ($scope, geoFileManagerService) {
-    geoFileManagerService.getPdeMap().success(function (backendData) {
+app.controller('getPdeMapController', function ($routeParams, $scope, geoFileManagerService) {
+    var mapName = $routeParams.tableName;
+    geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
         $scope.frontendData = backendData.list;
     });
 });
