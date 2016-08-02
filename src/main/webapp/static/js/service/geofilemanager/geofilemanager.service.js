@@ -9,12 +9,18 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         var service = {};
 
         // data mapping services
-        service.getGeo = getGeo;
+        service.getPixelDataEngineMaps = getPixelDataEngineMaps;
+        service.getGeoMap = getGeoMap;
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
 
 
-        function getGeo(mapname) {
+        function getPixelDataEngineMaps() {
+            var body = $http.get($rootScope.base + 'getPixelDataEngineMaps');
+            return body;
+        };
+
+        function getGeoMap(mapname) {
             var body = $http.get($rootScope.base + 'geo?mapname=' + mapname);
             return body;
         };

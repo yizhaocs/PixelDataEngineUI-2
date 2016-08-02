@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.io.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -24,8 +26,27 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         this.dataSource = dataSource;
     }
 
-    public GenericDTOList<PixelDataEngineMapsDTO> getGeoMaps() throws Exception{
-        return null;
+    public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
+        String query = "SELECT a.map_name, a.table_name FROM pde.pixel_data_engine_maps a";
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Map<String, Object>> listMap = null;
+        listMap = jdbcTemplate.queryForList(query);
+
+        GenericDTOList<PixelDataEngineMapsDTO> result = new GenericDTOList<PixelDataEngineMapsDTO>();
+        for (Map<String, Object> m : listMap) {
+            PixelDataEngineMapsDTO mPixelDataEngineMapsDTO = new PixelDataEngineMapsDTO();
+            mPixelDataEngineMapsDTO.setMap_name(String.valueOf(m.get("map_name")));
+            mPixelDataEngineMapsDTO.setTable_name(String.valueOf(m.get("table_name")));
+            result.add(mPixelDataEngineMapsDTO);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result.toString());
+
+        return result;
     }
     public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
         ResponseEntity<ResponseDTO> response = null;

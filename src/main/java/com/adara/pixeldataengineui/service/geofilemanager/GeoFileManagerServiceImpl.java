@@ -19,8 +19,8 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     @Autowired
     private GeoFileManagerDAOImpl mLocationDAOImpl;
 
-    public GenericDTOList<PixelDataEngineMapsDTO> getGeoMaps() throws Exception{
-        return mLocationDAOImpl.getGeoMaps();
+    public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
+        return mLocationDAOImpl.getPixelDataEngineMaps();
     }
 
     public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {

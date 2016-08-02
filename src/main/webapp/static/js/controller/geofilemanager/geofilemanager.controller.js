@@ -5,7 +5,7 @@
 'use strict';
 
 app.controller('listGeoMapsController', function ($scope, geoFileManagerService) {
-    geoFileManagerService.getGeo().success(function (backendData) {
+    geoFileManagerService.getPixelDataEngineMaps().success(function (backendData) {
         $scope.frontendData = backendData.list;
     });
 

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Created by yzhao on 7/21/16.
  */
 public interface GeoFileManagerService {
-    GenericDTOList<PixelDataEngineMapsDTO> getGeoMaps() throws Exception;
+    GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception;
 
     ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception;
 

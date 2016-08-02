@@ -18,10 +18,10 @@
             </thead>
             <tbody>
             <tr ng-repeat="data in frontendData">
-                <td>{{data.name}}</td>
+                <td>{{data.map_name}}</td>
                 <td><a href="geo/display-geo/name=0" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Show Contents</a></td>
                 <td><input type="file" file-model="myFile"/></td>
-                <td><button ng-click="exportTable()">Override the Table</button></td>
+                <td><button ng-click="exportTable()">Export the Table</button></td>
                 <td><button ng-click="appendTable()">Append the Table</button></td>
                 <td><button ng-click="overrideTable()">Override the Table</button></td>
             </tr>

@@ -26,13 +26,13 @@ public class GeoFileManagerController {
     @Autowired
     GeoFileManagerService mGeoFileManagerService;
 
-    @RequestMapping(value = "/getGeoMaps", method = RequestMethod.GET)
-    public ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> getGroups() {
+    @RequestMapping(value = "/getPixelDataEngineMaps", method = RequestMethod.GET)
+    public ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> getPixelDataEngineMaps() {
         ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> response = null;
         GenericDTOList<PixelDataEngineMapsDTO> retval = null;
 
         try {
-            retval = mGeoFileManagerService.getGeoMaps();
+            retval = mGeoFileManagerService.getPixelDataEngineMaps();
             if (retval.getList().size() == 0) {
                 response = new ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>>(retval, HttpStatus.NO_CONTENT);
             } else {

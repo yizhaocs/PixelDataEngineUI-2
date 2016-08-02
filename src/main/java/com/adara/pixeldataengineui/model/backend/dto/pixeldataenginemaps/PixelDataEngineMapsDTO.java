@@ -8,30 +8,38 @@ import java.io.Serializable;
  * @author YI ZHAO[yi.zhao@adara.com]
  */
 public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
-    private String value;
-    private String mapped_value;
+    private String map_name;
+    private String table_name;
 
 
     public PixelDataEngineMapsDTO() {
 
     }
 
-    public PixelDataEngineMapsDTO(String value, String mapped_value) {
-        this.value = value;
-        this.mapped_value = mapped_value;
+    public PixelDataEngineMapsDTO(String map_name, String table_name) {
+        this.map_name = map_name;
+        this.table_name = table_name;
     }
 
-    public String getValue() {
-        return value;
+    public String getMap_name() {
+        return map_name;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setMap_name(String map_name) {
+        this.map_name = map_name;
+    }
+
+    public String getTable_name() {
+        return table_name;
+    }
+
+    public void setTable_name(String table_name) {
+        this.table_name = table_name;
     }
 
     @Override
     public String toString() {
-        return "PixelDataEngineMapsDTO [value=" + value + ", mapped_value=" + mapped_value
+        return "PixelDataEngineMapsDTO [map_name=" + map_name + ", table_name=" + table_name
                 + "]";
     }
 
@@ -39,8 +47,8 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((value == null) ? 0 : value.hashCode());
-        result = prime * result + ((mapped_value == null) ? 0 : mapped_value.hashCode());
+        result = prime * result + ((map_name == null) ? 0 : map_name.hashCode());
+        result = prime * result + ((table_name == null) ? 0 : table_name.hashCode());
         return result;
     }
 
@@ -56,18 +64,18 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
             return false;
         }
         PixelDataEngineMapsDTO other = (PixelDataEngineMapsDTO) obj;
-        if (value == null) {
-            if (other.value != null) {
+        if (map_name == null) {
+            if (other.map_name != null) {
                 return false;
             }
-        } else if (!value.equals(other.value)) {
+        } else if (!map_name.equals(other.map_name)) {
             return false;
         }
-        if (mapped_value == null) {
-            if (other.mapped_value != null) {
+        if (table_name == null) {
+            if (other.table_name != null) {
                 return false;
             }
-        } else if (!mapped_value.equals(other.mapped_value)) {
+        } else if (!table_name.equals(other.table_name)) {
             return false;
         }
 
