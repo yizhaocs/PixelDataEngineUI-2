@@ -217,12 +217,12 @@ app.config(['$routeProvider', '$locationProvider',
             .when(base + 'geo/get-pde-map/tableName=:tableName', {
                 templateUrl: 'static/html/geo-file-manager/get-pde-map.html',
                 controller: 'getPdeMapController',
-                resolve: {
-                    backendData: function (geoFileManagerService, $route) {
-                        var map_name = $route.current.params.map_name;
-                        return geoFileManagerService.getPdeMap(map_name);
-                    }
-                }
+                //resolve: {
+                //    backendData: function (geoFileManagerService, $route) {
+                //        var map_name = $route.current.params.map_name;
+                //        return geoFileManagerService.getPdeMap(map_name);
+                //    }
+                //}
 
             })
 
