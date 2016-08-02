@@ -29,9 +29,9 @@ public class LocationDAOImpl implements LocationDAO {
 
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
-            appendFileWithoutOverride(jt, fileName, table);
+            appendFileWithOverride(jt, table);
             //       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
-//         "' INTO TABLE geoip.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
+//         "' INTO TABLE pde.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
 //            String query = "LOAD DATA LOCAL INFILE '" + fileName +
         }
 
@@ -47,72 +47,34 @@ public class LocationDAOImpl implements LocationDAO {
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
 
-            String firstQuery = "truncate table geoip.location;";
-
-            String secondQuery = "LOAD DATA LOCAL INFILE '" + fileName +
-                    "' INTO TABLE geoip." + table + "  FIELDS\n" +
-                    " TERMINATED BY ',';";
-
-            jt.execute(firstQuery);
-            jt.execute(secondQuery);
+            truncateTable(jt, table);
+            appendFileWithOverride(jt, table);
         }
-/*
-        String query = "UPDATE geoip.location SET " + "id" + "=?" + "," + "country" + "=?" + "," + "state" + "=?" + "," + "city" + "=?" + "," + "zipcode" + "=?" + "," + "latitude" + "=?" + "," + "longitude" + "=?"
-                + "," + "metrocode" + "=?"
-                + "," + "areacode" + "=?"
-                + "," + "gmt_offset" + "=?"
-                + "," + "cbsa_code" + "=?"
-                + "," + "csa_code" + "=?"
-                + "," + "md_code" + "=?"
-                + "," + "md_title" + "=?"
-                + "," + "income" + "=?"
-                + "," + "political_affiliation" + "=?"
-                + "," + "ethnicity" + "=?"
-                + "," + "rent_owned" + "=?"
-                + "," + "education" + "=?"
-                + "," + "modification_ts" + "=?"
-                + " WHERE id=?";
-        */
+
         return response;
+    }
+
+    private void truncateTable (JdbcTemplate jt, String table) throws Exception {
+        String query = "truncate table pde." + table;
+        jt.execute(query);
     }
 
     private void appendFileWithoutOverride(JdbcTemplate jt,String fileName, String table) throws Exception {
         String query = "LOAD DATA LOCAL INFILE '" + fileName +
-                "' INTO TABLE geoip." + table + "  FIELDS\n" +
+                "' INTO TABLE pde." + table + "  FIELDS\n" +
                 " TERMINATED BY ',';";
         jt.execute(query);
     }
 
     private void appendFileWithOverride(JdbcTemplate jt, String table) throws Exception {
-        String query = "UPDATE geoip." + table + " SET " +
-                "id" + "=?" + "," +
-                "country" + "=?" + "," +
-                "state" + "=?" + "," +
-                "city" + "=?" + "," +
-                "zipcode" + "=?" + "," +
-                "latitude" + "=?" + "," +
-                "longitude" + "=?" + "," +
-                "metrocode" + "=?" + "," +
-                "areacode" + "=?" + "," +
-                "gmt_offset" + "=?" + "," +
-                "cbsa_code" + "=?" + "," +
-                "csa_code" + "=?" + "," +
-                "md_code" + "=?" + "," +
-                "md_title" + "=?" + "," +
-                "income" + "=?" + "," +
-                "political_affiliation" + "=?" + "," +
-                "ethnicity" + "=?" + "," +
-                "rent_owned" + "=?" + "," +
-                "education" + "=?" + "," +
-                "modification_ts" + "=?"
-                + " WHERE id=?";
+        String query = "INSERT INTO pde." + table + " VALUES(?,?)";
 
         InputStream in = new FileInputStream(new File("/Users/yzhao/Desktop/output.csv"));
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] stringArray = line.split(",");
-            Object[] args = new Object[]{stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4], stringArray[5], stringArray[6], stringArray[7], stringArray[8], stringArray[9], stringArray[10], stringArray[11], stringArray[12], stringArray[13], stringArray[14], stringArray[15], stringArray[16], stringArray[17], stringArray[18], stringArray[19], stringArray[0]};
+            Object[] args = new Object[]{stringArray[0].trim(), stringArray[1].trim()};
             jt.update(query, args);
         }
 
@@ -155,6 +117,5 @@ public class LocationDAOImpl implements LocationDAO {
         }
 
         return success;
-
     }
 }
