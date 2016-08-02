@@ -9,17 +9,14 @@ app.controller('listGeoMapsController', function ($scope, geoFileManagerService)
         $scope.frontendData = backendData.list;
     });
 
-    $scope.appendTable = function(){
+    $scope.appendTable = function(tableName){
         var file = $scope.myFile;
-        var tableName = $scope.frontendData.append.tableName;
         geoFileManagerService.appendTable(file,tableName);
     };
 
 
-    $scope.overrideTable = function(){
+    $scope.overrideTable = function(tableName){
         var file = $scope.myFile;
-        var tableName = $scope.frontendData.override.tableName;
-
         geoFileManagerService.overrideTable(file, tableName);
     };
 });
@@ -30,6 +27,27 @@ app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', f
 
 }]);
 
+*/
+/*
+
+app.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
 */
 
 app.directive('fileModel', ['$parse', function ($parse) {
