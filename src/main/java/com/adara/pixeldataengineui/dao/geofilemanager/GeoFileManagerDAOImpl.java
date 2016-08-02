@@ -1,6 +1,8 @@
 package com.adara.pixeldataengineui.dao.geofilemanager;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +15,8 @@ import java.io.*;
 /**
  * Created by yzhao on 7/21/16.
  */
-public class LocationDAOImpl implements LocationDAO {
-    private static final Log LOG = LogFactory.getLog(LocationDAOImpl.class);
+public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
+    private static final Log LOG = LogFactory.getLog(GeoFileManagerDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;
 
@@ -22,6 +24,9 @@ public class LocationDAOImpl implements LocationDAO {
         this.dataSource = dataSource;
     }
 
+    public GenericDTOList<PixelDataEngineMapsDTO> getGeoMaps() throws Exception{
+        return null;
+    }
     public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();

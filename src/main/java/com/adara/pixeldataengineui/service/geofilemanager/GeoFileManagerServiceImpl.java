@@ -1,7 +1,9 @@
 package com.adara.pixeldataengineui.service.geofilemanager;
 
-import com.adara.pixeldataengineui.dao.geofilemanager.LocationDAOImpl;
+import com.adara.pixeldataengineui.dao.geofilemanager.GeoFileManagerDAOImpl;
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Transactional
 public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     @Autowired
-    private LocationDAOImpl mLocationDAOImpl;
+    private GeoFileManagerDAOImpl mLocationDAOImpl;
 
+    public GenericDTOList<PixelDataEngineMapsDTO> getGeoMaps() throws Exception{
+        return mLocationDAOImpl.getGeoMaps();
+    }
 
     public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
         return mLocationDAOImpl.append(file, table);

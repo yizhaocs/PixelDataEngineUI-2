@@ -1,6 +1,8 @@
 package com.adara.pixeldataengineui.controller;
 
+import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,6 +25,26 @@ public class GeoFileManagerController {
     public static final String ROOT = "upload-dir";
     @Autowired
     GeoFileManagerService mGeoFileManagerService;
+
+    @RequestMapping(value = "/getGeoMaps", method = RequestMethod.GET)
+    public ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> getGroups() {
+        ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> response = null;
+        GenericDTOList<PixelDataEngineMapsDTO> retval = null;
+
+        try {
+            retval = mGeoFileManagerService.getGeoMaps();
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>>(retval, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            LOG.error("[PixelDataEngineGroupController.getGroups] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/appendTable")
@@ -59,9 +81,6 @@ public class GeoFileManagerController {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = new ResponseDTO();
 
-        String x = table;
-        System.out.println(x);
-
         if (!file.isEmpty()) {
             try {
                 mGeoFileManagerService.override(file, table);
@@ -82,55 +101,5 @@ public class GeoFileManagerController {
     }
 
 
-/*
-    @RequestMapping(value = "/appendLocationTable", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> appendLocationTable(@RequestBody GeoFileManagerRequest request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "appendLocationTable" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
 
-        Integer result = 0;
-
-        try {
-            result = mGeoFileManagerService.append(request);
-        } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-
-    @RequestMapping(value = "/overrideLocationTable", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> overrideLocationTable(@RequestBody GeoFileManagerRequest request) {
-        final String LOG_HEADER = "[" + CLASS_NAME + "." + "overrideLocationTable" + "]";
-        LOG.info(LOG_HEADER + ", " + "request data ->" + request.toString());
-
-        Integer result = 0;
-
-        try {
-            result = mGeoFileManagerService.override(request);
-        } catch (Exception e) {
-            LOG.error(LOG_HEADER + " Service error: " + e, e);
-        }
-        ResponseEntity<String> response = null;
-        if (result > 0) {
-            response = new ResponseEntity<String>(Constants.SUCCESS_TRUE, HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<String>(Constants.SUCCESS_FALSE, HttpStatus.NO_CONTENT);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + ", " + "ResponseEntity:" + response.toString());
-
-        return response;
-    }
-    */
 }

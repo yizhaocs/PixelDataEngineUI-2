@@ -4,8 +4,11 @@
 
 'use strict';
 
+app.controller('listGeoMapsController', function ($scope, geoFileManagerService) {
+    geoFileManagerService.getGeo().success(function (backendData) {
+        $scope.frontendData = backendData.list;
+    });
 
-app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){
     $scope.appendTable = function(){
         var file = $scope.myFile;
         var tableName = $scope.frontendData.append.tableName;
@@ -19,8 +22,15 @@ app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', f
 
         geoFileManagerService.overrideTable(file, tableName);
     };
+});
+
+/*
+
+app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){
+
 }]);
 
+*/
 
 app.directive('fileModel', ['$parse', function ($parse) {
     return {

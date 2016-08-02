@@ -9,10 +9,15 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         var service = {};
 
         // data mapping services
-/*        service.appendTable = appendTable;
-        service.overrideTable = overrideTable;*/
+        service.getGeo = getGeo;
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
+
+
+        function getGeo(mapname) {
+            var body = $http.get($rootScope.base + 'geo?mapname=' + mapname);
+            return body;
+        };
 
         function appendTable(file, table) {
             var fd = new FormData();
@@ -46,20 +51,6 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 });
         };
 
-      /*  function appendTable(csvData) {
-            return $http.post($rootScope.base + 'appendLocationTable', {data: csvData}).success(function (status) {
-                return status.data;
-            });
-        };
-
-        function overrideTable(csvData) {
-            return $http.post($rootScope.base + 'overrideLocationTable', {data: csvData}).success(function (status) {
-                return status.data;
-            });
-        };
-*/
-
         return service;
     }
-])
-;
+]);
