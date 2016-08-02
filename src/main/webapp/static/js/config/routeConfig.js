@@ -211,9 +211,15 @@ app.config(['$routeProvider', '$locationProvider',
             })*/
             .when(base + 'geo-file-manager', {
                 title: 'Geo File Manager',
-                templateUrl: 'static/html/geo-file-manager/list-geo.html',
+                templateUrl: 'static/html/geo-file-manager/list-pixel-data-engine-maps.html',
                 controller: 'listGeoMapsController'
             })
+            .when(base + 'geo/get-pde-map/tableName=:tableName', {
+                templateUrl: 'static/html/geo-file-manager/get-pde-map.html',
+                controller: 'getPdeMapController'
+            })
+
+
             .otherwise({
                 templateUrl: 'static/html/usermanagement/login/login.view.html',
                 redirectTo: base + 'login'

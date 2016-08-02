@@ -21,6 +21,14 @@ app.controller('listGeoMapsController', function ($scope, geoFileManagerService)
     };
 });
 
+
+app.controller('getPdeMapController', function ($scope, geoFileManagerService) {
+    geoFileManagerService.getPdeMap().success(function (backendData) {
+        $scope.frontendData = backendData.list;
+    });
+});
+
+
 /*
 
 app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){
