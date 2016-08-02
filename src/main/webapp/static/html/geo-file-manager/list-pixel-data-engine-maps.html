@@ -30,7 +30,7 @@
             <tbody>
             <tr ng-repeat="data in frontendData">
                 <td>{{data.map_name}}</td>
-                <td><a href="geo/get-pde-map/tableName=0" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Show Contents</a></td>
+                <td><a href="geo/get-pde-map/tableName={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Show Contents</a></td>
                 <td>
                     <button ng-click="exportTable(data.table_name)">Export the Table</button>
                 </td>

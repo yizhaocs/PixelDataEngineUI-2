@@ -21,7 +21,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         };
 
         function getPdeMap(mapname) {
-            var body = $http.get($rootScope.base + 'geo?mapname=' + mapname);
+            var body = $http.get($rootScope.base + 'getPdeMap?mapname=' + mapname);
             return body;
         };
 

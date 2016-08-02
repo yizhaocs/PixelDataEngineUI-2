@@ -2,6 +2,7 @@ package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
+import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import org.apache.commons.logging.Log;
@@ -39,7 +40,7 @@ public class GeoFileManagerController {
                 response = new ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>>(retval, HttpStatus.OK);
             }
         } catch (Exception e) {
-            LOG.error("[PixelDataEngineGroupController.getGroups] Service error: " + e, e);
+            LOG.error("[GeoFileManagerController.getPixelDataEngineMaps] Service error: " + e, e);
             response = new ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -65,6 +66,7 @@ public class GeoFileManagerController {
 //                        "You successfully uploaded " + file.getOriginalFilename() + "!");
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             } catch (Exception e) {
+                LOG.error("[GeoFileManagerController.appendTable] Service error: " + e, e);
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
@@ -90,11 +92,37 @@ public class GeoFileManagerController {
 //                        "You successfully uploaded " + file.getOriginalFilename() + "!");
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             } catch (Exception e) {
+                LOG.error("[GeoFileManagerController.overrideTable] Service error: " + e, e);
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
             // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+        }
+
+        return response;
+    }
+
+
+    @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
+    public ResponseEntity<GenericDTOList<PdeMapTableDTO>> getPdeMap(@RequestParam(value = "mapname", required = false) String mapName) {
+        ResponseEntity<GenericDTOList<PdeMapTableDTO>> response = null;
+        GenericDTOList<PdeMapTableDTO> retval = null;
+
+        if (mapName.equals("0") || mapName.equals("undefined")) {
+            response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.NO_CONTENT);
+            return response;
+        }
+        try {
+            retval = mGeoFileManagerService.getPdeMap(mapName);
+            if (retval.getList().size() == 0) {
+                response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+            response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return response;
