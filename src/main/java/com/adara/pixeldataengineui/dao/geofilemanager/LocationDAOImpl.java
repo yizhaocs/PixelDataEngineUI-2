@@ -29,7 +29,7 @@ public class LocationDAOImpl implements LocationDAO {
 
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
-            appendFileWithOverride(jt, table);
+            appendFileWithoutOverride(jt, fileName, table);
             //       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
 //         "' INTO TABLE pde.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
 //            String query = "LOAD DATA LOCAL INFILE '" + fileName +
@@ -48,7 +48,7 @@ public class LocationDAOImpl implements LocationDAO {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
 
             truncateTable(jt, table);
-            appendFileWithOverride(jt, table);
+            appendFileWithoutOverride(jt, fileName, table);
         }
 
         return response;
@@ -98,7 +98,8 @@ public class LocationDAOImpl implements LocationDAO {
         out = new FileWriter("/Users/yzhao/Desktop/output.csv");
         String line;
         while ((line = br.readLine()) != null) {
-            out.write(line);
+
+            out.write(trimLine(line));
             out.write("\n");
             //sb.append(line);
         }
@@ -117,5 +118,21 @@ public class LocationDAOImpl implements LocationDAO {
         }
 
         return success;
+    }
+
+
+    private String trimLine(String line){
+        StringBuilder sb = new StringBuilder();
+        String[] sa = line.split(",");
+        for(String s: sa){
+            sb.append(s.trim());
+            sb.append(",");
+        }
+
+        if(sb.length() != 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        return sb.toString();
     }
 }

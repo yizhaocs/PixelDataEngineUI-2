@@ -11,37 +11,63 @@
     <form role="form" name="myForm" class="form-horizontal">
         <div class="row">
             <div class="form-group">
-                <label class="col-md-2"> Append the Table </label>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <td>
-                        <select class="form-control" ng-model="frontendData.append.tableName">
-                            <option disabled selected value> -- select an option --</option>
-                            <option value="city">city</option>
-                        </select>
-                    </td>
+                <div class="form-group">
+                    <label class="col-md-2"> Append the Table </label>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <td>
+                            <select class="form-control" ng-model="frontendData.append.tableName">
+                                <option disabled selected value> -- select an option --</option>
+                                <option value="city">city</option>
+                            </select>
+                        </td>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="file" file-model="myFile"/>
+                    <button ng-click="appendTable()">Append the Table</button>
                 </div>
             </div>
+
             <div class="form-group">
-                <input type="file" file-model="myFile"/>
-                <button ng-click="appendTable()">Append the Table</button>
+                <div class="form-group">
+                    <label class="col-md-2"> Override the Table </label>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <td>
+                            <select class="form-control" ng-model="frontendData.override.tableName">
+                                <option disabled selected value> -- select an option --</option>
+                                <option value="city">city</option>
+                            </select>
+                        </td>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="file" file-model="myFile"/>
+                    <button ng-click="overrideTable()">Override the Table</button>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2"> Override the Table </label>
 
-            <div class="col-md-2">
-                <td>
-                    <select class="form-control" ng-model="frontendData.override.tableName">
-                        <option disabled selected value> -- select an option --</option>
-                        <option value="city">city</option>
-                    </select>
-                </td>
-            </div>
+            <!--
 
-            <input type="file" file-model="myFile"/>
-            <button ng-click="overrideTable()">Override the Table</button>
+              <div class="form-group">
+                  <label class="col-md-2"> Override the Table </label>
+
+                  <div class="col-md-2">
+                      <td>
+                          <select class="form-control" ng-model="frontendData.override.tableName">
+                              <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
+                              <option value="city">city</option>
+                          </select>
+                      </td>
+                  </div>
+
+                  <input type="file" file-model="myFile"/>
+                  <button ng-click="overrideTable()">Override the Table</button>
+              </div>-->
         </div>
+
     </form>
 </div>
