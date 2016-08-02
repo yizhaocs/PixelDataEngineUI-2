@@ -1,3 +1,49 @@
+<div class="row">
+    <div class="col-md-12">
+        <hr>
+        <span><b>pixel_data_engine_maps</b></span><br><br>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="btn btn-lg btn-success" href="geo/edit-geo/name=0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new geo map</a>
+            </div>
+        </nav>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <th>Name&nbsp;</th>
+            <th>Contents&nbsp;</th>
+            <th>File Location&nbsp;</th>
+            <th>Export&nbsp;</th>
+            <th>Append&nbsp;</th>
+            <th>Override&nbsp;</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in frontendData">
+                <td>{{data.name}}</td>
+                <td><a href="geo/display-geo/name=0" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Show Contents</a></td>
+                <td><input type="file" file-model="myFile"/></td>
+                <td><button ng-click="exportTable()">Override the Table</button></td>
+                <td><button ng-click="appendTable()">Append the Table</button></td>
+                <td><button ng-click="overrideTable()">Override the Table</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12" ng-show="rules.length == 0">
+        <div class="col-md-12">
+            <h4>No geo map found</h4>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+
+
+
+
+
+
 <style type="text/css">
     .form-horizontal input.ng-invalid.ng-dirty {
         border-color: #FA787E;
@@ -18,7 +64,7 @@
                     <div class="col-md-2">
                         <td>
                             <select class="form-control" ng-model="frontendData.append.tableName">
-                                <option disabled selected value> -- select an option --</option>
+                                <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
                                 <option value="city">city</option>
                             </select>
                         </td>
@@ -38,7 +84,7 @@
                     <div class="col-md-2">
                         <td>
                             <select class="form-control" ng-model="frontendData.override.tableName">
-                                <option disabled selected value> -- select an option --</option>
+                                <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
                                 <option value="city">city</option>
                             </select>
                         </td>
@@ -50,7 +96,7 @@
                 </div>
             </div>
 
-            <!--
+            &lt;!&ndash;
 
               <div class="form-group">
                   <label class="col-md-2"> Override the Table </label>
@@ -66,8 +112,9 @@
 
                   <input type="file" file-model="myFile"/>
                   <button ng-click="overrideTable()">Override the Table</button>
-              </div>-->
+              </div>&ndash;&gt;
         </div>
 
     </form>
 </div>
+-->
