@@ -55,7 +55,18 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         * Select * from the new table, and we should get 0 return
         * */
         List<Map<String, Object>> listMap = null;
-        listMap = jdbcTemplate.queryForList(query3);
+        try {
+            listMap = jdbcTemplate.queryForList(query3);
+        }catch(Exception e){
+            /*
+            * Delete the relationship in pixel_data_engine_maps since the table creation failed
+            * */
+            if(retval1 > 0){
+                String query4 = "DELETE FROM pde.pixel_data_engine_maps WHERE map_name=?";
+                Object[] args2 = new Object[]{mapName};
+                jdbcTemplate.update(query4, args2);
+            }
+        }
         ResponseDTO result = new ResponseDTO();
         if(retval1 > 0 && listMap.size() == 0){
             result.setMessage(Constants.SUCCESS);
@@ -70,7 +81,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        ResponseDTO result = null;
+        ResponseDTO result = result = new ResponseDTO();
         String query1 = "DELETE FROM pde.pixel_data_engine_maps WHERE map_name=?";
         String query2 = "DROP TABLE pde.pde_map_" + mapName;
         String query3 = "SELECT * FROM pde.pde_map_" + mapName;
@@ -97,6 +108,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         * Generate the result
         * */
         if(retval1 > 0 && isException){
+
             result.setMessage(Constants.SUCCESS);
         }else{
             result.setMessage(Constants.FAILURE);

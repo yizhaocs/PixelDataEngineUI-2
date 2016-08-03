@@ -16,7 +16,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.deletePixelDataEngineMap = deletePixelDataEngineMap;
 
 
-        function createPixelDataEngineMap(frontendData) {
+        function createPixelDataEngineMap(redirectPath, frontendData) {
             return $http.post($rootScope.base + 'createPixelDataEngineMap', {
                     mapName:frontendData.map_name,
                     description: frontendData.description
@@ -24,14 +24,21 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
             })
                 .success(function () {
                     alert("New Geo Map Created Successfully");
+                    $location.path(redirectPath);
                 })
                 .error(function () {
                     alert("New Geo Map Created Failed");
                 });
         };
 
-        function deletePixelDataEngineMap(mapName) {
-            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName);
+        function deletePixelDataEngineMap(redirectPath, mapName) {
+            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName).success(function () {
+                    alert("Map Deleted Successfully");
+                    $location.path(redirectPath);
+                })
+                .error(function () {
+                    alert("Map Deleted Failed");
+                });
         };
 
         function getPixelDataEngineMaps() {

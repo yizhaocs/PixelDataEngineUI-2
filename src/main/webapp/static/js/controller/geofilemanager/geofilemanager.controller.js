@@ -44,12 +44,12 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
 
     $scope.createPixelDataEngineMap = function(frontendData){
-        geoFileManagerService.createPixelDataEngineMap(frontendData);
+        geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);
 
     };
 
-    $scope.deletePixelDataEngineMaps = function(map_name){
-        geoFileManagerService.deletePixelDataEngineMaps(map_name);
+    $scope.deletePixelDataEngineMap = function(map_name){
+        geoFileManagerService.deletePixelDataEngineMap($rootScope.base + 'geo-file-manager', map_name);
     };
 });
 
