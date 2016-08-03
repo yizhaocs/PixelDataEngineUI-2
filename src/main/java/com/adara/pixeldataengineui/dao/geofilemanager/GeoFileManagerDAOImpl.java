@@ -7,7 +7,6 @@ import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDa
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +29,6 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public ResponseDTO createPixelDataEngineMap(String mapName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "createPixelDataEngineMap" + "]";
-        ResponseEntity<ResponseDTO> response = null;
         String tableName = "pde_map_" + mapName;
         String query1 = "INSERT INTO pde.pixel_data_engine_maps(map_name, table_name) VALUES(?, ?)";
         String query2 = "CREATE TABLE pde." + tableName + " (value varchar(255) , mapped_value varchar(255))";
@@ -64,6 +62,42 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
+        return result;
+    }
+
+    public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        ResponseDTO result = null;
+        String query1 = "DELETE FROM pde.pixel_data_engine_maps WHERE map_name=?";
+        String query2 = "DROP TABLE pde.pde_map_" + mapName;
+        String query3 = "SELECT * FROM pde.pde_map_" + mapName;
+        Object[] args = new Object[]{mapName};
+        /*
+        * Delete the map relationship in pixel_data_engine_maps table
+        * */
+        int retval1 = jdbcTemplate.update(query1, args);
+        /*
+        * Drop the pde_map_table
+        * */
+        jdbcTemplate.execute(query2);
+/*
+        * Select * from the table, because table has been dropped so that we would expect from exception
+        * */
+        boolean isException =  false;
+        try {
+            jdbcTemplate.queryForList(query3);
+        }catch(Exception e){
+            isException = true;
+        }
+
+        /*
+        * Generate the result
+        * */
+        if(retval1 > 0 && isException){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
         return result;
     }
 

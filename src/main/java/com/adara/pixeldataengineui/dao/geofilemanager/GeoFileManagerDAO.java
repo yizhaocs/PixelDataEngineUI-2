@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface GeoFileManagerDAO {
     ResponseDTO createPixelDataEngineMap(String mapName) throws Exception;
 
+    ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception;
+
     GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception;
 
     ResponseDTO append(MultipartFile file, String table) throws Exception;

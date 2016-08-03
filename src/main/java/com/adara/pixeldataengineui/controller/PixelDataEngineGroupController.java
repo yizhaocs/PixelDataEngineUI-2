@@ -6,6 +6,7 @@ import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelD
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineGroupsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.InsertUpdateRequest;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineGroupService;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,11 @@ public class PixelDataEngineGroupController {
 
         try {
             retval = mPixelDataEngineGroupService.insertGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type(), false);
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[PixelDataEngineGroupController.insertGroup] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,7 +118,11 @@ public class PixelDataEngineGroupController {
 
         try {
             retval = mPixelDataEngineGroupService.updateGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type());
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[PixelDataEngineGroupController.updateGroup] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -135,7 +144,11 @@ public class PixelDataEngineGroupController {
 
         try {
             retval = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[PixelDataEngineGroupController.updateGroup] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);

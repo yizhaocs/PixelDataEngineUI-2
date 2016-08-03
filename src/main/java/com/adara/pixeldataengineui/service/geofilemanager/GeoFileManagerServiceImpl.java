@@ -23,6 +23,10 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mLocationDAOImpl.createPixelDataEngineMap(mapName);
     }
 
+    public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
+        return mLocationDAOImpl.deletePixelDataEngineMap(mapName);
+    }
+
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
         return mLocationDAOImpl.getPixelDataEngineMaps();
     }

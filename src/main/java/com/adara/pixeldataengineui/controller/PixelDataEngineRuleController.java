@@ -8,6 +8,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineRuleService;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineService;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,11 @@ public class PixelDataEngineRuleController {
 
         try {
             retval = mPixelDataEngineRuleService.insertRule(request, false);
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[PixelDataEngineRuleController.insertRule] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -97,7 +102,11 @@ public class PixelDataEngineRuleController {
 
         try {
             retval = mPixelDataEngineRuleService.updateRule(request);
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[PixelDataEngineRuleController.updateRule] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,7 +122,11 @@ public class PixelDataEngineRuleController {
 
         try {
             retval = mPixelDataEngineRuleService.deleteRule(gid, keyid, priority, false);
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[PixelDataEngineRuleController.deleteRule] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);

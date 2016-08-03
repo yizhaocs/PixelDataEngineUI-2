@@ -5,6 +5,7 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,34 @@ public class GeoFileManagerController {
 
         try {
             retval = mGeoFileManagerService.createPixelDataEngineMap(mapName);
-            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.createPixelDataEngineMap] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deletePixelDataEngineMap")
+    public ResponseEntity<ResponseDTO> deletePixelDataEngineMap(@RequestParam("mapname") String mapName) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
+
+        try {
+            retval = mGeoFileManagerService.deletePixelDataEngineMap(mapName);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
+
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.deletePixelDataEngineMap] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -73,7 +99,11 @@ public class GeoFileManagerController {
         if (!file.isEmpty()) {
             try {
                 retval = mGeoFileManagerService.append(file, table);
-                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+                if(retval.getMessage().equals(Constants.FAILURE)){
+                    response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+                }else{
+                    response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+                }
             } catch (Exception e) {
                 LOG.error("[GeoFileManagerController.appendTable] Service error: " + e, e);
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -94,7 +124,11 @@ public class GeoFileManagerController {
         if (!file.isEmpty()) {
             try {
                 retval = mGeoFileManagerService.override(file, table);
-                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+                if(retval.getMessage().equals(Constants.FAILURE)){
+                    response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+                }else{
+                    response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+                }
             } catch (Exception e) {
                 LOG.error("[GeoFileManagerController.overrideTable] Service error: " + e, e);
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
