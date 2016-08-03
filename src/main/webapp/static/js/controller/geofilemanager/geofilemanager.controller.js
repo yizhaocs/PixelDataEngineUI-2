@@ -4,7 +4,8 @@
 
 'use strict';
 
-app.controller('listGeoMapsController', function ($scope, geoFileManagerService) {
+app.controller('listGeoMapsController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
+
     geoFileManagerService.getPixelDataEngineMaps().success(function (backendData) {
         $scope.frontendData = backendData.list;
     });
@@ -22,8 +23,9 @@ app.controller('listGeoMapsController', function ($scope, geoFileManagerService)
 });
 
 
-app.controller('getPdeMapController', function ($routeParams, $scope, geoFileManagerService) {
+app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
     var mapName = $routeParams.tableName;
+    $rootScope.title = $routeParams.tableName;
     geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
         $scope.frontendData = backendData.list;
     });
