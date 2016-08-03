@@ -1,0 +1,67 @@
+<style type="text/css">
+    .form-horizontal input.ng-invalid.ng-dirty {
+        border-color: #FA787E;
+    }
+
+    .form-horizontal input.ng-valid.ng-dirty {
+        border-color: #78FA89;
+    }
+</style>
+<div class="view">
+    <div class="container">
+        <div class="row">
+            <header>
+                <h3>{{title}}</h3>
+            </header>
+            <div class="col-md-12">
+
+                <form role="form" name="myForm" class="form-horizontal">
+                    <div class="row">
+                        <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                            <label class="col-md-2"> Trigger Key ID </label>
+                            <div class="col-md-2">
+                                <input name="trigger_key_id" ng-model="frontendData.trigger_key_id" type="text" ng-disabled="keyIdDisable" class="form-control" placeholder="trigger_key_id" required/>
+                                <span ng-show="myForm.trigger_key_id.$dirty && myForm.trigger_key_id.$invalid" class="help-inline">Trigger Key Id Required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2"> Group ID </label>
+                            <div class="col-md-2">
+                                <input name="Gid" ng-model="frontendData.gid" type="text" ng-disabled=true class="form-control" placeholder="Gid"/>
+                                <span ng-show="myForm.Gid.$dirty && myForm.Gid.$invalid" class="help-inline">Gid Required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2"> Type </label>
+                            <!--<tr>-->
+                            <!--<td>Type:</td>-->
+                            <div class="col-md-2">
+                                <td>
+                                    <select class="form-control" ng-model="frontendData.group_type">
+                                        <option disabled selected value> -- select an option --</option>
+                                        <option value="independent">independent</option>
+                                        <option value="sequential">sequential</option>
+                                    </select>
+                                </td>
+                            </div>
+                            <!--</tr>-->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2"></label>
+                            <div class="col-md-4">
+                                <a href="pixel-data-engine-group" class="btn">Cancel</a>
+                                <button ng-click="saveGroup(frontendData);"
+                                        ng-disabled="isClean() || myForm.$invalid"
+                                        class="btn btn-primary">{{buttonText}}
+                                </button>
+                                <button ng-click="deleteGroup(frontendData)"
+                                        ng-show="isUpdate" class="btn btn-warning">Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

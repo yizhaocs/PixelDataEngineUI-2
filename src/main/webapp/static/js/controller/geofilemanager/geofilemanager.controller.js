@@ -32,6 +32,11 @@ app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope
 });
 
 
+app.controller('createNewGeoMapController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
+
+});
+
+
 /*
 
 app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){

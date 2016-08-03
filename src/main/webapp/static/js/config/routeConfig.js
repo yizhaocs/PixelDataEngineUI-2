@@ -225,8 +225,11 @@ app.config(['$routeProvider', '$locationProvider',
                 //}
 
             })
-
-
+            .when(base + 'geo/create-geo', {
+                title: 'Create a new Geo map',
+                templateUrl: 'static/html/geo-file-manager/create-geo.html',
+                controller: 'createNewGeoMapController'
+            })
             .otherwise({
                 templateUrl: 'static/html/usermanagement/login/login.view.html',
                 redirectTo: base + 'login'
