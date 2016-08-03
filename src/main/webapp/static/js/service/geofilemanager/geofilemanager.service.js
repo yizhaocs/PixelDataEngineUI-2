@@ -35,9 +35,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 })
 
                 .success(function () {
+                    alert("Table appended successfully");
                 })
 
                 .error(function () {
+                    alert("Table appended failed");
                 });
         };
 
@@ -51,9 +53,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 })
 
                 .success(function () {
+                    alert("Table overrided successfully");
                 })
 
                 .error(function () {
+                    alert("Table overrided failed");
                 });
         };
 
