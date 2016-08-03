@@ -27,6 +27,22 @@ public class GeoFileManagerController {
     @Autowired
     GeoFileManagerService mGeoFileManagerService;
 
+    @RequestMapping(method = RequestMethod.POST, value = "/createPixelDataEngineMap")
+    public ResponseEntity<ResponseDTO> createPixelDataEngineMap(@RequestParam("mapname") String mapName) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
+
+        try {
+            retval = mGeoFileManagerService.createPixelDataEngineMap(mapName);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.createPixelDataEngineMap] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
     @RequestMapping(value = "/getPixelDataEngineMaps", method = RequestMethod.GET)
     public ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> getPixelDataEngineMaps() {
         ResponseEntity<GenericDTOList<PixelDataEngineMapsDTO>> response = null;
@@ -52,18 +68,11 @@ public class GeoFileManagerController {
     public ResponseEntity<ResponseDTO> appendTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table
     ) {
         ResponseEntity<ResponseDTO> response = null;
-        ResponseDTO retval = new ResponseDTO();
-
-        String x = table;
-        System.out.println(x);
+        ResponseDTO retval = null;
 
         if (!file.isEmpty()) {
             try {
-                mGeoFileManagerService.append(file, table);
-                //inputStreamToFile(file);
-//                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
-//                redirectAttributes.addFlashAttribute("message",
-//                        "You successfully uploaded " + file.getOriginalFilename() + "!");
+                retval = mGeoFileManagerService.append(file, table);
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             } catch (Exception e) {
                 LOG.error("[GeoFileManagerController.appendTable] Service error: " + e, e);
@@ -71,7 +80,6 @@ public class GeoFileManagerController {
             }
         } else {
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
-            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
         }
 
         return response;
@@ -81,15 +89,11 @@ public class GeoFileManagerController {
     public ResponseEntity<ResponseDTO> overrideTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table
     ) {
         ResponseEntity<ResponseDTO> response = null;
-        ResponseDTO retval = new ResponseDTO();
+        ResponseDTO retval = null;
 
         if (!file.isEmpty()) {
             try {
-                mGeoFileManagerService.override(file, table);
-                //inputStreamToFile(file);
-//                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
-//                redirectAttributes.addFlashAttribute("message",
-//                        "You successfully uploaded " + file.getOriginalFilename() + "!");
+                retval = mGeoFileManagerService.override(file, table);
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             } catch (Exception e) {
                 LOG.error("[GeoFileManagerController.overrideTable] Service error: " + e, e);
@@ -97,7 +101,6 @@ public class GeoFileManagerController {
             }
         } else {
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NO_CONTENT);
-            // redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
         }
 
         return response;
@@ -127,7 +130,4 @@ public class GeoFileManagerController {
 
         return response;
     }
-
-
-
 }

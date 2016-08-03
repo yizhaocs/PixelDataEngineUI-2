@@ -4,6 +4,7 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
+import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,45 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    public ResponseDTO createPixelDataEngineMap(String mapName) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "createPixelDataEngineMap" + "]";
+        ResponseEntity<ResponseDTO> response = null;
+        String tableName = "pde_map_" + mapName;
+        String query1 = "INSERT INTO pde.pixel_data_engine_maps(map_name, table_name) VALUES(?, ?)";
+        String query2 = "CREATE TABLE pde." + tableName + " (value varchar(255) , mapped_value varchar(255))";
+        String query3 = "SELECT * FROM pde." + tableName;
+        Object[] args = new Object[]{mapName, tableName};
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query1.toString());
+
+        /*
+        * Insert the relationship to the "pixel_data_engine_maps" table
+        * */
+        int retval1 = jdbcTemplate.update(query1, args);
+
+        /*
+        * Create a table for the new table
+        * */
+        jdbcTemplate.execute(query2);
+
+        /*
+        * Select * from the new table, and we should get 0 return
+        * */
+        List<Map<String, Object>> listMap = null;
+        listMap = jdbcTemplate.queryForList(query3);
+        ResponseDTO result = new ResponseDTO();
+        if(retval1 > 0 && listMap.size() == 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        return result;
     }
 
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
@@ -49,8 +89,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
         return result;
     }
-    public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
-        ResponseEntity<ResponseDTO> response = null;
+    public ResponseDTO append(MultipartFile file, String table) throws Exception {
         ResponseDTO retval = new ResponseDTO();
         String fileName = "/Users/yzhao/Desktop/output.csv";
 
@@ -63,11 +102,10 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         }
 
 
-        return response;
+        return retval;
     }
 
-    public ResponseEntity<ResponseDTO> override(MultipartFile file, String table) throws Exception {
-        ResponseEntity<ResponseDTO> response = null;
+    public ResponseDTO override(MultipartFile file, String table) throws Exception {
         ResponseDTO retval = new ResponseDTO();
         String fileName = "/Users/yzhao/Desktop/output.csv";
 
@@ -78,7 +116,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             appendFileWithoutOverride(jt, fileName, table);
         }
 
-        return response;
+        return retval;
     }
 
 

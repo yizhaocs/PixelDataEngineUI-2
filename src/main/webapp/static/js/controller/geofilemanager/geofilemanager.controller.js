@@ -38,12 +38,13 @@ app.controller('editNewGeoMapController', function ($scope, $rootScope, $locatio
     $scope.buttonText = (mapname > 0) ? 'Update Geo Map' : 'Add New Geo Map';
     $scope.isUpdate = (mapname > 0) ? true : false;
 
-    $scope.savePixelDataEngineMaps = function(frontendData){
+    $scope.createPixelDataEngineMap = function(map_name){
+        geoFileManagerService.createPixelDataEngineMap(map_name);
 
     };
 
-    $scope.deletePixelDataEngineMaps = function(frontendData){
-
+    $scope.deletePixelDataEngineMaps = function(map_name){
+        geoFileManagerService.deletePixelDataEngineMaps(map_name);
     };
 });
 

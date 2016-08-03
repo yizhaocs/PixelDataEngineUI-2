@@ -8,21 +8,34 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
     function geoFileManagerService($http, $location, $rootScope) {
         var service = {};
 
-        // data mapping services
         service.getPixelDataEngineMaps = getPixelDataEngineMaps;
         service.getPdeMap = getPdeMap;
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
+        service.createPixelDataEngineMap = createPixelDataEngineMap;
+        service.deletePixelDataEngineMap = deletePixelDataEngineMap;
 
+
+        function createPixelDataEngineMap(mapName) {
+            return $http.post($rootScope.base + 'createPixelDataEngineMap?mapname=' + mapName)
+                .success(function () {
+                    alert("New Geo Map Created Successfully");
+                })
+                .error(function () {
+                    alert("New Geo Map Created Failed");
+                });
+        };
+
+        function deletePixelDataEngineMap(mapName) {
+            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName);
+        };
 
         function getPixelDataEngineMaps() {
-            var body = $http.get($rootScope.base + 'getPixelDataEngineMaps');
-            return body;
+            return $http.get($rootScope.base + 'getPixelDataEngineMaps');
         };
 
         function getPdeMap(mapname) {
-            var body = $http.get($rootScope.base + 'getPdeMap?mapname=' + mapname);
-            return body;
+            return $http.get($rootScope.base + 'getPdeMap?mapname=' + mapname);
         };
 
         function appendTable(file, table) {
@@ -35,11 +48,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 })
 
                 .success(function () {
-                    alert("Table appended successfully");
+                    alert("Table Appended Successfully");
                 })
 
                 .error(function () {
-                    alert("Table appended failed");
+                    alert("Table Appended Failed");
                 });
         };
 

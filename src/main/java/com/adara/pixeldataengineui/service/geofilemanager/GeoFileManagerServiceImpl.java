@@ -6,7 +6,6 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,15 +19,19 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     @Autowired
     private GeoFileManagerDAOImpl mLocationDAOImpl;
 
+    public ResponseDTO createPixelDataEngineMap(String mapName) throws Exception{
+        return mLocationDAOImpl.createPixelDataEngineMap(mapName);
+    }
+
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
         return mLocationDAOImpl.getPixelDataEngineMaps();
     }
 
-    public ResponseEntity<ResponseDTO> append(MultipartFile file, String table) throws Exception {
+    public ResponseDTO append(MultipartFile file, String table) throws Exception {
         return mLocationDAOImpl.append(file, table);
     }
 
-    public ResponseEntity<ResponseDTO> override(MultipartFile file, String table) throws Exception {
+    public ResponseDTO override(MultipartFile file, String table) throws Exception {
         return mLocationDAOImpl.override(file, table);
     }
 
