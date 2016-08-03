@@ -43,8 +43,8 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
     }
 
 
-    $scope.createPixelDataEngineMap = function(map_name){
-        geoFileManagerService.createPixelDataEngineMap(map_name);
+    $scope.createPixelDataEngineMap = function(frontendData){
+        geoFileManagerService.createPixelDataEngineMap(frontendData);
 
     };
 

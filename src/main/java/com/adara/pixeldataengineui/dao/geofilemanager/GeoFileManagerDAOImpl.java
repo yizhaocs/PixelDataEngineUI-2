@@ -4,6 +4,7 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
+import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,13 +28,15 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         this.dataSource = dataSource;
     }
 
-    public ResponseDTO createPixelDataEngineMap(String mapName) throws Exception{
+    public ResponseDTO createPixelDataEngineMap(GeoMapCreationRequest request) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "createPixelDataEngineMap" + "]";
+        String mapName = request.getMapName();
+        String description = request.getDescription();
         String tableName = "pde_map_" + mapName;
-        String query1 = "INSERT INTO pde.pixel_data_engine_maps(map_name, table_name) VALUES(?, ?)";
+        String query1 = "INSERT INTO pde.pixel_data_engine_maps(map_name, table_name, description) VALUES(?, ?, ?)";
         String query2 = "CREATE TABLE pde." + tableName + " (value varchar(255) , mapped_value varchar(255))";
         String query3 = "SELECT * FROM pde." + tableName;
-        Object[] args = new Object[]{mapName, tableName};
+        Object[] args = new Object[]{mapName, tableName, description};
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query1.toString());
@@ -103,7 +106,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT a.map_name, a.table_name FROM pde.pixel_data_engine_maps a";
+        String query = "SELECT a.map_name, a.table_name, a.description FROM pde.pixel_data_engine_maps a";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -115,6 +118,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             PixelDataEngineMapsDTO mPixelDataEngineMapsDTO = new PixelDataEngineMapsDTO();
             mPixelDataEngineMapsDTO.setMap_name(String.valueOf(m.get("map_name")));
             mPixelDataEngineMapsDTO.setTable_name(String.valueOf(m.get("table_name")));
+            mPixelDataEngineMapsDTO.setDescription(String.valueOf((m.get("description"))));
             result.add(mPixelDataEngineMapsDTO);
         }
 

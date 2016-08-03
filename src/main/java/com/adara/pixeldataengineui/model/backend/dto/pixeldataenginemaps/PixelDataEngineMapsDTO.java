@@ -10,15 +10,17 @@ import java.io.Serializable;
 public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
     private String map_name;
     private String table_name;
+    private String description;
 
 
     public PixelDataEngineMapsDTO() {
 
     }
 
-    public PixelDataEngineMapsDTO(String map_name, String table_name) {
+    public PixelDataEngineMapsDTO(String map_name, String table_name, String description) {
         this.map_name = map_name;
         this.table_name = table_name;
+        this.description = description;
     }
 
     public String getMap_name() {
@@ -37,9 +39,17 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
         this.table_name = table_name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
-        return "PixelDataEngineMapsDTO [map_name=" + map_name + ", table_name=" + table_name
+        return "PixelDataEngineMapsDTO [map_name=" + map_name + ", table_name=" + table_name + ", description=" + description
                 + "]";
     }
 
@@ -49,6 +59,7 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
         int result = super.hashCode();
         result = prime * result + ((map_name == null) ? 0 : map_name.hashCode());
         result = prime * result + ((table_name == null) ? 0 : table_name.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
         return result;
     }
 
@@ -76,6 +87,14 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
                 return false;
             }
         } else if (!table_name.equals(other.table_name)) {
+            return false;
+        }
+
+        if (description == null) {
+            if (other.description != null) {
+                return false;
+            }
+        } else if (!description.equals(other.description)) {
             return false;
         }
 

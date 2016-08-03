@@ -16,8 +16,12 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.deletePixelDataEngineMap = deletePixelDataEngineMap;
 
 
-        function createPixelDataEngineMap(mapName) {
-            return $http.post($rootScope.base + 'createPixelDataEngineMap?mapname=' + mapName)
+        function createPixelDataEngineMap(frontendData) {
+            return $http.post($rootScope.base + 'createPixelDataEngineMap', {
+                    mapName:frontendData.map_name,
+                    description: frontendData.description
+
+            })
                 .success(function () {
                     alert("New Geo Map Created Successfully");
                 })

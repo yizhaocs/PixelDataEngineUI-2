@@ -5,6 +5,7 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
+import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +20,8 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     @Autowired
     private GeoFileManagerDAOImpl mLocationDAOImpl;
 
-    public ResponseDTO createPixelDataEngineMap(String mapName) throws Exception{
-        return mLocationDAOImpl.createPixelDataEngineMap(mapName);
+    public ResponseDTO createPixelDataEngineMap(GeoMapCreationRequest request) throws Exception{
+        return mLocationDAOImpl.createPixelDataEngineMap(request);
     }
 
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{

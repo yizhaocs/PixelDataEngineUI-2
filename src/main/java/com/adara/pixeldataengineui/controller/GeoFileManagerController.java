@@ -4,17 +4,16 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
+import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -28,13 +27,13 @@ public class GeoFileManagerController {
     @Autowired
     GeoFileManagerService mGeoFileManagerService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/createPixelDataEngineMap")
-    public ResponseEntity<ResponseDTO> createPixelDataEngineMap(@RequestParam("mapname") String mapName) {
+    @RequestMapping(method = RequestMethod.POST, value = "/createPixelDataEngineMap", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseDTO> createPixelDataEngineMap(@RequestBody GeoMapCreationRequest request) {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = null;
 
         try {
-            retval = mGeoFileManagerService.createPixelDataEngineMap(mapName);
+            retval = mGeoFileManagerService.createPixelDataEngineMap(request);
             if(retval.getMessage().equals(Constants.FAILURE)){
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
             }else{
