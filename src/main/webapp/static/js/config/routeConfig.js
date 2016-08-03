@@ -225,9 +225,9 @@ app.config(['$routeProvider', '$locationProvider',
                 //}
 
             })
-            .when(base + 'geo/create-geo', {
+            .when(base + 'geo/edit-geo/mapname=:mapname', {
                 title: 'Create a new Geo map',
-                templateUrl: 'static/html/geo-file-manager/create-geo.html',
+                templateUrl: 'static/html/geo-file-manager/edit-geo.html',
                 controller: 'createNewGeoMapController'
             })
             .otherwise({
