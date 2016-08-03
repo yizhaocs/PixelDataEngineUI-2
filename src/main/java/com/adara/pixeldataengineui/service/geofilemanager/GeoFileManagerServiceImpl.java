@@ -18,29 +18,33 @@ import org.springframework.web.multipart.MultipartFile;
 @Transactional
 public class GeoFileManagerServiceImpl implements GeoFileManagerService {
     @Autowired
-    private GeoFileManagerDAOImpl mLocationDAOImpl;
+    private GeoFileManagerDAOImpl mGeoFileManagerDAOImpl;
 
     public ResponseDTO createPixelDataEngineMap(GeoMapCreationRequest request) throws Exception{
-        return mLocationDAOImpl.createPixelDataEngineMap(request);
+        return mGeoFileManagerDAOImpl.createPixelDataEngineMap(request);
     }
 
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
-        return mLocationDAOImpl.deletePixelDataEngineMap(mapName);
+        return mGeoFileManagerDAOImpl.deletePixelDataEngineMap(mapName);
     }
 
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
-        return mLocationDAOImpl.getPixelDataEngineMaps();
+        return mGeoFileManagerDAOImpl.getPixelDataEngineMaps();
     }
 
     public ResponseDTO append(MultipartFile file, String table) throws Exception {
-        return mLocationDAOImpl.append(file, table);
+        return mGeoFileManagerDAOImpl.append(file, table);
     }
 
     public ResponseDTO override(MultipartFile file, String table) throws Exception {
-        return mLocationDAOImpl.override(file, table);
+        return mGeoFileManagerDAOImpl.override(file, table);
     }
 
     public GenericDTOList<PdeMapTableDTO> getPdeMap(String tableName) throws Exception{
-        return mLocationDAOImpl.getPdeMap(tableName);
+        return mGeoFileManagerDAOImpl.getPdeMap(tableName);
+    }
+
+    public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{
+        return mGeoFileManagerDAOImpl.getPixelDataEngineMap(tableName);
     }
 }

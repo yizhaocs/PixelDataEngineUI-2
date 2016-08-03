@@ -14,7 +14,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.overrideTable = overrideTable;
         service.createPixelDataEngineMap = createPixelDataEngineMap;
         service.deletePixelDataEngineMap = deletePixelDataEngineMap;
-
+        service.getPixelDataEngineMap = getPixelDataEngineMap;
 
         function createPixelDataEngineMap(redirectPath, frontendData) {
             return $http.post($rootScope.base + 'createPixelDataEngineMap', {
@@ -32,7 +32,8 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         };
 
         function deletePixelDataEngineMap(redirectPath, mapName) {
-            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName).success(function () {
+            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName)
+                .success(function () {
                     alert("Map Deleted Successfully");
                     $location.path(redirectPath);
                 })
@@ -43,6 +44,10 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
         function getPixelDataEngineMaps() {
             return $http.get($rootScope.base + 'getPixelDataEngineMaps');
+        };
+
+        function getPixelDataEngineMap(mapname) {
+            return $http.get($rootScope.base + 'getPixelDataEngineMap?mapname=' + mapname);
         };
 
         function getPdeMap(mapname) {

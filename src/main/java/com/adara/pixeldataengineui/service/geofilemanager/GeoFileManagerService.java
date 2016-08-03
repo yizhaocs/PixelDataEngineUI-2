@@ -22,4 +22,6 @@ public interface GeoFileManagerService {
     ResponseDTO override(MultipartFile file, String table) throws Exception;
 
     GenericDTOList<PdeMapTableDTO> getPdeMap(String tableName) throws Exception;
+
+    PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception;
 }

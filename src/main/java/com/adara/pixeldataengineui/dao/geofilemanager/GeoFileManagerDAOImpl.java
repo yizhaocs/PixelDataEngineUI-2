@@ -9,10 +9,13 @@ import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -189,6 +192,30 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result.toString());
+
+        return result;
+    }
+
+    public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "getPixelDataEngineMap" + "]";
+        String query = "SELECT a.map_name, a.table_name, a.description FROM pde.pixel_data_engine_maps a where a.map_name= ?";
+        LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        final PixelDataEngineMapsDTO result = new PixelDataEngineMapsDTO();
+        jdbcTemplate.queryForObject(query, new Object[]{tableName}, new RowMapper<PixelDataEngineMapsDTO>() {
+            @Override
+            public PixelDataEngineMapsDTO mapRow(ResultSet rs, int rowNum)
+                    throws SQLException {
+                result.setMap_name(rs.getString("map_name"));
+                result.setTable_name(rs.getString("table_name"));
+                result.setDescription(rs.getString("description"));
+                return result;
+            }
+        });
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
         return result;
     }

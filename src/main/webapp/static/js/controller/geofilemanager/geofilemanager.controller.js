@@ -32,16 +32,18 @@ app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope
 });
 
 
-app.controller('editGeoMapController', function ($scope, $rootScope, $location, $routeParams, geoFileManagerService) {
+app.controller('editGeoMapController', function ($scope, $rootScope, $location, $routeParams, geoFileManagerService, backendData) {
     var mapname = ($routeParams.mapname != 0) ? $routeParams.mapname : 0;
     $rootScope.title = (mapname != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
     $scope.buttonText = (mapname != 0) ? 'Update Geo Map' : 'Add New Geo Map';
     $scope.isUpdate = (mapname != 0) ? true : false;
-    if(mapname != 0){
-        $scope.frontendData = {map_name: ''};
-        $scope.frontendData.map_name = mapname;
-    }
+    //if(mapname != 0){
+    //    $scope.frontendData = {map_name: ''};
+    //    $scope.frontendData.map_name = mapname;
+    //}
 
+    //var mapInfo = geoFileManagerService.getPdeMap(mapname);
+    $scope.frontendData = backendData.data;
 
     $scope.createPixelDataEngineMap = function(frontendData){
         geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);

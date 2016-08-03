@@ -228,7 +228,13 @@ app.config(['$routeProvider', '$locationProvider',
             .when(base + 'geo/edit-geo/mapname=:mapname', {
 
                 templateUrl: 'static/html/geo-file-manager/edit-geo.html',
-                controller: 'editGeoMapController'
+                controller: 'editGeoMapController',
+                resolve: {
+                    backendData: function (geoFileManagerService, $route) {
+                        var mapname = $route.current.params.mapname;
+                        return geoFileManagerService.getPixelDataEngineMap(mapname);
+                    }
+                }
             })
             .otherwise({
                 templateUrl: 'static/html/usermanagement/login/login.view.html',

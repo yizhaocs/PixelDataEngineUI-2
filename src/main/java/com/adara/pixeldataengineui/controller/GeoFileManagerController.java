@@ -88,6 +88,27 @@ public class GeoFileManagerController {
         return response;
     }
 
+    @RequestMapping(value = "/getPixelDataEngineMap", method = RequestMethod.GET)
+    public ResponseEntity<PixelDataEngineMapsDTO> getPixelDataEngineMap(@RequestParam(value = "mapname", required = false) String mapName) {
+        ResponseEntity<PixelDataEngineMapsDTO> response = null;
+        PixelDataEngineMapsDTO retval = null;
+
+        if (mapName.equals("0") || mapName.equals("undefined")) {
+            response = new ResponseEntity<PixelDataEngineMapsDTO>(retval, HttpStatus.NO_CONTENT);
+            return response;
+        }
+        try {
+            retval = mGeoFileManagerService.getPixelDataEngineMap(mapName);
+
+                response = new ResponseEntity<PixelDataEngineMapsDTO>(retval, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.getPixelDataEngineMap] Service error: " + e, e);
+            response = new ResponseEntity<PixelDataEngineMapsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/appendTable")
     public ResponseEntity<ResponseDTO> appendTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table
