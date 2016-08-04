@@ -29,7 +29,9 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
     var action = ($routeParams.action != 0) ? $routeParams.action : 0;
     $rootScope.title = (mapName != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
     $scope.editMapButtonText = (mapName != 0) ? 'Update Geo Map' : 'Add New Geo Map';
-    if(action == 'export'){
+    if(action == 'edit' || action == 'create' || action == 'append') {
+        $scope.fileProcessButtonText = 'Append the Table'
+    }else if(action == 'export'){
         $scope.fileProcessButtonText = 'Export the Table'
     }else if(action == 'append'){
         $scope.fileProcessButtonText = 'Append the Table'

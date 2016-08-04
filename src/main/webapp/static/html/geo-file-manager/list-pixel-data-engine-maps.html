@@ -5,34 +5,35 @@
         <span><b>pixel_data_engine_maps</b></span><br><br>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-                <a class="btn btn-lg btn-success" href="geo/edit-geo/mapname=0&action=0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new geo map</a>
+                <a class="btn btn-lg btn-success" href="geo/edit-geo/mapname=0&action=create"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new geo map</a>
             </div>
         </nav>
         <hr>
 
-
         <table class="table table-striped table-bordered">
             <thead>
             <th>Map Name&nbsp;</th>
+            <th>Description&nbsp;</th>
             <th>Edit&nbsp;</th>
             <th>Contents&nbsp;</th>
-            <th>Export&nbsp;</th>
             <th>Append&nbsp;</th>
             <th>Override&nbsp;</th>
+            <th>Export&nbsp;</th>
             </thead>
             <tbody>
             <tr ng-repeat="data in frontendData">
                 <td>{{data.map_name}}</td>
+                <td>{{data.description}}</td>
                 <td><a href="geo/edit-geo/mapname={{data.map_name}}&action=edit" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Map</a></td>
                 <td><a href="geo/get-pde-map/tableName={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Show Contents</a></td>
-                <td>
-                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>
-                </td>
                 <td>
                     <a href="geo/edit-geo/mapname={{data.map_name}}&action=append" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Append the Table</a>
                 </td>
                 <td>
                     <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override the Table</a>
+                </td>
+                <td>
+                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>
                 </td>
             </tr>
             </tbody>
