@@ -20,7 +20,7 @@
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                         <label class="col-md-2"> Map Name </label>
                         <div class="col-md-2">
-                            <input name="map_name" ng-model="frontendData.map_name" type="text"  class="form-control" placeholder="map_name" required/>
+                            <input name="map_name" ng-model="frontendData.map_name" ng-disabled="mapNameDisable" type="text"  class="form-control" placeholder="map_name" required/>
                             <span ng-show="myForm.map_name.$dirty && myForm.map_name.$invalid" class="help-inline">Map Name Required</span>
                         </div>
                     </div>
