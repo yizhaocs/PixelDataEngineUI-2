@@ -5,19 +5,11 @@
         <span><b>pixel_data_engine_maps</b></span><br><br>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-                <a class="btn btn-lg btn-success" href="geo/edit-geo/mapname=0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new geo map</a>
+                <a class="btn btn-lg btn-success" href="geo/edit-geo/mapname=0&action=0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new geo map</a>
             </div>
         </nav>
         <hr>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="form-group">
-                <label class="col-md-2"> File Location </label>
-                <div class="col-md-4">
-                    <input type="file" file-model="myFile"/>
-                </div>
-            </div>
-        </nav>
-        <hr>
+
 
         <table class="table table-striped table-bordered">
             <thead>
@@ -31,16 +23,16 @@
             <tbody>
             <tr ng-repeat="data in frontendData">
                 <td>{{data.map_name}}</td>
-                <td><a href="geo/edit-geo/mapname={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Map</a></td>
+                <td><a href="geo/edit-geo/mapname={{data.map_name}}&action=edit" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Map</a></td>
                 <td><a href="geo/get-pde-map/tableName={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Show Contents</a></td>
                 <td>
-                    <button ng-click="exportTable(data.table_name)">Export the Table</button>
+                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>
                 </td>
                 <td>
-                    <button ng-click="appendTable(data.table_name)">Append the Table</button>
+                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=append" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Append the Table</a>
                 </td>
                 <td>
-                    <button ng-click="overrideTable(data.table_name)">Override the Table</button>
+                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override the Table</a>
                 </td>
             </tr>
             </tbody>

@@ -148,7 +148,12 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
-            appendFileWithoutOverride(jt, fileName, table);
+            try {
+                retval.setMessage(Constants.SUCCESS);
+                appendFileWithoutOverride(jt, fileName, table);
+            }catch (Exception e){
+                retval.setMessage(Constants.FAILURE);
+            }
             //       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
 //         "' INTO TABLE pde.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
 //            String query = "LOAD DATA LOCAL INFILE '" + fileName +
@@ -165,9 +170,15 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
 
-            truncateTable(jt, table);
-            appendFileWithoutOverride(jt, fileName, table);
+            try {
+                retval.setMessage(Constants.SUCCESS);
+                truncateTable(jt, table);
+                appendFileWithoutOverride(jt, fileName, table);
+            }catch (Exception e){
+                retval.setMessage(Constants.FAILURE);
+            }
         }
+
 
         return retval;
     }

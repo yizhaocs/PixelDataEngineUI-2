@@ -10,16 +10,7 @@ app.controller('listGeoMapsController', function ($routeParams, $rootScope, $sco
         $scope.frontendData = backendData.list;
     });
 
-    $scope.appendTable = function(tableName){
-        var file = $scope.myFile;
-        geoFileManagerService.appendTable(file,tableName);
-    };
 
-
-    $scope.overrideTable = function(tableName){
-        var file = $scope.myFile;
-        geoFileManagerService.overrideTable(file, tableName);
-    };
 });
 
 
@@ -33,11 +24,21 @@ app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope
 
 
 app.controller('editGeoMapController', function ($scope, $rootScope, $location, $routeParams, geoFileManagerService, backendData) {
-    var mapname = ($routeParams.mapname != 0) ? $routeParams.mapname : 0;
-    $rootScope.title = (mapname != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
-    $scope.buttonText = (mapname != 0) ? 'Update Geo Map' : 'Add New Geo Map';
-    $scope.isUpdate = (mapname != 0) ? true : false;
-    $scope.mapNameDisable = (mapname != 0) ? true : false;
+    var mapName = ($routeParams.mapname != 0) ? $routeParams.mapname : 0;
+    var tableName = 'pde_map_' + mapName;
+    var action = ($routeParams.action != 0) ? $routeParams.action : 0;
+    $rootScope.title = (mapName != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
+    $scope.editMapButtonText = (mapName != 0) ? 'Update Geo Map' : 'Add New Geo Map';
+    if(action == 'export'){
+        $scope.fileProcessButtonText = 'Export the Table'
+    }else if(action == 'append'){
+        $scope.fileProcessButtonText = 'Append the Table'
+    }else if(action == 'override'){
+        $scope.fileProcessButtonText = 'Override the Table'
+    }
+
+    $scope.isUpdate = (mapName != 0) ? true : false;
+    $scope.mapNameDisable = (mapName != 0) ? true : false;
     //if(mapname != 0){
     //    $scope.frontendData = {map_name: ''};
     //    $scope.frontendData.map_name = mapname;
@@ -53,6 +54,21 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
     $scope.deletePixelDataEngineMap = function(map_name){
         geoFileManagerService.deletePixelDataEngineMap($rootScope.base + 'geo-file-manager', map_name);
+    };
+
+
+    $scope.fileProcess = function(){
+
+        if(action == 'export'){
+
+        }else if(action == 'append'){
+            var file = $scope.myFile;
+            geoFileManagerService.appendTable(file,tableName);
+        }else if(action == 'override'){
+            var file = $scope.myFile;
+            geoFileManagerService.overrideTable(file, tableName);
+        }
+
     };
 });
 
