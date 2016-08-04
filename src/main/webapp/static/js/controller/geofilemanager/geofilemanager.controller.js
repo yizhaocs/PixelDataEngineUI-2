@@ -9,20 +9,22 @@ app.controller('listGeoMapsController', function ($routeParams, $rootScope, $sco
         $scope.frontendData = backendData.list;
     });
 
-    $scope.exportTable = function(mapName) {
+/*    $scope.exportTable = function(mapName) {
         $scope.filename = mapName + '.csv';
         geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
             $scope.getArray = backendData.list;
         });
-    }
+    }*/
 });
 
 
 app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
     var mapName = $routeParams.tableName;
     $rootScope.title = $routeParams.tableName;
+    $scope.filename = mapName + '.csv';
     geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
         $scope.frontendData = backendData.list;
+        $scope.getArray = backendData.list;
     });
 });
 
