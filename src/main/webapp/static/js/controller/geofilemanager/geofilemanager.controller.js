@@ -8,13 +8,6 @@ app.controller('listGeoMapsController', function ($routeParams, $rootScope, $sco
     geoFileManagerService.getPixelDataEngineMaps().success(function (backendData) {
         $scope.frontendData = backendData.list;
     });
-
-/*    $scope.exportTable = function(mapName) {
-        $scope.filename = mapName + '.csv';
-        geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
-            $scope.getArray = backendData.list;
-        });
-    }*/
 });
 
 
@@ -81,8 +74,6 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
         }
     };
 
-
-
     $scope.deletePixelDataEngineMap = function(map_name){
         geoFileManagerService.deletePixelDataEngineMap($rootScope.base + 'geo-file-manager', map_name);
     };
@@ -95,16 +86,6 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
             geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager',$scope.myFile, tableName);
         }
     };
-
-
-
-    /*$scope.getHeader = function(mapName,tableName){
-        $scope.filename = mapName + ".csv";
-        $scope.getArray = geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
-            var data = backendData.list;
-            return data;
-        });
-    }*/
 });
 
 
