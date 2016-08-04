@@ -5,6 +5,11 @@
 
 'use strict';
 
-var app = angular.module('myApp', ['ngRoute', 'ngCookies', 'ngMd5']);
+/**
+ * ngCookies is for login
+ * ngMd5 is for password encode
+ * ngSanitize and ngCsv are for geo map export
+ */
+var app = angular.module('myApp', ['ngRoute', 'ngCookies', 'ngMd5', 'ngSanitize','ngCsv']);
 
 

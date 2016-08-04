@@ -33,13 +33,14 @@
                     <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override the Table</a>
                 </td>
                 <td>
-                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>
+                    <button type="button" ng-csv="getArray" filename="test.csv">Export</button>
+                    <!--<a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>-->
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div class="col-md-12" ng-show="rules.length == 0">
+    <div class="col-md-12" ng-show="frontendData.length == 0">
         <div class="col-md-12">
             <h4>No geo map found</h4>
         </div>
