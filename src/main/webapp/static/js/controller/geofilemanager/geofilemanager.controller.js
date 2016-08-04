@@ -30,6 +30,7 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
    // $rootScope.title = (mapName != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
   //  $scope.editMapButtonText = (mapName != 0) ? 'Update Geo Map' : 'Add New Geo Map';
     if(action == 'create'){
+        $scope.showFileLocation = true;
         $scope.isCreate = true;
         $scope.isUpdate = false;
         $scope.isUpload = false;
@@ -38,6 +39,7 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
         $rootScope.title = 'Add New Geo Map';
         $scope.editMapButtonText = 'Add New Geo Map';
     } else if(action == 'edit') {
+        $scope.showFileLocation = false;
         $scope.isCreate = true;
         $scope.isUpdate = true;
         $scope.isUpload = false;
@@ -47,6 +49,7 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
         $rootScope.title = 'Edit Geo Map';
         $scope.fileProcessButtonText = 'Append the Table'
     }else if(action == 'append'){
+        $scope.showFileLocation = true;
         $scope.isUpdate = false;
         $scope.isUpload = true;
         $scope.disableDescription = true;
@@ -54,6 +57,7 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
         $rootScope.title = 'Append Geo Map';
         $scope.fileProcessButtonText = 'Append the Table'
     }else if(action == 'override'){
+        $scope.showFileLocation = true;
         $scope.isUpdate = false;
         $scope.isUpload = true;
         $scope.disableDescription = true;

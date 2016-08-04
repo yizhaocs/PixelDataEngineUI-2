@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                        <div class="form-group" ng-show="showFileLocation" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> File Location </label>
                             <div class="col-md-5">
                                 <input type="file" file-model="myFile"/>
