@@ -35,13 +35,17 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
                             .success(function () {
                                 alert("Table Appended Successfully");
+                                $location.path(redirectPath);
                             })
 
                             .error(function () {
                                 alert("Table Appended Failed");
+                                $location.path(redirectPath);
                             });
+                    }else{
+                        $location.path(redirectPath);
                     }
-                    $location.path(redirectPath);
+
                 })
 
                 .error(function () {
@@ -87,7 +91,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
             return $http.get($rootScope.base + 'getPdeMap?mapname=' + mapname);
         };
 
-        function appendTable(file, table) {
+        function appendTable(redirectPath, file, table) {
             var fd = new FormData();
             fd.append('file', file);
 
@@ -98,14 +102,16 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
                 .success(function () {
                     alert("Table Appended Successfully");
+                    $location.path(redirectPath);
                 })
 
                 .error(function () {
                     alert("Table Appended Failed");
+                    $location.path(redirectPath);
                 });
         };
 
-        function overrideTable(file, table) {
+        function overrideTable(redirectPath, file, table) {
             var fd = new FormData();
             fd.append('file', file);
 
@@ -116,11 +122,14 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
                 .success(function () {
                     alert("Table overrided successfully");
+                    $location.path(redirectPath);
                 })
 
                 .error(function () {
                     alert("Table overrided failed");
+                    $location.path(redirectPath);
                 });
+
         };
 
         return service;

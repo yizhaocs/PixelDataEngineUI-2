@@ -27,20 +27,43 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
     var mapName = ($routeParams.mapname != 0) ? $routeParams.mapname : 0;
     var tableName = 'pde_map_' + mapName;
     var action = ($routeParams.action != 0) ? $routeParams.action : 0;
-    $rootScope.title = (mapName != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
-    $scope.editMapButtonText = (mapName != 0) ? 'Update Geo Map' : 'Add New Geo Map';
-    if(action == 'edit' || action == 'create' || action == 'append') {
+   // $rootScope.title = (mapName != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
+  //  $scope.editMapButtonText = (mapName != 0) ? 'Update Geo Map' : 'Add New Geo Map';
+    if(action == 'create'){
+        $scope.isCreate = true;
+        $scope.isUpdate = false;
+        $scope.isUpload = false;
+        $scope.disableDescription = false;
+        $scope.mapNameDisable = false;
+        $rootScope.title = 'Add New Geo Map';
+        $scope.editMapButtonText = 'Add New Geo Map';
+    } else if(action == 'edit') {
+        $scope.isCreate = true;
+        $scope.isUpdate = true;
+        $scope.isUpload = false;
+        $scope.disableDescription = false;
+        $scope.editMapButtonText = 'Update Geo Map';
+        $scope.mapNameDisable = true;
+        $rootScope.title = 'Edit Geo Map';
         $scope.fileProcessButtonText = 'Append the Table'
-    }else if(action == 'export'){
-        $scope.fileProcessButtonText = 'Export the Table'
     }else if(action == 'append'){
+        $scope.isUpdate = false;
+        $scope.isUpload = true;
+        $scope.disableDescription = true;
+        $scope.mapNameDisable = true;
+        $rootScope.title = 'Append Geo Map';
         $scope.fileProcessButtonText = 'Append the Table'
     }else if(action == 'override'){
+        $scope.isUpdate = false;
+        $scope.isUpload = true;
+        $scope.disableDescription = true;
+        $scope.mapNameDisable = true;
+        $rootScope.title = 'Override Geo Map';
         $scope.fileProcessButtonText = 'Override the Table'
     }
 
-    $scope.isUpdate = (mapName != 0) ? true : false;
-    $scope.mapNameDisable = (mapName != 0) ? true : false;
+    //$scope.isUpdate = (mapName != 0) ? true : false;
+   // $scope.mapNameDisable = (mapName != 0) ? true : false;
     //if(mapname != 0){
     //    $scope.frontendData = {map_name: ''};
     //    $scope.frontendData.map_name = mapname;
@@ -71,10 +94,10 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
         }else if(action == 'append'){
             var file = $scope.myFile;
-            geoFileManagerService.appendTable(file,tableName);
+            geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager',file,tableName);
         }else if(action == 'override'){
             var file = $scope.myFile;
-            geoFileManagerService.overrideTable(file, tableName);
+            geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager',file, tableName);
         }
 
     };

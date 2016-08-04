@@ -36,27 +36,11 @@
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> Description </label>
                             <div class="col-md-5">
-                                <textarea rows="6" cols="80" ng-disabled=false class="form-control" ng-model="frontendData.description">  </textarea>
+                                <textarea rows="6" cols="80" ng-disabled="disableDescription" class="form-control" ng-model="frontendData.description">  </textarea>
 
                                 <!--<input type="text" class="form-control" ng-disabled=true class="form-control" ng-model="frontendRightHandPanelData.testResult">-->
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-md-2"></label>
-                            <div class="col-md-4">
-                                <a href="geo-file-manager" class="btn">Cancel</a>
-                                <button ng-click="savePixelDataEngineMap(frontendData);"
-                                        ng-disabled="isClean() || myForm.$invalid"
-                                        class="btn btn-primary">{{editMapButtonText}}
-                                </button>
-                                <button ng-click="deletePixelDataEngineMap(frontendData.map_name)"
-                                        ng-show="isUpdate" class="btn btn-warning">Delete
-                                </button>
-                            </div>
-                        </div>
-
-                        <hr>
 
                         <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                             <label class="col-md-2"> File Location </label>
@@ -68,13 +52,38 @@
                         <div class="form-group">
                             <label class="col-md-2"></label>
                             <div class="col-md-4">
+                                <a href="geo-file-manager" class="btn">Cancel</a>
+                                <button ng-click="savePixelDataEngineMap(frontendData);"
+                                        ng-disabled="isClean() || myForm.$invalid"
+                                        ng-show="isCreate"
+                                        class="btn btn-primary">{{editMapButtonText}}
+                                </button>
+                                <button ng-click="deletePixelDataEngineMap(frontendData.map_name)"
+                                        ng-show="isUpdate" class="btn btn-warning">Delete
+                                </button>
                                 <button ng-click="fileProcess();"
                                         ng-disabled="isClean() || myForm.$invalid"
+                                        ng-show="isUpload"
                                         class="btn btn-primary">{{fileProcessButtonText}}
                                 </button>
-
                             </div>
                         </div>
+
+
+
+
+
+
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-md-2"></label>-->
+                            <!--<div class="col-md-4">-->
+                                <!--<button ng-click="fileProcess();"-->
+                                        <!--ng-disabled="isClean() || myForm.$invalid"-->
+                                        <!--class="btn btn-primary">{{fileProcessButtonText}}-->
+                                <!--</button>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                 </form>
             </div>
