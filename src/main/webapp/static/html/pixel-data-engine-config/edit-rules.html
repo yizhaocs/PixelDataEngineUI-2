@@ -232,12 +232,20 @@
 
                                     <td class="rightColumnPadding">
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'">
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'" ng:repeat="len in frontendRightHandPanelData.lenRuleArray">
+                                                <tr>
+                                                    <td>
+                                                        <label> len_{{len.column1}}: </label>
+                                                        <input type="text" class="form-control" ng-model="len.column2">
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                            <tr>
+                                            <!--<tr>
                                                 <td>
                                                     <label> Sub Parse Rule: </label>
                                                     <select class="form-control" ng-model="frontendRightHandPanelData.conditionSubselect">
-                                                        <option disabled selected value> -- select an option --</option>
+                                                        <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
                                                         <option value="orig">orig</option>
                                                         <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split2'" value="split1">split1</option>
                                                         <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split1'" value="split2">split2</option>
@@ -287,7 +295,7 @@
                                                     <label> Range To: </label>
                                                     <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.rangeTo">
                                                 </td>
-                                            </tr>
+                                            </tr>-->
                                         </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='seg'">
