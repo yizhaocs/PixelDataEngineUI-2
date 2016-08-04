@@ -33,7 +33,8 @@
                     <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override the Table</a>
                 </td>
                 <td>
-                    <button type="button" ng-csv="getArray" filename="test.csv">Export</button>
+                    <!--<button type="button"  ng-csv="getArray" csv-header="exportTable(data.map_name, data.table_name)" filename="{{ filename }}">Export</button>-->
+                    <button type="button"  ng-click="exportTable(data.map_name);" ng-csv="getArray"  filename="{{ filename }}">Export</button>
                     <!--<a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>-->
                 </td>
             </tr>

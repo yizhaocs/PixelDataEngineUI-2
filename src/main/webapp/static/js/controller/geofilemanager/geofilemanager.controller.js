@@ -5,12 +5,16 @@
 'use strict';
 
 app.controller('listGeoMapsController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
-
     geoFileManagerService.getPixelDataEngineMaps().success(function (backendData) {
         $scope.frontendData = backendData.list;
     });
 
-
+    $scope.exportTable = function(mapName) {
+        $scope.filename = mapName + '.csv';
+        geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
+            $scope.getArray = backendData.list;
+        });
+    }
 });
 
 
@@ -27,8 +31,6 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
     var mapName = ($routeParams.mapname != 0) ? $routeParams.mapname : 0;
     var tableName = 'pde_map_' + mapName;
     var action = ($routeParams.action != 0) ? $routeParams.action : 0;
-   // $rootScope.title = (mapName != 0) ? 'Edit Geo Map' : 'Add New Geo Map';
-  //  $scope.editMapButtonText = (mapName != 0) ? 'Update Geo Map' : 'Add New Geo Map';
     if(action == 'create'){
         $scope.showFileLocation = true;
         $scope.isCreate = true;
@@ -66,14 +68,6 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
         $scope.fileProcessButtonText = 'Override the Table'
     }
 
-    //$scope.isUpdate = (mapName != 0) ? true : false;
-   // $scope.mapNameDisable = (mapName != 0) ? true : false;
-    //if(mapname != 0){
-    //    $scope.frontendData = {map_name: ''};
-    //    $scope.frontendData.map_name = mapname;
-    //}
-
-    //var mapInfo = geoFileManagerService.getPdeMap(mapname);
     $scope.frontendData = backendData.data;
 
     $scope.savePixelDataEngineMap = function(frontendData){
@@ -93,49 +87,24 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
 
     $scope.fileProcess = function(){
-
-        if(action == 'export'){
-
-        }else if(action == 'append'){
-            var file = $scope.myFile;
-            geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager',file,tableName);
+        if(action == 'append'){
+            geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager',$scope.myFile,tableName);
         }else if(action == 'override'){
-            var file = $scope.myFile;
-            geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager',file, tableName);
+            geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager',$scope.myFile, tableName);
         }
-
     };
+
+
+
+    /*$scope.getHeader = function(mapName,tableName){
+        $scope.filename = mapName + ".csv";
+        $scope.getArray = geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
+            var data = backendData.list;
+            return data;
+        });
+    }*/
 });
 
-
-/*
-
-app.controller('geoFileManagerController', ['$scope', 'geoFileManagerService', function($scope, geoFileManagerService){
-
-}]);
-
-*/
-/*
-
-app.directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
-        },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
-                }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-            });
-        }
-    }
-}]);
-*/
 
 app.directive('fileModel', ['$parse', function ($parse) {
     return {
@@ -153,57 +122,3 @@ app.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
-/*
-
-app.controller('geoFileManagerController', function ($scope, geoFileManagerService) {
-    $scope.save = function (csvFile) {
-        console.log("hahhaha:" + csvFile)
-        //var fileSplitedByLine = $scope.processData(csvFile);
-        geoFileManagerService.overrideTable(csvFile);
-    };
-
-
-    $scope.processData = function processData(csvFile) {
-        var allTextLines = csvFile.split(/\r\n|\n/);
-        var lines = [];
-        for (var i = 0; i < allTextLines.length; i++) {
-            var data = allTextLines[i].split(';');
-            var tarr = [];
-            for (var j = 0; j < data.length; j++) {
-                tarr.push(data[j]);
-            }
-            lines.push(tarr);
-        }
-
-        return lines;
-    };
-
-
-})
-
-app.directive('fileReader', function () {
-    return {
-        scope: {
-            fileReader: "="
-        },
-        link: function (scope, element) {
-            $(element).on('change', function (changeEvent) {
-                var files = changeEvent.target.files;
-                if (files.length) {
-                    var r = new FileReader();
-                    r.onload = function (e) {
-                        var contents = e.target.result;
-                        scope.$apply(function () {
-                            scope.fileReader = contents;
-                            //processData(contents);
-                        });
-                    };
-
-                    r.readAsText(files[0]);
-                }
-            });
-        }
-    };
-});
-
-*/
