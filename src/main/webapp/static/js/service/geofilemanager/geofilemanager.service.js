@@ -17,7 +17,9 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.updatePixelDataEngineMap = updatePixelDataEngineMap;
         service.getPixelDataEngineMap = getPixelDataEngineMap;
 
-        function createPixelDataEngineMap(redirectPath, frontendData) {
+        function createPixelDataEngineMap(redirectPath, file,  frontendData) {
+            var fd = new FormData();
+            fd.append('file', file);
             return $http.post($rootScope.base + 'createPixelDataEngineMap', {
                     mapName:frontendData.map_name,
                     description: frontendData.description
@@ -25,8 +27,23 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
             })
                 .success(function () {
                     alert("New Geo Map Created Successfully");
+                    if(file!= undefined){
+                        $http.post($rootScope.base + 'appendTable?table=' + "pde_map_" + frontendData.map_name, fd, {
+                                transformRequest: angular.identity,
+                                headers: {'Content-Type': undefined}
+                            })
+
+                            .success(function () {
+                                alert("Table Appended Successfully");
+                            })
+
+                            .error(function () {
+                                alert("Table Appended Failed");
+                            });
+                    }
                     $location.path(redirectPath);
                 })
+
                 .error(function () {
                     alert("New Geo Map Created Failed");
                 });

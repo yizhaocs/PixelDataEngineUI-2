@@ -51,7 +51,8 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
     $scope.savePixelDataEngineMap = function(frontendData){
         if($scope.editMapButtonText == 'Add New Geo Map'){
-            geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);
+            var file = $scope.myFile;
+            geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',file, frontendData);
         }else if($scope.editMapButtonText == 'Update Geo Map'){
             geoFileManagerService.updatePixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);
         }
