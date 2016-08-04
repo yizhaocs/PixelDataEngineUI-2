@@ -24,6 +24,10 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mGeoFileManagerDAOImpl.createPixelDataEngineMap(request);
     }
 
+    public ResponseDTO updatePixelDataEngineMap(GeoMapCreationRequest request) throws Exception{
+        return mGeoFileManagerDAOImpl.updatePixelDataEngineMap(request);
+    }
+
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
         return mGeoFileManagerDAOImpl.deletePixelDataEngineMap(mapName);
     }

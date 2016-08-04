@@ -49,10 +49,15 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
     //var mapInfo = geoFileManagerService.getPdeMap(mapname);
     $scope.frontendData = backendData.data;
 
-    $scope.createPixelDataEngineMap = function(frontendData){
-        geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);
-
+    $scope.savePixelDataEngineMap = function(frontendData){
+        if($scope.editMapButtonText == 'Add New Geo Map'){
+            geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);
+        }else if($scope.editMapButtonText == 'Update Geo Map'){
+            geoFileManagerService.updatePixelDataEngineMap($rootScope.base + 'geo-file-manager',frontendData);
+        }
     };
+
+
 
     $scope.deletePixelDataEngineMap = function(map_name){
         geoFileManagerService.deletePixelDataEngineMap($rootScope.base + 'geo-file-manager', map_name);

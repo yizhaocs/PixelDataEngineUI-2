@@ -47,6 +47,26 @@ public class GeoFileManagerController {
         return response;
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/updatePixelDataEngineMap", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseDTO> updatePixelDataEngineMap(@RequestBody GeoMapCreationRequest request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
+
+        try {
+            retval = mGeoFileManagerService.updatePixelDataEngineMap(request);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.updatePixelDataEngineMap] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/deletePixelDataEngineMap")
     public ResponseEntity<ResponseDTO> deletePixelDataEngineMap(@RequestParam("mapname") String mapName) {
         ResponseEntity<ResponseDTO> response = null;

@@ -82,6 +82,30 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         return result;
     }
 
+    public ResponseDTO updatePixelDataEngineMap(GeoMapCreationRequest request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updatePixelDataEngineMap" + "]";
+        String mapName = request.getMapName();
+        String description = request.getDescription();
+        String tableName = "pde_map_" + mapName;
+        String query = "UPDATE pde.pixel_data_engine_maps SET " + "description" + "=?" + " WHERE map_name=?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        Object[] args = new Object[]{description, mapName};
+        Integer retval = 0;
+        retval = jdbcTemplate.update(query, args);
+
+        ResponseDTO result = new ResponseDTO();
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        return result;
+    }
+
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         ResponseDTO result = result = new ResponseDTO();
