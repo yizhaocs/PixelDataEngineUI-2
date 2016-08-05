@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Created by yzhao on 7/21/16.
  */
@@ -44,11 +48,45 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mGeoFileManagerDAOImpl.override(file, table);
     }
 
-    public GenericDTOList<PdeMapTableDTO> getPdeMap(String tableName) throws Exception{
-        return mGeoFileManagerDAOImpl.getPdeMap(tableName);
+    public Boolean getPdeMap(String tableName) throws Exception{
+        GenericDTOList<PdeMapTableDTO> data = mGeoFileManagerDAOImpl.getPdeMap(tableName);
+        Boolean isDataWritingFinished = fileWriter(data);
+        return isDataWritingFinished;
     }
 
     public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{
         return mGeoFileManagerDAOImpl.getPixelDataEngineMap(tableName);
+    }
+
+
+    private boolean fileWriter(GenericDTOList<PdeMapTableDTO> data) throws Exception{
+        Boolean isDataWritingFinished = false;
+        FileWriter out = null;
+        try {
+            // When you're working with FileWriter you don't have to create the file first,
+            // you can simply start writing to it.
+            out = new FileWriter("/Users/yzhao/Desktop/output.csv");
+//            Collection<PdeMapTableDTO> result = data.list;
+//
+//            for(PdeMapTableDTO p: result){
+//                out.write(p.getValue() + "," + p.getMapped_value() + "\n");
+//            }
+            String x ="NYNYNYNY, NEW YORK" + "\n";
+            int i = 2000000;
+            while (i>0) {
+                out.write(x);
+                i--;
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Caught FileNotFoundException: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Caught IOException: " + e.getMessage());
+        } finally {
+            if (out != null) {
+                out.close();
+                isDataWritingFinished = true;
+            }
+        }
+        return isDataWritingFinished;
     }
 }

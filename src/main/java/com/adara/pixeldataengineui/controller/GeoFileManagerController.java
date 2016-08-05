@@ -2,7 +2,6 @@ package com.adara.pixeldataengineui.controller;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
@@ -15,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -180,6 +181,7 @@ public class GeoFileManagerController {
         return response;
     }
 
+/*
 
     @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
     public ResponseEntity<GenericDTOList<PdeMapTableDTO>> getPdeMap(@RequestParam(value = "mapname", required = false) String mapName) {
@@ -203,5 +205,25 @@ public class GeoFileManagerController {
         }
 
         return response;
+    }
+*/
+
+    @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
+    public void getFile(
+            @RequestParam(value = "mapname", required = false) String mapName,
+            HttpServletResponse response) {
+        try {
+
+            mGeoFileManagerService.getPdeMap(mapName);
+            System.out.println(123);
+            // get your file as InputStream
+//            InputStream is = new FileInputStream(new File("/Users/yzhao/Desktop/output.csv"));
+//            // copy it to response's OutputStream
+//            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+//            response.flushBuffer();
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+        }
+
     }
 }

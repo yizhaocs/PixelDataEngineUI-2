@@ -14,11 +14,16 @@ app.controller('listGeoMapsController', function ($routeParams, $rootScope, $sco
 app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
     var mapName = $routeParams.tableName;
     $rootScope.title = $routeParams.tableName;
-    $scope.filename = mapName + '.csv';
-    geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
-        $scope.frontendData = backendData.list;
-        $scope.getArray = backendData.list;
-    });
+    //$scope.getPdeMap =
+    //    geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
+    //    $scope.frontendData = backendData.list;
+    //    $scope.getArray = backendData.list;
+    //});
+
+
+    $scope.getPdeMap = function(){
+        geoFileManagerService.getPdeMap(mapName);
+    };
 });
 
 

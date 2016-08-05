@@ -88,13 +88,14 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 "column1": null,
                 "column2": null
             },
-            "len": {
-                "seg": null,
-                "row": null,
-                "column": null,
-                "rangeFrom": null,
-                "rangeTo": null
-            },
+            "lenRuleArray": [],
+            //"len": {
+            //    "seg": null,
+            //    "row": null,
+            //    "column": null,
+            //    "rangeFrom": null,
+            //    "rangeTo": null
+            //},
             "seg": {
                 "column1": null
             },
@@ -131,6 +132,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.frontendRightHandPanelData = angular.copy($scope.processedResponseBackupRuleData);
 
         // if no inElementArray || setRuleArray data from backend, then init them
+        if ($scope.frontendRightHandPanelData.lenRuleArray.length == 0) {
+            $scope.frontendRightHandPanelData.lenRuleArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+
         if ($scope.frontendRightHandPanelData.in.inElementArray.length == 0) {
             $scope.frontendRightHandPanelData.in.inElementArray = [{
                 column1: '0',
@@ -166,6 +174,18 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
      * functions
      * */
     // button fuctions
+    $scope.lenSetRule = function () {
+        $scope.frontendRightHandPanelData.lenRuleArray.push({
+            column1: $scope.frontendRightHandPanelData.lenRuleArray.length,
+            column2: ''
+        });
+
+    };
+
+    $scope.removeLenRule = function () {
+        $scope.frontendRightHandPanelData.lenRuleArray.pop();
+    };
+
     $scope.addSetRule = function () {
         $scope.frontendRightHandPanelData.setRuleArray.push({
             column1: $scope.frontendRightHandPanelData.setRuleArray.length,
@@ -242,7 +262,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.type,
                 frontendRightHandPanelData.split1,
                 frontendRightHandPanelData.split2,
-                frontendRightHandPanelData.len,
+                frontendRightHandPanelData.lenRuleArray,
                 frontendRightHandPanelData.seg,
                 frontendRightHandPanelData.contains,
                 frontendRightHandPanelData.range,
@@ -278,7 +298,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.type,
                 frontendRightHandPanelData.split1,
                 frontendRightHandPanelData.split2,
-                frontendRightHandPanelData.len,
+                frontendRightHandPanelData.lenRuleArray,
                 frontendRightHandPanelData.seg,
                 frontendRightHandPanelData.contains,
                 frontendRightHandPanelData.range,
@@ -323,7 +343,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.type,
             frontendRightHandPanelData.split1,
             frontendRightHandPanelData.split2,
-            frontendRightHandPanelData.len,
+            frontendRightHandPanelData.lenRuleArray,
             frontendRightHandPanelData.seg,
             frontendRightHandPanelData.contains,
             frontendRightHandPanelData.range,
@@ -542,6 +562,14 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             //----------------------------------------------------------------------------------------------------------------
 
             // if no inElementArray || setRuleArray data from backend, then init them
+
+            if ($scope.frontendRightHandPanelData.lenRuleArray.length == 0) {
+                $scope.frontendRightHandPanelData.lenRuleArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+            }
+
             if ($scope.frontendRightHandPanelData.in.inElementArray.length == 0) {
                 $scope.frontendRightHandPanelData.in.inElementArray = [{
                     column1: '0',
