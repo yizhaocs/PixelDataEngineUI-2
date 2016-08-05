@@ -88,30 +88,12 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 "column1": null,
                 "column2": null
             },
-            "lenRuleArray": [],
-            //"len": {
-            //    "seg": null,
-            //    "row": null,
-            //    "column": null,
-            //    "rangeFrom": null,
-            //    "rangeTo": null
-            //},
+            "lenArray": [],
             "seg": {
                 "column1": null
             },
-            "contains": {
-                "seg": null,
-                "row": null,
-                "column": null,
-                "charString": null
-            },
-            "range": {
-                "seg": null,
-                "row": null,
-                "column": null,
-                "rangeFrom": null,
-                "rangeTo": null
-            },
+            "containsArray": [],
+            "rangeArray": [],
             "substr": {
                 "column1": null,
                 "column2": null,
@@ -120,27 +102,36 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             "dec": {
                 "column1": null
             },
-            "in": {
-                "seg": null,
-                "row": null,
-                "column": null,
-                "inElementArray": []
-            },
+            "inArray": [],
             "setRuleArray": []
         };
 
         $scope.frontendRightHandPanelData = angular.copy($scope.processedResponseBackupRuleData);
 
-        // if no inElementArray || setRuleArray data from backend, then init them
-        if ($scope.frontendRightHandPanelData.lenRuleArray.length == 0) {
-            $scope.frontendRightHandPanelData.lenRuleArray = [{
+        // if no inArray || setRuleArray data from backend, then init them
+        if ($scope.frontendRightHandPanelData.lenArray.length == 0) {
+            $scope.frontendRightHandPanelData.lenArray = [{
                 column1: '0',
                 column2: ''
             }];
         }
 
-        if ($scope.frontendRightHandPanelData.in.inElementArray.length == 0) {
-            $scope.frontendRightHandPanelData.in.inElementArray = [{
+        if ($scope.frontendRightHandPanelData.rangeArray.length == 0) {
+            $scope.frontendRightHandPanelData.rangeArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+
+        if ($scope.frontendRightHandPanelData.containsArray.length == 0) {
+            $scope.frontendRightHandPanelData.containsArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+
+        if ($scope.frontendRightHandPanelData.inArray.length == 0) {
+            $scope.frontendRightHandPanelData.inArray = [{
                 column1: '0',
                 column2: ''
             }];
@@ -174,16 +165,40 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
      * functions
      * */
     // button fuctions
-    $scope.lenSetRule = function () {
-        $scope.frontendRightHandPanelData.lenRuleArray.push({
-            column1: $scope.frontendRightHandPanelData.lenRuleArray.length,
+    $scope.addLenRule = function () {
+        $scope.frontendRightHandPanelData.lenArray.push({
+            column1: $scope.frontendRightHandPanelData.lenArray.length,
             column2: ''
         });
 
     };
 
     $scope.removeLenRule = function () {
-        $scope.frontendRightHandPanelData.lenRuleArray.pop();
+        $scope.frontendRightHandPanelData.lenArray.pop();
+    };
+
+    $scope.addRangeRule = function () {
+        $scope.frontendRightHandPanelData.rangeArray.push({
+            column1: $scope.frontendRightHandPanelData.rangeArray.length,
+            column2: ''
+        });
+
+    };
+
+    $scope.removeRangeRule = function () {
+        $scope.frontendRightHandPanelData.rangeArray.pop();
+    };
+
+    $scope.addContainsRule = function () {
+        $scope.frontendRightHandPanelData.containsArray.push({
+            column1: $scope.frontendRightHandPanelData.containsArray.length,
+            column2: ''
+        });
+
+    };
+
+    $scope.removeContainsRule = function () {
+        $scope.frontendRightHandPanelData.containsArray.pop();
     };
 
     $scope.addSetRule = function () {
@@ -199,14 +214,14 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.addInElement = function () {
-        $scope.frontendRightHandPanelData.in.inElementArray.push({
-            column1: $scope.frontendRightHandPanelData.in.inElementArray.length,
+        $scope.frontendRightHandPanelData.inArray.push({
+            column1: $scope.frontendRightHandPanelData.inArray.length,
             column2: ''
         });
     };
 
     $scope.removeInElement = function () {
-        $scope.frontendRightHandPanelData.in.inElementArray.pop();
+        $scope.frontendRightHandPanelData.inArray.pop();
     };
 
 
@@ -262,13 +277,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.type,
                 frontendRightHandPanelData.split1,
                 frontendRightHandPanelData.split2,
-                frontendRightHandPanelData.lenRuleArray,
+                frontendRightHandPanelData.lenArray,
                 frontendRightHandPanelData.seg,
-                frontendRightHandPanelData.contains,
-                frontendRightHandPanelData.range,
+                frontendRightHandPanelData.containsArray,
+                frontendRightHandPanelData.rangeArray,
                 frontendRightHandPanelData.substr,
                 frontendRightHandPanelData.dec,
-                frontendRightHandPanelData.in,
+                frontendRightHandPanelData.inArray,
                 frontendRightHandPanelData.setRuleArray
             ).success(function (backendData) {
                 $scope.refreshLeftPanel();
@@ -298,13 +313,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.type,
                 frontendRightHandPanelData.split1,
                 frontendRightHandPanelData.split2,
-                frontendRightHandPanelData.lenRuleArray,
+                frontendRightHandPanelData.lenArray,
                 frontendRightHandPanelData.seg,
-                frontendRightHandPanelData.contains,
-                frontendRightHandPanelData.range,
+                frontendRightHandPanelData.containsArray,
+                frontendRightHandPanelData.rangeArray,
                 frontendRightHandPanelData.substr,
                 frontendRightHandPanelData.dec,
-                frontendRightHandPanelData.in,
+                frontendRightHandPanelData.inArray,
                 frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.leftPanelSelectedPriority = frontendRightHandPanelData.priority, // add this for fixing bug when updated the priority more than once
                     $scope.refreshLeftPanel();
@@ -343,13 +358,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.type,
             frontendRightHandPanelData.split1,
             frontendRightHandPanelData.split2,
-            frontendRightHandPanelData.lenRuleArray,
+            frontendRightHandPanelData.lenArray,
             frontendRightHandPanelData.seg,
-            frontendRightHandPanelData.contains,
-            frontendRightHandPanelData.range,
+            frontendRightHandPanelData.containsArray,
+            frontendRightHandPanelData.rangeArray,
             frontendRightHandPanelData.substr,
             frontendRightHandPanelData.dec,
-            frontendRightHandPanelData.in,
+            frontendRightHandPanelData.inArray,
             frontendRightHandPanelData.setRuleArray,
             frontendRightHandPanelData.testValue,
             frontendRightHandPanelData.testOption
@@ -468,7 +483,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                                 column1: i - 1,
                                 column2: conditionRuleSplit[i]
                             }
-                            $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
+                            $scope.processedResponseBackupRuleData.inArray.push(inObject);
                         }
                     } else if (conditionRuleSplit[1] == 'split1') {
                         $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
@@ -479,7 +494,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                                 column1: i - 3,
                                 column2: conditionRuleSplit[i]
                             }
-                            $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
+                            $scope.processedResponseBackupRuleData.inArray.push(inObject);
                         }
                     } else if (conditionRuleSplit[1] == 'split2') {
                         $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
@@ -492,7 +507,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                                 column1: i - 3,
                                 column2: conditionRuleSplit[i]
                             }
-                            $scope.processedResponseBackupRuleData.in.inElementArray.push(inObject);
+                            $scope.processedResponseBackupRuleData.inArray.push(inObject);
                         }
                     }
                 } else if (conditionRuleSplit[0] == 'seg') {
@@ -561,17 +576,31 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             //----------------------------------------------------------------------------------------------------------------
 
-            // if no inElementArray || setRuleArray data from backend, then init them
+            // if no inArray || setRuleArray data from backend, then init them
 
-            if ($scope.frontendRightHandPanelData.lenRuleArray.length == 0) {
-                $scope.frontendRightHandPanelData.lenRuleArray = [{
+            if ($scope.frontendRightHandPanelData.lenArray.length == 0) {
+                $scope.frontendRightHandPanelData.lenArray = [{
                     column1: '0',
                     column2: ''
                 }];
             }
 
-            if ($scope.frontendRightHandPanelData.in.inElementArray.length == 0) {
-                $scope.frontendRightHandPanelData.in.inElementArray = [{
+            if ($scope.frontendRightHandPanelData.rangeArray.length == 0) {
+                $scope.frontendRightHandPanelData.rangeArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+            }
+
+            if ($scope.frontendRightHandPanelData.containsArray.length == 0) {
+                $scope.frontendRightHandPanelData.containsArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+            }
+
+            if ($scope.frontendRightHandPanelData.inArray.length == 0) {
+                $scope.frontendRightHandPanelData.inArray = [{
                     column1: '0',
                     column2: ''
                 }];

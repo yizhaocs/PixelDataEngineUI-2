@@ -232,7 +232,7 @@
 
                                     <td class="rightColumnPadding">
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'" ng:repeat="len in frontendRightHandPanelData.lenRuleArray">
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'" ng:repeat="len in frontendRightHandPanelData.lenArray">
                                                 <tr>
                                                     <td>
                                                         <label> len_{{len.column1}}: </label>
@@ -241,62 +241,43 @@
                                                 </tr>
                                             </table>
 
-                                            <!--<tr>
-                                                <td>
-                                                    <label> Sub Parse Rule: </label>
-                                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionSubselect">
-                                                        <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
-                                                        <option value="orig">orig</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split2'" value="split1">split1</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split1'" value="split2">split2</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'">
+                                                <tr>
+                                                    <td>
+                                                        <label> </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" ng-click="addLenRule()">+</button>
+                                                        <button type="button" ng-click="removeLenRule()">-</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
-                                                <td>
-                                                    <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.seg">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.row">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.column">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <label> Range From: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.rangeFrom">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label> Range To: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.len.rangeTo">
-                                                </td>
-                                            </tr>-->
                                         </table>
+
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'">
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'" ng:repeat="range in frontendRightHandPanelData.rangeArray">
+                                                <tr>
+                                                    <td>
+                                                        <label> range_{{range.column1}}: </label>
+                                                        <input type="text" class="form-control" ng-model="range.column2">
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'">
+                                                <tr>
+                                                    <td>
+                                                        <label> </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" ng-click="addRangeRule()">+</button>
+                                                        <button type="button" ng-click="removeRangeRule()">-</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </table>
+
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='seg'">
                                             <tr>
@@ -308,174 +289,53 @@
                                         </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
-                                            <tr>
-                                                <td>
-                                                    <label> Sub Parse Rule: </label>
-                                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionSubselect">
-                                                        <option disabled selected value> -- select an option --</option>
-                                                        <option value="orig">orig</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split2'" value="split1">split1</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split1'" value="split2">split2</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'" ng:repeat="contains in frontendRightHandPanelData.containsArray">
+                                                <tr>
+                                                    <td>
+                                                        <label> contains_{{contains.column1}}: </label>
+                                                        <input type="text" class="form-control" ng-model="contains.column2">
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
-                                                <td>
-                                                    <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.seg">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.row">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.column">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label> Character/String: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.contains.charString">
-                                                </td>
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
+                                                <tr>
+                                                    <td>
+                                                        <label> </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" ng-click="addContainsRule()">+</button>
+                                                        <button type="button" ng-click="removeContainsRule()">-</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </table>
 
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'">
-                                            <tr>
-                                                <td>
-                                                    <label> Sub Parse Rule: </label>
-                                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionSubselect">
-                                                        <option disabled selected value> -- select an option --</option>
-                                                        <option value="orig">orig</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split2'" value="split1">split1</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split1'" value="split2">split2</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
-                                                <td>
-                                                    <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.seg">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.row">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.column">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label> Range From: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.rangeFrom">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label> Range To: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.range.rangeTo">
-                                                </td>
-                                            </tr>
-                                        </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'">
-                                            <tr>
-                                                <td>
-                                                    <label> Sub Parse Rule: </label>
-                                                    <select class="form-control" ng-model="frontendRightHandPanelData.conditionSubselect">
-                                                        <option disabled selected value> -- select an option --</option>
-                                                        <option value="orig">orig</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split2'" value="split1">split1</option>
-                                                        <option ng-disabled="frontendRightHandPanelData.parseRule=='orig' || frontendRightHandPanelData.parseRule=='split1'" value="split2">split2</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="range in frontendRightHandPanelData.inArray">
+                                                <tr>
+                                                    <td>
+                                                        <label> element_{{element.column1}}: </label>
+                                                        <input type="text" class="form-control" ng-model="element.column2">
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split1'">
-                                                <td>
-                                                    <label> Seg: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.in.seg">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Row: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.in.row">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'">
+                                                <tr>
+                                                    <td>
+                                                        <label> </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" ng-click="addInElement()">+</button>
+                                                        <button type="button" ng-click="removeInElement()">-</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </table>
 
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.in.inElementArray">
-                                            <tr ng-show="frontendRightHandPanelData.conditionSubselect=='split2'">
-                                                <td>
-                                                    <label> Column: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.in.column">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
 
-                                            <tr>
-                                                <td>
-                                                    <label> element_{{element.column1}}: </label>
-                                                    <input type="text" class="form-control" ng-model="element.column2">
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'">
-                                            <tr>
-                                                <td>
-                                                    <label> </label>
-                                                </td>
-                                                <td>
-                                                    <button type="button" ng-click="addInElement()">+</button>
-                                                    <button type="button" ng-click="removeInElement()">-</button>
-                                                </td>
-                                            </tr>
-                                        </table>
                                     </td>
                                 </tr>
                             </table>
