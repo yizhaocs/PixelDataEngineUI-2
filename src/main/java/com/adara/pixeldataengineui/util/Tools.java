@@ -124,29 +124,20 @@ public class Tools {
         String actionRuleKey = request.getActionRule();
         StringBuilder actionRuleValue = new StringBuilder();
         actionRuleValue.append(actionRuleKey);
-        String substrDirection = null;
-        String substrStartIndex = null;
-        String substrLength = null;
+
         List<SetRuleArray> setRuleArrayDTOList = null;
-        String dec;
+        List<SubstrArray> substrArray = null;
+        List<DecArray> decArray = null;
         if (actionRuleKey.equals("substr")) {
-            substrDirection = request.getSubstr().getColumn1();
-            substrStartIndex = request.getSubstr().getColumn2();
-            substrLength = request.getSubstr().getColumn3();
-            if(substrDirection !=null && substrDirection.equals("") == false){
-                actionRuleValue.append("|");
-                actionRuleValue.append(substrDirection);
+            substrArray = request.getSubstrArray();
+            actionRuleValue.append("|");
+            for (SubstrArray s : substrArray) {
+                if (s.getColumn2() != null && s.getColumn2().equals("") == false) {
+                    actionRuleValue.append(s.getColumn2());
+                    actionRuleValue.append("|");
+                }
             }
-
-            if(substrStartIndex != null && substrStartIndex.equals("") == false){
-                actionRuleValue.append("|");
-                actionRuleValue.append(substrStartIndex);
-            }
-
-            if(substrLength != null && substrLength.equals("") == false){
-                actionRuleValue.append("|");
-                actionRuleValue.append(substrLength);
-            }
+            actionRuleValue.deleteCharAt(actionRuleValue.length() - 1);
         } else if (actionRuleKey.equals("set")) {
             setRuleArrayDTOList = request.getSetRuleArray();
             actionRuleValue.append("|");
@@ -158,11 +149,15 @@ public class Tools {
             }
             actionRuleValue.deleteCharAt(actionRuleValue.length() - 1);
         } else if (actionRuleKey.equals("dec")) {
-            dec = request.getDec().toString();
-            if(dec != null && dec.equals("") == false){
-                actionRuleValue.append("|");
-                actionRuleValue.append(dec);
+            decArray = request.getDecArray();
+            actionRuleValue.append("|");
+            for (DecArray s : decArray) {
+                if (s.getColumn2() != null && s.getColumn2().equals("") == false) {
+                    actionRuleValue.append(s.getColumn2());
+                    actionRuleValue.append("|");
+                }
             }
+            actionRuleValue.deleteCharAt(actionRuleValue.length() - 1);
         }
         return actionRuleValue.toString();
     }

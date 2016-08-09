@@ -93,14 +93,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             },
             "containsArray": [],
             "rangeArray": [],
-            "substr": {
-                "column1": null,
-                "column2": null,
-                "column3": null
-            },
-            "dec": {
-                "column1": null
-            },
+            "substrArray": [],
+            "decArray": [],
             "inArray": [],
             "setRuleArray": []
         };
@@ -138,6 +132,20 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
         if ($scope.frontendRightHandPanelData.setRuleArray.length == 0) {
             $scope.frontendRightHandPanelData.setRuleArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+
+        if ($scope.frontendRightHandPanelData.substrArray.length == 0) {
+            $scope.frontendRightHandPanelData.substrArray = [{
+                column1: '0',
+                column2: ''
+            }];
+        }
+
+        if ($scope.frontendRightHandPanelData.decArray.length == 0) {
+            $scope.frontendRightHandPanelData.decArray = [{
                 column1: '0',
                 column2: ''
             }];
@@ -224,6 +232,29 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
 
+    $scope.addSubstr = function () {
+        $scope.frontendRightHandPanelData.substrArray.push({
+            column1: $scope.frontendRightHandPanelData.substrArray.length,
+            column2: ''
+        });
+    };
+
+    $scope.removeSubstr = function () {
+        $scope.frontendRightHandPanelData.substrArray.pop();
+    };
+
+    $scope.addDec = function () {
+        $scope.frontendRightHandPanelData.decArray.push({
+            column1: $scope.frontendRightHandPanelData.decArray.length,
+            column2: ''
+        });
+    };
+
+    $scope.removeDecElement = function () {
+        $scope.frontendRightHandPanelData.decArray.pop();
+    };
+
+
     $scope.isClean = function () {
         return angular.equals(frontendRightHandPanelDataForClean, $scope.frontendRightHandPanelData);
     }
@@ -279,8 +310,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.seg,
                 frontendRightHandPanelData.containsArray,
                 frontendRightHandPanelData.rangeArray,
-                frontendRightHandPanelData.substr,
-                frontendRightHandPanelData.dec,
+                frontendRightHandPanelData.substrArray,
+                frontendRightHandPanelData.decArray,
                 frontendRightHandPanelData.inArray,
                 frontendRightHandPanelData.setRuleArray
             ).success(function (backendData) {
@@ -314,8 +345,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.seg,
                 frontendRightHandPanelData.containsArray,
                 frontendRightHandPanelData.rangeArray,
-                frontendRightHandPanelData.substr,
-                frontendRightHandPanelData.dec,
+                frontendRightHandPanelData.substrArray,
+                frontendRightHandPanelData.decArray,
                 frontendRightHandPanelData.inArray,
                 frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.leftPanelSelectedPriority = frontendRightHandPanelData.priority, // add this for fixing bug when updated the priority more than once
@@ -358,8 +389,8 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.seg,
             frontendRightHandPanelData.containsArray,
             frontendRightHandPanelData.rangeArray,
-            frontendRightHandPanelData.substr,
-            frontendRightHandPanelData.dec,
+            frontendRightHandPanelData.substrArray,
+            frontendRightHandPanelData.decArray,
             frontendRightHandPanelData.inArray,
             frontendRightHandPanelData.setRuleArray,
             frontendRightHandPanelData.testValue,
@@ -482,9 +513,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 var actionRuleSplit = backendData.action_rule.split("|");
                 $scope.processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
                 if (actionRuleSplit[0] == 'substr') {
-                    $scope.processedResponseBackupRuleData.substr.column1 = actionRuleSplit[1];
-                    $scope.processedResponseBackupRuleData.substr.column2 = actionRuleSplit[2];
-                    $scope.processedResponseBackupRuleData.substr.column3 = actionRuleSplit[3];
+                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                        var inObject = {
+                            column1: i - 1,
+                            column2: conditionRuleSplit[i]
+                        }
+                        $scope.processedResponseBackupRuleData.substrArray.push(inObject);
+                    }
                 } else if (actionRuleSplit[0] == 'set') {
                     for (var i = 1; i < actionRuleSplit.length; i++) {
                         var setObject = {
@@ -494,7 +529,13 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                         $scope.processedResponseBackupRuleData.setRuleArray.push(setObject);
                     }
                 } else if (actionRuleSplit[0] == 'dec') {
-                    $scope.processedResponseBackupRuleData.dec.column1 = actionRuleSplit[1];
+                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                        var inObject = {
+                            column1: i - 1,
+                            column2: conditionRuleSplit[i]
+                        }
+                        $scope.processedResponseBackupRuleData.decArray.push(inObject);
+                    }
                 }
             }
 
@@ -547,6 +588,20 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             if ($scope.frontendRightHandPanelData.setRuleArray.length == 0) {
                 $scope.frontendRightHandPanelData.setRuleArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+            }
+
+            if ($scope.frontendRightHandPanelData.substrArray.length == 0) {
+                $scope.frontendRightHandPanelData.substrArray = [{
+                    column1: '0',
+                    column2: ''
+                }];
+            }
+
+            if ($scope.frontendRightHandPanelData.decArray.length == 0) {
+                $scope.frontendRightHandPanelData.decArray = [{
                     column1: '0',
                     column2: ''
                 }];
