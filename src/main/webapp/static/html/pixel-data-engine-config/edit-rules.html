@@ -365,29 +365,28 @@
                                     </td>
 
                                     <td class="rightColumnPadding">
+
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
-                                            <tr>
-                                                <td>
-                                                    <label> Direction: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column1">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label> Start Index: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column2">
-                                                </td>
-                                            </tr>
-                                            <tr height="5px">
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label> Length: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.substr.column3">
-                                                </td>
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'" ng:repeat="substr in frontendRightHandPanelData.substrArray">
+                                                <tr>
+                                                    <td>
+                                                        <label> substr_{{substr.column1}}: </label>
+                                                        <input type="text" class="form-control" ng-model="substr.column2">
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
+                                                <tr>
+                                                    <td>
+                                                        <label> </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" ng-click="addSubstr()">+</button>
+                                                        <button type="button" ng-click="removeSubstr()">-</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </table>
 
 
@@ -413,13 +412,28 @@
                                         </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'">
-                                            <tr>
-                                                <td>
-                                                    <label> Number of Decimals: </label>
-                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.dec.column1">
-                                                </td>
-                                            </tr>
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'" ng:repeat="dec in frontendRightHandPanelData.decArray">
+                                                <tr>
+                                                    <td>
+                                                        <label> dec_{{dec.column1}}: </label>
+                                                        <input type="text" class="form-control" ng-model="dec.column2">
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'">
+                                                <tr>
+                                                    <td>
+                                                        <label> </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" ng-click="addDec()">+</button>
+                                                        <button type="button" ng-click="removeDecElement()">-</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </table>
+
                                     </td>
                                 </tr>
                             </table>

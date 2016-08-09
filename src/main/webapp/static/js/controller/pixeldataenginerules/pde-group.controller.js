@@ -513,10 +513,10 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 var actionRuleSplit = backendData.action_rule.split("|");
                 $scope.processedResponseBackupRuleData.actionRule = actionRuleSplit[0];
                 if (actionRuleSplit[0] == 'substr') {
-                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                    for (var i = 1; i < actionRuleSplit.length; i++) {
                         var inObject = {
                             column1: i - 1,
-                            column2: conditionRuleSplit[i]
+                            column2: actionRuleSplit[i]
                         }
                         $scope.processedResponseBackupRuleData.substrArray.push(inObject);
                     }
@@ -529,10 +529,10 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                         $scope.processedResponseBackupRuleData.setRuleArray.push(setObject);
                     }
                 } else if (actionRuleSplit[0] == 'dec') {
-                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                    for (var i = 1; i < actionRuleSplit.length; i++) {
                         var inObject = {
                             column1: i - 1,
-                            column2: conditionRuleSplit[i]
+                            column2: actionRuleSplit[i]
                         }
                         $scope.processedResponseBackupRuleData.decArray.push(inObject);
                     }
