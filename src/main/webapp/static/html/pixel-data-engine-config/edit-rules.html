@@ -231,54 +231,52 @@
                                     </td>
 
                                     <td class="rightColumnPadding">
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'" ng:repeat="len in frontendRightHandPanelData.lenArray">
+                                            <tr>
+                                                <td>
+                                                    <label> len_{{len.column1}}: </label>
+                                                    <input type="text" class="form-control" ng-model="len.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
+
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'" ng:repeat="len in frontendRightHandPanelData.lenArray">
-                                                <tr>
-                                                    <td>
-                                                        <label> len_{{len.column1}}: </label>
-                                                        <input type="text" class="form-control" ng-model="len.column2">
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                            <tr>
+                                                <td>
+                                                    <label> </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addLenRule()">+</button>
+                                                    <button type="button" ng-click="removeLenRule()">-</button>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='len'">
-                                                <tr>
-                                                    <td>
-                                                        <label> </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" ng-click="addLenRule()">+</button>
-                                                        <button type="button" ng-click="removeLenRule()">-</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
+                                    </td>
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'" ng:repeat="range in frontendRightHandPanelData.rangeArray">
+                                            <tr>
+                                                <td>
+                                                    <label> range_{{range.column1}}: </label>
+                                                    <input type="text" class="form-control" ng-model="range.column2">
+                                                </td>
+                                            </tr>
                                         </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'" ng:repeat="range in frontendRightHandPanelData.rangeArray">
-                                                <tr>
-                                                    <td>
-                                                        <label> range_{{range.column1}}: </label>
-                                                        <input type="text" class="form-control" ng-model="range.column2">
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='range'">
-                                                <tr>
-                                                    <td>
-                                                        <label> </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" ng-click="addRangeRule()">+</button>
-                                                        <button type="button" ng-click="removeRangeRule()">-</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                            <tr>
+                                                <td>
+                                                    <label> </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addRangeRule()">+</button>
+                                                    <button type="button" ng-click="removeRangeRule()">-</button>
+                                                </td>
+                                            </tr>
                                         </table>
-
-
+                                    </td>
+                                    <td>
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='seg'">
                                             <tr>
                                                 <td>
@@ -287,55 +285,52 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                    </td>
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'" ng:repeat="contains in frontendRightHandPanelData.containsArray">
+                                            <tr>
+                                                <td>
+                                                    <label> contains_{{contains.column1}}: </label>
+                                                    <input type="text" class="form-control" ng-model="contains.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'" ng:repeat="contains in frontendRightHandPanelData.containsArray">
-                                                <tr>
-                                                    <td>
-                                                        <label> contains_{{contains.column1}}: </label>
-                                                        <input type="text" class="form-control" ng-model="contains.column2">
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='contains'">
-                                                <tr>
-                                                    <td>
-                                                        <label> </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" ng-click="addContainsRule()">+</button>
-                                                        <button type="button" ng-click="removeContainsRule()">-</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                            <tr>
+                                                <td>
+                                                    <label> </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addContainsRule()">+</button>
+                                                    <button type="button" ng-click="removeContainsRule()">-</button>
+                                                </td>
+                                            </tr>
                                         </table>
-
+                                    </td>
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inArray">
+                                            <tr>
+                                                <td>
+                                                    <label> element_{{element.column1}}: </label>
+                                                    <input type="text" class="form-control" ng-model="element.column2">
+                                                </td>
+                                            </tr>
+                                        </table>
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'" ng:repeat="element in frontendRightHandPanelData.inArray">
-                                                <tr>
-                                                    <td>
-                                                        <label> element_{{element.column1}}: </label>
-                                                        <input type="text" class="form-control" ng-model="element.column2">
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.conditionRule=='in'">
-                                                <tr>
-                                                    <td>
-                                                        <label> </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" ng-click="addInElement()">+</button>
-                                                        <button type="button" ng-click="removeInElement()">-</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                            <tr>
+                                                <td>
+                                                    <label> </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addInElement()">+</button>
+                                                    <button type="button" ng-click="removeInElement()">-</button>
+                                                </td>
+                                            </tr>
                                         </table>
 
-
+                                    </td>
                                     </td>
                                 </tr>
                             </table>
@@ -366,30 +361,30 @@
 
                                     <td class="rightColumnPadding">
 
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'" ng:repeat="substr in frontendRightHandPanelData.substrArray">
-                                                <tr>
-                                                    <td>
-                                                        <label> substr_{{substr.column1}}: </label>
-                                                        <input type="text" class="form-control" ng-model="substr.column2">
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
-                                                <tr>
-                                                    <td>
-                                                        <label> </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" ng-click="addSubstr()">+</button>
-                                                        <button type="button" ng-click="removeSubstr()">-</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'" ng:repeat="substr in frontendRightHandPanelData.substrArray">
+                                            <tr>
+                                                <td>
+                                                    <label> substr_{{substr.column1}}: </label>
+                                                    <input type="text" class="form-control" ng-model="substr.column2">
+                                                </td>
+                                            </tr>
                                         </table>
 
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
+                                            <tr>
+                                                <td>
+                                                    <label> </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addSubstr()">+</button>
+                                                    <button type="button" ng-click="removeSubstr()">-</button>
+                                                </td>
+                                            </tr>
+                                        </table>
 
+                                    </td>
+                                    <td>
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='set'" ng:repeat="set in frontendRightHandPanelData.setRuleArray">
                                             <tr>
                                                 <td>
@@ -410,30 +405,29 @@
                                                 </td>
                                             </tr>
                                         </table>
-
-                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'">
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'" ng:repeat="dec in frontendRightHandPanelData.decArray">
-                                                <tr>
-                                                    <td>
-                                                        <label> dec_{{dec.column1}}: </label>
-                                                        <input type="text" class="form-control" ng-model="dec.column2">
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'">
-                                                <tr>
-                                                    <td>
-                                                        <label> </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" ng-click="addDec()">+</button>
-                                                        <button type="button" ng-click="removeDecElement()">-</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                    </td>
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'" ng:repeat="dec in frontendRightHandPanelData.decArray">
+                                            <tr>
+                                                <td>
+                                                    <label> dec_{{dec.column1}}: </label>
+                                                    <input type="text" class="form-control" ng-model="dec.column2">
+                                                </td>
+                                            </tr>
                                         </table>
 
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'">
+                                            <tr>
+                                                <td>
+                                                    <label> </label>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="addDec()">+</button>
+                                                    <button type="button" ng-click="removeDecElement()">-</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                     </td>
                                 </tr>
                             </table>
