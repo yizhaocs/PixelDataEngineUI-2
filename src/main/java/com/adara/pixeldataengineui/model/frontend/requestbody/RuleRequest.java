@@ -10,7 +10,6 @@ import java.util.List;
 public class RuleRequest {
     private String parseRule;
     private String conditionRule;
-    private String conditionSubselect;
     private String actionRule;
     private String gid;
     private String keyId;
@@ -19,26 +18,24 @@ public class RuleRequest {
     private String type;
     private Split1 split1;
     private Split2 split2;
-    private Len len;
+    private List<LenArray> lenArray;
     private Seg seg;
-    private Contains contains;
-    private Range range;
+    private List<ContainsArray> containsArray;
+    private List<RangeArray> rangeArray;
     private Substr substr;
     private Dec dec;
     private String testValue;
     private String testOption;
-    private In in;
-    //    private List<InElementArray> inElementArray;
+    private List<InElementArray> inElementArray;
     private List<SetRuleArray> setRuleArray;
 
     public RuleRequest() {
 
     }
 
-    public RuleRequest(String parseRule, String conditionRule, String conditionSubselect, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, Len len, Seg seg, Contains contains, Range range, Substr substr, Dec dec, String testValue, String testOption, In in) {
+    public RuleRequest(String parseRule, String conditionRule, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, List<LenArray> lenArray,Seg seg, List<ContainsArray> containsArray, List<RangeArray> rangeArray, Substr substr, Dec dec, String testValue, String testOption, List<InElementArray> inElementArray, List<SetRuleArray> setRuleArray) {
         this.parseRule = parseRule;
         this.conditionRule = conditionRule;
-        this.conditionSubselect = conditionSubselect;
         this.actionRule = actionRule;
         this.gid = gid;
         this.keyId = keyId;
@@ -47,15 +44,16 @@ public class RuleRequest {
         this.type = type;
         this.split1 = split1;
         this.split2 = split2;
-        this.len = len;
+        this.lenArray = lenArray;
         this.seg = seg;
-        this.contains = contains;
-        this.range = range;
+        this.containsArray = containsArray;
+        this.rangeArray = rangeArray;
         this.substr = substr;
         this.dec = dec;
         this.testValue = testValue;
         this.testOption = testOption;
-        this.in = in;
+        this.inElementArray = inElementArray;
+        this.setRuleArray = setRuleArray;
     }
 
     public String getParseRule() {
@@ -80,14 +78,6 @@ public class RuleRequest {
 
     public void setConditionRule(String conditionRule) {
         this.conditionRule = conditionRule;
-    }
-
-    public String getConditionSubselect() {
-        return conditionSubselect;
-    }
-
-    public void setConditionSubselect(String conditionSubselect) {
-        this.conditionSubselect = conditionSubselect;
     }
 
     public String getGid() {
@@ -130,21 +120,13 @@ public class RuleRequest {
         this.type = type;
     }
 
-    public In getIn() {
-        return in;
+    public List<InElementArray> getInElementArray() {
+        return inElementArray;
     }
 
-    public void setIn(In in) {
-        this.in = in;
+    public void setInElementArray(List<InElementArray> inElementArray) {
+        this.inElementArray = inElementArray;
     }
-
-    //    public List<InElementArray> getInElementArray() {
-//        return inElementArray;
-//    }
-//
-//    public void setInElementArray(List<InElementArray> inElementArray) {
-//        this.inElementArray = inElementArray;
-//    }
 
     public Split1 getSplit1() {
         return split1;
@@ -162,12 +144,12 @@ public class RuleRequest {
         this.split2 = split2;
     }
 
-    public Len getLen() {
-        return len;
+    public List<LenArray> getLenArray() {
+        return lenArray;
     }
 
-    public void setLen(Len len) {
-        this.len = len;
+    public void setLenArray(List<LenArray> lenArray) {
+        this.lenArray = lenArray;
     }
 
     public Seg getSeg() {
@@ -178,20 +160,20 @@ public class RuleRequest {
         this.seg = seg;
     }
 
-    public Contains getContains() {
-        return contains;
+    public List<ContainsArray> getContainsArray() {
+        return containsArray;
     }
 
-    public void setContains(Contains contains) {
-        this.contains = contains;
+    public void setContainsArray(List<ContainsArray> containsArray) {
+        this.containsArray = containsArray;
     }
 
-    public Range getRange() {
-        return range;
+    public List<RangeArray> getRangeArray() {
+        return rangeArray;
     }
 
-    public void setRange(Range range) {
-        this.range = range;
+    public void setRangeArray(List<RangeArray> rangeArray) {
+        this.rangeArray = rangeArray;
     }
 
     public Substr getSubstr() {

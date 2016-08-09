@@ -26,7 +26,7 @@ public class Tools {
         String split2Level2SplitString = null;
         if (parseRuleKey.equals("split1")) {
             split1 = request.getSplit1().toString();
-            if (split1 != null && split1.equals("") == false) {
+            if(split1 != null && split1.equals("") == false){
                 parseRuleValue.append("|");
                 if (split1.equals("|")) {
                     split1 = "\"" + split1 + "\"";
@@ -38,7 +38,7 @@ public class Tools {
             split2Level1SplitString = request.getSplit2().getColumn1();
             split2Level2SplitString = request.getSplit2().getColumn2();
 
-            if (split2Level1SplitString != null && split2Level1SplitString.equals("") == false) {
+            if(split2Level1SplitString!=null && split2Level1SplitString.equals("") == false){
                 parseRuleValue.append("|");
                 if (split2Level1SplitString.equals("|")) {
                     split2Level1SplitString = "\"" + split2Level1SplitString + "\"";
@@ -46,7 +46,7 @@ public class Tools {
                 parseRuleValue.append(split2Level1SplitString);
             }
 
-            if (split2Level2SplitString != null && split2Level2SplitString.equals("") == false) {
+            if(split2Level2SplitString != null && split2Level2SplitString.equals("") == false){
                 parseRuleValue.append("|");
                 if (split2Level2SplitString.equals("|")) {
                     split2Level2SplitString = "\"" + split2Level2SplitString + "\"";
@@ -61,221 +61,60 @@ public class Tools {
 
     public static String conditionRuleBuilder(RuleRequest request) {
         String conditionRuleKey = request.getConditionRule();
-        String conditionSubselect = request.getConditionSubselect();
         StringBuilder conditionRuleValue = new StringBuilder();
         conditionRuleValue.append(conditionRuleKey);
-
-
+        String seg = null;
+        List<InElementArray> inElementArrayList = null;
+        List<LenArray> lenArrayList = null;
+        List<RangeArray> rangeArrayList = null;
+        List<ContainsArray> containsArrayList = null;
         if (conditionRuleKey.equals("len")) {
-            Len len = request.getLen();
-
-            String conditionSubselectSeg = len.getSeg();
-            String conditionSubselectRow = len.getRow();
-            String conditionSubselectColumn = len.getColumn();
-            String rangeFrom = len.getRangeFrom();
-            String rangeTo = len.getRangeTo();
-
-            if (len != null && len.equals("") == false) {
-                if (conditionSubselect.equals("orig")) {
-
-                    if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeFrom);
-                    }
-
-                    if (rangeTo != null && rangeTo.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeTo);
-                    }
-                } else if (conditionSubselect.equals("split1")) {
+            lenArrayList = request.getLenArray();
+            conditionRuleValue.append("|");
+            for (LenArray i : lenArrayList) {
+                if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
+                    conditionRuleValue.append(i.getColumn2());
                     conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselect);
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselectSeg);
-
-                    if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeFrom);
-                    }
-
-                    if (rangeTo != null && rangeTo.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeTo);
-                    }
-                } else if (conditionSubselect.equals("split2")) {
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselect);
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselectRow);
-                    conditionRuleValue.append(",");
-                    conditionRuleValue.append(conditionSubselectColumn);
-
-                    if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeFrom);
-                    }
-
-                    if (rangeTo != null && rangeTo.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeTo);
-                    }
                 }
             }
+            conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
         } else if (conditionRuleKey.equals("range")) {
-            Range mRange = request.getRange();
-            String conditionSubselectSeg = mRange.getSeg();
-            String conditionSubselectRow = mRange.getRow();
-            String conditionSubselectColumn = mRange.getColumn();
-            String rangeFrom = mRange.getRangeFrom();
-            String rangeTo = mRange.getRangeTo();
-
-            if (mRange != null && mRange.equals("") == false) {
-                if (conditionSubselect.equals("orig")) {
+            rangeArrayList = request.getRangeArray();
+            conditionRuleValue.append("|");
+            for (RangeArray i : rangeArrayList) {
+                if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
+                    conditionRuleValue.append(i.getColumn2());
                     conditionRuleValue.append("|");
-
-                    if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append(rangeFrom);
-                    }
-
-                    if (rangeTo != null && rangeTo.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeTo);
-                    }
-                } else if (conditionSubselect.equals("split1")) {
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselect);
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselectSeg);
-
-                    if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeFrom);
-                    }
-
-                    if (rangeTo != null && rangeTo.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeTo);
-                    }
-                } else if (conditionSubselect.equals("split2")) {
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselect);
-                    conditionRuleValue.append("|");
-                    conditionRuleValue.append(conditionSubselectRow);
-                    conditionRuleValue.append(",");
-                    conditionRuleValue.append(conditionSubselectColumn);
-
-                    if (rangeFrom != null && rangeFrom.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeFrom);
-                    }
-
-                    if (rangeTo != null && rangeTo.equals("") == false) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(rangeTo);
-                    }
                 }
             }
-        } else {
-            if (conditionRuleKey.equals("in")) {
-                In in = request.getIn();
-                String conditionSubselectSeg = in.getSeg();
-                String conditionSubselectRow = in.getRow();
-                String conditionSubselectColumn = in.getColumn();
-                List<InElementArray> inElementArrayList = in.getInElementArray();
+            conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
 
-
-                if (in != null && in.equals("") == false) {
-                    if (conditionSubselect.equals("orig")) {
-                        conditionRuleValue.append("|");
-
-                        for (InElementArray i : inElementArrayList) {
-                            if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
-                                conditionRuleValue.append(i.getColumn2());
-                                conditionRuleValue.append("|");
-                            }
-                        }
-                        conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
-                    } else if (conditionSubselect.equals("split1")) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselect);
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselectSeg);
-                        conditionRuleValue.append("|");
-
-                        for (InElementArray i : inElementArrayList) {
-                            if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
-                                conditionRuleValue.append(i.getColumn2());
-                                conditionRuleValue.append("|");
-                            }
-                        }
-                        conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
-                    } else if (conditionSubselect.equals("split2")) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselect);
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselectRow);
-                        conditionRuleValue.append(",");
-                        conditionRuleValue.append(conditionSubselectColumn);
-                        conditionRuleValue.append("|");
-
-                        for (InElementArray i : inElementArrayList) {
-                            if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
-                                conditionRuleValue.append(i.getColumn2());
-                                conditionRuleValue.append("|");
-                            }
-                        }
-                        conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
-                    }
-                }
-            } else if (conditionRuleKey.equals("seg")) {
-                String seg = request.getSeg().toString();
-                if (seg != null && seg.equals("") == false) {
+        } else if (conditionRuleKey.equals("in")) {
+            inElementArrayList = request.getInElementArray();
+            conditionRuleValue.append("|");
+            for (InElementArray i : inElementArrayList) {
+                if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
+                    conditionRuleValue.append(i.getColumn2());
                     conditionRuleValue.append("|");
-                    conditionRuleValue.append(seg);
-                }
-            } else if (conditionRuleKey.equals("contains")) {
-                Contains contains = request.getContains();
-
-                String conditionSubselectSeg = contains.getSeg();
-                String conditionSubselectRow = contains.getRow();
-                String conditionSubselectColumn = contains.getColumn();
-                String charString = contains.getCharString();
-
-                if (contains != null && contains.equals("") == false) {
-                    if (conditionSubselect.equals("orig")) {
-                        conditionRuleValue.append("|");
-                        if (charString.equals("|")) {
-                            conditionRuleValue.append("\"" + charString + "\"");
-                        } else {
-                            conditionRuleValue.append(charString);
-                        }
-                    } else if (conditionSubselect.equals("split1")) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselect);
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselectSeg);
-                        conditionRuleValue.append("|");
-                        if (charString.equals("|")) {
-                            conditionRuleValue.append("\"" + charString + "\"");
-                        } else {
-                            conditionRuleValue.append(charString);
-                        }
-                    } else if (conditionSubselect.equals("split2")) {
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselect);
-                        conditionRuleValue.append("|");
-                        conditionRuleValue.append(conditionSubselectRow);
-                        conditionRuleValue.append(",");
-                        conditionRuleValue.append(conditionSubselectColumn);
-                        conditionRuleValue.append("|");
-                        if (charString.equals("|")) {
-                            conditionRuleValue.append("\"" + charString + "\"");
-                        } else {
-                            conditionRuleValue.append(charString);
-                        }
-                    }
                 }
             }
+            conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
+        } else if (conditionRuleKey.equals("seg")) {
+            seg = request.getSeg().toString();
+            if(seg !=null  && seg.equals("") == false){
+                conditionRuleValue.append("|");
+                conditionRuleValue.append(seg);
+            }
+        } else if (conditionRuleKey.equals("contains")) {
+            containsArrayList = request.getContainsArray();
+            conditionRuleValue.append("|");
+            for (ContainsArray i : containsArrayList) {
+                if (i.getColumn2() != null && i.getColumn2().equals("") == false) {
+                    conditionRuleValue.append(i.getColumn2());
+                    conditionRuleValue.append("|");
+                }
+            }
+            conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
         }
 
         return conditionRuleValue.toString();
@@ -294,17 +133,17 @@ public class Tools {
             substrDirection = request.getSubstr().getColumn1();
             substrStartIndex = request.getSubstr().getColumn2();
             substrLength = request.getSubstr().getColumn3();
-            if (substrDirection != null && substrDirection.equals("") == false) {
+            if(substrDirection !=null && substrDirection.equals("") == false){
                 actionRuleValue.append("|");
                 actionRuleValue.append(substrDirection);
             }
 
-            if (substrStartIndex != null && substrStartIndex.equals("") == false) {
+            if(substrStartIndex != null && substrStartIndex.equals("") == false){
                 actionRuleValue.append("|");
                 actionRuleValue.append(substrStartIndex);
             }
 
-            if (substrLength != null && substrLength.equals("") == false) {
+            if(substrLength != null && substrLength.equals("") == false){
                 actionRuleValue.append("|");
                 actionRuleValue.append(substrLength);
             }
@@ -320,7 +159,7 @@ public class Tools {
             actionRuleValue.deleteCharAt(actionRuleValue.length() - 1);
         } else if (actionRuleKey.equals("dec")) {
             dec = request.getDec().toString();
-            if (dec != null && dec.equals("") == false) {
+            if(dec != null && dec.equals("") == false){
                 actionRuleValue.append("|");
                 actionRuleValue.append(dec);
             }

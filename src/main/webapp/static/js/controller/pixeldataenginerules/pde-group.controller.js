@@ -75,7 +75,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
         $scope.processedResponseBackupRuleData = {
             "parseRule": null,
             "conditionRule": null,
-            "conditionSubselect": null,
             "actionRule": null,
             "gid": gid,
             "keyId": null,
@@ -269,7 +268,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.parseRule,
                 frontendRightHandPanelData.conditionRule,
-                frontendRightHandPanelData.conditionSubselect,
                 frontendRightHandPanelData.actionRule,
                 frontendRightHandPanelData.gid,
                 frontendRightHandPanelData.keyId,
@@ -304,7 +302,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.parseRule,
                 frontendRightHandPanelData.conditionRule,
-                frontendRightHandPanelData.conditionSubselect,
                 frontendRightHandPanelData.actionRule,
                 frontendRightHandPanelData.gid,
                 frontendRightHandPanelData.keyId,
@@ -349,7 +346,6 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             $rootScope.base + 'group/edit-rules/triggerkeyid=' + triggerKeyId + '&gid=' + gid,
             frontendRightHandPanelData.parseRule,
             frontendRightHandPanelData.conditionRule,
-            frontendRightHandPanelData.conditionSubselect,
             frontendRightHandPanelData.actionRule,
             frontendRightHandPanelData.gid,
             frontendRightHandPanelData.keyId,
@@ -445,99 +441,42 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 var conditionRuleSplit = backendData.condition_rule.split("|");
                 $scope.processedResponseBackupRuleData.conditionRule = conditionRuleSplit[0];
                 if (conditionRuleSplit[0] == 'len') {
-                    if (conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = 'orig';
-                    } else if (conditionRuleSplit[1] == 'split1') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        $scope.processedResponseBackupRuleData.len.seg = conditionRuleSplit[2];
-                    } else if (conditionRuleSplit[1] == 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        var splitedValue = conditionRuleSplit[2].split(",");
-                        $scope.processedResponseBackupRuleData.len.row = splitedValue[0];
-                        $scope.processedResponseBackupRuleData.len.column = splitedValue[1];
+                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                        var inObject = {
+                            column1: i - 1,
+                            column2: conditionRuleSplit[i]
+                        }
+                        $scope.processedResponseBackupRuleData.lenArray.push(inObject);
                     }
 
-                    $scope.processedResponseBackupRuleData.len.rangeFrom = conditionRuleSplit[conditionRuleSplit.length - 2];
-                    $scope.processedResponseBackupRuleData.len.rangeTo = conditionRuleSplit[conditionRuleSplit.length - 1];
+                    //$scope.processedResponseBackupRuleData.len.rangeFrom = conditionRuleSplit[conditionRuleSplit.length - 2];
+                    //$scope.processedResponseBackupRuleData.len.rangeTo = conditionRuleSplit[conditionRuleSplit.length - 1];
                 } else if (conditionRuleSplit[0] == 'range') {
-                    if (conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = 'orig';
-                    } else if (conditionRuleSplit[1] == 'split1') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        $scope.processedResponseBackupRuleData.range.seg = conditionRuleSplit[2];
-                    } else if (conditionRuleSplit[1] == 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        var splitedValue = conditionRuleSplit[2].split(",");
-                        $scope.processedResponseBackupRuleData.range.row = splitedValue[0];
-                        $scope.processedResponseBackupRuleData.range.column = splitedValue[1];
+                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                        var inObject = {
+                            column1: i - 1,
+                            column2: conditionRuleSplit[i]
+                        }
+                        $scope.processedResponseBackupRuleData.rangeArray.push(inObject);
                     }
-
-                    $scope.processedResponseBackupRuleData.range.rangeFrom = conditionRuleSplit[conditionRuleSplit.length - 2];
-                    $scope.processedResponseBackupRuleData.range.rangeTo = conditionRuleSplit[conditionRuleSplit.length - 1];
                 } else if (conditionRuleSplit[0] == 'in') {
-                    if (conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = 'orig';
-
-                        for (var i = 1; i < conditionRuleSplit.length; i++) {
-                            var inObject = {
-                                column1: i - 1,
-                                column2: conditionRuleSplit[i]
-                            }
-                            $scope.processedResponseBackupRuleData.inArray.push(inObject);
+                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                        var inObject = {
+                            column1: i - 1,
+                            column2: conditionRuleSplit[i]
                         }
-                    } else if (conditionRuleSplit[1] == 'split1') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        $scope.processedResponseBackupRuleData.in.seg = conditionRuleSplit[2];
-
-                        for (var i = 3; i < conditionRuleSplit.length; i++) {
-                            var inObject = {
-                                column1: i - 3,
-                                column2: conditionRuleSplit[i]
-                            }
-                            $scope.processedResponseBackupRuleData.inArray.push(inObject);
-                        }
-                    } else if (conditionRuleSplit[1] == 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        var splitedValue = conditionRuleSplit[2].split(",");
-                        $scope.processedResponseBackupRuleData.in.row = splitedValue[0];
-                        $scope.processedResponseBackupRuleData.in.column = splitedValue[1];
-
-                        for (var i = 3; i < conditionRuleSplit.length; i++) {
-                            var inObject = {
-                                column1: i - 3,
-                                column2: conditionRuleSplit[i]
-                            }
-                            $scope.processedResponseBackupRuleData.inArray.push(inObject);
-                        }
+                        $scope.processedResponseBackupRuleData.inArray.push(inObject);
                     }
                 } else if (conditionRuleSplit[0] == 'seg') {
                     $scope.processedResponseBackupRuleData.seg.column1 = conditionRuleSplit[1];
                 } else if (conditionRuleSplit[0] == 'contains') {
-                    if (conditionRuleSplit[1] != 'split1' && conditionRuleSplit[1] != 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = 'orig';
-                    } else if (conditionRuleSplit[1] == 'split1') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        $scope.processedResponseBackupRuleData.contains.seg = conditionRuleSplit[2];
-                    } else if (conditionRuleSplit[1] == 'split2') {
-                        $scope.processedResponseBackupRuleData.conditionSubselect = conditionRuleSplit[1];
-                        var splitedValue = conditionRuleSplit[2].split(",");
-                        $scope.processedResponseBackupRuleData.contains.row = splitedValue[0];
-                        $scope.processedResponseBackupRuleData.contains.column = splitedValue[1];
+                    for (var i = 1; i < conditionRuleSplit.length; i++) {
+                        var inObject = {
+                            column1: i - 1,
+                            column2: conditionRuleSplit[i]
+                        }
+                        $scope.processedResponseBackupRuleData.containsArray.push(inObject);
                     }
-
-                    if (conditionRuleSplit[conditionRuleSplit.length - 1] == '"' && conditionRuleSplit[conditionRuleSplit.length - 2] == '"') {
-                        $scope.processedResponseBackupRuleData.contains.charString = "\"|\""; // contains|"|"
-                    } else {
-                        $scope.processedResponseBackupRuleData.contains.charString = conditionRuleSplit[conditionRuleSplit.length - 1];
-                    }
-
-                    /*
-                     if (conditionRuleSplit.length == 3) { // contains|"|"
-                     $scope.processedResponseBackupRuleData.contains.column1 = "\"|\"";
-                     }else{
-                     $scope.processedResponseBackupRuleData.contains.column1 = conditionRuleSplit[1];
-                     }
-                     */
                 }
 
                 var actionRuleSplit = backendData.action_rule.split("|");
