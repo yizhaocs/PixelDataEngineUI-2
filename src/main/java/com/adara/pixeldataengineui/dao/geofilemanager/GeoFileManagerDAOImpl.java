@@ -158,6 +158,8 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             mPixelDataEngineMapsDTO.setMap_name(String.valueOf(m.get("map_name")));
             mPixelDataEngineMapsDTO.setTable_name(String.valueOf(m.get("table_name")));
             mPixelDataEngineMapsDTO.setDescription(String.valueOf((m.get("description"))));
+            mPixelDataEngineMapsDTO.setVersion(String.valueOf((m.get("version"))));
+            mPixelDataEngineMapsDTO.setModification_ts(String.valueOf((m.get("modification_ts"))));
             result.add(mPixelDataEngineMapsDTO);
         }
 

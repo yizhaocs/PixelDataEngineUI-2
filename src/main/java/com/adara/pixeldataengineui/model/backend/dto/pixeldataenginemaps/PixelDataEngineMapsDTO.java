@@ -11,6 +11,8 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
     private String map_name;
     private String table_name;
     private String description;
+    private String version;
+    private String modification_ts;
 
 
     public PixelDataEngineMapsDTO() {
@@ -47,9 +49,25 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
         this.description = description;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getModification_ts() {
+        return modification_ts;
+    }
+
+    public void setModification_ts(String modification_ts) {
+        this.modification_ts = modification_ts;
+    }
+
     @Override
     public String toString() {
-        return "PixelDataEngineMapsDTO [map_name=" + map_name + ", table_name=" + table_name + ", description=" + description
+        return "PixelDataEngineMapsDTO [map_name=" + map_name + ", table_name=" + table_name + ", description=" + description + ", version=" + version + ", modification_ts=" + modification_ts
                 + "]";
     }
 
