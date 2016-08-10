@@ -365,11 +365,13 @@
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'" ng:repeat="substr in frontendRightHandPanelData.substrArray">
                                             <tr>
                                                 <td>
-                                                    <label> substr_{{substr.column1}}: </label>
+                                                    <!--<label> substr_{{substr.column1}}: </label>-->
+                                                    <label> substr: </label>
                                                     <input type="text" class="form-control" ng-model="substr.column2">
                                                 </td>
                                             </tr>
                                         </table>
+<!--
 
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='substr'">
                                             <tr>
@@ -382,6 +384,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+-->
 
                                     </td>
                                     <td>
@@ -410,12 +413,13 @@
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'" ng:repeat="dec in frontendRightHandPanelData.decArray">
                                             <tr>
                                                 <td>
-                                                    <label> dec_{{dec.column1}}: </label>
+                                                    <!--<label> dec_{{dec.column1}}: </label>-->
+                                                    <label> dec: </label>
                                                     <input type="text" class="form-control" ng-model="dec.column2">
                                                 </td>
                                             </tr>
                                         </table>
-
+<!--
                                         <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='dec'">
                                             <tr>
                                                 <td>
@@ -427,6 +431,8 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        -->
+
                                     </td>
                                     </td>
                                 </tr>
