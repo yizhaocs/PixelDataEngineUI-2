@@ -22,8 +22,8 @@ public class RuleRequest {
     private Seg seg;
     private List<ContainsArray> containsArray;
     private List<RangeArray> rangeArray;
-    private List<SubstrArray> substrArray;
-    private List<DecArray> decArray;
+    private Substr substr;
+    private Dec dec;
     private String testValue;
     private String testOption;
     private List<InElementArray> inElementArray;
@@ -33,7 +33,7 @@ public class RuleRequest {
 
     }
 
-    public RuleRequest(String parseRule, String conditionRule, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, List<LenArray> lenArray,Seg seg, List<ContainsArray> containsArray, List<RangeArray> rangeArray, List<SubstrArray> substrArray, List<DecArray> decArray, String testValue, String testOption, List<InElementArray> inElementArray, List<SetRuleArray> setRuleArray) {
+    public RuleRequest(String parseRule, String conditionRule, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, List<LenArray> lenArray,Seg seg, List<ContainsArray> containsArray, List<RangeArray> rangeArray, Substr substr, Dec dec, String testValue, String testOption, List<InElementArray> inElementArray, List<SetRuleArray> setRuleArray) {
         this.parseRule = parseRule;
         this.conditionRule = conditionRule;
         this.actionRule = actionRule;
@@ -48,8 +48,8 @@ public class RuleRequest {
         this.seg = seg;
         this.containsArray = containsArray;
         this.rangeArray = rangeArray;
-        this.substrArray = substrArray;
-        this.decArray = decArray;
+        this.substr = substr;
+        this.dec = dec;
         this.testValue = testValue;
         this.testOption = testOption;
         this.inElementArray = inElementArray;
@@ -176,20 +176,20 @@ public class RuleRequest {
         this.rangeArray = rangeArray;
     }
 
-    public List<SubstrArray> getSubstrArray() {
-        return substrArray;
+    public Substr getSubstr() {
+        return substr;
     }
 
-    public void setSubstrArray(List<SubstrArray> substrArray) {
-        this.substrArray = substrArray;
+    public void setSubstr(Substr substr) {
+        this.substr = substr;
     }
 
-    public List<DecArray> getDecArray() {
-        return decArray;
+    public Dec getDec() {
+        return dec;
     }
 
-    public void setDecArray(List<DecArray> decArray) {
-        this.decArray = decArray;
+    public void setDec(Dec dec) {
+        this.dec = dec;
     }
 
     public String getTestValue() {
