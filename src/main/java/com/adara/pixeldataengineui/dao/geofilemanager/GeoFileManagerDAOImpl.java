@@ -5,9 +5,11 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
+import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +28,8 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     private static final Log LOG = LogFactory.getLog(GeoFileManagerDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;
+    @Autowired
+    private GeoFileManagerService mGeoFileManagerService;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -185,6 +189,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 //            String query = "LOAD DATA LOCAL INFILE '" + fileName +
         }
 
+        updateVersion(retval, table);
 
         return retval;
     }
@@ -205,8 +210,27 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             }
         }
 
+        updateVersion(retval, table);
+
 
         return retval;
+    }
+
+    private void updateVersion(ResponseDTO retval, String table) throws Exception{
+        String mapName = null;
+        PixelDataEngineMapsDTO mPixelDataEngineMapsDTO = null;
+        if(retval.getMessage().equals(Constants.SUCCESS)){
+            mapName = table.substring(8, table.length()); // remove "pde_map_" from "pde_map_city" to get the mapName
+            mPixelDataEngineMapsDTO = mGeoFileManagerService.getPixelDataEngineMap(mapName);
+
+            String query = "UPDATE pde.pixel_data_engine_maps SET " + "version" + "=?" + " WHERE map_name=?";
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+            Object[] args = new Object[]{String.valueOf(Integer.valueOf(mPixelDataEngineMapsDTO.getVersion()) + 1), mapName};
+
+            if(jdbcTemplate.update(query, args) <= 0){
+                retval.setMessage(Constants.FAILURE);
+            }
+        }
     }
 
 
@@ -235,7 +259,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getPixelDataEngineMap" + "]";
-        String query = "SELECT a.map_name, a.table_name, a.description FROM pde.pixel_data_engine_maps a where a.map_name= ?";
+        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.modification_ts FROM pde.pixel_data_engine_maps a where a.map_name= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -247,6 +271,8 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
                 result.setMap_name(rs.getString("map_name"));
                 result.setTable_name(rs.getString("table_name"));
                 result.setDescription(rs.getString("description"));
+                result.setVersion(rs.getString("version"));
+                result.setModification_ts(rs.getString("modification_ts"));
                 return result;
             }
         });
