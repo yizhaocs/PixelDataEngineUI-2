@@ -145,7 +145,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT a.map_name, a.table_name, a.description FROM pde.pixel_data_engine_maps a";
+        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.modification_ts FROM pde.pixel_data_engine_maps a";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
