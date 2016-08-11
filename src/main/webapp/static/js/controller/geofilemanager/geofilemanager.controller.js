@@ -40,6 +40,8 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
         $scope.mapNameDisable = false;
         $rootScope.title = 'Add New Geo Map';
         $scope.editMapButtonText = 'Add New Geo Map';
+
+
     } else if(action == 'edit') {
         $scope.showFileLocation = false;
         $scope.isCreate = true;
@@ -72,6 +74,11 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
     $scope.savePixelDataEngineMap = function(frontendData){
         if($scope.editMapButtonText == 'Add New Geo Map'){
+            if(frontendData.map_name.indexOf('-') > -1){
+                alert("Failed to create the map, please make sure the Map Name doesn't contains '-'");
+                return;
+            }
+
             var file = $scope.myFile;
             geoFileManagerService.createPixelDataEngineMap($rootScope.base + 'geo-file-manager',file, frontendData);
         }else if($scope.editMapButtonText == 'Update Geo Map'){
