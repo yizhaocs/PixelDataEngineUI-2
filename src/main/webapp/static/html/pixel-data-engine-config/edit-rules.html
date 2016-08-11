@@ -131,6 +131,14 @@
                             </div>
 
                             <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                                <label class="col-md-2"> Trigger Key ID </label>
+                                <div class="col-md-2">
+                                    <input type="text" ng-disabled="groupTypeDisable=true" class="form-control" ng-model="frontendRightHandPanelData.triggerKeyID">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" ng-class="{error: myForm.name.$invalid}">
                                 <label class="col-md-2"> Key ID </label>
                                 <div class="col-md-2">
                                     <input type="text" ng-disabled="keyIdDisable" class="form-control" ng-model="frontendRightHandPanelData.keyId">

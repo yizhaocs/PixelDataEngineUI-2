@@ -512,6 +512,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             * This is for hard setting for the Group Type on the frontend Right Hand Panel
             * */
             pixelmappingService.getGroup(triggerKeyId).success(function (backendData) {
+                $scope.frontendRightHandPanelData.triggerKeyID = triggerKeyId;
                 var group = backendData;
                 if(group.group_type == 1){
                     $scope.frontendRightHandPanelData.groupType = "independent";
