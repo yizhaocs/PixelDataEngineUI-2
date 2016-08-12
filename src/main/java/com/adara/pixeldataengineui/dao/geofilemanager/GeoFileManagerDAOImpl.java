@@ -148,7 +148,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.modification_ts FROM pde.pixel_data_engine_maps a";
+        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.loading_in_progress, a.modification_ts FROM pde.pixel_data_engine_maps a";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -161,6 +161,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             mPixelDataEngineMapsDTO.setMap_name(String.valueOf(m.get("map_name")));
             mPixelDataEngineMapsDTO.setTable_name(String.valueOf(m.get("table_name")));
             mPixelDataEngineMapsDTO.setDescription(String.valueOf((m.get("description"))));
+            mPixelDataEngineMapsDTO.setLoading_in_progress(Boolean.valueOf(String.valueOf(m.get("loading_in_progress"))));
             mPixelDataEngineMapsDTO.setVersion(String.valueOf((m.get("version"))));
             mPixelDataEngineMapsDTO.setModification_ts(String.valueOf((m.get("modification_ts"))));
             result.add(mPixelDataEngineMapsDTO);
