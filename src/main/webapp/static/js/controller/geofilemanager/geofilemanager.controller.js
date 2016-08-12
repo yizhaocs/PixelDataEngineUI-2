@@ -98,11 +98,30 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
 
 
     $scope.fileProcess = function(){
-        if(action == 'append'){
-            geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager',$scope.myFile,tableName);
-        }else if(action == 'override'){
-            geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager',$scope.myFile, tableName);
-        }
+        geoFileManagerService.getPixelDataEngineMap(mapName).success(function (backendData) {
+            var isLoadingInProgress = backendData.loading_in_progress;
+
+            /*
+            * true to forbidden user from append/override file without waiting for the previous operation
+            * */
+            if(isLoadingInProgress){
+                var alertMessage = "previous file loading operation is still in progress, please wait";
+
+                if(action == 'append'){
+                    alertMessage = "Append file failed because " + alertMessage;
+                }else{
+                    alertMessage = "Override file failed because " + alertMessage;
+                }
+
+                alert(alertMessage);
+                return;
+            }
+            if(action == 'append'){
+                geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager',$scope.myFile,tableName);
+            }else if(action == 'override'){
+                geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager',$scope.myFile, tableName);
+            }
+        });
     };
 });
 
