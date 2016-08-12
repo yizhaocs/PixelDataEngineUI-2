@@ -185,57 +185,6 @@ public class GeoFileManagerController {
         return response;
     }
 
-/*
-
-    @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
-    public ResponseEntity<GenericDTOList<PdeMapTableDTO>> getPdeMap(@RequestParam(value = "mapname", required = false) String mapName) {
-        ResponseEntity<GenericDTOList<PdeMapTableDTO>> response = null;
-        GenericDTOList<PdeMapTableDTO> retval = null;
-
-        if (mapName.equals("0") || mapName.equals("undefined")) {
-            response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.NO_CONTENT);
-            return response;
-        }
-        try {
-            retval = mGeoFileManagerService.getPdeMap(mapName);
-            if (retval.getList().size() == 0) {
-                response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.NO_CONTENT);
-            } else {
-                response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
-            response = new ResponseEntity<GenericDTOList<PdeMapTableDTO>>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return response;
-    }
-*/
-/*
-    @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
-    public void getFile(
-            @RequestParam(value = "mapname", required = false) String mapName,
-            HttpServletResponse response) {
-        try {
-
-            mGeoFileManagerService.getPdeMap(mapName);
-            System.out.println(123);
-            // get your file as InputStream
-            InputStream is = new FileInputStream(new File("/Users/yzhao/Desktop/output.csv"));
-            // copy it to response's OutputStream
-            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-            response.setContentType("application/octet-stream");
-            response.setHeader("Content-Disposition",
-                    "attachment;filename=downloadfilename.csv");
-            response.flushBuffer();
-        } catch (Exception e) {
-            LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
-        }
-
-    }*/
-
-
-
     @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
     public ResponseEntity<ResponseDTO> getFile(
             @RequestParam(value = "mapname", required = false) String mapName) {
@@ -270,6 +219,7 @@ public class GeoFileManagerController {
         }finally {
             File file = new File("/opt/opinmind/var/pdeui/file.csv");
             try {
+                // need to delete the file after downloading since the file from "SELECT INTO OUTFILE" is forbidden from replacing so that I have to delete the file after user download it
                 Files.deleteIfExists(file.toPath());
             }catch (Exception e){
                 LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
