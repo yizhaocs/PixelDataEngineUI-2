@@ -12,6 +12,7 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
     private String table_name;
     private String description;
     private String version;
+    private String loading_in_progress;
     private String modification_ts;
 
 
@@ -55,6 +56,14 @@ public class PixelDataEngineMapsDTO extends BaseDTO implements Serializable {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getLoading_in_progress() {
+        return loading_in_progress;
+    }
+
+    public void setLoading_in_progress(String loading_in_progress) {
+        this.loading_in_progress = loading_in_progress;
     }
 
     public String getModification_ts() {

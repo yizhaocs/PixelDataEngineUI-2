@@ -172,30 +172,33 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         return result;
     }
     public ResponseDTO append(MultipartFile file, String table) throws Exception {
+
+        Boolean isUpdated1 = updateLoadingInProgress(true,table);
         ResponseDTO retval = new ResponseDTO();
-        String fileName = "/Users/yzhao/Desktop/output.csv";
+        if(isUpdated1 == false){
+            retval.setMessage(Constants.FAILURE);
+            return retval;
+        }
 
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
             try {
                 retval.setMessage(Constants.SUCCESS);
-                appendFileWithoutOverride(jt, fileName, table);
+                appendFileWithoutOverride(jt, Constants.fileUploadingPath, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
+                updateLoadingInProgress(false,table);
             }
-            //       /* String query = "LOAD DATA LOCAL INFILE '" + fileName +
-//         "' INTO TABLE pde.location  (id,country,state,city,zipcode,latitude,longitude,metrocode,areacode,gmt_offset,cbsa_code,csa_code,md_code,md_title,income,political_affiliation,ethnicity,rent_owned,education,modification_ts);";*/
-//            String query = "LOAD DATA LOCAL INFILE '" + fileName +
         }
 
         updateVersion(retval, table);
-
+        updateLoadingInProgress(false,table);
         return retval;
     }
 
     public ResponseDTO override(MultipartFile file, String table) throws Exception {
+        updateLoadingInProgress(true,table);
         ResponseDTO retval = new ResponseDTO();
-        String fileName = "/Users/yzhao/Desktop/output.csv";
 
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
@@ -203,14 +206,14 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             try {
                 retval.setMessage(Constants.SUCCESS);
                 truncateTable(jt, table);
-                appendFileWithoutOverride(jt, fileName, table);
+                appendFileWithoutOverride(jt, Constants.fileUploadingPath, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
             }
         }
 
         updateVersion(retval, table);
-
+        updateLoadingInProgress(false,table);
 
         return retval;
     }
@@ -232,16 +235,27 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         }
     }
 
+    private Boolean updateLoadingInProgress(Boolean isInProgress, String table) throws Exception{
+        String mapName = null;
+            mapName = table.substring(8, table.length()); // remove "pde_map_" from "pde_map_city" to get the mapName
+
+            String query = "UPDATE pde.pixel_data_engine_maps SET " + "loading_in_progress" + "=?" + " WHERE map_name=?";
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+            Object[] args = new Object[]{isInProgress, mapName};
+        int retval = jdbcTemplate.update(query,args);
+        return retval>0?true:false;
+    }
+
 
     public void getPdeMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
 
-        File file = new File("/opt/opinmind/var/pdeui/");
+        File file = new File(Constants.fileDirector);
         if (!file.exists()) {
             file.mkdir();
         }
 
-        String query = "SELECT value, mapped_value INTO OUTFILE '/opt/opinmind/var/pdeui/file.csv' FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + "pde." + tableName;
+        String query = "SELECT value, mapped_value INTO OUTFILE" + Constants.fileDownloadingPath + " FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + "pde." + tableName;
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -289,7 +303,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     private void appendFileWithOverride(JdbcTemplate jt, String table) throws Exception {
         String query = "INSERT INTO pde." + table + " VALUES(?,?)";
 
-        InputStream in = new FileInputStream(new File("/Users/yzhao/Desktop/output.csv"));
+        InputStream in = new FileInputStream(new File(Constants.fileUploadingPath));
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -315,7 +329,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         FileWriter out = null;
         inputStream = file.getInputStream();
         br = new BufferedReader(new InputStreamReader(inputStream));
-        out = new FileWriter("/Users/yzhao/Desktop/output.csv");
+        out = new FileWriter(Constants.fileUploadingPath);
         String line;
         while ((line = br.readLine()) != null) {
 

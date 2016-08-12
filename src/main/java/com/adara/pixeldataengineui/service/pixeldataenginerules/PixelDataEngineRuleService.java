@@ -20,7 +20,7 @@ public interface PixelDataEngineRuleService {
 
     ResponseDTO deleteRule(Integer gid, String keyId, Integer priority, Boolean isUITest) throws Exception;
 
-    GenericDTOList<TestRuleDTO> testRule(PixelDataEngineService mPixelDataEngine, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception;
+    GenericDTOList<TestRuleDTO> testRule(PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception;
 
     void truncatePixelDataEngineConfigsTable(Boolean isUITest) throws Exception;
 }

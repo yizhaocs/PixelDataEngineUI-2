@@ -209,7 +209,7 @@ public class GeoFileManagerController {
 
 
         try {
-            File file = new File("/opt/opinmind/var/pdeui/file.csv");
+            File file = new File(Constants.fileUploadingPath);
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
@@ -217,7 +217,7 @@ public class GeoFileManagerController {
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
         }finally {
-            File file = new File("/opt/opinmind/var/pdeui/file.csv");
+            File file = new File(Constants.fileDownloadingPath);
             try {
                 // need to delete the file after downloading since the file from "SELECT INTO OUTFILE" is forbidden from replacing so that I have to delete the file after user download it
                 Files.deleteIfExists(file.toPath());

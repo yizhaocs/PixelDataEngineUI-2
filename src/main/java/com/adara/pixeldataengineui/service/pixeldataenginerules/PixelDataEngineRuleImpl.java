@@ -25,6 +25,8 @@ import java.util.TreeMap;
 public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
+    @Autowired
+    private PixelDataEngineService mPixelDataEngineService;
 
     @Autowired
     private PixelDataEngineRuleDAO mPixelDataEngineRuleDAO;
@@ -53,7 +55,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         mPixelDataEngineRuleDAO.truncatePixelDataEngineConfigsTable(isUITest);
     }
 
-    public GenericDTOList<TestRuleDTO> testRule(PixelDataEngineService mPixelDataEngineService, PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
+    public GenericDTOList<TestRuleDTO> testRule(PixelDataEngineRuleService mPixelDataEngineRuleService, PixelDataEngineGroupService mPixelDataEngineGroupService, RuleRequest request) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
         GenericDTOList<TestRuleDTO> result = new GenericDTOList<TestRuleDTO>();

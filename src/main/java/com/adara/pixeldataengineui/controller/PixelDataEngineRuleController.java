@@ -7,7 +7,6 @@ import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRu
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineGroupService;
 import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineRuleService;
-import com.adara.pixeldataengineui.service.pixeldataenginerules.PixelDataEngineService;
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,9 +23,6 @@ import org.springframework.web.bind.annotation.*;
 public class PixelDataEngineRuleController {
     private static final Log LOG = LogFactory.getLog(PixelDataEngineRuleController.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
-
-    @Autowired
-    private PixelDataEngineService mPixelDataEngineService;
 
     @Autowired
     private PixelDataEngineRuleService mPixelDataEngineRuleService;
@@ -141,7 +137,7 @@ public class PixelDataEngineRuleController {
         GenericDTOList<TestRuleDTO> retval = null;
 
         try {
-            retval = mPixelDataEngineRuleService.testRule(mPixelDataEngineService, mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
+            retval = mPixelDataEngineRuleService.testRule(mPixelDataEngineRuleService, mPixelDataEngineGroupService, request);
             if (retval.getList().size() == 0) {
                 response = new ResponseEntity<GenericDTOList<TestRuleDTO>>(retval, HttpStatus.NO_CONTENT);
             } else {
