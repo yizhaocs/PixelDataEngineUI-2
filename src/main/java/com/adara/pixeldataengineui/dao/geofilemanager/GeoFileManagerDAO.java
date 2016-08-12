@@ -2,7 +2,6 @@ package com.adara.pixeldataengineui.dao.geofilemanager;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +22,7 @@ public interface GeoFileManagerDAO {
 
     ResponseDTO override(MultipartFile file, String table) throws Exception;
 
-    GenericDTOList<PdeMapTableDTO> getPdeMap(String tableName) throws Exception;
+    void getPdeMap(String tableName) throws Exception;
 
     PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception;
 }

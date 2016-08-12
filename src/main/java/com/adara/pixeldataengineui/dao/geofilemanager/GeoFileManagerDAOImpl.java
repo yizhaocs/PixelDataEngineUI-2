@@ -2,7 +2,6 @@ package com.adara.pixeldataengineui.dao.geofilemanager;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PdeMapTableDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
@@ -234,27 +233,13 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     }
 
 
-    public GenericDTOList<PdeMapTableDTO> getPdeMap(String tableName) throws Exception{
+    public void getPdeMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT a.value, a.mapped_value FROM pde.pde_map_" + tableName + " a";
+        String query = "SELECT value, mapped_value INTO OUTFILE '/tmp2/file.csv' FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + tableName;
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        List<Map<String, Object>> listMap = null;
-        listMap = jdbcTemplate.queryForList(query);
-
-        GenericDTOList<PdeMapTableDTO> result = new GenericDTOList<PdeMapTableDTO>();
-        for (Map<String, Object> m : listMap) {
-            PdeMapTableDTO mPdeMapTableDTO = new PdeMapTableDTO();
-            mPdeMapTableDTO.setValue(String.valueOf(m.get("value")));
-            mPdeMapTableDTO.setMapped_value(String.valueOf(m.get("mapped_value")));
-            result.add(mPdeMapTableDTO);
-        }
-
-        if (LOG.isDebugEnabled())
-            LOG.debug(LOG_HEADER + "  ,method return -> " + result.toString());
-
-        return result;
+        jdbcTemplate.execute(query);
     }
 
     public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{

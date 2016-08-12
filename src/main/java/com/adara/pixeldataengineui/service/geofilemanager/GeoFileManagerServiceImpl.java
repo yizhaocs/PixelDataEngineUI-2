@@ -48,10 +48,8 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mGeoFileManagerDAOImpl.override(file, table);
     }
 
-    public Boolean getPdeMap(String tableName) throws Exception{
-        GenericDTOList<PdeMapTableDTO> data = mGeoFileManagerDAOImpl.getPdeMap(tableName);
-        Boolean isDataWritingFinished = fileWriter(data);
-        return isDataWritingFinished;
+    public void getPdeMap(String tableName) throws Exception{
+        mGeoFileManagerDAOImpl.getPdeMap(tableName);
     }
 
     public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{
