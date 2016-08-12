@@ -4,6 +4,7 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
+import com.adara.pixeldataengineui.model.frontend.requestbody.UpdateLoadingInProgressRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
@@ -66,6 +67,26 @@ public class GeoFileManagerController {
             }
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.updatePixelDataEngineMap] Service error: " + e, e);
+            response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateLoadingInProgress", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseDTO> updateLoadingInProgress(@RequestBody UpdateLoadingInProgressRequest request) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
+
+        try {
+            retval = mGeoFileManagerService.updateLoadingInProgress(request);
+            if(retval.getMessage().equals(Constants.FAILURE)){
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
+            }else{
+                response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            LOG.error("[GeoFileManagerController.updateLoadingInProgress] Service error: " + e, e);
             response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

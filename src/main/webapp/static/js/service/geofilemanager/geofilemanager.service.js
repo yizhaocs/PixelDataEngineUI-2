@@ -13,6 +13,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.downloadTheMap = downloadTheMap;
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
+        service.updateLoadingInProgress = updateLoadingInProgress;
         service.createPixelDataEngineMap = createPixelDataEngineMap;
         service.deletePixelDataEngineMap = deletePixelDataEngineMap;
         service.updatePixelDataEngineMap = updatePixelDataEngineMap;
@@ -53,6 +54,18 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                     alert("New Geo Map Created Failed");
                 });
         };
+
+        function updateLoadingInProgress(loadingInProgress, map_name){
+            return $http.put($rootScope.base + 'updateLoadingInProgress', {
+                    loading_in_progress:loadingInProgress,
+                    map_name: map_name
+
+                })
+                .success(function () {
+                })
+                .error(function () {
+                });
+        }
 
         function deletePixelDataEngineMap(redirectPath, mapName) {
             return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName)

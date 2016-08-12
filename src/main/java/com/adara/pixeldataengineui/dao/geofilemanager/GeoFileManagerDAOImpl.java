@@ -4,6 +4,7 @@ import com.adara.pixeldataengineui.model.backend.dto.generic.GenericDTOList;
 import com.adara.pixeldataengineui.model.backend.dto.generic.ResponseDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginemaps.PixelDataEngineMapsDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequest;
+import com.adara.pixeldataengineui.model.frontend.requestbody.UpdateLoadingInProgressRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import com.adara.pixeldataengineui.util.Constants;
 import org.apache.commons.logging.Log;
@@ -109,6 +110,29 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         return result;
     }
 
+    public ResponseDTO updateLoadingInProgress(UpdateLoadingInProgressRequest request) throws Exception{
+        final String LOG_HEADER = "[" + CLASS_NAME + "." + "updatePixelDataEngineMap" + "]";
+        String mapName = request.getMap_name();
+        Boolean loading_in_progress = request.getLoading_in_progress();
+        String query = "UPDATE pde.pixel_data_engine_maps SET " + "loading_in_progress" + "=?" + " WHERE map_name=?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        Object[] args = new Object[]{loading_in_progress, mapName};
+        Integer retval = 0;
+        retval = jdbcTemplate.update(query, args);
+
+        ResponseDTO result = new ResponseDTO();
+        if(retval > 0){
+            result.setMessage(Constants.SUCCESS);
+        }else{
+            result.setMessage(Constants.FAILURE);
+        }
+
+        if (LOG.isDebugEnabled())
+            LOG.debug(LOG_HEADER + "  ,method return -> " + result);
+
+        return result;
+    }
+
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         ResponseDTO result = result = new ResponseDTO();
@@ -174,12 +198,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     }
     public ResponseDTO append(MultipartFile file, String table) throws Exception {
 
-        Boolean isUpdated1 = updateLoadingInProgress(true,table);
         ResponseDTO retval = new ResponseDTO();
-        if(isUpdated1 == false){
-            retval.setMessage(Constants.FAILURE);
-            return retval;
-        }
 
         if (inputStreamToFile(file)) {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
@@ -188,17 +207,14 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
                 appendFileWithoutOverride(jt, Constants.fileUploadingPath, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
-                updateLoadingInProgress(false,table);
             }
         }
 
         updateVersion(retval, table);
-        updateLoadingInProgress(false,table);
         return retval;
     }
 
     public ResponseDTO override(MultipartFile file, String table) throws Exception {
-        updateLoadingInProgress(true,table);
         ResponseDTO retval = new ResponseDTO();
 
         if (inputStreamToFile(file)) {
@@ -214,8 +230,6 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         }
 
         updateVersion(retval, table);
-        updateLoadingInProgress(false,table);
-
         return retval;
     }
 
@@ -235,18 +249,6 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             }
         }
     }
-
-    private Boolean updateLoadingInProgress(Boolean isInProgress, String table) throws Exception{
-        String mapName = null;
-            mapName = table.substring(8, table.length()); // remove "pde_map_" from "pde_map_city" to get the mapName
-
-            String query = "UPDATE pde.pixel_data_engine_maps SET " + "loading_in_progress" + "=?" + " WHERE map_name=?";
-            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            Object[] args = new Object[]{isInProgress, mapName};
-        int retval = jdbcTemplate.update(query,args);
-        return retval>0?true:false;
-    }
-
 
     public void getPdeMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
