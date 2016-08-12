@@ -235,7 +235,13 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public void getPdeMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT value, mapped_value INTO OUTFILE '/tmp2/file.csv' FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + tableName;
+
+        File file = new File("/opt/opinmind/var/pdeui/");
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
+        String query = "SELECT value, mapped_value INTO OUTFILE '/opt/opinmind/var/pdeui/file.csv' FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + "pde." + tableName;
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

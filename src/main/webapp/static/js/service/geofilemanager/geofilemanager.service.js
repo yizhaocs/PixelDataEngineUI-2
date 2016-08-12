@@ -10,6 +10,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
         service.getPixelDataEngineMaps = getPixelDataEngineMaps;
         service.getPdeMap = getPdeMap;
+        service.downloadTheMap = downloadTheMap;
         service.appendTable = appendTable;
         service.overrideTable = overrideTable;
         service.createPixelDataEngineMap = createPixelDataEngineMap;
@@ -89,6 +90,12 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
 
         function getPdeMap(mapname) {
             return $http.get($rootScope.base + 'getPdeMap?mapname=' + mapname);
+
+        };
+
+        function downloadTheMap(mapname) {
+            return $http.get($rootScope.base + 'downloadTheMap?mapname=' + mapname);
+
         };
 
         function appendTable(redirectPath, file, table) {

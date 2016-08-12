@@ -11,9 +11,11 @@ app.controller('listGeoMapsController', function ($routeParams, $rootScope, $sco
 });
 
 
-app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope, geoFileManagerService) {
+app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope, $location,geoFileManagerService) {
     var mapName = $routeParams.tableName;
     $rootScope.title = $routeParams.tableName;
+    geoFileManagerService.getPdeMap("pde_map_" + mapName);
+
     //$scope.getPdeMap =
     //    geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
     //    $scope.frontendData = backendData.list;
@@ -21,9 +23,13 @@ app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope
     //});
 
 
-    $scope.getPdeMap = function(){
-        geoFileManagerService.getPdeMap(mapName);
-    };
+   /*
+       $scope.getPdeMap = function(){
+            geoFileManagerService.getPdeMap(mapName);
+            $location.path($rootScope.base + "downloadTheMap?mapname=" + mapName);
+           // geoFileManagerService.downloadTheMap(mapName);
+        };
+    */
 });
 
 

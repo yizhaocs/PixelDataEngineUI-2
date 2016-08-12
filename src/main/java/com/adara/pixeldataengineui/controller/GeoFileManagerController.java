@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -236,56 +237,43 @@ public class GeoFileManagerController {
 
 
     @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
-    public void getFile(
-            @RequestParam(value = "mapname", required = false) String mapName,
-            HttpServletResponse response) {
-/*
-        response.setContentType("text/csv");
-        String reportName = "CSV_Report_Name.csv";
-        response.setHeader("Content-disposition", "attachment;filename="+reportName);
-
-        ArrayList<String> rows = new ArrayList<String>();
-        rows.add("Name,Result");
-        rows.add("\n");
-
-        for (int i = 0; i < 10; i++) {
-            rows.add("Java Honk,Success");
-            rows.add("\n");
-        }
-
-        Iterator<String> iter = rows.iterator();
-        try {
-        while (iter.hasNext()) {
-            String outputString = (String) iter.next();
-            response.getOutputStream().print(outputString);
-        }
-
-        response.getOutputStream().flush();
-
-        } catch (Exception e) {
+    public ResponseEntity<ResponseDTO> getFile(
+            @RequestParam(value = "mapname", required = false) String mapName) {
+        ResponseEntity<ResponseDTO> response = null;
+        ResponseDTO retval = null;
+        response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+        try{
+            mGeoFileManagerService.getPdeMap(mapName);
+        }catch (Exception e) {
             LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
         }
-*/
+
+        return response;
+    }
 
 
+    @RequestMapping(value = "/downloadTheMap", method = RequestMethod.GET)
+    public void downloadTheMap(HttpServletResponse response) {
+        // get your file as InputStream
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + "file.csv");
 
-        //
-            // get your file as InputStream
+
         try {
-
-            File file = new File("/Users/yzhao/Desktop/testing3.csv");
+            File file = new File("/opt/opinmind/var/pdeui/file.csv");
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-            response.setContentType("text/csv");
-            response.setHeader("Content-Disposition", "attachment; filename="+"file.csv");
-            response.setHeader("Content-Length", String.valueOf(file.length()));
             response.flushBuffer();
-           // response.getOutputStream().flush();
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+        }finally {
+            File file = new File("/opt/opinmind/var/pdeui/file.csv");
+            try {
+                Files.deleteIfExists(file.toPath());
+            }catch (Exception e){
+                LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+            }
         }
-
-
     }
 }
