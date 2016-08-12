@@ -15,21 +15,6 @@ app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope
     var mapName = $routeParams.tableName;
     $rootScope.title = $routeParams.tableName;
     geoFileManagerService.getPdeMap("pde_map_" + mapName);
-
-    //$scope.getPdeMap =
-    //    geoFileManagerService.getPdeMap(mapName).success(function (backendData) {
-    //    $scope.frontendData = backendData.list;
-    //    $scope.getArray = backendData.list;
-    //});
-
-
-   /*
-       $scope.getPdeMap = function(){
-            geoFileManagerService.getPdeMap(mapName);
-            $location.path($rootScope.base + "downloadTheMap?mapname=" + mapName);
-           // geoFileManagerService.downloadTheMap(mapName);
-        };
-    */
 });
 
 
@@ -116,6 +101,7 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
                 alert(alertMessage);
                 return;
             }
+
             if(action == 'append'){
                 geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager',$scope.myFile,tableName);
             }else if(action == 'override'){
