@@ -121,13 +121,26 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 })
 
                 .success(function () {
-                    alert("Table Appended Successfully");
-                    $location.path(redirectPath);
+                    updateLoadingInProgress(false, table.substring(8, table.length)).success(function () {
+                        alert("Table Appended Successfully");
+                        $location.path(redirectPath);
+                    }).error(function () {
+                        updateLoadingInProgress(false, table.substring(8, table.length));
+                        alert("Table Appended Successfully");
+                        $location.path(redirectPath);
+                    });
+
                 })
 
                 .error(function () {
-                    alert("Table Appended Failed");
-                    $location.path(redirectPath);
+                    updateLoadingInProgress(false, table.substring(8, table.length)).success(function () {
+                        alert("Table Appended Failed");
+                        $location.path(redirectPath);
+                    }).error(function () {
+                        updateLoadingInProgress(false, table.substring(8, table.length));
+                        alert("Table Appended Failed");
+                        $location.path(redirectPath);
+                    });
                 });
         };
 
@@ -135,6 +148,37 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
             var fd = new FormData();
             fd.append('file', file);
 
+
+            $http.post($rootScope.base + 'overrideTable?table=' + table, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+
+                .success(function () {
+                    updateLoadingInProgress(false, table.substring(8, table.length)).success(function () {
+                        alert("Table overrided Successfully");
+                        $location.path(redirectPath);
+                    }).error(function () {
+                        updateLoadingInProgress(false, table.substring(8, table.length));
+                        alert("Table overrided Successfully");
+                        $location.path(redirectPath);
+                    });
+
+                })
+
+                .error(function () {
+                    updateLoadingInProgress(false, table.substring(8, table.length)).success(function () {
+                        alert("Table overrided Failed");
+                        $location.path(redirectPath);
+                    }).error(function () {
+                        updateLoadingInProgress(false, table.substring(8, table.length));
+                        alert("Table overrided Failed");
+                        $location.path(redirectPath);
+                    });
+                });
+
+
+/*
             $http.post($rootScope.base + 'overrideTable?table=' + table, fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
@@ -148,7 +192,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 .error(function () {
                     alert("Table overrided failed");
                     $location.path(redirectPath);
-                });
+                });*/
 
         };
 

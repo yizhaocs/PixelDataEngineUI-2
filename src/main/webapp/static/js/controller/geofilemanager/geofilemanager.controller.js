@@ -107,10 +107,10 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
                     .success(function () {
                         geoFileManagerService.appendTable($rootScope.base + 'geo-file-manager', $scope.myFile, tableName)
                             .success(function () {
-                                geoFileManagerService.updateLoadingInProgress(false, mapName);
+                                //geoFileManagerService.updateLoadingInProgress(false, mapName);
                             })
                             .error(function () {
-                                geoFileManagerService.updateLoadingInProgress(false, mapName);
+                                //geoFileManagerService.updateLoadingInProgress(false, mapName);
                             });
                     })
                     .error(function () {
@@ -121,10 +121,10 @@ app.controller('editGeoMapController', function ($scope, $rootScope, $location, 
                     .success(function () {
                         geoFileManagerService.overrideTable($rootScope.base + 'geo-file-manager', $scope.myFile, tableName)
                             .success(function () {
-                                geoFileManagerService.updateLoadingInProgress(false, mapName);
+                                //geoFileManagerService.updateLoadingInProgress(false, mapName);
                             })
                             .error(function () {
-                                geoFileManagerService.updateLoadingInProgress(false, mapName);
+                                //geoFileManagerService.updateLoadingInProgress(false, mapName);
                             });
                     })
                     .error(function () {
