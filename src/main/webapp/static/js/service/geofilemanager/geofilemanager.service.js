@@ -147,7 +147,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         function overrideTable(redirectPath, file, table) {
             var fd = new FormData();
             fd.append('file', file);
-
+            var mapName = table.substring(8, table.length);
 
             $http.post($rootScope.base + 'overrideTable?table=' + table, fd, {
                     transformRequest: angular.identity,
@@ -155,11 +155,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 })
 
                 .success(function () {
-                    updateLoadingInProgress(false, table.substring(8, table.length)).success(function () {
+                    updateLoadingInProgress(false, mapName).success(function () {
                         alert("Table overrided Successfully");
                         $location.path(redirectPath);
                     }).error(function () {
-                        updateLoadingInProgress(false, table.substring(8, table.length));
+                        updateLoadingInProgress(false, mapName);
                         alert("Table overrided Successfully");
                         $location.path(redirectPath);
                     });
@@ -167,11 +167,11 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 })
 
                 .error(function () {
-                    updateLoadingInProgress(false, table.substring(8, table.length)).success(function () {
+                    updateLoadingInProgress(false, mapName).success(function () {
                         alert("Table overrided Failed");
                         $location.path(redirectPath);
                     }).error(function () {
-                        updateLoadingInProgress(false, table.substring(8, table.length));
+                        updateLoadingInProgress(false, mapName);
                         alert("Table overrided Failed");
                         $location.path(redirectPath);
                     });
