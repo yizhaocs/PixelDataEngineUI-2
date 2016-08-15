@@ -103,6 +103,11 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 "column1": null,
                 "column2": null
             },
+            "map": {
+                "column1": null,
+                "column2": null,
+                "column3": null
+            },
             "inArray": [],
             "setRuleArray": []
         };
@@ -282,6 +287,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.rangeArray,
                 frontendRightHandPanelData.substr,
                 frontendRightHandPanelData.dec,
+                frontendRightHandPanelData.map,
                 frontendRightHandPanelData.inArray,
                 frontendRightHandPanelData.setRuleArray
             ).success(function (backendData) {
@@ -317,6 +323,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                 frontendRightHandPanelData.rangeArray,
                 frontendRightHandPanelData.substr,
                 frontendRightHandPanelData.dec,
+                frontendRightHandPanelData.map,
                 frontendRightHandPanelData.inArray,
                 frontendRightHandPanelData.setRuleArray).success(function (backendData) {
                 $scope.leftPanelSelectedPriority = frontendRightHandPanelData.priority, // add this for fixing bug when updated the priority more than once
@@ -361,6 +368,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.rangeArray,
             frontendRightHandPanelData.substr,
             frontendRightHandPanelData.dec,
+            frontendRightHandPanelData.map,
             frontendRightHandPanelData.inArray,
             frontendRightHandPanelData.setRuleArray,
             frontendRightHandPanelData.testValue,
@@ -502,6 +510,11 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
                     var splitedDec = actionRuleSplit[1].split(":");
                     $scope.processedResponseBackupRuleData.dec.column1 = splitedDec[0];
                     $scope.processedResponseBackupRuleData.dec.column2 = splitedDec[1];
+                } else if (actionRuleSplit[0] == 'map') {
+                    $scope.processedResponseBackupRuleData.map.column1 = actionRuleSplit[1];
+                    var splitedMap = actionRuleSplit[2].split(":");
+                    $scope.processedResponseBackupRuleData.map.column2 = splitedMap[0];
+                    $scope.processedResponseBackupRuleData.map.column3 = splitedMap[1];
                 }
             }
 

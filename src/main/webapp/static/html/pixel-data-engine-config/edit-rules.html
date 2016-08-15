@@ -361,6 +361,7 @@
                                                         <option value="dec">dec</option>
                                                         <option value="ignore">ignore</option>
                                                         <option value="addition">addition</option>
+                                                        <option value="map">map</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -490,6 +491,33 @@
                                         </table>
                                         &ndash;&gt;
 -->
+                                    </td>
+
+                                    <td>
+                                        <table class="rightColumnWidth" ng-show="frontendRightHandPanelData.actionRule=='map'">
+                                            <tr>
+                                                <td>
+                                                    <label> Table: </label>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.map.column1">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label> Key: </label>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.map.column2">
+                                                </td>
+                                            </tr>
+                                            <tr height="5px">
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label> Position: </label>
+                                                    <input type="text" class="form-control" ng-model="frontendRightHandPanelData.map.column3">
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                     </td>
                                 </tr>

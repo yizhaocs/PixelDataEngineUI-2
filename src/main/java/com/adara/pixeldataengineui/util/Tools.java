@@ -126,16 +126,11 @@ public class Tools {
         actionRuleValue.append(actionRuleKey);
 
         List<SetRuleArray> setRuleArrayDTOList = null;
-        String position = null;
-        String substrDirection = null;
-        String substrStartIndex = null;
-        String substrLength = null;
-        String dec = null;
         if (actionRuleKey.equals("substr")) {
-            position = request.getSubstr().getColumn1();
-            substrDirection = request.getSubstr().getColumn2();
-            substrStartIndex = request.getSubstr().getColumn3();
-            substrLength = request.getSubstr().getColumn4();
+            String position = request.getSubstr().getColumn1();
+            String substrDirection = request.getSubstr().getColumn2();
+            String substrStartIndex = request.getSubstr().getColumn3();
+            String substrLength = request.getSubstr().getColumn4();
 
             if (position != null && position.equals("") == false) {
                 actionRuleValue.append("|");
@@ -167,8 +162,8 @@ public class Tools {
             }
             actionRuleValue.deleteCharAt(actionRuleValue.length() - 1);
         } else if (actionRuleKey.equals("dec")) {
-            position = request.getDec().getColumn1();
-            dec = request.getDec().getColumn2();
+            String position = request.getDec().getColumn1();
+            String dec = request.getDec().getColumn2();
 
             if (position != null && position.equals("") == false) {
                 actionRuleValue.append("|");
@@ -178,6 +173,25 @@ public class Tools {
             if (dec != null && dec.equals("") == false) {
                 actionRuleValue.append(":");
                 actionRuleValue.append(dec);
+            }
+        }else if (actionRuleKey.equals("map")) {
+            String table = request.getMap().getColumn1();
+            String key = request.getMap().getColumn2();
+            String position = request.getMap().getColumn3();
+
+            if (table != null && table.equals("") == false) {
+                actionRuleValue.append("|");
+                actionRuleValue.append(table);
+            }
+
+            if (key != null && key.equals("") == false) {
+                actionRuleValue.append("|");
+                actionRuleValue.append(key);
+            }
+
+            if (position != null && position.equals("") == false) {
+                actionRuleValue.append(":");
+                actionRuleValue.append(position);
             }
         }
         return actionRuleValue.toString();
