@@ -7,6 +7,7 @@ import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelD
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelDataEngineGroupsDTO;
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
+import com.opinmind.pixeldataengine.cache.MapCache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,12 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             mPixelDataEngineRuleService.insertRule(request, true);
 
             /*
+            * init mapCache
+            * */
+            MapCache mapCache = initMapCache();
+            mPixelDataEngineService.mPixelDataEngine.setMapCache(mapCache);
+
+            /*
             * let the mock table refresh its pixelDataEngineConfigs
             * */
             mPixelDataEngineService.mPixelDataEngine.init();
@@ -130,6 +137,12 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             mPixelDataEngineRuleService.insertRule(request, true);
 
             /*
+            * init mapCache
+            * */
+            MapCache mapCache = initMapCache();
+            mPixelDataEngineService.mPixelDataEngine.setMapCache(mapCache);
+
+            /*
             * let the mock table refresh its pixelDataEngineConfigs
             * */
             mPixelDataEngineService.mPixelDataEngine.init();
@@ -158,5 +171,29 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         }
 
         return result;
+    }
+
+
+    private MapCache initMapCache(){
+        MapCache mapCache = new MapCache() {
+            @Override
+            public String getMapping(String mapName, String value) {
+                if(mapName.equals("city")){
+                    if(value.equals("NY")){
+                        return "NEW YORK";
+                    }
+                    return value;
+                }
+                return "empty";
+            }
+
+            @Override
+            public void setMapping(String mapName, String value,
+                                   String mappedValue) {
+                // do nothing
+            }
+        };
+
+        return mapCache;
     }
 }
