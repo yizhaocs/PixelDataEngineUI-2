@@ -60,6 +60,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "testRule" + "]";
 
         GenericDTOList<TestRuleDTO> result = new GenericDTOList<TestRuleDTO>();
+        MapCache mapCache = initMapCache();
         /*
         * truncate pixel_data_engine_groups
         * */
@@ -92,7 +93,6 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             /*
             * init mapCache
             * */
-            MapCache mapCache = initMapCache();
             mPixelDataEngineService.mPixelDataEngine.setMapCache(mapCache);
 
             /*
@@ -139,7 +139,6 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             /*
             * init mapCache
             * */
-            MapCache mapCache = initMapCache();
             mPixelDataEngineService.mPixelDataEngine.setMapCache(mapCache);
 
             /*
@@ -184,7 +183,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
                     }
                     return value;
                 }
-                return "empty";
+                return "Please use 'city' table for testing map action purpose";
             }
 
             @Override
