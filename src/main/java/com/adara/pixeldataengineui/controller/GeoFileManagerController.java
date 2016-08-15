@@ -230,7 +230,7 @@ public class GeoFileManagerController {
 
 
         try {
-            File file = new File(Constants.fileUploadingPath);
+            File file = new File(Constants.FILE_UPLOADING_PATH);
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
@@ -238,7 +238,7 @@ public class GeoFileManagerController {
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
         }finally {
-            File file = new File(Constants.fileDownloadingPath);
+            File file = new File(Constants.FILE_DOWNLOADING_PATH);
             try {
                 // need to delete the file after downloading since the file from "SELECT INTO OUTFILE" is forbidden from replacing so that I have to delete the file after user download it
                 Files.deleteIfExists(file.toPath());

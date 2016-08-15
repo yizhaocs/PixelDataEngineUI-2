@@ -40,7 +40,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         String mapName = request.getMapName();
         String description = request.getDescription();
         String tableName = "pde_map_" + mapName;
-        String query1 = "INSERT INTO pde.pixel_data_engine_maps(map_name, table_name, description) VALUES(?, ?, ?)";
+        String query1 = "INSERT INTO marketplace.pixel_data_engine_maps(map_name, table_name, description) VALUES(?, ?, ?)";
         String query2 = "CREATE TABLE pde." + tableName + " (value varchar(255) , mapped_value varchar(255))";
         String query3 = "SELECT * FROM pde." + tableName;
         Object[] args = new Object[]{mapName, tableName, description};
@@ -69,7 +69,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             * Delete the relationship in pixel_data_engine_maps since the table creation failed
             * */
             if(retval1 > 0){
-                String query4 = "DELETE FROM pde.pixel_data_engine_maps WHERE map_name=?";
+                String query4 = "DELETE FROM marketplace.pixel_data_engine_maps WHERE map_name=?";
                 Object[] args2 = new Object[]{mapName};
                 jdbcTemplate.update(query4, args2);
             }
@@ -91,7 +91,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         String mapName = request.getMapName();
         String description = request.getDescription();
         String tableName = "pde_map_" + mapName;
-        String query = "UPDATE pde.pixel_data_engine_maps SET " + "description" + "=?" + " WHERE map_name=?";
+        String query = "UPDATE marketplace.pixel_data_engine_maps SET " + "description" + "=?" + " WHERE map_name=?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{description, mapName};
         Integer retval = 0;
@@ -114,7 +114,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "updatePixelDataEngineMap" + "]";
         String mapName = request.getMap_name();
         Boolean loading_in_progress = request.getLoading_in_progress();
-        String query = "UPDATE pde.pixel_data_engine_maps SET " + "loading_in_progress" + "=?" + " WHERE map_name=?";
+        String query = "UPDATE marketplace.pixel_data_engine_maps SET " + "loading_in_progress" + "=?" + " WHERE map_name=?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         Object[] args = new Object[]{loading_in_progress, mapName};
         Integer retval = 0;
@@ -136,7 +136,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     public ResponseDTO deletePixelDataEngineMap(String mapName) throws Exception{
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         ResponseDTO result = result = new ResponseDTO();
-        String query1 = "DELETE FROM pde.pixel_data_engine_maps WHERE map_name=?";
+        String query1 = "DELETE FROM marketplace.pixel_data_engine_maps WHERE map_name=?";
         String query2 = "DROP TABLE pde.pde_map_" + mapName;
         String query3 = "SELECT * FROM pde.pde_map_" + mapName;
         Object[] args = new Object[]{mapName};
@@ -172,7 +172,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
-        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.loading_in_progress, a.modification_ts FROM pde.pixel_data_engine_maps a";
+        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.loading_in_progress, a.modification_ts FROM marketplace.pixel_data_engine_maps a";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -204,7 +204,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             JdbcTemplate jt = new JdbcTemplate(dataSource);
             try {
                 retval.setMessage(Constants.SUCCESS);
-                appendFileWithoutOverride(jt, Constants.fileUploadingPath, table);
+                appendFileWithoutOverride(jt, Constants.FILE_UPLOADING_PATH, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
             }
@@ -223,7 +223,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             try {
                 retval.setMessage(Constants.SUCCESS);
                 truncateTable(jt, table);
-                appendFileWithoutOverride(jt, Constants.fileUploadingPath, table);
+                appendFileWithoutOverride(jt, Constants.FILE_UPLOADING_PATH, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
             }
@@ -240,7 +240,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
             mapName = table.substring(8, table.length()); // remove "pde_map_" from "pde_map_city" to get the mapName
             mPixelDataEngineMapsDTO = mGeoFileManagerService.getPixelDataEngineMap(mapName);
 
-            String query = "UPDATE pde.pixel_data_engine_maps SET " + "version" + "=?" + " WHERE map_name=?";
+            String query = "UPDATE marketplace.pixel_data_engine_maps SET " + "version" + "=?" + " WHERE map_name=?";
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             Object[] args = new Object[]{String.valueOf(Integer.valueOf(mPixelDataEngineMapsDTO.getVersion()) + 1), mapName};
 
@@ -253,12 +253,12 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     public void getPdeMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
 
-        File file = new File(Constants.fileDirector);
+        File file = new File(Constants.GEO_MANAGER_DIRECTORY);
         if (!file.exists()) {
             file.mkdir();
         }
 
-        String query = "SELECT value, mapped_value INTO OUTFILE" + Constants.fileDownloadingPath + " FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + "pde." + tableName;
+        String query = "SELECT value, mapped_value INTO OUTFILE" + Constants.FILE_DOWNLOADING_PATH + " FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + "pde." + tableName;
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -267,7 +267,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception{
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getPixelDataEngineMap" + "]";
-        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.loading_in_progress, a.modification_ts FROM pde.pixel_data_engine_maps a where a.map_name= ?";
+        String query = "SELECT a.map_name, a.table_name, a.description, a.version, a.loading_in_progress, a.modification_ts FROM marketplace.pixel_data_engine_maps a where a.map_name= ?";
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -307,7 +307,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
     private void appendFileWithOverride(JdbcTemplate jt, String table) throws Exception {
         String query = "INSERT INTO pde." + table + " VALUES(?,?)";
 
-        InputStream in = new FileInputStream(new File(Constants.fileUploadingPath));
+        InputStream in = new FileInputStream(new File(Constants.FILE_UPLOADING_PATH));
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -328,12 +328,18 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
 
     private boolean inputStreamToFile(MultipartFile file) throws Exception {
         Boolean success = false;
+
+        File directory = new File(Constants.GEO_MANAGER_DIRECTORY);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
         InputStream inputStream = null;
         BufferedReader br = null;
         FileWriter out = null;
         inputStream = file.getInputStream();
         br = new BufferedReader(new InputStreamReader(inputStream));
-        out = new FileWriter(Constants.fileUploadingPath);
+        out = new FileWriter(Constants.FILE_UPLOADING_PATH);
         String line;
         while ((line = br.readLine()) != null) {
 
