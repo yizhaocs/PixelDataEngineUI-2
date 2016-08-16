@@ -216,10 +216,14 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
                 appendFileWithoutOverride(jt, Constants.FILE_UPLOADING_PATH, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
+                /*
+                * Directly return, don't update version
+                * */
+                return retval;
+            } finally {
+                updateVersion(retval, table);
             }
         }
-
-        updateVersion(retval, table);
         return retval;
     }
 
@@ -235,10 +239,14 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
                 appendFileWithoutOverride(jt, Constants.FILE_UPLOADING_PATH, table);
             }catch (Exception e){
                 retval.setMessage(Constants.FAILURE);
+                /*
+                * Directly return, don't update version
+                * */
+                return retval;
+            } finally {
+                updateVersion(retval, table);
             }
         }
-
-        updateVersion(retval, table);
         return retval;
     }
 
