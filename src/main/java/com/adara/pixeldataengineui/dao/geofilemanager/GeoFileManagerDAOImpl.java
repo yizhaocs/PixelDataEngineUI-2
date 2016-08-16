@@ -48,15 +48,24 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query1.toString());
 
-        /*
-        * Insert the relationship to the "pixel_data_engine_maps" table
-        * */
-        int retval1 = jdbcTemplate.update(query1, args);
+
 
         /*
-        * Create a table for the new table
+        * Jason ask for create the pde_map_xxx table before creating a new record in pixel_data_engine_maps.
+        * Reason:
+        * so when you write the pixel_data_engine_maps with a new map, you also create a map in pde database called pde_map_xxx.
+        * Please write the pde_map_xxx first, before you insert a new record into the pixel_data_engine_maps table.
+        * the reason is, I periodically check the pixel_data_engine_maps table and if there is a new version ,
+        * I will go and get the pde_map_xxx table and pull them into the BDB cache.
+        * If the pixel_data_engine_maps table is modified before the pde_map_xxx table,
+        * my code won't be able to get the data .
         * */
+        // Create a table for the new table
         jdbcTemplate.execute(query2);
+
+        // Insert the relationship to the "pixel_data_engine_maps" table
+        int retval1 = jdbcTemplate.update(query1, args);
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /*
         * Select * from the new table, and we should get 0 return
