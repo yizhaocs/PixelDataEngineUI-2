@@ -229,7 +229,7 @@ public class GeoFileManagerController {
 
 
         try {
-            File file = new File(Constants.FILE_UPLOADING_PATH);
+            File file = new File(Constants.FILE_DOWNLOADING_PATH);
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
