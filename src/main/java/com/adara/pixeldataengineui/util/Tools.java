@@ -26,7 +26,7 @@ public class Tools {
         String split2Level2SplitString = null;
         if (parseRuleKey.equals("split1")) {
             split1 = request.getSplit1().toString();
-            if(split1 != null && split1.equals("") == false){
+            if (split1 != null && split1.equals("") == false) {
                 parseRuleValue.append("|");
                 if (split1.equals("|")) {
                     split1 = "\"" + split1 + "\"";
@@ -38,7 +38,7 @@ public class Tools {
             split2Level1SplitString = request.getSplit2().getColumn1();
             split2Level2SplitString = request.getSplit2().getColumn2();
 
-            if(split2Level1SplitString!=null && split2Level1SplitString.equals("") == false){
+            if (split2Level1SplitString != null && split2Level1SplitString.equals("") == false) {
                 parseRuleValue.append("|");
                 if (split2Level1SplitString.equals("|")) {
                     split2Level1SplitString = "\"" + split2Level1SplitString + "\"";
@@ -46,7 +46,7 @@ public class Tools {
                 parseRuleValue.append(split2Level1SplitString);
             }
 
-            if(split2Level2SplitString != null && split2Level2SplitString.equals("") == false){
+            if (split2Level2SplitString != null && split2Level2SplitString.equals("") == false) {
                 parseRuleValue.append("|");
                 if (split2Level2SplitString.equals("|")) {
                     split2Level2SplitString = "\"" + split2Level2SplitString + "\"";
@@ -101,7 +101,7 @@ public class Tools {
             conditionRuleValue.deleteCharAt(conditionRuleValue.length() - 1);
         } else if (conditionRuleKey.equals("seg")) {
             seg = request.getSeg().toString();
-            if(seg !=null  && seg.equals("") == false){
+            if (seg != null && seg.equals("") == false) {
                 conditionRuleValue.append("|");
                 conditionRuleValue.append(seg);
             }
@@ -174,7 +174,7 @@ public class Tools {
                 actionRuleValue.append(":");
                 actionRuleValue.append(dec);
             }
-        }else if (actionRuleKey.equals("map")) {
+        } else if (actionRuleKey.equals("map")) {
             String table = request.getMap().getColumn1();
             String key = request.getMap().getColumn2();
             String position = request.getMap().getColumn3();

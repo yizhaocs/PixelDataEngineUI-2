@@ -123,9 +123,9 @@ public class UserManagementDAOImpl implements UserManagementDAO {
                             }
                         });
 
-        if(retval.length() > 0){
+        if (retval.length() > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -159,9 +159,9 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -179,9 +179,9 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         int retval = 0;
         retval = jdbcTemplate.update(query, username);
 
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -220,9 +220,9 @@ public class UserManagementDAOImpl implements UserManagementDAO {
         if (LOG.isDebugEnabled())
             LOG.debug(LOG_HEADER + "  ,method return -> " + result);
 
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 

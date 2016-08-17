@@ -246,7 +246,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     $scope.deleteRule = function (frontendRightHandPanelData) {
         if (confirm("Are you sure to delete rule number: " + frontendRightHandPanelData.keyId) == true) {
             pixelmappingService.deleteRule(
-                $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
+                $rootScope.base + 'group/edit-rules/triggerkeyid=' + triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.gid,
                 frontendRightHandPanelData.keyId,
                 $scope.leftPanelSelectedPriority
@@ -271,7 +271,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             }
 
             pixelmappingService.insertRule(
-                $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
+                $rootScope.base + 'group/edit-rules/triggerkeyid=' + triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.parseRule,
                 frontendRightHandPanelData.conditionRule,
                 frontendRightHandPanelData.actionRule,
@@ -306,7 +306,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
             }
             pixelmappingService.updateRule(
-                $rootScope.base + 'group/edit-rules/triggerkeyid=' +triggerKeyId + '&gid=' + gid,
+                $rootScope.base + 'group/edit-rules/triggerkeyid=' + triggerKeyId + '&gid=' + gid,
                 frontendRightHandPanelData.parseRule,
                 frontendRightHandPanelData.conditionRule,
                 frontendRightHandPanelData.actionRule,
@@ -334,7 +334,7 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
     };
 
     $scope.refreshLeftPanel = function () {
-        pixelmappingService.getSameGroup(triggerKeyId,gid).success(function (backendData) {
+        pixelmappingService.getSameGroup(triggerKeyId, gid).success(function (backendData) {
             $scope.sortPriority(backendData.list);
             $scope.frontendLeftHandPanelData = angular.copy(backendData.list);
         });
@@ -375,18 +375,18 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
             frontendRightHandPanelData.testOption
         ).success(function (backendData) {
             var result = "";
-            if(backendData != ''){
+            if (backendData != '') {
                 for (var i = 0; i < backendData.list.length; i++) {
                     var key = backendData.list[i].key;
                     var value = backendData.list[i].value;
                     result += key + "=" + value + "\n";
                 }
 
-                if(backendData.list.length == 0){
+                if (backendData.list.length == 0) {
                     result = "null/empty result";
                 }
 
-            }else{
+            } else {
                 result = "null/empty result";
             }
 
@@ -522,14 +522,14 @@ app.controller('editSameGroup', function ($scope, $rootScope, $location, $routeP
 
 
             /*
-            * This is for hard setting for the Group Type on the frontend Right Hand Panel
-            * */
+             * This is for hard setting for the Group Type on the frontend Right Hand Panel
+             * */
             pixelmappingService.getGroup(triggerKeyId).success(function (backendData) {
                 $scope.frontendRightHandPanelData.triggerKeyID = triggerKeyId;
                 var group = backendData;
-                if(group.group_type == 1){
+                if (group.group_type == 1) {
                     $scope.frontendRightHandPanelData.groupType = "independent";
-                }else if(group.group_type == 2){
+                } else if (group.group_type == 2) {
                     $scope.frontendRightHandPanelData.groupType = "sequential";
                 }
             });

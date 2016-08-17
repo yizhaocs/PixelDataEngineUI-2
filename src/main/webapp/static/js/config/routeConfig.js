@@ -197,18 +197,18 @@ app.config(['$routeProvider', '$locationProvider',
                 controller: 'listPixelRules'
             })
             /*.when(base + 'rule/edit-rule/triggerkeyid=:keyId', {
-                title: 'Edit Pixel Data Engine Rule',
-                templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
-                controller: 'editPixelRule',
-                resolve: {
-                    backendData: function (pixelmappingService, $route) {
-                        var gid = $route.current.params.gid;
-                        var keyId = $route.current.params.keyId;
-                        var priority = $route.current.params.priority;
-                        return pixelmappingService.getRule(gid, keyId, priority);
-                    }
-                }
-            })*/
+             title: 'Edit Pixel Data Engine Rule',
+             templateUrl: 'static/html/pixel-data-engine-config/edit-rule.html',
+             controller: 'editPixelRule',
+             resolve: {
+             backendData: function (pixelmappingService, $route) {
+             var gid = $route.current.params.gid;
+             var keyId = $route.current.params.keyId;
+             var priority = $route.current.params.priority;
+             return pixelmappingService.getRule(gid, keyId, priority);
+             }
+             }
+             })*/
             .when(base + 'geo-file-manager', {
                 title: 'Geo File Manager',
                 templateUrl: 'static/html/geo-file-manager/list-pixel-data-engine-maps.html',

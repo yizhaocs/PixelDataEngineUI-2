@@ -34,9 +34,9 @@ public class PixelDataEngineGroupController {
 
         try {
             retval = mPixelDataEngineGroupService.insertGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type(), false);
-            if(retval.getMessage().equals(Constants.FAILURE)){
+            if (retval.getMessage().equals(Constants.FAILURE)) {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
-            }else{
+            } else {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             }
         } catch (Exception e) {
@@ -118,9 +118,9 @@ public class PixelDataEngineGroupController {
 
         try {
             retval = mPixelDataEngineGroupService.updateGroup(request.getMapping().getTriggering_key_id(), request.getMapping().getGroup_type());
-            if(retval.getMessage().equals(Constants.FAILURE)){
+            if (retval.getMessage().equals(Constants.FAILURE)) {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
-            }else{
+            } else {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             }
         } catch (Exception e) {
@@ -144,9 +144,9 @@ public class PixelDataEngineGroupController {
 
         try {
             retval = mPixelDataEngineGroupService.deleteGroup(triggerKeyId, gid, false);
-            if(retval.getMessage().equals(Constants.FAILURE)){
+            if (retval.getMessage().equals(Constants.FAILURE)) {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
-            }else{
+            } else {
                 response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
             }
         } catch (Exception e) {

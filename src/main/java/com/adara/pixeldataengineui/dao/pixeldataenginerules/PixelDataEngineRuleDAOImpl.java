@@ -60,10 +60,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         retval = jdbcTemplate.update(query, args);
 
 
-
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -166,9 +165,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         Integer retval = 0;
         retval = jdbcTemplate.update(query, args);
 
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -197,9 +196,9 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         int retval = 0;
         retval = jdbcTemplate.update(query, gid, keyId, priority);
 
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -218,7 +217,7 @@ public class PixelDataEngineRuleDAOImpl implements PixelDataEngineRuleDAO {
         }
 
         JdbcTemplate jdbcTemplateRulesToThatGroup = new JdbcTemplate(dataSource);
-            jdbcTemplateRulesToThatGroup.execute(query);
+        jdbcTemplateRulesToThatGroup.execute(query);
 
     }
 }

@@ -28,7 +28,7 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mGeoFileManagerDAOImpl.updatePixelDataEngineMap(request);
     }
 
-    public ResponseDTO updateLoadingInProgress(UpdateLoadingInProgressRequest request) throws Exception{
+    public ResponseDTO updateLoadingInProgress(UpdateLoadingInProgressRequest request) throws Exception {
         return mGeoFileManagerDAOImpl.updateLoadingInProgress(request);
     }
 

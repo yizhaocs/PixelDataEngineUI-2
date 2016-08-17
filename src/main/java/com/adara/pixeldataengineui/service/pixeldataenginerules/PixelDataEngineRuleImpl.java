@@ -8,6 +8,7 @@ import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.PixelD
 import com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules.TestRuleDTO;
 import com.adara.pixeldataengineui.model.frontend.requestbody.RuleRequest;
 import com.opinmind.pixeldataengine.cache.MapCache;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,7 +125,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             Collection<PixelDataEngineConfigsDTO> sameGroupRulesList = sameGroupRules.getList();
             for (PixelDataEngineConfigsDTO mPixelDataEngineConfigsDTO : sameGroupRulesList) {
                 if (mPixelDataEngineConfigsDTO.getPriority().equals(request.getPriority()) == false) {
-                    RuleRequest mRuleRequest = new RuleRequest(mPixelDataEngineConfigsDTO.getParse_rule(), mPixelDataEngineConfigsDTO.getCondition_rule(), mPixelDataEngineConfigsDTO.getAction_rule(), "1", mPixelDataEngineConfigsDTO.getKey_id(), mPixelDataEngineConfigsDTO.getPriority(), null, mPixelDataEngineConfigsDTO.getType(), null, null, null, null, null, null, null, null, null, null, null,null, null);
+                    RuleRequest mRuleRequest = new RuleRequest(mPixelDataEngineConfigsDTO.getParse_rule(), mPixelDataEngineConfigsDTO.getCondition_rule(), mPixelDataEngineConfigsDTO.getAction_rule(), "1", mPixelDataEngineConfigsDTO.getKey_id(), mPixelDataEngineConfigsDTO.getPriority(), null, mPixelDataEngineConfigsDTO.getType(), null, null, null, null, null, null, null, null, null, null, null, null, null);
                     mPixelDataEngineRuleService.insertRule(mRuleRequest, true);
                 }
             }
@@ -164,7 +165,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         mPixelDataEngineRuleService.truncatePixelDataEngineConfigsTable(true);
 
 
-        for(String key: treeMapResultMap.keySet()){
+        for (String key : treeMapResultMap.keySet()) {
             TestRuleDTO mTestRuleDTO = new TestRuleDTO(key, treeMapResultMap.get(key));
             result.add(mTestRuleDTO);
         }
@@ -173,12 +174,12 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
     }
 
 
-    private MapCache initMapCache(){
+    private MapCache initMapCache() {
         MapCache mapCache = new MapCache() {
             @Override
             public String getMapping(String mapName, String value) {
-                if(mapName.equals("city")){
-                    if(value.equals("NY")){
+                if (mapName.equals("city")) {
+                    if (value.equals("NY")) {
                         return "NEW YORK";
                     }
                     return value;
@@ -190,6 +191,11 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
             public void setMapping(String mapName, String value,
                                    String mappedValue) {
                 // do nothing
+            }
+
+            public String printInfo() {
+                // TODO Auto-generated method stub
+                return null;
             }
         };
 

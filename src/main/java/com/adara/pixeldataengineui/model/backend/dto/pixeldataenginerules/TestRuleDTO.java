@@ -1,7 +1,6 @@
 package com.adara.pixeldataengineui.model.backend.dto.pixeldataenginerules;
 
 import com.adara.pixeldataengineui.model.backend.dto.generic.BaseDTO;
-import com.adara.pixeldataengineui.model.backend.dto.pixelmapping.AdobeDpkeyMappingDTO;
 
 import java.io.Serializable;
 
@@ -12,11 +11,11 @@ public class TestRuleDTO extends BaseDTO implements Serializable {
     private String key;
     private String value;
 
-    public TestRuleDTO(){
+    public TestRuleDTO() {
 
     }
 
-    public TestRuleDTO(String key, String value){
+    public TestRuleDTO(String key, String value) {
         this.key = key;
         this.value = value;
     }

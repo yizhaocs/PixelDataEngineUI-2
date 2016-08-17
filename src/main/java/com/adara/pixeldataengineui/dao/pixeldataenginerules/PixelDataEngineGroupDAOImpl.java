@@ -48,9 +48,9 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         retval = jdbcTemplate.update(query, args);
 
         ResponseDTO result = new ResponseDTO();
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
         if (LOG.isDebugEnabled())
@@ -161,9 +161,9 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
         retval = jdbcTemplate.update(query, args);
 
         ResponseDTO result = new ResponseDTO();
-        if(retval > 0){
+        if (retval > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 
@@ -214,9 +214,9 @@ public class PixelDataEngineGroupDAOImpl implements PixelDataEngineGroupDAO {
             LOG.error("Failed to execute sql query", e);
         }
 
-        if(resultDeleteRulesToThatGroup > 0){
+        if (resultDeleteRulesToThatGroup > 0) {
             result.setMessage(Constants.SUCCESS);
-        }else{
+        } else {
             result.setMessage(Constants.FAILURE);
         }
 

@@ -34,7 +34,7 @@ public class RuleRequest {
 
     }
 
-    public RuleRequest(String parseRule, String conditionRule, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, List<LenArray> lenArray,Seg seg, List<ContainsArray> containsArray, List<RangeArray> rangeArray, Substr substr, Dec dec, Map map, String testValue, String testOption, List<InElementArray> inElementArray, List<SetRuleArray> setRuleArray) {
+    public RuleRequest(String parseRule, String conditionRule, String actionRule, String gid, String keyId, String priority, String newPriority, String type, Split1 split1, Split2 split2, List<LenArray> lenArray, Seg seg, List<ContainsArray> containsArray, List<RangeArray> rangeArray, Substr substr, Dec dec, Map map, String testValue, String testOption, List<InElementArray> inElementArray, List<SetRuleArray> setRuleArray) {
         this.parseRule = parseRule;
         this.conditionRule = conditionRule;
         this.actionRule = actionRule;

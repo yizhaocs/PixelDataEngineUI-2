@@ -19,17 +19,17 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         service.updatePixelDataEngineMap = updatePixelDataEngineMap;
         service.getPixelDataEngineMap = getPixelDataEngineMap;
 
-        function createPixelDataEngineMap(redirectPath, file,  frontendData) {
+        function createPixelDataEngineMap(redirectPath, file, frontendData) {
             var fd = new FormData();
             fd.append('file', file);
             return $http.post($rootScope.base + 'createPixelDataEngineMap', {
-                    mapName:frontendData.map_name,
+                    mapName: frontendData.map_name,
                     description: frontendData.description
 
-            })
+                })
                 .success(function () {
                     alert("New Geo Map Created Successfully");
-                    if(file!= undefined){
+                    if (file != undefined) {
                         $http.post($rootScope.base + 'appendTable?table=' + "pde_map_" + frontendData.map_name, fd, {
                                 transformRequest: angular.identity,
                                 headers: {'Content-Type': undefined}
@@ -44,7 +44,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                                 alert("Table Appended Failed");
                                 $location.path(redirectPath);
                             });
-                    }else{
+                    } else {
                         $location.path(redirectPath);
                     }
 
@@ -55,9 +55,9 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 });
         };
 
-        function updateLoadingInProgress(loadingInProgress, map_name){
+        function updateLoadingInProgress(loadingInProgress, map_name) {
             return $http.put($rootScope.base + 'updateLoadingInProgress', {
-                    loading_in_progress:loadingInProgress,
+                    loading_in_progress: loadingInProgress,
                     map_name: map_name
 
                 })
@@ -68,7 +68,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         }
 
         function deletePixelDataEngineMap(redirectPath, mapName) {
-            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' +mapName)
+            return $http.delete($rootScope.base + 'deletePixelDataEngineMap?mapname=' + mapName)
                 .success(function () {
                     alert("Map Deleted Successfully");
                     $location.path(redirectPath);
@@ -78,9 +78,9 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 });
         };
 
-        function updatePixelDataEngineMap(redirectPath, frontendData){
+        function updatePixelDataEngineMap(redirectPath, frontendData) {
             return $http.put($rootScope.base + 'updatePixelDataEngineMap', {
-                    mapName:frontendData.map_name,
+                    mapName: frontendData.map_name,
                     description: frontendData.description
 
                 })
@@ -178,21 +178,21 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 });
 
 
-/*
-            $http.post($rootScope.base + 'overrideTable?table=' + table, fd, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                })
+            /*
+             $http.post($rootScope.base + 'overrideTable?table=' + table, fd, {
+             transformRequest: angular.identity,
+             headers: {'Content-Type': undefined}
+             })
 
-                .success(function () {
-                    alert("Table overrided successfully");
-                    $location.path(redirectPath);
-                })
+             .success(function () {
+             alert("Table overrided successfully");
+             $location.path(redirectPath);
+             })
 
-                .error(function () {
-                    alert("Table overrided failed");
-                    $location.path(redirectPath);
-                });*/
+             .error(function () {
+             alert("Table overrided failed");
+             $location.path(redirectPath);
+             });*/
 
         };
 

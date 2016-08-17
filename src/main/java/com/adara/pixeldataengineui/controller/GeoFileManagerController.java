@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.nio.file.Files;
 
 /**
  * Created by yzhao on 7/21/16.
@@ -146,7 +145,7 @@ public class GeoFileManagerController {
         try {
             retval = mGeoFileManagerService.getPixelDataEngineMap(mapName);
 
-                response = new ResponseEntity<PixelDataEngineMapsDTO>(retval, HttpStatus.OK);
+            response = new ResponseEntity<PixelDataEngineMapsDTO>(retval, HttpStatus.OK);
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.getPixelDataEngineMap] Service error: " + e, e);
             response = new ResponseEntity<PixelDataEngineMapsDTO>(retval, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -236,14 +235,16 @@ public class GeoFileManagerController {
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
-            LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+            LOG.error("[GeoFileManagerController.downloadTheMap] Service error: " + e, e);
         }finally {
             File file = new File(Constants.FILE_DOWNLOADING_PATH);
             try {
                 // need to delete the file after downloading since the file from "SELECT INTO OUTFILE" is forbidden from replacing so that I have to delete the file after user download it
-                Files.deleteIfExists(file.toPath());
+                if (file.exists()){
+                    file.delete();
+                }
             }catch (Exception e){
-                LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+                LOG.error("[GeoFileManagerController.downloadTheMap] Service error: " + e, e);
             }
         }
     }

@@ -12,5 +12,6 @@ public class Constants {
 
     public static final String FILE_UPLOADING_PATH = "/opt/opinmind/var/pdeui/fileUpload.csv";
     public static final String FILE_DOWNLOADING_PATH = "/opt/opinmind/var/pdeui/fileDownload.csv";
-    public static final String GEO_MANAGER_DIRECTORY = "/opt/opinmind/var/pdeui/";
+    public static final String GEO_MANAGER_DIRECTORY_LEVEL1 = "/opt/opinmind/var/";
+    public static final String GEO_MANAGER_DIRECTORY_LEVEL2 = "/opt/opinmind/var/pdeui/";
 }
