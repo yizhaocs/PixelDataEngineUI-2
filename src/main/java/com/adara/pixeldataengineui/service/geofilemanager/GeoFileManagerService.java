@@ -21,7 +21,7 @@ public interface GeoFileManagerService {
 
     GenericDTOList<PixelDataEngineMapsDTO> getPixelDataEngineMaps() throws Exception;
 
-    ResponseDTO append(MultipartFile file, String table) throws Exception;
+    ResponseDTO append(MultipartFile file, String table, String appendWhenCreatingTable) throws Exception;
 
     ResponseDTO override(MultipartFile file, String table) throws Exception;
 

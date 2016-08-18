@@ -30,7 +30,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
                 .success(function () {
                     alert("New Geo Map Created Successfully");
                     if (file != undefined) {
-                        $http.post($rootScope.base + 'appendTable?table=' + "pde_map_" + frontendData.map_name, fd, {
+                        $http.post($rootScope.base + 'appendTable?table=' + "pde_map_" + frontendData.map_name + '&appendWhenCreatingTable=' + 'yes', fd, {
                                 transformRequest: angular.identity,
                                 headers: {'Content-Type': undefined}
                             })
@@ -115,7 +115,7 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
             var fd = new FormData();
             fd.append('file', file);
 
-            $http.post($rootScope.base + 'appendTable?table=' + table, fd, {
+            $http.post($rootScope.base + 'appendTable?table=' + table + '&appendWhenCreatingTable=' + 'no', fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })

@@ -206,7 +206,7 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         return result;
     }
 
-    public ResponseDTO append(MultipartFile file, String table) throws Exception {
+    public ResponseDTO append(MultipartFile file, String table, String appendWhenCreatingTable) throws Exception {
 
         ResponseDTO retval = new ResponseDTO();
 
@@ -222,7 +222,9 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
                 * */
                 return retval;
             } finally {
-                updateVersion(retval, table);
+                if(appendWhenCreatingTable.equals("no")){
+                    updateVersion(retval, table);
+                }
             }
         }
         return retval;

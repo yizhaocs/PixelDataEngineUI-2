@@ -155,15 +155,19 @@ public class GeoFileManagerController {
     }
 
 
+    /*
+    * @appendWhenCreatingTable -> appendWhenCreatingTable == yes means append then time when use use creating button, then we don't update the version from 0 to 1.
+    *
+    * */
     @RequestMapping(method = RequestMethod.POST, value = "/appendTable")
-    public ResponseEntity<ResponseDTO> appendTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table
+    public ResponseEntity<ResponseDTO> appendTable(@RequestParam("file") MultipartFile file, @RequestParam(value = "table", required = false) String table,  @RequestParam(value = "appendWhenCreatingTable", required = false) String appendWhenCreatingTable
     ) {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = null;
 
         if (!file.isEmpty()) {
             try {
-                retval = mGeoFileManagerService.append(file, table);
+                retval = mGeoFileManagerService.append(file, table, appendWhenCreatingTable);
                 if(retval.getMessage().equals(Constants.FAILURE)){
                     response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.NOT_FOUND);
                 }else{

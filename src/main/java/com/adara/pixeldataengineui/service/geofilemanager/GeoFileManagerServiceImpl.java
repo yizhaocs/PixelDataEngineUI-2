@@ -40,8 +40,8 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mGeoFileManagerDAOImpl.getPixelDataEngineMaps();
     }
 
-    public ResponseDTO append(MultipartFile file, String table) throws Exception {
-        return mGeoFileManagerDAOImpl.append(file, table);
+    public ResponseDTO append(MultipartFile file, String table, String appendWhenCreatingTable) throws Exception {
+        return mGeoFileManagerDAOImpl.append(file, table, appendWhenCreatingTable);
     }
 
     public ResponseDTO override(MultipartFile file, String table) throws Exception {
