@@ -178,7 +178,7 @@ public class PixelDataEngineRuleImpl implements PixelDataEngineRuleService {
         MapCache mapCache = new MapCache() {
             @Override
             public String getMapping(String mapName, String value) {
-                if (mapName.equals("city")) {
+                if (mapName.equals("dummy")) {
                     if (value.equals("NY")) {
                         return "NEW YORK";
                     }
