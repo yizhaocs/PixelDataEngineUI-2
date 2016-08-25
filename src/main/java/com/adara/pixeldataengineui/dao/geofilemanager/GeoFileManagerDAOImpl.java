@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * Created by yzhao on 7/21/16.
  */
-public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
+public class GeoFileManagerDAOImpl implements com.adara.pixeldataengineui.dao.geofilemanager.GeoFileManagerDAO {
     private static final Log LOG = LogFactory.getLog(GeoFileManagerDAOImpl.class);
     private final String CLASS_NAME = this.getClass().getSimpleName();
     private DataSource dataSource;
@@ -277,7 +277,8 @@ public class GeoFileManagerDAOImpl implements GeoFileManagerDAO {
         if (!file.exists()) {
             file.mkdir();
         }
-
+        //ExecUtil.exec(  );
+        //String query = "mysql -uom -pN3wQA3ra. -hubuntu1-lax3 -e \"SELECT value, mapped_value FROM pde." + tableName + ">" + Constants.FILE_DOWNLOADING_PATH  + "\"";
         String query = "SELECT value, mapped_value INTO OUTFILE " + "'" + Constants.FILE_DOWNLOADING_PATH + "'" + " FIELDS TERMINATED BY ','  LINES TERMINATED BY '\\n' FROM " + "pde." + tableName;
         LOG.info(LOG_HEADER + ", " + "Executing query -> " + query.toString());
 
