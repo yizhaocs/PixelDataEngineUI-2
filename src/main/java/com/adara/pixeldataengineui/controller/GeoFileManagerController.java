@@ -284,6 +284,7 @@ public class GeoFileManagerController {
             * Start with downloading
             * */
             File file = new File(Constants.FILE_DOWNLOADING_PATH);
+            response.setContentLength((int)file.length());
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
