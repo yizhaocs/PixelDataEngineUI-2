@@ -213,6 +213,7 @@ public class GeoFileManagerController {
         return response;
     }
 
+    @Deprecated
     @RequestMapping(value = "/createCSVFromTable", method = RequestMethod.GET)
     public ResponseEntity<ResponseDTO> createCSVFromTable(
             @RequestParam(value = "mapname", required = false) String mapName) {
