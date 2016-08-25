@@ -266,7 +266,7 @@ public class GeoFileManagerController {
 
         // get your file as InputStream
         response.setContentType("text/csv");
-        response.setHeader("Content-Disposition", "attachment; filename=" + "file.csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + tableName + ".csv");
 
         try {
             /*
