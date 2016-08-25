@@ -213,7 +213,7 @@ public class GeoFileManagerController {
         return response;
     }
 
-    @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
+    @RequestMapping(value = "/createCSVFromTable", method = RequestMethod.GET)
     public ResponseEntity<ResponseDTO> createCSVFromTable(
             @RequestParam(value = "mapname", required = false) String mapName) {
         ResponseEntity<ResponseDTO> response = null;

@@ -220,7 +220,7 @@ app.config(['$routeProvider', '$locationProvider',
                 //resolve: {
                 //    backendData: function (geoFileManagerService, $route) {
                 //        var map_name = $route.current.params.map_name;
-                //        return geoFileManagerService.getPdeMap(map_name);
+                //        return geoFileManagerService.createCSVFromTable(map_name);
                 //    }
                 //}
 

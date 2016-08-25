@@ -14,7 +14,7 @@ app.controller('listGeoMapsController', function ($routeParams, $rootScope, $sco
 app.controller('getPdeMapController', function ($routeParams, $rootScope, $scope, $location, geoFileManagerService) {
     var mapName = $routeParams.tableName;
     $rootScope.title = "Export the " + $routeParams.tableName + " table";
-    geoFileManagerService.getPdeMap("pde_map_" + mapName);
+    geoFileManagerService.createCSVFromTable("pde_map_" + mapName);
 });
 
 
