@@ -41,7 +41,7 @@ public class ExecUtil {
 		}
 	}
 
-	private static String execGeneral(String command, String[] commandArray) {
+	public static String execGeneral(String command, String[] commandArray) {
 		log.info(String.format(
 				"BEGIN execGeneral(command='%s', commandArray=[%s])", command,
 				Arrays.toString(commandArray)));

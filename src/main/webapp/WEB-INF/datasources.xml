@@ -38,4 +38,14 @@
         <property name="maxActive" value="5"/>
         <property name="minIdle" value="1"/>
     </bean>
+
+    <bean id="chatProjectName" class="java.lang.String">
+        <qualifier value="projectName" />
+        <constructor-arg value="chat"/>
+    </bean>
+
+    <bean id="mysqlHost" class="java.lang.String">
+        <qualifier value="mysqlHost" />
+        <constructor-arg value="${marketplace.db.svr}"/>
+    </bean>
 </beans>

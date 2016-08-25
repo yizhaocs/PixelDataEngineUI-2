@@ -25,7 +25,7 @@ public interface GeoFileManagerService {
 
     ResponseDTO override(MultipartFile file, String table) throws Exception;
 
-    void getPdeMap(String tableName) throws Exception;
+    void createCSVFromTable(String tableName) throws Exception;
 
     PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception;
 }

@@ -107,8 +107,8 @@ app.factory("geoFileManagerService", ['$http', '$location', '$rootScope',
         };
 
         function downloadTheMap(mapname) {
-            return $http.get($rootScope.base + 'downloadTheMap?mapname=' + mapname);
-
+            $http.get($rootScope.base + 'downloadTheMap?mapname=' + mapname);
+            $location.path($rootScope.base + geo-file-manager);
         };
 
         function appendTable(redirectPath, file, table) {

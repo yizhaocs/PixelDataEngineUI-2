@@ -48,8 +48,8 @@ public class GeoFileManagerServiceImpl implements GeoFileManagerService {
         return mGeoFileManagerDAOImpl.override(file, table);
     }
 
-    public void getPdeMap(String tableName) throws Exception {
-        mGeoFileManagerDAOImpl.getPdeMap(tableName);
+    public void createCSVFromTable(String tableName) throws Exception {
+        mGeoFileManagerDAOImpl.createCSVFromTable(tableName);
     }
 
     public PixelDataEngineMapsDTO getPixelDataEngineMap(String tableName) throws Exception {

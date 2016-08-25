@@ -7,6 +7,7 @@ import com.adara.pixeldataengineui.model.frontend.requestbody.GeoMapCreationRequ
 import com.adara.pixeldataengineui.model.frontend.requestbody.UpdateLoadingInProgressRequest;
 import com.adara.pixeldataengineui.service.geofilemanager.GeoFileManagerService;
 import com.adara.pixeldataengineui.util.Constants;
+import com.adara.pixeldataengineui.util.ExecUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ public class GeoFileManagerController {
     private final String CLASS_NAME = this.getClass().getSimpleName();
     public static final String ROOT = "upload-dir";
     @Autowired
-    GeoFileManagerService mGeoFileManagerService;
+    private GeoFileManagerService mGeoFileManagerService;
+
+    @Autowired(required = true)
+    private String mysqlHost;
 
     @RequestMapping(method = RequestMethod.POST, value = "/createPixelDataEngineMap", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseDTO> createPixelDataEngineMap(@RequestBody GeoMapCreationRequest request) {
@@ -210,15 +214,27 @@ public class GeoFileManagerController {
     }
 
     @RequestMapping(value = "/getPdeMap", method = RequestMethod.GET)
-    public ResponseEntity<ResponseDTO> getFile(
+    public ResponseEntity<ResponseDTO> createCSVFromTable(
             @RequestParam(value = "mapname", required = false) String mapName) {
         ResponseEntity<ResponseDTO> response = null;
         ResponseDTO retval = null;
         response = new ResponseEntity<ResponseDTO>(retval, HttpStatus.OK);
+
+        /*
+        * Delete the download preparation file from both mysql database server
+        * */
+        String commandDeleteFileInMysqlServer = "/usr/bin/ssh " + mysqlHost + " rm -f " + Constants.FILE_DOWNLOADING_PATH;
+        LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandDeleteFileInMysqlServer);
+        String commandOutput = ExecUtil.execGeneral(commandDeleteFileInMysqlServer, null);
+        LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandOutput);
+
+        /*
+        * Create a new csv file in mysql database
+        * */
         try{
-            mGeoFileManagerService.getPdeMap(mapName);
+            mGeoFileManagerService.createCSVFromTable(mapName);
         }catch (Exception e) {
-            LOG.error("[GeoFileManagerController.getPdeMap] Service error: " + e, e);
+            LOG.error("[GeoFileManagerController.createCSVFromTable] Service error: " + e, e);
         }
 
         return response;
@@ -231,8 +247,21 @@ public class GeoFileManagerController {
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + "file.csv");
 
-
         try {
+            /*
+            * Download the csv file mysql database to pdeui server by using scp command
+            * */
+            String commandDownloadTheFileFromMysqlServerToPDEUIServer = "scp " + mysqlHost + ":" + Constants.FILE_DOWNLOADING_PATH + " " + Constants.GEO_MANAGER_DIRECTORY_LEVEL2;
+            LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandDownloadTheFileFromMysqlServerToPDEUIServer);
+            String commandOutput = ExecUtil.execGeneral(commandDownloadTheFileFromMysqlServerToPDEUIServer, null);
+            LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandOutput);
+            /*
+            * sleep for 5 seconds wait for the download complete
+            * */
+            Thread.sleep(5000);
+            /*
+            * Start with downloading
+            * */
             File file = new File(Constants.FILE_DOWNLOADING_PATH);
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
@@ -241,6 +270,10 @@ public class GeoFileManagerController {
         } catch (Exception e) {
             LOG.error("[GeoFileManagerController.downloadTheMap] Service error: " + e, e);
         }finally {
+
+            /*
+            * Delete the download preparation file from pdeui server
+            * */
             File file = new File(Constants.FILE_DOWNLOADING_PATH);
             try {
                 // need to delete the file after downloading since the file from "SELECT INTO OUTFILE" is forbidden from replacing so that I have to delete the file after user download it
@@ -251,5 +284,13 @@ public class GeoFileManagerController {
                 LOG.error("[GeoFileManagerController.downloadTheMap] Service error: " + e, e);
             }
         }
+    }
+
+    public String getMysqlHost() {
+        return mysqlHost;
+    }
+
+    public void setMysqlHost(String mysqlHost) {
+        this.mysqlHost = mysqlHost;
     }
 }

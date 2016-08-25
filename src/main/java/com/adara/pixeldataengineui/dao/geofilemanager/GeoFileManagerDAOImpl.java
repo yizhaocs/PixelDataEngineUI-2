@@ -270,7 +270,7 @@ public class GeoFileManagerDAOImpl implements com.adara.pixeldataengineui.dao.ge
         }
     }
 
-    public void getPdeMap(String tableName) throws Exception {
+    public void createCSVFromTable(String tableName) throws Exception {
         final String LOG_HEADER = "[" + CLASS_NAME + "." + "getGroups" + "]";
 
         File file = new File(Constants.GEO_MANAGER_DIRECTORY_LEVEL2);
