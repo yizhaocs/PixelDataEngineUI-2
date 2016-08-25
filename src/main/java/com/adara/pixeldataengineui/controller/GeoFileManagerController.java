@@ -258,7 +258,7 @@ public class GeoFileManagerController {
         * */
         try{
             mGeoFileManagerService.createCSVFromTable(tableName);
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         }catch (Exception e) {
             LOG.error("[GeoFileManagerController.createCSVFromTable] Service error: " + e, e);
         }
