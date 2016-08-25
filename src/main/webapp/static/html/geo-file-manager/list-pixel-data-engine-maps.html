@@ -18,7 +18,6 @@
             <th>Loading In Progress&nbsp;</th>
             <th>Modification TS&nbsp;</th>
             <th>Edit&nbsp;</th>
-            <!--<th>Export&nbsp;</th>-->
             <th>Append&nbsp;</th>
             <th>Override&nbsp;</th>
             <th>Export&nbsp;</th>
@@ -31,20 +30,9 @@
                 <td>{{data.loading_in_progress}}</td>
                 <td>{{data.modification_ts}}</td>
                 <td><a href="geo/edit-geo/mapname={{data.map_name}}&action=edit" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Map</a></td>
-
-                <td>
-                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=append" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Append</a>
-                </td>
-                <td>
-                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override</a>
-                </td>
+                <td><a href="geo/edit-geo/mapname={{data.map_name}}&action=append" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Append</a></td>
+                <td><a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override</a></td>
                 <td><a href="downloadTheMap?mapname={{data.map_name}}" target="_blank" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export</a></td>
-                <!--<td><a href="geo/get-pde-map/tableName={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a></td>-->
-                <!--<td>-->
-                <!--&lt;!&ndash;<button type="button"  ng-csv="getArray" csv-header="exportTable(data.map_name, data.table_name)" filename="{{ filename }}">Export</button>&ndash;&gt;-->
-                <!--<button type="button"  ng-click="exportTable(data.map_name);" ng-csv="getArray"  filename="{{ filename }}">Export</button>-->
-                <!--&lt;!&ndash;<a href="geo/edit-geo/mapname={{data.map_name}}&action=export" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a>&ndash;&gt;-->
-                <!--</td>-->
             </tr>
             </tbody>
         </table>
@@ -55,86 +43,3 @@
         </div>
     </div>
 </div>
-
-
-<!--
-
-
-
-
-
-
-<style type="text/css">
-    .form-horizontal input.ng-invalid.ng-dirty {
-        border-color: #FA787E;
-    }
-
-    .form-horizontal input.ng-valid.ng-dirty {
-        border-color: #78FA89;
-    }
-</style>
-<div>
-    <form role="form" name="myForm" class="form-horizontal">
-        <div class="row">
-            <div class="form-group">
-                <div class="form-group">
-                    <label class="col-md-2"> Append the Table </label>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2">
-                        <td>
-                            <select class="form-control" ng-model="frontendData.append.tableName">
-                                <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
-                                <option value="city">city</option>
-                            </select>
-                        </td>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="file" file-model="myFile"/>
-                    <button ng-click="appendTable()">Append the Table</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="form-group">
-                    <label class="col-md-2"> Override the Table </label>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2">
-                        <td>
-                            <select class="form-control" ng-model="frontendData.override.tableName">
-                                <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
-                                <option value="city">city</option>
-                            </select>
-                        </td>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="file" file-model="myFile"/>
-                    <button ng-click="overrideTable()">Override the Table</button>
-                </div>
-            </div>
-
-            &lt;!&ndash;
-
-              <div class="form-group">
-                  <label class="col-md-2"> Override the Table </label>
-
-                  <div class="col-md-2">
-                      <td>
-                          <select class="form-control" ng-model="frontendData.override.tableName">
-                              <option disabled selected value> &#45;&#45; select an option &#45;&#45;</option>
-                              <option value="city">city</option>
-                          </select>
-                      </td>
-                  </div>
-
-                  <input type="file" file-model="myFile"/>
-                  <button ng-click="overrideTable()">Override the Table</button>
-              </div>&ndash;&gt;
-        </div>
-
-    </form>
-</div>
--->
