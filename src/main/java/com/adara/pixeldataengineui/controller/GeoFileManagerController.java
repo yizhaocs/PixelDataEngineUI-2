@@ -242,7 +242,28 @@ public class GeoFileManagerController {
 
 
     @RequestMapping(value = "/downloadTheMap", method = RequestMethod.GET)
-    public void downloadTheMap(HttpServletResponse response) {
+    public void downloadTheMap(HttpServletResponse response, @RequestParam(value = "mapname", required = false) String mapName) {
+        String tableName = "pde_map_" + mapName;
+
+        /*
+        * Delete the download preparation file from both mysql database server
+        * */
+        String commandDeleteFileInMysqlServer = "/usr/bin/ssh " + mysqlHost + " rm -f " + Constants.FILE_DOWNLOADING_PATH;
+        LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandDeleteFileInMysqlServer);
+        String commandOutputOfCreatingFile = ExecUtil.execGeneral(commandDeleteFileInMysqlServer, null);
+        LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandOutputOfCreatingFile);
+
+        /*
+        * Create a new csv file in mysql database
+        * */
+        try{
+            mGeoFileManagerService.createCSVFromTable(tableName);
+            Thread.sleep(5000);
+        }catch (Exception e) {
+            LOG.error("[GeoFileManagerController.createCSVFromTable] Service error: " + e, e);
+        }
+
+
         // get your file as InputStream
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + "file.csv");
@@ -253,8 +274,8 @@ public class GeoFileManagerController {
             * */
             String commandDownloadTheFileFromMysqlServerToPDEUIServer = "scp " + mysqlHost + ":" + Constants.FILE_DOWNLOADING_PATH + " " + Constants.GEO_MANAGER_DIRECTORY_LEVEL2;
             LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandDownloadTheFileFromMysqlServerToPDEUIServer);
-            String commandOutput = ExecUtil.execGeneral(commandDownloadTheFileFromMysqlServerToPDEUIServer, null);
-            LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandOutput);
+            String commandOutputOfDownloading = ExecUtil.execGeneral(commandDownloadTheFileFromMysqlServerToPDEUIServer, null);
+            LOG.info("[GeoFileManagerController.downloadTheMap] Service execute command: " + commandOutputOfDownloading);
             /*
             * sleep for 5 seconds wait for the download complete
             * */

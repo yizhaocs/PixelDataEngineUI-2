@@ -33,12 +33,13 @@
                 <td><a href="geo/edit-geo/mapname={{data.map_name}}&action=edit" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Map</a></td>
 
                 <td>
-                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=append" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Append the Table</a>
+                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=append" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Append</a>
                 </td>
                 <td>
-                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override the Table</a>
+                    <a href="geo/edit-geo/mapname={{data.map_name}}&action=override" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Override</a>
                 </td>
-                <td><a href="geo/get-pde-map/tableName={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a></td>
+                <td><a href="downloadTheMap?mapname={{data.map_name}}" target="_blank" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export</a></td>
+                <!--<td><a href="geo/get-pde-map/tableName={{data.map_name}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Export the Table</a></td>-->
                 <!--<td>-->
                 <!--&lt;!&ndash;<button type="button"  ng-csv="getArray" csv-header="exportTable(data.map_name, data.table_name)" filename="{{ filename }}">Export</button>&ndash;&gt;-->
                 <!--<button type="button"  ng-click="exportTable(data.map_name);" ng-csv="getArray"  filename="{{ filename }}">Export</button>-->
