@@ -280,7 +280,7 @@ public class GeoFileManagerController {
             /*
             * sleep for 5 seconds wait for the download complete
             * */
-            Thread.sleep(5000);
+            // Thread.sleep(5000);
             /*
             * Start with downloading
             * */
